@@ -5,6 +5,9 @@ public class Game_Environment {
 	private static String teamName;
 	private static int numberHeroes;
 	private static int numberCities;	
+	private static int currentCity = 0;
+	
+	
 	private ArrayList<Villain> list_villains = new ArrayList<Villain>();
 	
 	private static void getTeamName() {
@@ -62,8 +65,13 @@ public class Game_Environment {
 		
 	}
 	
+	private void move() {
+		
+	}
+	
 	
 	public static void main(String[] args) {
+		
 		getTeamName();
 		getNumberCities();
 		getNumberHeroes();
