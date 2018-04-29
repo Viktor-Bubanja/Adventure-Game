@@ -43,7 +43,6 @@ public class City {
 		if (positions.get(currentPosition) == "SHOP") {
 			Shop shop = new Shop();
 		} else if (positions.get(currentPosition) == "POWERUPDEN") {
-			//call enter shop
 			
 		} else if (positions.get(currentPosition) == "HOSPITAL") {
 			

@@ -4,6 +4,48 @@ import java.util.Scanner;
 
 public class Shop {
 	
+	private static double buyItem(List<HealingItem> healingItems, List<PowerUp> powerUps, Map map) {
+		int numberHealingItems = healingItems.size();
+		int numberPowerUps = powerUps.size();
+		double cost = 0;
+		System.out.println("what do you want to buy?");
+		for (int i = 0; i < numberHealingItems; i++) {
+			System.out.print(i);
+			System.out.print(". A " + healingItems.get(i) + "? It costs $"); //Add the cost
+			System.out.println(healingItems.get(i).getCost());
+		}
+		for (int i = 4; i < numberPowerUps + 4; i++) {
+			System.out.print(i);
+			System.out.println(". A " + powerUps.get(i) + "? It costs $");
+			System.out.print(powerUps.get(i).getCost());
+		}
+		System.out.print(7);
+		System.out.println(". A Map? It costs $20");
+		
+
+		Scanner scanner = new Scanner(System.in);
+		int toBuy = scanner.nextInt();
+		if (toBuy < 4) {
+			System.out.println("You bought: ");
+			System.out.println(healingItems.get(toBuy));
+			cost = healingItems.get(toBuy).getCost();
+		}
+		
+		else if (toBuy < 7) {
+			System.out.println("You bought: ");
+			System.out.println(powerUps.get(toBuy));
+			cost = powerUps.get(toBuy).getCost();
+		}
+		
+		else {
+			System.out.println("You bought: ");
+			System.out.println(map);
+			cost = map.getCost();
+		}
+		
+		return cost;
+	}
+	
 	public Shop() {
 		Map map = new Map();
 		HealingItem smallPotion = new HealingItem(10.00, 1, 20, "Small Potion");
@@ -17,37 +59,9 @@ public class Shop {
 		List<PowerUp> powerUps = new ArrayList<PowerUp>(); 
 		
 
-		//Add all item names
-		
-		int numberHealingItems = healingItems.size();
-		int numberPowerUps = powerUps.size();
-		
-		System.out.println("what do you want to buy?");
-		
-		for (int i = 0; i < numberHealingItems; i++) {
-			System.out.print(i);
-			System.out.println(". A " + healingItems.get(i) + "? It costs $"); //Add the cost
-			//System.out.print(numberHealingItems.get(i).getCost());
-		}
-		for (int i = 4; i < numberPowerUps + 4; i++) {
-			System.out.print(i);
-			System.out.println(". A " + powerUps.get(i) + "? It costs $");
-			//System.out.print(numberPowerUps.get(i).getCost());
-		}
-		System.out.print(7);
-		System.out.println(". A Map? It costs $20");
-		
-
-		Scanner scanner = new Scanner(System.in);
-		int toBuy = scanner.nextInt();
-		if toBuy < 4;
-		
-		else if toBuy < 7
-		
-		else if toBuy < 8
-		
-		else picAnother
-		Team.decreaseMoneyBy(20);
+		double cost = buyItem(healingItems, powerUps, map);
+		System.out.println(cost);
+		Team.decreaseMoneyBy(cost);
 		
 		
 		

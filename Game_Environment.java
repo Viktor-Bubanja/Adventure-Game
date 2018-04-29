@@ -5,8 +5,9 @@ public class Game_Environment {
 	private static String teamName;
 	private static int numberHeroes;
 	private static int numberCities;	
-	private static int currentCity = 0;
 	
+	private static ArrayList<City> cities = new ArrayList<City>();
+	private static City currentCity = cities.get(0);
 	
 	
 	private ArrayList<Villain> list_villains = new ArrayList<Villain>();
@@ -17,8 +18,6 @@ public class Game_Environment {
 		//maybs  a for loops asking for here names
 		
 	}
-	
-
 	
 	private void move() {
 		

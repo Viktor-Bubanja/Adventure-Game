@@ -1,6 +1,6 @@
 
-public class Map extends ShopItem{
-	private double cost = 50.00;
+public class Map{
+	private double cost = 20.00;
 	public String toString() {
 		return "Map";
 	}
