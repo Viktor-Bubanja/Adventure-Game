@@ -4,9 +4,9 @@ public class Team {
 	
 	public String teamName;
 	public static int numberHeroes;	
-	public static double money = 100.00; //Some random amount later
+	private static double money = 100.00; //Some random amount later
 	public static ArrayList<Object> heroes = new ArrayList<Object>();
-	private ArrayList<Map> maps = new ArrayList<Map>();
+	private static int maps = 0;
 	private static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
 	
@@ -21,16 +21,33 @@ public class Team {
 
 	public static void decreaseMoneyBy(double cost) {
 		money -= cost;
-		System.out.println("money left = ");
-		System.out.println(money);
 	}
 	
 	public static void usePowerUp(int i) {
 		powerUps.remove(i);
 	}
+	
+	public static void addHealingItem(HealingItem healingItem) {
+		healingItems.add(healingItem);
+	}
+	
+	public static void addPowerUp(PowerUp powerUp) {
+		powerUps.add(powerUp);
+	}
+	
+	public static double getMoney() {
+		return money;
+	}
+	public static void addMap() {
+		maps++;
+	}
+			
+			
+			
 	public static void main(String[] args) {
 		Team neewTeam = new Team("trht", 2);
 	}
+
 	
 	
 	

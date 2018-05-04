@@ -57,7 +57,6 @@ public class City {
 	
 	public static void main(String[] args) {
 		Villain villain; //maybe villains lair
-
 		int currentPosition = 0;
 		List<String> positions = new ArrayList<String>();
 
