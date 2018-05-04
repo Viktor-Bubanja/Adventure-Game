@@ -43,23 +43,19 @@ public class City {
 		if (positions.get(currentPosition) == "SHOP") {
 			Shop shop = new Shop();
 		} else if (positions.get(currentPosition) == "POWERUPDEN") {
-			PowerUpDen powerUpDen = new PowerUpDen();
 			
 		} else if (positions.get(currentPosition) == "HOSPITAL") {
-			Hospital hospital = new Hospital();
 			
 		} else if (positions.get(currentPosition) == "VILLAINSLAIR") {
-			VillainsLair villainsLair = new VillainsLair();
-			
 			
 		} else if (positions.get(currentPosition) == "HOMEBASE") {
-			System.out.println("You were already homE!!!! go somewhere else ");
-			getMove();
+
+			
 		}
-		//moveBackToHome();
-	} 
+		moveBackToHome();
+	}
 	
-	public City() {
+	public static void main(String[] args) {
 		Villain villain; //maybe villains lair
 
 		int currentPosition = 0;
