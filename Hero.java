@@ -29,8 +29,17 @@ public class Hero {
 		}
 	}
 	
+	public String toString() {
+		String toReturn;
+		toReturn = "Heroes name: " + name + ". \n Herotype: " + type + ". \nHe has " + Integer.toString(health) + " health.";
+		
+		
+		
+		return toReturn;
+	}
+}
 	
-
+/**
 public class Tank {
 	private int health = 400;
 	private int recovery_rate = 10;
@@ -66,10 +75,5 @@ public class Lucky {
 	private String ability_description = "Lucky gets more money from winning each battle.";
 }
 
+**/ 
 
-	
-	
-	
-	
-	
-}
