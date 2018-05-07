@@ -1,44 +1,52 @@
 
 public class Hero {
-	private static String name;
+	private String name;
 	private String type;
-	private int health;
+	private int maxHealth;
+	private int currentHealth;
 	private int recoveryRate;
 	
 	public Hero(String inputName, String inputType) {
 		name = inputName;
 		type = inputType;
 		if (type == "Gambler") {
-			health = 200;
+			maxHealth = 200;
 			recoveryRate = 8;
 		} else if (type == "Medic") {
-			health = 150;
+			maxHealth = 150;
 			recoveryRate = 15;
 		} else if (type == "Diplomat") {
-			health = 200;
+			maxHealth = 200;
 			recoveryRate = 8;
 		} else if (type == "Tank") {
-			health = 400;
+			maxHealth = 400;
 			recoveryRate = 10;
 		} else if (type == "Explorer") {
-			health = 300;
+			maxHealth = 300;
 			recoveryRate = 8;
 		} else if (type == "Lucky") {
-			health = 250;
+			maxHealth = 250;
 			recoveryRate = 9;
 		}
+		currentHealth = maxHealth;
+	}
+	
+	public void heal(HealingItem healingItem) {
+		int amountToHeal = healingItem.getHealingAmount();
+		System.out.println("health = ");
+		System.out.println(currentHealth);
+		currentHealth += amountToHeal;
+		System.out.println("health = ");
+		System.out.println(currentHealth);
 	}
 	
 	public String toString() {
 		String toReturn;
-		toReturn = "Heroes name: " + name + ". \n Herotype: " + type + ". \nHe has " + Integer.toString(health) + " health.";
-		
-		
-		
+		toReturn = "Heroes name: " + name + ". \n Herotype: " + type + ". \nHe has " + Integer.toString(currentHealth) + " health.";
 		return toReturn;
 	}
 	
-	public static String getName() {
+	public String getName() {
 		return name;
 	}
 }

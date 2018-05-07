@@ -12,18 +12,19 @@ import java.awt.event.ActionEvent;
 
 public class HospitalGUI {
 
-
-	private JFrame frame;
+	private int healingItemIndex;
+	private int heroIndex;
+	private JFrame HospitalFrame;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					HospitalGUI window = new HospitalGUI();
-					window.frame.setVisible(true);
+					window.HospitalFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -32,7 +33,7 @@ public class HospitalGUI {
 	}
 	
 	private static void healHero(HealingItem healingItem, Hero hero) {
-		
+		hero.heal(healingItem);
 	}
 
 	/**
@@ -45,21 +46,19 @@ public class HospitalGUI {
 	private static String[] getListHeroNames() {
 		String[] heroNames;
 		
-		int numberHeroes = 3;
+		int numberHeroes = Team.getNumberHeroes();
 		heroNames = new String[numberHeroes];
-		/*int numberHeroes = Team.getNumberHeroes();
-		3;
 		
 		heroNames = new String[numberHeroes];
 		for (int i = 0; i < numberHeroes; i++) {
 			System.out.println("fghgfh");
-			heroNames[i] = Team.heroes.get(i).getName();
+			heroNames[i] = Team.getHeroes().get(i).getName();
 			System.out.println(i);
 			System.out.println(heroNames[i]);
-		}*/
-		heroNames[0] = "hero1";
-		heroNames[1] = "hero2";
-		heroNames[2] = "hero3";
+		}
+		//heroNames[0] = "hero1";
+		//heroNames[1] = "hero2";
+		//heroNames[2] = "hero3";
 		return heroNames;
 	}
 	
@@ -80,73 +79,58 @@ public class HospitalGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		HospitalFrame = new JFrame();
+		HospitalFrame.setTitle("Hospital");
+		HospitalFrame.setBounds(100, 100, 450, 300);
+		HospitalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		HospitalFrame.getContentPane().setLayout(null);
 		
 
 		
 		JLabel lblChooseAHero = new JLabel("Choose a hero to heal");
 		lblChooseAHero.setBounds(24, 47, 202, 21);
-		frame.getContentPane().add(lblChooseAHero);
+		HospitalFrame.getContentPane().add(lblChooseAHero);
 		
 		JLabel lblHospital = new JLabel("Hospital");
 		lblHospital.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblHospital.setBounds(174, 12, 166, 23);
-		frame.getContentPane().add(lblHospital);
+		HospitalFrame.getContentPane().add(lblHospital);
 
 		
 		JLabel lblChooseAHealing = new JLabel("Choose a healing item to use:");
 		lblChooseAHealing.setBounds(24, 147, 227, 15);
-		frame.getContentPane().add(lblChooseAHealing);
-		
-		JLabel heroToHealLabel = new JLabel("New label");
-		heroToHealLabel.setBounds(351, 83, 70, 15);
-		frame.getContentPane().add(heroToHealLabel);
-		
-		JLabel healingItemLabel = new JLabel("New label");
-		healingItemLabel.setBounds(337, 190, 70, 15);
-		frame.getContentPane().add(healingItemLabel);
+		HospitalFrame.getContentPane().add(lblChooseAHealing);
 
 		JComboBox heroComboBox = new JComboBox(getListHeroNames());
-		heroComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int heroIndex = heroComboBox.getSelectedIndex();
-				System.out.println(heroIndex);
-				
-				heroToHealLabel.setText(Integer.toString(heroIndex));
-				//Hero heroToHeal = Team.getHeroes().get(heroIndex);
-			}
-		});
-		
+		heroIndex = heroComboBox.getSelectedIndex();
 		heroComboBox.setBounds(126, 80, 149, 21);
-		frame.getContentPane().add(heroComboBox);
+		HospitalFrame.getContentPane().add(heroComboBox);
 		
 		JComboBox healingItemComboBox = new JComboBox(getListHealingItemNames());
-		healingItemComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int healingItemIndex = healingItemComboBox.getSelectedIndex();
-				System.out.println(healingItemIndex);
-				healingItemLabel.setText(Integer.toString(healingItemIndex));
-				
-				//HealingItem healingItem = Team.getHealingItems().get(healingItemIndex);
-			}
-		});
-		
-
-
+		healingItemIndex = healingItemComboBox.getSelectedIndex();
 		healingItemComboBox.setBounds(126, 187, 166, 21);
-		frame.getContentPane().add(healingItemComboBox);
+		HospitalFrame.getContentPane().add(healingItemComboBox);
 		
 		JButton healButton = new JButton("Heal");
 		healButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				healHero(Team.getHealingItems().get(healingItemIndex), Team.getHeroes().get(heroIndex));
+				
+			
 				
 			}
 		});
 		healButton.setBounds(160, 220, 117, 25);
-		frame.getContentPane().add(healButton);
+		HospitalFrame.getContentPane().add(healButton);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HospitalFrame.dispose();
+			}
+		});
+		btnClose.setBounds(0, 220, 117, 25);
+		HospitalFrame.getContentPane().add(btnClose);
 		
 
 		

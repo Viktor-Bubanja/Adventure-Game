@@ -16,10 +16,10 @@ public class HealingItem {
 	public double getCost() {
 		return cost;
 	}
-	public int applicationTime() {
+	public int getApplicationTime() {
 		return applicationTime;
 	}
-	public int healingAmount() {
+	public int getHealingAmount() {
 		return healingAmount;
 	}
 	public String getName() {

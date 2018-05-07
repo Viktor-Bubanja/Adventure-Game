@@ -6,7 +6,7 @@ public class Team {
 	private static int numberHeroes;	
 	private static double money = 100.00; //Some random amount later
 	private static int maps = 0;
-	public static ArrayList<Hero> heroes = new ArrayList<Hero>();
+	private static ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
 	
@@ -14,9 +14,6 @@ public class Team {
 	public Team(String name, int number_of_heroes) {
 		teamName = name;
 		numberHeroes = number_of_heroes;
-	}
-	public static void setNumberHeroes(int num) {
-		numberHeroes = num;
 	}
 
 	public static void decreaseMoneyBy(double cost) {
@@ -43,7 +40,7 @@ public class Team {
 	}
 			
 	public static int getNumberHeroes() {
-		return numberHeroes;
+		return heroes.size();
 	}
 	
 	public static ArrayList<HealingItem> getHealingItems() {
@@ -52,6 +49,9 @@ public class Team {
 	
 	public static ArrayList<Hero> getHeroes() {
 		return heroes;
+	}
+	public static void addHero(Hero hero) {
+		heroes.add(hero);
 	}
 	
 	public static ArrayList<PowerUp> getPowerups() {

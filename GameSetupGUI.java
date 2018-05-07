@@ -167,15 +167,10 @@ public class GameSetupGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				//if inputHeroName.getText().length() 
-				Team.heroes.add(new Hero(inputHeroName.getText(), heroType));
-				inputNumHeroes++;
-				Team.setNumberHeroes(inputNumHeroes);
+				Team.addHero(new Hero(inputHeroName.getText(), heroType));
+				inputNumHeroes++; 
 				
-				String longS;
-				for (int i = 0; i <= inputNumHeroes; i++) {
-					longS = Team.heroes.toString();
-				}
-				lblHeroes.setText(Team.heroes.toString());
+				lblHeroes.setText(Team.getHeroes().toString());
 				//heroes.add();
 				
 				
@@ -239,7 +234,7 @@ public class GameSetupGUI {
 				System.out.println(Game_Environment.getTeamName());
 				CiyGUI City1 = new CiyGUI();
 				City1.NewScreen();
-				City1.exit();
+				//City1.exit();
 				
 			}
 		});
