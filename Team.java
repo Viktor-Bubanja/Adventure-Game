@@ -5,7 +5,7 @@ public class Team {
 	public String teamName;
 	public static int numberHeroes;	
 	private static double money = 100.00; //Some random amount later
-	public static ArrayList<Object> heroes = new ArrayList<Object>();
+	public static ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private static int maps = 0;
 	private static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();

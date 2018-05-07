@@ -1,6 +1,6 @@
 
 public class Hero {
-	private String name;
+	private static String name;
 	private String type;
 	private int health;
 	private int recoveryRate;
@@ -36,6 +36,10 @@ public class Hero {
 		
 		
 		return toReturn;
+	}
+	
+	public static String getName() {
+		return name;
 	}
 }
 	

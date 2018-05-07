@@ -86,7 +86,7 @@ public class CiyGUI {
 				
 			}
 		});
-		westButton.setBounds(59, 172, 120, 33);
+		westButton.setBounds(30, 172, 189, 33);
 		frame.getContentPane().add(westButton);
 		
 		JButton eastButton = new JButton("East");
@@ -97,7 +97,7 @@ public class CiyGUI {
 				System.out.println(currentLocation);
 			}
 		});
-		eastButton.setBounds(463, 176, 117, 25);
+		eastButton.setBounds(463, 176, 181, 25);
 		frame.getContentPane().add(eastButton);
 		
 		JButton northButton = new JButton("North");
@@ -109,7 +109,7 @@ public class CiyGUI {
 				
 			}
 		});
-		northButton.setBounds(273, 53, 117, 25);
+		northButton.setBounds(273, 53, 168, 25);
 		frame.getContentPane().add(northButton);
 		
 		JButton southButton = new JButton("South");
@@ -121,11 +121,33 @@ public class CiyGUI {
 				
 			}
 		});
-		southButton.setBounds(273, 309, 117, 25);
+		southButton.setBounds(273, 309, 180, 25);
 		frame.getContentPane().add(southButton);
 		
 		JLabel lblHomeBase = new JLabel("Home Base");
 		lblHomeBase.setBounds(273, 181, 110, 15);
 		frame.getContentPane().add(lblHomeBase);
+		
+		JLabel lblYouHaveA = new JLabel("You have a map available to use!");
+		lblYouHaveA.setBounds(406, 12, 295, 25);
+		frame.getContentPane().add(lblYouHaveA);
+		
+		JButton useMap = new JButton("Use map");
+		useMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean mapAvailable = true;
+				if (mapAvailable) {
+					//take map away from inventory
+					northButton.setText(positions.get(1));
+					eastButton.setText(positions.get(2));
+					southButton.setText(positions.get(3));
+					westButton.setText(positions.get(4));
+					
+					
+				}
+			}
+		});
+		useMap.setBounds(494, 53, 117, 25);
+		frame.getContentPane().add(useMap);
 	}
 }
