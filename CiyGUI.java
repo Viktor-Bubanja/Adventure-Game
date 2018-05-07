@@ -40,17 +40,18 @@ public class CiyGUI {
 	public static void enterDistrict(String currentLocation) {
 		if (currentLocation == "SHOP") {
 			ShopGUI shop = new ShopGUI();
+			shop.NewScreen();
 		} else if (currentLocation == "POWERUPDEN") {
-			
+			DenGUI den = new DenGUI();
+			den.NewScreen();
 		} else if (currentLocation == "HOSPITAL") {
-			
+			HospitalGUI hospital = new HospitalGUI();
+			hospital.NewScreen();
 		} else if (currentLocation == "VILLAINSLAIR") {
-			
-		} else if (currentLocation == "HOMEBASE") {
-
-			
-		}
-		//moveBackToHome();
+			LairGUI lair = new LairGUI();
+			lair.NewScreen();
+		} //else if (currentLocation == "HOMEBASE") {}
+	
 	}
 
 	/**
@@ -82,10 +83,7 @@ public class CiyGUI {
 				String currentLocation = positions.get(4);
 				enterDistrict(currentLocation);
 				System.out.println(currentLocation);
-				if (currentLocation == "SHOP") {
-					ShopGUI shopGUI = new ShopGUI();
-					shopGUI.NewScreen();
-				}
+				
 			}
 		});
 		westButton.setBounds(59, 172, 120, 33);
@@ -97,10 +95,6 @@ public class CiyGUI {
 				String currentLocation = positions.get(2);
 				enterDistrict(currentLocation);
 				System.out.println(currentLocation);
-				if (currentLocation == "SHOP") {
-					ShopGUI shopGUI = new ShopGUI();
-					shopGUI.NewScreen();
-				}
 			}
 		});
 		eastButton.setBounds(463, 176, 117, 25);
@@ -112,10 +106,7 @@ public class CiyGUI {
 				String currentLocation = positions.get(1);
 				enterDistrict(currentLocation);
 				System.out.println(currentLocation);
-				if (currentLocation == "SHOP") {
-					ShopGUI shopGUI = new ShopGUI();
-					shopGUI.NewScreen();
-				}
+				
 			}
 		});
 		northButton.setBounds(273, 53, 117, 25);
@@ -127,10 +118,7 @@ public class CiyGUI {
 				String currentLocation = positions.get(3);
 				enterDistrict(currentLocation);
 				System.out.println(currentLocation);
-				if (currentLocation == "SHOP") {
-					ShopGUI shopGUI = new ShopGUI();
-					shopGUI.NewScreen();
-				}
+				
 			}
 		});
 		southButton.setBounds(273, 309, 117, 25);
