@@ -30,6 +30,7 @@ public class DenGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public DenGUI() {
+		setTitle("Power Up Den");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -39,9 +40,6 @@ public class DenGUI extends JFrame {
 		
 		JLabel lblWhatsUppppIm = new JLabel("Whats upppp im a place to use your powerups");
 		contentPane.add(lblWhatsUppppIm, BorderLayout.CENTER);
-		
-		JLabel lblPowerupDen = new JLabel("Power-Up den");
-		contentPane.add(lblPowerupDen, BorderLayout.NORTH);
 	}
 
 }

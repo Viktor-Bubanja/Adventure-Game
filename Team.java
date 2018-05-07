@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class Team {
 	
 	public String teamName;
-	public static int numberHeroes;	
+	private static int numberHeroes;	
 	private static double money = 100.00; //Some random amount later
-	public static ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private static int maps = 0;
+	public static ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
 	
@@ -42,7 +42,21 @@ public class Team {
 		maps++;
 	}
 			
-			
+	public static int getNumberHeroes() {
+		return numberHeroes;
+	}
+	
+	public static ArrayList<HealingItem> getHealingItems() {
+		return healingItems;
+	}
+	
+	public static ArrayList<Hero> getHeroes() {
+		return heroes;
+	}
+	
+	public static ArrayList<PowerUp> getPowerups() {
+		return powerUps;
+	}
 			
 	public static void main(String[] args) {
 		Team neewTeam = new Team("trht", 2);

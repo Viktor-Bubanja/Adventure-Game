@@ -12,17 +12,17 @@ import java.awt.event.ActionEvent;
 
 public class CiyGUI {
 
-	private JFrame frame;
+	private JFrame CityScreen;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					CiyGUI window = new CiyGUI();
-					window.frame.setVisible(true);
+					window.CityScreen.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,6 +50,7 @@ public class CiyGUI {
 		} else if (currentLocation == "VILLAINSLAIR") {
 			LairGUI lair = new LairGUI();
 			lair.NewScreen();
+			
 		} //else if (currentLocation == "HOMEBASE") {}
 	
 	}
@@ -71,10 +72,11 @@ public class CiyGUI {
 		
 		
 		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 658, 441);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		CityScreen = new JFrame();
+		CityScreen.setTitle("City1  //needa do a few more lol");
+		CityScreen.setBounds(100, 100, 658, 441);
+		CityScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		CityScreen.getContentPane().setLayout(null);
 		
 		
 		JButton westButton = new JButton("West");
@@ -87,7 +89,7 @@ public class CiyGUI {
 			}
 		});
 		westButton.setBounds(30, 172, 189, 33);
-		frame.getContentPane().add(westButton);
+		CityScreen.getContentPane().add(westButton);
 		
 		JButton eastButton = new JButton("East");
 		eastButton.addActionListener(new ActionListener() {
@@ -98,7 +100,7 @@ public class CiyGUI {
 			}
 		});
 		eastButton.setBounds(463, 176, 181, 25);
-		frame.getContentPane().add(eastButton);
+		CityScreen.getContentPane().add(eastButton);
 		
 		JButton northButton = new JButton("North");
 		northButton.addActionListener(new ActionListener() {
@@ -110,7 +112,7 @@ public class CiyGUI {
 			}
 		});
 		northButton.setBounds(273, 53, 168, 25);
-		frame.getContentPane().add(northButton);
+		CityScreen.getContentPane().add(northButton);
 		
 		JButton southButton = new JButton("South");
 		southButton.addActionListener(new ActionListener() {
@@ -122,15 +124,15 @@ public class CiyGUI {
 			}
 		});
 		southButton.setBounds(273, 309, 180, 25);
-		frame.getContentPane().add(southButton);
+		CityScreen.getContentPane().add(southButton);
 		
 		JLabel lblHomeBase = new JLabel("Home Base");
 		lblHomeBase.setBounds(273, 181, 110, 15);
-		frame.getContentPane().add(lblHomeBase);
+		CityScreen.getContentPane().add(lblHomeBase);
 		
 		JLabel lblYouHaveA = new JLabel("You have a map available to use!");
 		lblYouHaveA.setBounds(406, 12, 295, 25);
-		frame.getContentPane().add(lblYouHaveA);
+		CityScreen.getContentPane().add(lblYouHaveA);
 		
 		JButton useMap = new JButton("Use map");
 		useMap.addActionListener(new ActionListener() {
@@ -148,6 +150,15 @@ public class CiyGUI {
 			}
 		});
 		useMap.setBounds(494, 53, 117, 25);
-		frame.getContentPane().add(useMap);
+		CityScreen.getContentPane().add(useMap);
+		
+		JButton close = new JButton("Close");
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		close.setBounds(0, 309, 117, 25);
+		CityScreen.getContentPane().add(close);
 	}
 }

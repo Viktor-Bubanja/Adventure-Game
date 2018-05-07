@@ -51,6 +51,7 @@ public class GameSetupGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
 		JLabel lblWhatWouldYou = new JLabel("What would you like your super team to be called?");
 		lblWhatWouldYou.setBounds(2, -7, 378, 59);
 		frame.getContentPane().add(lblWhatWouldYou);
@@ -76,7 +77,6 @@ public class GameSetupGUI {
 		lblHeroes.setBounds(70, 27, 973, 245);
 		frame.getContentPane().add(lblHeroes);
 		
-		//Will need all 6 hero type pictures
 		JLabel picGambler = new JLabel("Pic Gambler");
 		picGambler.setBounds(379, 267, 147, 50);
 		frame.getContentPane().add(picGambler);
@@ -237,6 +237,9 @@ public class GameSetupGUI {
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
 				
 				System.out.println(Game_Environment.getTeamName());
+				CiyGUI City1 = new CiyGUI();
+				City1.NewScreen();
+				City1.exit();
 				
 			}
 		});

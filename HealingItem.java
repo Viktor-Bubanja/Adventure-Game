@@ -22,7 +22,7 @@ public class HealingItem {
 	public int healingAmount() {
 		return healingAmount;
 	}
-	public String toString() {
+	public String getName() {
 		return name;
 	}
 }
