@@ -155,7 +155,7 @@ public class CiyGUI {
 		JButton close = new JButton("Close");
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				CityScreen.dispose();
 			}
 		});
 		close.setBounds(0, 309, 117, 25);

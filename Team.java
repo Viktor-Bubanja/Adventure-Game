@@ -43,6 +43,14 @@ public class Team {
 		return heroes.size();
 	}
 	
+	public static String[] getHeroNames() {
+		String[] heroNames = new String[heroes.size()];
+		for (int i = 0; i < heroes.size(); i++) {
+			heroNames[i] = heroes.get(i).getName();
+		}
+		return heroNames;
+	}
+	
 	public static ArrayList<HealingItem> getHealingItems() {
 		return healingItems;
 	}
@@ -59,7 +67,7 @@ public class Team {
 	}
 			
 	public static void main(String[] args) {
-		Team neewTeam = new Team("trht", 2);
+		Team newTeam = new Team("trht", 2);
 	}
 
 	

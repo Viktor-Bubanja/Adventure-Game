@@ -7,6 +7,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
 import javax.swing.ImageIcon;
@@ -51,6 +53,14 @@ public class GameSetupGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		Map map = new Map();
+		HealingItem smallPotion = new HealingItem(10.00, 1, 20, "Small Potion");
+		HealingItem quickPotion = new HealingItem(25.00, 1, 5, "Quick Potion");
+		HealingItem bigPotion = new HealingItem(40.00, 2, 10, "Big Potion");
+		List<HealingItem> healingItems = new ArrayList<HealingItem>();
+		healingItems.add(smallPotion);
+		healingItems.add(quickPotion);
+		healingItems.add(bigPotion);
 		
 		JLabel lblWhatWouldYou = new JLabel("What would you like your super team to be called?");
 		lblWhatWouldYou.setBounds(2, -7, 378, 59);
@@ -239,10 +249,6 @@ public class GameSetupGUI {
 			}
 		});
 		btnDone.setBounds(841, 570, 117, 25);
-		frame.getContentPane().add(btnDone);
-		
-		
-		
-		
+		frame.getContentPane().add(btnDone);	
 	}
 }

@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +15,7 @@ import javax.swing.JTextPane;
 public class LairGUI extends JFrame {
 
 	private JPanel contentPane;
+
 
 	/**
 	 * Launch the application.
@@ -39,22 +42,38 @@ public class LairGUI extends JFrame {
 		setBounds(100, 100, 801, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		JButton btnEnterTheLair = new JButton("Enter the lair!");
-		contentPane.add(btnEnterTheLair, BorderLayout.WEST);
+		btnEnterTheLair.setBounds(5, 5, 132, 443);
+		btnEnterTheLair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				battleWindow.NewScreen();
+			}
+		});
+		contentPane.setLayout(null);
+		
+		contentPane.add(btnEnterTheLair);
 		
 		JButton btnRunAwaaaaay = new JButton("Run awaaaaay!");
-		contentPane.add(btnRunAwaaaaay, BorderLayout.EAST);
+		btnRunAwaaaaay.setBounds(650, 5, 144, 443);
+		btnRunAwaaaaay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		
+		contentPane.add(btnRunAwaaaaay);
 		
 		JTextPane textPane = new JTextPane();
-		contentPane.add(textPane, BorderLayout.SOUTH);
+		textPane.setBounds(5, 448, 789, 21);
+		contentPane.add(textPane);
 		
 		JTextPane txtpnYouAreAbout = new JTextPane();
+		txtpnYouAreAbout.setBounds(137, 5, 513, 443);
 		txtpnYouAreAbout.setEditable(false);
 		txtpnYouAreAbout.setText("You are about to enter the villains lair\n would you like too....");
-		contentPane.add(txtpnYouAreAbout, BorderLayout.CENTER);
+		contentPane.add(txtpnYouAreAbout);
 	}
 
 }
