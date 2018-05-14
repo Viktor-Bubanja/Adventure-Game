@@ -41,12 +41,15 @@ public class battleWindow {
 		frame.setBounds(100, 100, 724, 417);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		GameEnvironment gameEnvironment = new GameEnvironment();
+		int currentCity = gameEnvironment.getCurrentCity();
+		Villain villain = gameEnvironment.getVillains().get(currentCity);
 		
-		JLabel lblTaunt = new JLabel("Taunt");
+		JLabel lblTaunt = new JLabel(villain.getTaunt());
 		lblTaunt.setBounds(303, 62, 70, 15);
 		frame.getContentPane().add(lblTaunt);
 		
-		JLabel lblName = new JLabel("Name");
+		JLabel lblName = new JLabel(villain.getName());
 		lblName.setBounds(303, 35, 70, 15);
 		frame.getContentPane().add(lblName);
 		

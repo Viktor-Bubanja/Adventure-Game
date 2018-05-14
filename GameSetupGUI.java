@@ -236,12 +236,12 @@ public class GameSetupGUI {
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Game_Environment.setTeamName(txtTeamName.getText());
+				GameEnvironment.setTeamName(txtTeamName.getText());
 				
-				Game_Environment.setNumberCities(numCities.getValue());
+				GameEnvironment.setNumberCities(numCities.getValue());
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
 				
-				System.out.println(Game_Environment.getTeamName());
+				System.out.println(GameEnvironment.getTeamName());
 				CiyGUI City1 = new CiyGUI();
 				City1.NewScreen();
 				//City1.exit();
