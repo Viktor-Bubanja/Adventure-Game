@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 
 public class Villain {
 	private String taunt;
-	private String favouriteGame;
+	private ArrayList<String> games;
 	private String name;
 	private int damage;
 	//Might need boolean for supervillain
@@ -12,12 +13,12 @@ public class Villain {
 	public String getName() {
 		return name;
 	}
-	public String getFavouriteGame() {
-		return favouriteGame;
+	public ArrayList<String> getGames() {
+		return games;
 	}
-	public Villain(String inputTaunt, String inputFavouriteGame, String inputName, int inputDamage) {
+	public Villain(String inputTaunt, ArrayList<String> inputGames, String inputName, int inputDamage) {
 		taunt = inputTaunt;
-		favouriteGame = inputFavouriteGame;
+		games = inputGames;
 		name = inputName;
 		damage = inputDamage;
 	}

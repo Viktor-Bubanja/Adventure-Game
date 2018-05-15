@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
+	private String name;
 	
 	private static int getPlayersGuess() {
 		Scanner scan = new Scanner(System.in);
@@ -23,6 +24,9 @@ public class GuessNumber {
 		}
 		return playersGuess;
 	
+	}
+	public String getName() {
+		return name;
 	}
 	
 	private static boolean playRoundOne(int playersGuess, int villainsNumber) {

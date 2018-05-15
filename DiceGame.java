@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DiceGame {
-
+public class DiceGame{
+	private String name;
 	private JFrame frame;
 
 	/**
@@ -32,6 +32,10 @@ public class DiceGame {
 	 */
 	public DiceGame() {
 		initialize();
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	
