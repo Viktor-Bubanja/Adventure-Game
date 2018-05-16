@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class GameEnvironment {
@@ -21,36 +22,56 @@ public class GameEnvironment {
 		return teamName;
 	}
 	public static int getCurrentCity() {
-		return currentCity;
+		if (currentCity == numberCities - 1)
+			return - 1; //We now at the last city with the supervillain
+		else
+			return currentCity;
 	}
 	
-	public GameEnvironment() {
-		
+	public static String[] getVillainNames() {
+		String[] heroNames = new String[villains.size()];
+		for (int i = 0; i < villains.size(); i++) {
+			heroNames[i] = villains.get(i).getName();
+		}
+		return heroNames;
+	}
+	
+	public static void main(String[] args) {
 		ArrayList<String> games1 = new ArrayList<String>();
 		ArrayList<String> games2 = new ArrayList<String>();
 		ArrayList<String> games3 = new ArrayList<String>();
 		ArrayList<String> games4 = new ArrayList<String>();
 		ArrayList<String> games5 = new ArrayList<String>();
 		ArrayList<String> games6 = new ArrayList<String>();
-		//GuessNumber guessNumberGame = new GuessNumber();
-		//games1.add(guessNumberGame);
+
 		games1.add("paper scissors rock");
 		games1.add("guess a number");
+		games1.add("Dice game");
 		games2.add("guess a number");
 		games2.add("paper scissors rock");
 		games2.add("guess a number");
+		
 		Villain villain1 = new Villain("come here boa", games1, "villain one", 100);
-		//Villain villain2 = new Villain("oy m8 you wont", games2, "villain two", 50);
-		//Villain villain3 = new Villain("you a bitch", "paper scissors rock", "villain three", 70);
-		//Villain villain4 = new Villain("come here boy", "rock paper scissors", "villain one", 100);
-		//Villain villain5 = new Villain("oy m8 you wont", "guess a number", "villain two", 50);
-		//Villain villain6 = new Villain("you a bitch", "paper scissors rock", "villain three", 70);
+		Villain villain2 = new Villain("oy m8 you wont", games2, "villain two", 50);
+		Villain villain3 = new Villain("you a bitch", games1, "villain three", 70);
+		Villain villain4 = new Villain("ohh whats that", games1, "villain four", 70);
+		Villain villain5 = new Villain("im da bomd you not", games1, "villain five", 70);
+		Villain superVillain = new Villain("you a big fat nob", games1, "Super", 70);
 		villains.add(villain1);
-		//villains.add(villain2);
-		//villains.add(villain3);
-		//villains.add(villain4);
-		//villains.add(villain5);
-		//villains.add(villain6);
+		villains.add(villain2);
+		villains.add(villain3);
+		villains.add(villain4);
+		villains.add(villain5);
+		Collections.shuffle(villains);
+		villains.add(superVillain);
+		System.out.println(villains.get(0).getName());
+		System.out.println(villains.get(1).getName());
+		System.out.println(villains.get(2).getName());
+		System.out.println(villains.get(3).getName());
+		System.out.println(villains.get(4).getName());
+		System.out.println(villains.get(5).getName());
+		GameSetupGUI.NewScreen(); //start the gammeeee
+		
 	}
 	
 }

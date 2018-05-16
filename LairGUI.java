@@ -1,21 +1,15 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class LairGUI extends JFrame {
 
-	private JPanel contentPane;
+public class LairGUI {
 
+	private JFrame lairFrame;
 
 	/**
 	 * Launch the application.
@@ -24,8 +18,8 @@ public class LairGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LairGUI frame = new LairGUI();
-					frame.setVisible(true);
+					LairGUI window = new LairGUI();
+					window.lairFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -34,46 +28,51 @@ public class LairGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
 	public LairGUI() {
-		setTitle("Villains Lair");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 801, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		lairFrame = new JFrame();
+		lairFrame.setTitle("Villains Lair");
+		lairFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		lairFrame.setBounds(100, 100, 801, 500);
+		lairFrame.getContentPane().setLayout(null);
+		
+		int currentCity = GameEnvironment.getCurrentCity();
+		Villain villain = GameEnvironment.getVillains().get(currentCity);
 		
 		JButton btnEnterTheLair = new JButton("Enter the lair!");
-		btnEnterTheLair.setBounds(5, 5, 132, 443);
+		btnEnterTheLair.setBounds(5, 152, 149, 68);
 		btnEnterTheLair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				battleWindow.NewScreen();
+				battleWindow.NewScreen(villain);
 			}
 		});
-		contentPane.setLayout(null);
-		
-		contentPane.add(btnEnterTheLair);
+		lairFrame.getContentPane().add(btnEnterTheLair);
 		
 		JButton btnRunAwaaaaay = new JButton("Run awaaaaay!");
-		btnRunAwaaaaay.setBounds(650, 5, 144, 443);
+		btnRunAwaaaaay.setBounds(591, 171, 173, 90);
 		btnRunAwaaaaay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				lairFrame.dispose();
 			}
 		});
+		lairFrame.getContentPane().add(btnRunAwaaaaay);
 		
-		contentPane.add(btnRunAwaaaaay);
+		JLabel toFightLabel = new JLabel("The Villain you will be fighting issssss....");
+		toFightLabel.setBounds(189, 152, 351, 68);
+		lairFrame.getContentPane().add(toFightLabel);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(5, 448, 789, 21);
-		contentPane.add(textPane);
-		
-		JTextPane txtpnYouAreAbout = new JTextPane();
-		txtpnYouAreAbout.setBounds(137, 5, 513, 443);
-		txtpnYouAreAbout.setEditable(false);
-		txtpnYouAreAbout.setText("You are about to enter the villains lair\n would you like too....");
-		contentPane.add(txtpnYouAreAbout);
+		JLabel VillainLabel = new JLabel("");
+		VillainLabel.setText("" + villain.getName());
+		VillainLabel.setBounds(211, 229, 227, 15);
+		lairFrame.getContentPane().add(VillainLabel);
 	}
 
 }

@@ -84,7 +84,6 @@ public class CiyGUI {
 			public void actionPerformed(ActionEvent e) {
 				String currentLocation = positions.get(4);
 				enterDistrict(currentLocation);
-				System.out.println(currentLocation);
 				
 			}
 		});
@@ -96,7 +95,6 @@ public class CiyGUI {
 			public void actionPerformed(ActionEvent e) {
 				String currentLocation = positions.get(2);
 				enterDistrict(currentLocation);
-				System.out.println(currentLocation);
 			}
 		});
 		eastButton.setBounds(463, 176, 181, 25);
@@ -107,7 +105,6 @@ public class CiyGUI {
 			public void actionPerformed(ActionEvent e) {
 				String currentLocation = positions.get(1);
 				enterDistrict(currentLocation);
-				System.out.println(currentLocation);
 				
 			}
 		});
@@ -119,7 +116,6 @@ public class CiyGUI {
 			public void actionPerformed(ActionEvent e) {
 				String currentLocation = positions.get(3);
 				enterDistrict(currentLocation);
-				System.out.println(currentLocation);
 				
 			}
 		});

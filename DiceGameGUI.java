@@ -16,11 +16,11 @@ public class DiceGameGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void NewScreen(Villain villain, Hero heroPlaying) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DiceGameGUI window = new DiceGameGUI();
+					DiceGameGUI window = new DiceGameGUI(villain, heroPlaying);
 					window.diceGameFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,14 +32,14 @@ public class DiceGameGUI {
 	/**
 	 * Create the application.
 	 */
-	public DiceGameGUI() {
-		initialize();
+	public DiceGameGUI(Villain villain, Hero heroPlaying) {
+		initialize(villain, heroPlaying);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Villain villain, Hero heroPlaying) {
 		diceGameFrame = new JFrame();
 		diceGameFrame.setBounds(100, 100, 450, 300);
 		diceGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

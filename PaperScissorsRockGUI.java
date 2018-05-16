@@ -25,13 +25,13 @@ public class PaperScissorsRockGUI {
 
 	//Launch the application.
 	 
-	public static void NewScreen() {
+	public static void NewScreen(Villain villain, Hero heroPlaying) {
 		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PaperScissorsRockGUI window = new PaperScissorsRockGUI();
+					PaperScissorsRockGUI window = new PaperScissorsRockGUI(villain, heroPlaying);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,11 +77,13 @@ public class PaperScissorsRockGUI {
 
 	//Create the application.
 	 
-	public PaperScissorsRockGUI() {
-		initialize();
+	public PaperScissorsRockGUI(Villain villain, Hero heroPlaying) {
+		initialize(villain, heroPlaying);
 	}
+	
+	
 	 //Initialize the contents of the frame.
-	private void initialize() {
+	private void initialize(Villain villain, Hero heroPlaying) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +149,8 @@ public class PaperScissorsRockGUI {
 		if (numHeroWon == 3) {
 			winOrLoseGameLabel.setText("You win!");
 			winOrLoseGameLabel.setVisible(true);
+			
+			
 		} else if (numVillainWon == 3) {
 			winOrLoseGameLabel.setText("You Lose!");
 			winOrLoseGameLabel.setVisible(true);

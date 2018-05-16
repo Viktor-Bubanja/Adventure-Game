@@ -20,11 +20,13 @@ public class GameSetupGUI {
 	private JTextField inputHeroName;
 	private String heroType = "Gambler";
 	private int inputNumHeroes;
-
+	//GameEnvironment gameEnv = new GameEnvironment();
+	
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,6 +50,7 @@ public class GameSetupGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame("Main setup frame");
 		frame.setBounds(100, 100, 1109, 658);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,7 +127,7 @@ public class GameSetupGUI {
 		sliderLabel.setBounds(383, 64, 296, 26);
 		frame.getContentPane().add(sliderLabel);
 		
-		JLabel lblAddUpTo = new JLabel("Pick and name up to 3 heroes to your team");
+		JLabel lblAddUpTo = new JLabel("");
 		lblAddUpTo.setBounds(19, 67, 401, 39);
 		frame.getContentPane().add(lblAddUpTo);
 		
@@ -237,11 +240,8 @@ public class GameSetupGUI {
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameEnvironment.setTeamName(txtTeamName.getText());
-				
 				GameEnvironment.setNumberCities(numCities.getValue());
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
-				
-				System.out.println(GameEnvironment.getTeamName());
 				CiyGUI City1 = new CiyGUI();
 				City1.NewScreen();
 				//City1.exit();
