@@ -60,7 +60,7 @@ public class battleWindow {
 		GameEnvironment gameEnvironment = new GameEnvironment();
 		int currentCity = gameEnvironment.getCurrentCity();
 		Villain villain = gameEnvironment.getVillains().get(currentCity);
-		PaperScissorsRock paperScissorsRockGame = new PaperScissorsRock();
+		PaperScissorsRockGUI paperScissorsRockGameGui = new PaperScissorsRockGUI();
 		String villainsGame = getGame(villain);
 		
 		
@@ -92,7 +92,7 @@ public class battleWindow {
 		fightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (villainsGame == "paper scissors rock") {
-					
+					//PaperScissorsRockGUI.NewScreen();
 				} else if (villainsGame == "guess number") {
 					
 				} else if (villainsGame == "dice game") {

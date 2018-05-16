@@ -32,9 +32,7 @@ public class GameEnvironment {
 		ArrayList<String> games4 = new ArrayList<String>();
 		ArrayList<String> games5 = new ArrayList<String>();
 		ArrayList<String> games6 = new ArrayList<String>();
-		PaperScissorsRock paperScissorsRockGame = new PaperScissorsRock();
-		GuessNumber guessNumberGame = new GuessNumber();
-		//games1.add(paperScissorsRockGame);
+		//GuessNumber guessNumberGame = new GuessNumber();
 		//games1.add(guessNumberGame);
 		games1.add("paper scissors rock");
 		games1.add("guess a number");
