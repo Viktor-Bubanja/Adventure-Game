@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -11,18 +12,25 @@ import java.awt.event.ActionEvent;
 public class GuessNumberGUI {
 
 	private JFrame frame;
+	private JFrame guessGameFrame;
 	private int villainsNumber;
 	private int guessAvailable = 2;
 	private int guessNumber = 1;
+	private BattleWindow battleWindow;
+	private Villain villain;
+	private Hero heroPlaying;
+	private int villainsDamage;
+	
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Villain villain, Hero heroPlaying) {
+	public static void NewScreen(Villain villain, Hero heroPlaying, BattleWindow battleWindow) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GuessNumberGUI window = new GuessNumberGUI(villain, heroPlaying);
-					window.frame.setVisible(true);
+					GuessNumberGUI window = new GuessNumberGUI(villain, heroPlaying, battleWindow);
+					window.guessGameFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -30,20 +38,25 @@ public class GuessNumberGUI {
 		});
 	}
 	
-	public GuessNumberGUI(Villain villain, Hero heroPlaying) {
-		initialize(villain, heroPlaying);
+	public GuessNumberGUI(Villain villainInput, Hero heroPlayingInput, BattleWindow battleWindowInput) {
+		battleWindow = battleWindowInput;
+		heroPlaying = heroPlayingInput;
+		villain = villainInput;
+		initialize();
 	}
 	
 	/**
 	 * Create the frame.
 	 */
-	private void initialize(Villain villain, Hero heroPlaying) {
+	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Guess the Number Battle");
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		guessGameFrame = new JFrame();
+		guessGameFrame.setBounds(100, 100, 450, 300);
+		guessGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		guessGameFrame.getContentPane().setLayout(null);
+		
+		
 		
 		Random random = new Random();
 		villainsNumber = random.nextInt(10);
@@ -57,15 +70,29 @@ public class GuessNumberGUI {
 		guessSlider.setMinimum(1);
 		guessSlider.setMaximum(10);
 		guessSlider.setBounds(32, 54, 245, 41);
-		frame.add(guessSlider);
+		guessGameFrame.getContentPane().add(guessSlider);
 		
 		JLabel pickLabel = new JLabel("Pick a number, any number!");
 		pickLabel.setBounds(46, 12, 250, 30);
-		frame.add(pickLabel);
+		guessGameFrame.getContentPane().add(pickLabel);
 		
 		JLabel highOrLow = new JLabel("");
 		highOrLow.setBounds(12, 97, 424, 58);
-		frame.add(highOrLow);
+		guessGameFrame.getContentPane().add(highOrLow);
+		
+		villainsDamage = villain.getDamage();
+		
+		JButton goBackButton = new JButton("Go back!");
+		goBackButton.setVisible(false);
+		goBackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				battleWindow.changeGame();
+				guessGameFrame.dispose();
+				
+			}
+		});
+		goBackButton.setBounds(319, 237, 117, 25);
+		guessGameFrame.getContentPane().add(goBackButton);
 		
 		JButton btnPick = new JButton("Pick!");
 		btnPick.addActionListener(new ActionListener() {
@@ -77,6 +104,12 @@ public class GuessNumberGUI {
 				
 					if (guessSlider.getValue() == villainsNumber) {
 						highOrLow.setText("Wow you got it on the first try!");
+						villain.loseLife();
+						if (villain.getLives() == 0) {
+							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+						}
+						battleWindow.villainDies();
+						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
 					} else if (guessSlider.getValue() > villainsNumber) {
 						highOrLow.setText("you have another guess, your guess was too high");
@@ -88,16 +121,33 @@ public class GuessNumberGUI {
 				} else if (guessNumber == guessAvailable) { //If this is your last guess
 					if (guessSlider.getValue() == villainsNumber) {
 						highOrLow.setText("Great guess! You got it");
+						villain.loseLife();
+						if (villain.getLives() == 0) {
+							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+						}
+						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
-					} else {
+						
+					} else { // The only place you can lose!
+						
 						textSet = "Sorry you lose, the number was: " + villainsNumber;
 						highOrLow.setText(textSet);
+						heroPlaying.doDamage(villainsDamage);
+						if (heroPlaying.getHealth() <= 0) {
+							JOptionPane.showMessageDialog(frame, "Your hero has died!");
+						}
+						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
 					}
 					
 				} else if (guessAvailable > guessNumber) { 
 					if (guessSlider.getValue() == villainsNumber) {
 						highOrLow.setText("Great guess! You got it with guesses to spare");
+						villain.loseLife();
+						if (villain.getLives() == 0) {
+							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+						}
+						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
 					} else if (guessSlider.getValue() > villainsNumber) {
 						highOrLow.setText("you have another guess, your guess was too high");
@@ -106,12 +156,11 @@ public class GuessNumberGUI {
 					}
 				}
 				guessNumber = guessNumber + 1;
-				System.out.println("Number after: " + guessNumber);
 				//System.out.println("Available after: " + guessAvailable);
 			}
-			
+
 		});
 		btnPick.setBounds(300, 54, 117, 25);
-		frame.add(btnPick);
+		guessGameFrame.getContentPane().add(btnPick);
 	}
 }

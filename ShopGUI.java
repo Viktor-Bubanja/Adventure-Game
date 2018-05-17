@@ -151,6 +151,7 @@ public class ShopGUI {
 		JButton btnBackToHome = new JButton("Back to Home Base!");
 		btnBackToHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CityGUI.CityScreen.setVisible(true);
 				ShopGUIFrame.dispose();
 			}
 		});

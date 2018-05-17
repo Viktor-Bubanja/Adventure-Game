@@ -123,6 +123,7 @@ public class HospitalGUI {
 		JButton btnClose = new JButton("Back to Home Base!");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CityGUI.CityScreen.setVisible(true);
 				HospitalFrame.dispose();
 			}
 		});

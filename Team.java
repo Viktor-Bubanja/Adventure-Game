@@ -65,6 +65,9 @@ public class Team {
 	public static ArrayList<PowerUp> getPowerups() {
 		return powerUps;
 	}
+	public static void removeHero(Hero hero) {
+		heroes.remove(hero);
+	}
 			
 	public static void main(String[] args) {
 		Team newTeam = new Team("trht", 2);

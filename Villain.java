@@ -21,6 +21,12 @@ public class Villain {
 	public void loseLife() {
 		lives--;
 	}
+	public int getLives() {
+		return lives;
+	}
+	public int getDamage() {
+		return damage;
+	}
 	
 	public Villain(String inputTaunt, ArrayList<String> inputGames, String inputName, int inputDamage) {
 		taunt = inputTaunt;

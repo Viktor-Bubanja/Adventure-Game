@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 
 public class Hero {
 	private String name;
@@ -39,6 +40,9 @@ public class Hero {
 		System.out.println("health = ");
 		System.out.println(currentHealth);
 	}
+	public int getHealth() {
+		return currentHealth;
+	}
 	
 	public String toString() {
 		String toReturn;
@@ -48,6 +52,12 @@ public class Hero {
 	
 	public String getName() {
 		return name;
+	}
+	public void doDamage(int damage) {
+		currentHealth -= damage;
+		if (currentHealth <= 0) {
+			Team.removeHero(this);
+		}
 	}
 }
 	

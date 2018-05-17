@@ -51,6 +51,7 @@ public class LairGUI {
 		btnEnterTheLair.setBounds(5, 152, 149, 68);
 		btnEnterTheLair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BattleWindow battleWindow = new BattleWindow(villain);
 				battleWindow.NewScreen(villain);
 			}
 		});
@@ -61,6 +62,7 @@ public class LairGUI {
 		btnRunAwaaaaay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lairFrame.dispose();
+				CityGUI.CityScreen.setVisible(true);
 			}
 		});
 		lairFrame.getContentPane().add(btnRunAwaaaaay);
