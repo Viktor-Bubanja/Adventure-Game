@@ -145,8 +145,6 @@ public class CityGUI {
 					eastButton.setText(positions.get(2));
 					southButton.setText(positions.get(3));
 					westButton.setText(positions.get(4));
-					
-					
 				}
 			}
 		});

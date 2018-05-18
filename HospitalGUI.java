@@ -9,12 +9,20 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+import javax.swing.JProgressBar;
 
 public class HospitalGUI {
 
 	private int healingItemIndex;
 	private int heroIndex;
 	private JFrame HospitalFrame;
+	private static int timeRemaining;
+	private ActionListener countdown;
+	private static Timer timer;
+	private static ActionListener healProgressListener;
+	private static Hero heroToHeal;
+	private JProgressBar progressBar = new JProgressBar();
 
 	/**
 	 * Launch the application.
@@ -33,7 +41,10 @@ public class HospitalGUI {
 	}
 	
 	private static void healHero(HealingItem healingItem, Hero hero) {
-		hero.heal(healingItem);
+		heroToHeal = hero;
+		timeRemaining = healingItem.getApplicationTime();
+		//healProgressListener;
+		timer.start();
 	}
 
 	/**
@@ -57,6 +68,26 @@ public class HospitalGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
+		countdown = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timeRemaining--;
+				if (timeRemaining <= 0) {
+					timer.stop();
+				}
+			}
+		};
+		
+		timer = new Timer(1000, countdown);
+		
+		healProgressListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				heroToHeal.heal(10);
+				
+			}
+		};
+		
 		HospitalFrame = new JFrame();
 		HospitalFrame.setTitle("Hospital");
 		HospitalFrame.setBounds(100, 100, 1000, 700);
@@ -113,6 +144,8 @@ public class HospitalGUI {
 		healButton.setBounds(312, 281, 117, 25);
 		HospitalFrame.getContentPane().add(healButton);
 		
+		
+		
 		JButton btnClose = new JButton("Back to Home Base!");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,6 +155,10 @@ public class HospitalGUI {
 		});
 		btnClose.setBounds(34, 328, 209, 25);
 		HospitalFrame.getContentPane().add(btnClose);
+		
+		
+		progressBar.setBounds(51, 470, 246, 25);
+		HospitalFrame.getContentPane().add(progressBar);
 		
 
 		

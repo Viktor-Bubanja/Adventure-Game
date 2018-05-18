@@ -4,7 +4,7 @@ public class Team {
 	
 	public String teamName;
 	private static int numberHeroes;	
-	private static double money = 100.00; //Some random amount later
+	private static double money = 300.00; //Some random amount later
 	private static int maps = 0;
 	private static ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
@@ -49,6 +49,20 @@ public class Team {
 			heroNames[i] = heroes.get(i).getName();
 		}
 		return heroNames;
+	}
+	public static String[] getHealingItemNames() {
+		String[] healingItemNames = new String[healingItems.size()];
+		for (int i = 0; i < healingItems.size(); i++ ) {
+			healingItemNames[i] = healingItems.get(i).getName();
+		}
+		return healingItemNames;
+	}
+	public static String[] getPowerUpNames() {
+		String[] powerUpNames = new String[powerUps.size()];
+		for (int i = 0; i < powerUps.size(); i++ ) {
+			powerUpNames[i] = powerUps.get(i).getName();
+		}
+		return powerUpNames;
 	}
 	
 	public static ArrayList<HealingItem> getHealingItems() {

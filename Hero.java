@@ -48,13 +48,8 @@ public class Hero {
 	}
 
 	
-	public void heal(HealingItem healingItem) {
-		int amountToHeal = healingItem.getHealingAmount();
-		System.out.println("health = ");
-		System.out.println(currentHealth);
+	public void heal(int amountToHeal) {
 		currentHealth += amountToHeal;
-		System.out.println("health = ");
-		System.out.println(currentHealth);
 	}
 	public int getHealth() {
 		return currentHealth;
