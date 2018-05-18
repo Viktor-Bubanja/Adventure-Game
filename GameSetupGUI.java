@@ -12,6 +12,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
 import javax.swing.ImageIcon;
+import java.awt.Rectangle;
 
 public class GameSetupGUI {
 
@@ -52,7 +53,7 @@ public class GameSetupGUI {
 	private void initialize() {
 		
 		setupFrame = new JFrame("Main setup frame");
-		setupFrame.setBounds(100, 100, 1109, 658);
+		setupFrame.setBounds(new Rectangle(0, 0, 1000, 700));
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		

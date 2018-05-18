@@ -51,6 +51,10 @@ public class GameEnvironment {
 		cities.add(city5);
 		cities.add(finalCity);
 	}
+	public static void endGame() {
+		BattleWindow.closeWindow();
+		
+	}
 	
 	private static void makeVillains() {
 		ArrayList<String> games1 = new ArrayList<String>();

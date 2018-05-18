@@ -43,7 +43,7 @@ public class CityGUI {
 			shop.NewScreen();
 			CityScreen.setVisible(false);
 		} else if (currentLocation == "POWERUPDEN") {
-			DenGUI den = new DenGUI();
+			PowerUpDenGUI den = new PowerUpDenGUI();
 			den.NewScreen();
 			CityScreen.setVisible(false);
 		} else if (currentLocation == "HOSPITAL") {
@@ -78,8 +78,8 @@ public class CityGUI {
 		
 		
 		CityScreen = new JFrame();
-		CityScreen.setTitle("City1  //needa do a few more lol");
-		CityScreen.setBounds(100, 100, 658, 441);
+		CityScreen.setTitle("");
+		CityScreen.setBounds(100, 100, 1000, 700);
 		CityScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		CityScreen.getContentPane().setLayout(null);
 		

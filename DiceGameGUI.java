@@ -16,6 +16,9 @@ public class DiceGameGUI {
 	private Villain villain;
 	private Hero heroPlaying;
 	private BattleWindow battleWindow;
+	private boolean heroHasPowerUp = false;
+	private int rollHero;
+	
 
 	/**
 	 * Launch the application.
@@ -24,8 +27,14 @@ public class DiceGameGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DiceGameGUI window = new DiceGameGUI(villain, heroPlaying, battleWindow);
-					window.diceGameFrame.setVisible(true);
+					DiceGameGUI diceGameWindow = new DiceGameGUI(villain, heroPlaying, battleWindow);
+					if (heroPlaying.getHasDiceGamePowerUp()) {
+						diceGameWindow.heroHasPowerUp = true;
+						System.out.println(heroPlaying.getHasDiceGamePowerUp());
+						heroPlaying.setHasDiceGamePowerUp(false);
+						System.out.println(heroPlaying.getHasDiceGamePowerUp());
+					}
+					diceGameWindow.diceGameFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,8 +56,9 @@ public class DiceGameGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		diceGameFrame = new JFrame();
-		diceGameFrame.setBounds(100, 100, 727, 386);
+		diceGameFrame.setBounds(100, 100, 1000, 700);
 		diceGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		diceGameFrame.getContentPane().setLayout(null);
 
@@ -98,7 +108,12 @@ public class DiceGameGUI {
 				if (!gameOver) {
 					Random randomHeroNumber = new Random();
 					Random randomVillainNumber = new Random();
-					int rollHero = randomHeroNumber.nextInt(6) + 1;
+					if (heroHasPowerUp) {
+						rollHero = randomHeroNumber.nextInt(4) + 3;
+					} else {
+						rollHero = randomHeroNumber.nextInt(6) + 1;
+					}
+					
 					int rollVillain = randomVillainNumber.nextInt(6) + 1;
 					labelHeroRoll.setText(Integer.toString(rollHero));
 					labelVillainRoll.setText(Integer.toString(rollVillain));
@@ -112,7 +127,10 @@ public class DiceGameGUI {
 							goBackButton.setVisible(true);
 							if (villain.getLives() == 0) {
 								JOptionPane.showMessageDialog(diceGameFrame, "The villain is now dead!");
+								BattleWindow.villainDies();
+								diceGameFrame.dispose();
 							}
+							
 						}
 						heroWonLabel.setText(Integer.toString(heroWon));
 					} else if (rollVillain > rollHero) {

@@ -47,14 +47,6 @@ public class HospitalGUI {
 	private static String[] getListHealingItemNames() {
 		int numberHealingItems = Team.getHealingItems().size();
 		String[] healingItemNames = new String[numberHealingItems];
-		//int numberHealingItems = 3;
-		//healingItemNames = new String[3];
-		//HealingItem smallPotion = new HealingItem(10.00, 1, 20, "Small Potion");
-		//HealingItem quickPotion = new HealingItem(25.00, 1, 5, "Quick Potion");
-		//HealingItem bigPotion = new HealingItem(40.00, 2, 10, "Big Potion");
-		//healingItemNames[0] = smallPotion.getName();
-		//healingItemNames[1] = quickPotion.getName();
-		//healingItemNames[2] = bigPotion.getName();
 		for (int i = 0; i < numberHealingItems; i++) {
 			healingItemNames[i] = Team.getHealingItems().get(i).getName();
 		}	
@@ -67,7 +59,7 @@ public class HospitalGUI {
 	private void initialize() {
 		HospitalFrame = new JFrame();
 		HospitalFrame.setTitle("Hospital");
-		HospitalFrame.setBounds(100, 100, 745, 408);
+		HospitalFrame.setBounds(100, 100, 1000, 700);
 		HospitalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		HospitalFrame.getContentPane().setLayout(null);
 		
@@ -91,6 +83,7 @@ public class HospitalGUI {
 		heroComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroIndex = heroComboBox.getSelectedIndex();
+				System.out.println(heroIndex);
 			}
 		});
 

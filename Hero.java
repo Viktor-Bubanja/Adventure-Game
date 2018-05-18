@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class Hero {
@@ -6,6 +8,10 @@ public class Hero {
 	private int maxHealth;
 	private int currentHealth;
 	private int recoveryRate;
+	private boolean hasPaperScissorsRockPowerUp = false;
+	private boolean hasGuessNumberPowerUp = false;
+	private boolean hasDiceGamePowerUp = false;
+	private ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 	
 	public Hero(String inputName, String inputType) {
 		name = inputName;
@@ -31,6 +37,16 @@ public class Hero {
 		}
 		currentHealth = maxHealth;
 	}
+	public ArrayList<PowerUp> getPowerUps() {
+		return powerUps;
+	}
+	public void addPaperScissorsRockPowerUp() {
+		hasPaperScissorsRockPowerUp = true;
+	}
+	public void  addGuessNumberPowerUp() {
+		hasGuessNumberPowerUp = true;
+	}
+
 	
 	public void heal(HealingItem healingItem) {
 		int amountToHeal = healingItem.getHealingAmount();
@@ -56,9 +72,34 @@ public class Hero {
 	public void doDamage(int damage) {
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
-			Team.removeHero(this);
+			Team.killHero(this);
+			BattleWindow.updateHeroComboBox(this);
+			
 		}
 	}
+	public void addDiceGamePowerUp() {
+		hasDiceGamePowerUp = true;
+		
+	}
+	public boolean getHasPaperScissorsRockPowerUp() {
+		return hasPaperScissorsRockPowerUp;
+	}
+	public void setHasPaperScissorsRockPowerUp(boolean hasPaperScissorsRockPowerUp) {
+		this.hasPaperScissorsRockPowerUp = hasPaperScissorsRockPowerUp;
+	}
+	public boolean getHasGuessNumberPowerUp() {
+		return hasGuessNumberPowerUp;
+	}
+	public void setHasGuessNumberPowerUp(boolean hasGuessNumberPowerUp) {
+		this.hasGuessNumberPowerUp = hasGuessNumberPowerUp;
+	}
+	public boolean getHasDiceGamePowerUp() {
+		return hasDiceGamePowerUp;
+	}
+	public void setHasDiceGamePowerUp(boolean hasDiceGamePowerUp) {
+		this.hasDiceGamePowerUp = hasDiceGamePowerUp;
+	}
+	
 }
 	
 /**

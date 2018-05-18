@@ -62,11 +62,14 @@ public class Team {
 		heroes.add(hero);
 	}
 	
-	public static ArrayList<PowerUp> getPowerups() {
+	public static ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
 	}
-	public static void removeHero(Hero hero) {
+	public static void killHero(Hero hero) {
 		heroes.remove(hero);
+		if (heroes.size() == 0) {
+			GameEnvironment.endGame();
+		}
 	}
 			
 	public static void main(String[] args) {

@@ -14,10 +14,11 @@ import java.awt.event.ActionEvent;
 
 public class BattleWindow {
 
-	private JFrame battleWindowFrame;
+	private static JFrame battleWindowFrame;
 	private static Villain villain;
 	private static String currentGame;
 	private JLabel gameLabel = new JLabel();
+	private static JComboBox heroSelection = new JComboBox(Team.getHeroNames());
 	
 	
 	/**
@@ -44,9 +45,7 @@ public class BattleWindow {
 	public static String getGame() {
 		ArrayList<String> villainsGames = new ArrayList<String>();
 		villainsGames = villain.getGames();
-		System.out.println(villainsGames);
 		Collections.shuffle(villainsGames);
-		System.out.println(villainsGames);
 		return villainsGames.get(0);		
 	}
 
@@ -66,7 +65,6 @@ public class BattleWindow {
 		
 	}
 	public void openCurrrentGame(Hero heroPlaying) {
-		System.out.println(this.getVillain());
 		if (currentGame == "paper scissors rock") {
 			PaperScissorsRockGUI.NewScreen(villain, heroPlaying, this);
 		} else if (currentGame == "guess a number") {
@@ -80,13 +78,12 @@ public class BattleWindow {
 	 * @param villain 
 	 */
 	private void initialize() {
-		
+		System.out.println(villain.getName());
 		battleWindowFrame = new JFrame();
-		battleWindowFrame.setBounds(100, 100, 724, 417);
+		battleWindowFrame.setBounds(100, 100, 1000, 700);
 		battleWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		battleWindowFrame.getContentPane().setLayout(null);
 		
-		//PaperScissorsRockGUI paperScissorsRockGameGui = new PaperScissorsRockGUI();
 		changeGame();
 		Hero heroPlaying;
 		
@@ -98,7 +95,7 @@ public class BattleWindow {
 		lblName.setBounds(165, 28, 341, 22);
 		battleWindowFrame.getContentPane().add(lblName);
 		
-		JComboBox heroSelection = new JComboBox(Team.getHeroNames());
+		
 		heroSelection.setBounds(267, 108, 161, 29);
 		battleWindowFrame.getContentPane().add(heroSelection);
 		
@@ -126,10 +123,18 @@ public class BattleWindow {
 		battleWindowFrame.getContentPane().add(fightButton);
 	}
 
-	public void villainDies() {
+	public static void villainDies() {
 		// TODO Auto-generated method stub
+		closeWindow();
 		CityGUI.CityScreen.dispose();
 		GameEnvironment.moveToNewCity();
 		
+	}
+	public static void closeWindow() {
+		battleWindowFrame.dispose();
+		
+	}
+	public static void updateHeroComboBox(Hero hero) {
+		heroSelection = new JComboBox(Team.getHeroNames());
 	}
 }

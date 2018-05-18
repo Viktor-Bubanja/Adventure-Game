@@ -41,7 +41,7 @@ public class LairGUI {
 		lairFrame = new JFrame();
 		lairFrame.setTitle("Villains Lair");
 		lairFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		lairFrame.setBounds(100, 100, 801, 500);
+		lairFrame.setBounds(100, 100, 1000, 700);
 		lairFrame.getContentPane().setLayout(null);
 		
 		int currentCity = GameEnvironment.getCurrentCity();
@@ -52,6 +52,7 @@ public class LairGUI {
 		btnEnterTheLair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BattleWindow battleWindow = new BattleWindow(villain);
+				lairFrame.dispose();
 				battleWindow.NewScreen(villain);
 			}
 		});
@@ -72,8 +73,8 @@ public class LairGUI {
 		lairFrame.getContentPane().add(toFightLabel);
 		
 		JLabel VillainLabel = new JLabel("");
-		VillainLabel.setText("" + villain.getName());
-		VillainLabel.setBounds(211, 229, 227, 15);
+		VillainLabel.setText(villain.getName());
+		VillainLabel.setBounds(211, 229, 306, 150);
 		lairFrame.getContentPane().add(VillainLabel);
 	}
 
