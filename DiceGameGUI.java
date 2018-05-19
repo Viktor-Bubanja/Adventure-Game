@@ -28,11 +28,9 @@ public class DiceGameGUI {
 			public void run() {
 				try {
 					DiceGameGUI diceGameWindow = new DiceGameGUI(villain, heroPlaying, battleWindow);
-					if (heroPlaying.getHasDiceGamePowerUp()) {
+					if (heroPlaying.getHasDiceGamePowerUp() || Team.teamHasGambler()) {
 						diceGameWindow.heroHasPowerUp = true;
-						System.out.println(heroPlaying.getHasDiceGamePowerUp());
 						heroPlaying.setHasDiceGamePowerUp(false);
-						System.out.println(heroPlaying.getHasDiceGamePowerUp());
 					}
 					diceGameWindow.diceGameFrame.setVisible(true);
 				} catch (Exception e) {

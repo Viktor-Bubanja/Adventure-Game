@@ -96,10 +96,8 @@ public class PaperScissorsRockGUI {
 		villain = villainInput;
 		villainsDamage = villain.getDamage();
 		if (heroPlaying.getHasPaperScissorsRockPowerUp()) {
-			System.out.println(heroPlaying.getHasPaperScissorsRockPowerUp());
 			heroHasPowerUp = true;
 			heroPlaying.setHasPaperScissorsRockPowerUp(false);
-			System.out.println(heroPlaying.getHasPaperScissorsRockPowerUp());
 			
 		}
 		initialize();
@@ -206,7 +204,7 @@ public class PaperScissorsRockGUI {
 		if (numHeroWon == 3) {
 			setButtonsInvisible();
 			gameOver = true;
-			endGameLabels();
+			endGameLabels("You win!");
 			villain.loseLife();
 			if (villain.getLives() == 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "The villain is now dead!");
@@ -217,7 +215,7 @@ public class PaperScissorsRockGUI {
 		} else if (numVillainWon == 3) {
 			setButtonsInvisible();
 			gameOver = true;
-			endGameLabels();
+			endGameLabels("You lose!");
 			heroPlaying.doDamage(villainsDamage);
 			if (heroPlaying.getHealth() <= 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "Your hero has died!");
@@ -229,7 +227,6 @@ public class PaperScissorsRockGUI {
 			int randomNumber = getRandomNumber();
 			if (heroHasPowerUp) {
 				giveClue(randomNumber);
-				
 			}
 			villainsMove = HandSign.parseType(randomNumber);
 		}
@@ -239,8 +236,8 @@ public class PaperScissorsRockGUI {
 		scissorsButton.setVisible(false);
 		rockButton.setVisible(false);
 	}
-	private void endGameLabels() {
-		winOrLoseGameLabel.setText("You Lose!");
+	private void endGameLabels(String gameResult) {
+		winOrLoseGameLabel.setText(gameResult);
 		winOrLoseGameLabel.setVisible(true);
 		goBackButton.setVisible(true);
 	}

@@ -1,10 +1,10 @@
 
 public class Map{
-	private double cost = 20.00;
+	private int cost = 20;
 	public String getName() {
 		return "Map";
 	}
-	public double getCost() {
+	public int getCost() {
 		return cost;
 	}
 }

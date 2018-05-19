@@ -46,6 +46,21 @@ public class GameSetupGUI {
 	public GameSetupGUI() {
 		initialize();
 	}
+	
+	private void addHeroTypeToTeam(String heroType) {
+		if (heroType == "Medic") {
+			Team.setTeamHasMedic(true);
+		} else if(heroType == "Gambler") {
+			Team.setTeamHasGambler(true);
+		} else if (heroType == "Diplomat") {
+			Team.setTeamHasDiplomat(true);
+		}
+		else if (heroType == "Explorer") {
+			Team.setTeamHasExplorer(true);
+		} else if (heroType == "Lucky") {
+			Team.setTeamHasLucky(true);
+		}
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -57,14 +72,14 @@ public class GameSetupGUI {
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		
-		Map map = new Map();
-		HealingItem smallPotion = new HealingItem(10.00, 1, 20, "Small Potion");
-		HealingItem quickPotion = new HealingItem(25.00, 1, 5, "Quick Potion");
-		HealingItem bigPotion = new HealingItem(40.00, 2, 10, "Big Potion");
+		/*Map map = new Map();
+		HealingItem smallPotion = new HealingItem(10, 1, 20, "Small Potion");
+		HealingItem quickPotion = new HealingItem(25, 1, 5, "Quick Potion");
+		HealingItem bigPotion = new HealingItem(40, 2, 10, "Big Potion");
 		List<HealingItem> healingItems = new ArrayList<HealingItem>();
 		healingItems.add(smallPotion);
 		healingItems.add(quickPotion);
-		healingItems.add(bigPotion);
+		healingItems.add(bigPotion); */
 		
 		JLabel lblWhatWouldYou = new JLabel("What would you like your super team to be called?");
 		lblWhatWouldYou.setBounds(2, -7, 378, 59);
@@ -182,7 +197,7 @@ public class GameSetupGUI {
 				//if inputHeroName.getText().length() 
 				Team.addHero(new Hero(inputHeroName.getText(), heroType));
 				inputNumHeroes++; 
-				
+				addHeroTypeToTeam(heroType);
 				lblHeroes.setText(Team.getHeroes().toString());
 				//heroes.add();
 				inputHeroName.setText("");
@@ -239,6 +254,11 @@ public class GameSetupGUI {
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Team.teamHasMedic()) {
+					for (Hero hero: Team.getHeroes()) {
+						hero.increaseMaxHealth(20);
+					}
+				}
 				GameEnvironment.setTeamName(txtTeamName.getText());
 				GameEnvironment.setNumberCities(numCities.getValue());
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)

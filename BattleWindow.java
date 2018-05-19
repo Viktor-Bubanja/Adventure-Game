@@ -127,6 +127,11 @@ public class BattleWindow {
 		// TODO Auto-generated method stub
 		closeWindow();
 		CityGUI.CityScreen.dispose();
+		if (Team.teamHasLucky()) {
+			Team.increaseMoneyBy(200);
+		} else {
+			Team.increaseMoneyBy(100);
+		}
 		GameEnvironment.moveToNewCity();
 		
 	}
@@ -134,7 +139,8 @@ public class BattleWindow {
 		battleWindowFrame.dispose();
 		
 	}
-	public static void updateHeroComboBox(Hero hero) {
-		heroSelection = new JComboBox(Team.getHeroNames());
+	public static void removeDeadHeroFromComboBox(Hero hero) {
+		heroSelection.removeItem(hero);
+		//heroSelection = new JComboBox(Team.getHeroNames());
 	}
 }

@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -13,6 +14,9 @@ import java.awt.event.ActionEvent;
 public class CityGUI {
 
 	public static JFrame CityScreen;
+	private boolean hasMap = false;
+	private JButton useMapButton = new JButton("Use map");
+	private JLabel youHaveAMapLabel = new JLabel("You have a map available to use!");
 
 	/**
 	 * Launch the application.
@@ -58,12 +62,40 @@ public class CityGUI {
 		} //else if (currentLocation == "HOMEBASE") {}
 	
 	}
-	
+	private void showMapButtonAndLabel() {
+		useMapButton.setVisible(true);
+		youHaveAMapLabel.setVisible(true);
+	}
+	private void hideMapButtonAndLabel() {
+		useMapButton.setVisible(false);
+		youHaveAMapLabel.setVisible(false);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		CityScreen = new JFrame();
+		CityScreen.setTitle("");
+		CityScreen.setBounds(100, 100, 1000, 700);
+		CityScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		CityScreen.getContentPane().setLayout(null);
+		
+		useMapButton.setBounds(494, 53, 117, 25);
+		CityScreen.getContentPane().add(useMapButton);
+		useMapButton.setVisible(false);
+		
+		youHaveAMapLabel.setBounds(406, 12, 295, 25);
+		youHaveAMapLabel.setVisible(false);
+		CityScreen.getContentPane().add(youHaveAMapLabel);
+		for (int i = 0; i < Team.getHeroes().size(); i++) {
+			System.out.println(Team.getHeroTypes().get(i));
+		}
+		
+		if (Team.getNumberMaps() >0 || Team.teamHasExplorer()) {
+			System.out.println("FDHFDHFDGHGFDHGFD");
+			showMapButtonAndLabel();
+		}
 		
 		int currentPosition = 0;
 		List<String> positions = new ArrayList<String>();
@@ -77,11 +109,7 @@ public class CityGUI {
 		
 		
 		
-		CityScreen = new JFrame();
-		CityScreen.setTitle("");
-		CityScreen.setBounds(100, 100, 1000, 700);
-		CityScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		CityScreen.getContentPane().setLayout(null);
+
 		
 		
 		JButton westButton = new JButton("West");
@@ -131,25 +159,23 @@ public class CityGUI {
 		lblHomeBase.setBounds(273, 181, 110, 15);
 		CityScreen.getContentPane().add(lblHomeBase);
 		
-		JLabel lblYouHaveA = new JLabel("You have a map available to use!");
-		lblYouHaveA.setBounds(406, 12, 295, 25);
-		CityScreen.getContentPane().add(lblYouHaveA);
 		
-		JButton useMap = new JButton("Use map");
-		useMap.addActionListener(new ActionListener() {
+
+		
+		
+		useMapButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean mapAvailable = true;
-				if (mapAvailable) {
-					//take map away from inventory
-					northButton.setText(positions.get(1));
-					eastButton.setText(positions.get(2));
-					southButton.setText(positions.get(3));
-					westButton.setText(positions.get(4));
-				}
+
+				northButton.setText(positions.get(1));
+				eastButton.setText(positions.get(2));
+				southButton.setText(positions.get(3));
+				westButton.setText(positions.get(4));
+				hideMapButtonAndLabel();
+				Team.removeMap();
+				
 			}
 		});
-		useMap.setBounds(494, 53, 117, 25);
-		CityScreen.getContentPane().add(useMap);
+
 		
 		JButton close = new JButton("Close");
 		close.addActionListener(new ActionListener() {

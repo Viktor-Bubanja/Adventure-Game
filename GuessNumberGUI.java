@@ -30,11 +30,9 @@ public class GuessNumberGUI {
 			public void run() {
 				try {
 					GuessNumberGUI guessNumberWindow = new GuessNumberGUI(villain, heroPlaying, battleWindow);
-					if (heroPlaying.getHasGuessNumberPowerUp()) {
+					if (heroPlaying.getHasGuessNumberPowerUp() || Team.teamHasGambler()) {
 						guessNumberWindow.guessAvailable = 3;
-						System.out.println(heroPlaying.getHasGuessNumberPowerUp());
 						heroPlaying.setHasGuessNumberPowerUp(false);
-						System.out.println(heroPlaying.getHasGuessNumberPowerUp());
 					}
 					guessNumberWindow.guessGameFrame.setVisible(true);
 				} catch (Exception e) {

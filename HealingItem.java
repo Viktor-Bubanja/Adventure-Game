@@ -2,19 +2,22 @@
 public class HealingItem {
 
 	private int applicationTime;
-	private double cost;
+	private int cost;
 	private int healingAmount;
 	private String name;
 	
 	
-	public HealingItem (double costInput, int healingAmountInput, int applicationTimeInput, String nameInput) {
+	public HealingItem (int costInput, int healingAmountInput, int applicationTimeInput, String nameInput) {
 		cost = costInput;
 		healingAmount = healingAmountInput;
 		applicationTime = applicationTimeInput;
 		name = nameInput;
 	}
-	public double getCost() {
+	public int getCost() {
 		return cost;
+	}
+	public void reduceCost(int reduceBy) {
+		cost -= reduceBy;
 	}
 	public int getApplicationTime() {
 		return applicationTime;

@@ -8,6 +8,9 @@ public class GameEnvironment {
 	private static ArrayList<Villain> villains = new ArrayList<Villain>();
 	private static ArrayList<CityGUI> cities = new ArrayList<CityGUI>();
 	private static int currentCity = 0;
+
+
+
 	
 	public static ArrayList<Villain> getVillains() {
 		return villains;
@@ -27,6 +30,9 @@ public class GameEnvironment {
 			return - 1; //We now at the last city with the supervillain
 		else
 			return currentCity;
+	}
+	public static int getNumberCities() {
+		return cities.size();
 	}
 	
 	public static String[] getVillainNames() {
@@ -87,12 +93,12 @@ public class GameEnvironment {
 	public static void main(String[] args) {
 		makeVillains();
 		makeCities();
-		System.out.println(villains.get(0).getName());
-		System.out.println(villains.get(1).getName());
-		System.out.println(villains.get(2).getName());
-		System.out.println(villains.get(3).getName());
-		System.out.println(villains.get(4).getName());
-		System.out.println(villains.get(5).getName());
+		//System.out.println(villains.get(0).getName());
+		//System.out.println(villains.get(1).getName());
+		//System.out.println(villains.get(2).getName());
+		//System.out.println(villains.get(3).getName());
+		//System.out.println(villains.get(4).getName());
+		//System.out.println(villains.get(5).getName());
 		GameSetupGUI.NewScreen(); //start the game already
 		
 	}

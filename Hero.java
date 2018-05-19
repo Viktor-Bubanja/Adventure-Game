@@ -17,10 +17,10 @@ public class Hero {
 		name = inputName;
 		type = inputType;
 		if (type == "Gambler") {
-			maxHealth = 200;
+			maxHealth = 2;
 			recoveryRate = 8;
 		} else if (type == "Medic") {
-			maxHealth = 150;
+			maxHealth = 1;
 			recoveryRate = 15;
 		} else if (type == "Diplomat") {
 			maxHealth = 200;
@@ -39,6 +39,12 @@ public class Hero {
 	}
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
+	}
+	public void increaseMaxHealth(int increaseBy) {
+		maxHealth += increaseBy;
+	}
+	public void decreaseMaxHealth(int decreaseBy) {
+		maxHealth -= decreaseBy;
 	}
 	public void addPaperScissorsRockPowerUp() {
 		hasPaperScissorsRockPowerUp = true;
@@ -64,17 +70,18 @@ public class Hero {
 	public String getName() {
 		return name;
 	}
+	public String getType() {
+		return type;
+	}
 	public void doDamage(int damage) {
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
 			Team.killHero(this);
-			BattleWindow.updateHeroComboBox(this);
-			
+			BattleWindow.removeDeadHeroFromComboBox(this);
 		}
 	}
 	public void addDiceGamePowerUp() {
 		hasDiceGamePowerUp = true;
-		
 	}
 	public boolean getHasPaperScissorsRockPowerUp() {
 		return hasPaperScissorsRockPowerUp;
@@ -102,29 +109,33 @@ public class Tank {
 	private int health = 400;
 	private int recovery_rate = 10;
 	private String ability_description = "Tank has higher health and recovery rate.";
+	done
 }
 
 public class Gambler {
 	private int health = 200;
 	private int recovery_rate = 8;
 	private String ability_description = "Gambler has an extra dice roll and an extra guess at the guess the number game.");
+	done
 	
 }
 public class Explorer {
 	private int health = 300;
 	private int recovery_rate = 8;
 	private String ability_description = "Explorer knows the layout of every city.";
+	done
 }
 public class Medic{
 	private int health = 150;
 	private int recovery_rate = 15;
-	private String ability_description = "Medic increases everyones recovery rate by 5, and healing items increase health by more.";
+	private String ability_description = "Medic increases everyones health by 20";
 	
 }
 public class Diplomat {
 	private int health = 200;
 	private int recovery_rate = 8;
-	private String ability_description = "Diplomat decreases the cost of items in the store, and can skip one Villain per game (not including super vilain).";
+	private String ability_description = "Diplomat decreases the cost of items in the store";
+	done
 	
 }
 public class Lucky {

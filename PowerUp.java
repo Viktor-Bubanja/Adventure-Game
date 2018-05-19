@@ -1,18 +1,21 @@
 
 public class PowerUp {
-	private double cost;
+	private int cost;
 	private String name;
 	
 	
-	public PowerUp (double costInput, String nameInput) {
+	public PowerUp (int costInput, String nameInput) {
 		cost = costInput;
 		name = nameInput;
 	}
-	public double getCost() {
+	public int getCost() {
 		return cost;
 	}
 
 	public String getName() {
 		return name;
+	}
+	public void reduceCost(int reduceBy) {
+		cost -= reduceBy;
 	}
 }

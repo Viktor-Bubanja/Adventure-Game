@@ -15,7 +15,7 @@ public class ShopGUI {
 	private static JLabel notEnoughMoneyLabel = new JLabel("You don't have enough money!");
 	private static JLabel powerUpsLabel = new JLabel("");
 	private static JLabel healingItemsLabel = new JLabel("");
-
+	private static JLabel tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +41,7 @@ public class ShopGUI {
 	}
 	
 	public static void buyHealingItem(HealingItem healingItem) {
-		double cost = healingItem.getCost();
+		int cost = healingItem.getCost();
 		if (Team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else {
@@ -54,20 +54,22 @@ public class ShopGUI {
 	}
 	
 	public static void buyMap(Map map) {
-		double cost = map.getCost();
+		int cost = map.getCost();
 		if (Team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
-		} else {
+		} else if (Team.getNumberMaps() < GameEnvironment.getNumberCities() - GameEnvironment.getCurrentCity() + 1){
 			Team.addMap();
 			Team.decreaseMoneyBy(cost);	
 			updatePowerUpsLabel();
+		} else {
+			tooManyMapsLabel.setVisible(true);
 		}
 		
 	}
 	
 	private static void buyPowerUp(PowerUp powerUp) {
 		
-		double cost = powerUp.getCost();
+		int cost = powerUp.getCost();
 		if (Team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else {
@@ -93,7 +95,7 @@ public class ShopGUI {
 		}
 		powerUpsLabel.setText(powerUpsString);
 	}
-	
+
 	
 
 	/**
@@ -106,12 +108,12 @@ public class ShopGUI {
 		ShopGUIFrame.getContentPane().setLayout(null);
 		
 		Map map = new Map();
-		HealingItem smallPotion = new HealingItem(10.00, 10, 5000, "Small Potion");
-		HealingItem quickPotion = new HealingItem(25.00, 10, 2000, "Quick Potion");
-		HealingItem bigPotion = new HealingItem(40.00, 20, 10000, "Big Potion");
-		PowerUp extraRoll = new PowerUp(30.00, "Extra Roll");
-		PowerUp extraGuess = new PowerUp(50.00, "Extra Guess");
-		PowerUp paperScissorsRockClue = new PowerUp(50.00, "Clue for Paper Scissors Rock");
+		HealingItem smallPotion = new HealingItem(10, 10, 5000, "Small Potion");
+		HealingItem quickPotion = new HealingItem(25, 10, 2000, "Quick Potion");
+		HealingItem bigPotion = new HealingItem(40, 20, 10000, "Big Potion");
+		PowerUp extraRoll = new PowerUp(30, "Extra Roll");
+		PowerUp extraGuess = new PowerUp(50, "Extra Guess");
+		PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
 		
 		List<PowerUp> powerUps = new ArrayList<PowerUp>();
 		powerUps.add(paperScissorsRockClue);
@@ -122,6 +124,14 @@ public class ShopGUI {
 		healingItems.add(smallPotion);
 		healingItems.add(quickPotion);
 		healingItems.add(bigPotion);
+		if (Team.teamHasDiplomat()) {
+			smallPotion.reduceCost(5);
+			quickPotion.reduceCost(10);
+			bigPotion.reduceCost(15);
+			extraRoll.reduceCost(10);
+			extraGuess.reduceCost(15);
+			paperScissorsRockClue.reduceCost(15);
+		}
 		
 		
 		healingItemsLabel.setBounds(249, 407, 353, 15);
@@ -143,21 +153,21 @@ public class ShopGUI {
 		lblMap.setBounds(580, 238, 122, 15);
 		ShopGUIFrame.getContentPane().add(lblMap);
 		
-		JLabel label = new JLabel("$10");
-		label.setBounds(99, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(label);
+		JLabel smallPotionCostLabel = new JLabel("$" + Integer.toString(smallPotion.getCost()));
+		smallPotionCostLabel.setBounds(99, 280, 70, 15);
+		ShopGUIFrame.getContentPane().add(smallPotionCostLabel);
 		
-		JLabel label_1 = new JLabel("$25");
-		label_1.setBounds(243, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(label_1);
+		JLabel quickPotionCostLabel = new JLabel("$" + Integer.toString(quickPotion.getCost()));
+		quickPotionCostLabel.setBounds(243, 280, 70, 15);
+		ShopGUIFrame.getContentPane().add(quickPotionCostLabel);
 		
-		JLabel label_2 = new JLabel("$40");
-		label_2.setBounds(403, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(label_2);
+		JLabel bigPotionCostLabel = new JLabel("$" + Integer.toString(bigPotion.getCost()));
+		bigPotionCostLabel.setBounds(403, 280, 70, 15);
+		ShopGUIFrame.getContentPane().add(bigPotionCostLabel);
 		
-		JLabel label_3 = new JLabel("$20");
-		label_3.setBounds(580, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(label_3);
+		JLabel mapCostLabel = new JLabel("$" + Integer.toString(map.getCost()));
+		mapCostLabel.setBounds(580, 280, 70, 15);
+		ShopGUIFrame.getContentPane().add(mapCostLabel);
 		
 		JLabel moneyLeftLabel = new JLabel("Money left: " + Team.getMoney());
 		moneyLeftLabel.setBounds(754, 434, 172, 15);
@@ -253,15 +263,15 @@ public class ShopGUI {
 		ShopGUIFrame.getContentPane().add(buyExtraGuessButton);
 		
 		JLabel lblNewLabel = new JLabel("Extra Roll");
-		lblNewLabel.setBounds(52, 103, 101, 25);
+		lblNewLabel.setBounds(47, 71, 101, 25);
 		ShopGUIFrame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblExtraGuess = new JLabel("Extra Guess");
-		lblExtraGuess.setBounds(221, 108, 108, 20);
+		lblExtraGuess.setBounds(210, 73, 108, 20);
 		ShopGUIFrame.getContentPane().add(lblExtraGuess);
 		
 		JLabel lblClueForPaper = new JLabel("Clue for Paper Scissors Rock");
-		lblClueForPaper.setBounds(380, 113, 241, 15);
+		lblClueForPaper.setBounds(380, 76, 241, 15);
 		ShopGUIFrame.getContentPane().add(lblClueForPaper);
 		
 
@@ -283,6 +293,23 @@ public class ShopGUI {
 		
 		powerUpsLabel.setBounds(259, 444, 413, 15);
 		ShopGUIFrame.getContentPane().add(powerUpsLabel);
+		
+		
+		tooManyMapsLabel.setBounds(503, 365, 344, 25);
+		ShopGUIFrame.getContentPane().add(tooManyMapsLabel);
+		
+		JLabel extraRollCostLabel = new JLabel("$" + Integer.toString(extraRoll.getCost()));
+		extraRollCostLabel.setBounds(52, 108, 70, 15);
+		ShopGUIFrame.getContentPane().add(extraRollCostLabel);
+		
+		JLabel extraGuessCostLabel = new JLabel("$" + Integer.toString(extraGuess.getCost()));
+		extraGuessCostLabel.setBounds(243, 113, 70, 15);
+		ShopGUIFrame.getContentPane().add(extraGuessCostLabel);
+		
+		JLabel clueCostLabel = new JLabel("$" + Integer.toString(paperScissorsRockClue.getCost()));
+		clueCostLabel.setBounds(450, 103, 70, 15);
+		ShopGUIFrame.getContentPane().add(clueCostLabel);
+		tooManyMapsLabel.setVisible(false);
 		
 		
 		
