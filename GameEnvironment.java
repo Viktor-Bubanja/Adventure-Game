@@ -9,9 +9,6 @@ public class GameEnvironment {
 	private static ArrayList<CityGUI> cities = new ArrayList<CityGUI>();
 	private static int currentCity = 0;
 
-
-
-	
 	public static ArrayList<Villain> getVillains() {
 		return villains;
 	}

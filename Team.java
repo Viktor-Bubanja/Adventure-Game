@@ -68,7 +68,7 @@ public class Team {
 		money += reward;
 	}
 	
-	public static void usePowerUp(int i) {
+	public static void removePowerUp(int i) {
 		powerUps.remove(i);
 	}
 	
@@ -141,6 +141,9 @@ public class Team {
 	
 	public static ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
+	}
+	public static void removeHealingItem(int index) {
+		healingItems.remove(index);
 	}
 	public static void killHero(Hero hero) {
 		heroes.remove(hero);

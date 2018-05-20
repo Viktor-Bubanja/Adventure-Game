@@ -10,15 +10,34 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class ShopGUI {
-	private HealingItem smallPotion;
 	private JFrame ShopGUIFrame;
 	private static JLabel notEnoughMoneyLabel = new JLabel("You don't have enough money!");
 	private static JLabel powerUpsLabel = new JLabel("");
 	private static JLabel healingItemsLabel = new JLabel("");
 	private static JLabel tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
+	private static HealingItem smallPotion = new HealingItem(10, 10, 5, "Small Potion");
+	private static HealingItem quickPotion = new HealingItem(25, 10, 2, "Quick Potion");
+	private static HealingItem bigPotion = new HealingItem(40, 20, 10, "Big Potion");
+	private static PowerUp extraRoll = new PowerUp(30, "Extra Roll");
+	private static PowerUp extraGuess = new PowerUp(50, "Extra Guess");
+	private static PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
+	private static Map map = new Map();
+	private static List<PowerUp> powerUps = new ArrayList<PowerUp>();
+	private static List<HealingItem> healingItems = new ArrayList<HealingItem>();
 	/**
 	 * Launch the application.
 	 */
+	public ShopGUI() {
+		System.out.println("SHGJHAHSGDHSGJA");
+		powerUps.add(paperScissorsRockClue);
+		powerUps.add(extraGuess);
+		powerUps.add(extraRoll);
+		healingItems.add(smallPotion);
+		healingItems.add(quickPotion);
+		healingItems.add(bigPotion);
+		
+		initialize();
+	}
 	public static void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,14 +50,40 @@ public class ShopGUI {
 			}
 		});
 	}
+	public static List<PowerUp> getPowerUpList() {
+		return powerUps;
+	}
+	public static List<HealingItem> getHealingItemList() {
+		return healingItems;
+	}
+	
+	public static HealingItem getSmallPotion() {
+		return smallPotion;
+	}
 
+	public static HealingItem getQuickPotion() {
+		return quickPotion;
+	}
+
+	public static HealingItem getBigPotion() {
+		return bigPotion;
+	}
+
+	public static PowerUp getExtraRoll() {
+		return extraRoll;
+	}
+
+	public static PowerUp getExtraGuess() {
+		return extraGuess;
+	}
+	public static PowerUp getpaperScissorsRockClue() {
+		return paperScissorsRockClue;
+	}
 
 	/**
 	 * Create the application.
 	 */
-	public ShopGUI() {
-		initialize();
-	}
+
 	
 	public static void buyHealingItem(HealingItem healingItem) {
 		int cost = healingItem.getCost();
@@ -107,23 +152,8 @@ public class ShopGUI {
 		ShopGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ShopGUIFrame.getContentPane().setLayout(null);
 		
-		Map map = new Map();
-		HealingItem smallPotion = new HealingItem(10, 10, 5000, "Small Potion");
-		HealingItem quickPotion = new HealingItem(25, 10, 2000, "Quick Potion");
-		HealingItem bigPotion = new HealingItem(40, 20, 10000, "Big Potion");
-		PowerUp extraRoll = new PowerUp(30, "Extra Roll");
-		PowerUp extraGuess = new PowerUp(50, "Extra Guess");
-		PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
 		
-		List<PowerUp> powerUps = new ArrayList<PowerUp>();
-		powerUps.add(paperScissorsRockClue);
-		powerUps.add(extraGuess);
-		powerUps.add(extraRoll);
-		
-		List<HealingItem> healingItems = new ArrayList<HealingItem>();
-		healingItems.add(smallPotion);
-		healingItems.add(quickPotion);
-		healingItems.add(bigPotion);
+
 		if (Team.teamHasDiplomat()) {
 			smallPotion.reduceCost(5);
 			quickPotion.reduceCost(10);

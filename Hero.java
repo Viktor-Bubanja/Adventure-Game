@@ -60,7 +60,9 @@ public class Hero {
 	public int getHealth() {
 		return currentHealth;
 	}
-	
+	public int getMaxHealth() {
+		return maxHealth;
+	}
 	public String toString() {
 		String toReturn;
 		toReturn = "Heroes name: " + name + ". \n Herotype: " + type + ". \nHe has " + Integer.toString(currentHealth) + " health.";

@@ -19,6 +19,7 @@ public class BattleWindow {
 	private static String currentGame;
 	private JLabel gameLabel = new JLabel();
 	private static JComboBox heroSelection = new JComboBox(Team.getHeroNames());
+	private static Hero heroPlaying;
 	
 	
 	/**
@@ -85,7 +86,6 @@ public class BattleWindow {
 		battleWindowFrame.getContentPane().setLayout(null);
 		
 		changeGame();
-		Hero heroPlaying;
 		
 		JLabel lblTaunt = new JLabel(villain.getTaunt());
 		lblTaunt.setBounds(175, 60, 341, 22);
@@ -99,7 +99,7 @@ public class BattleWindow {
 		heroSelection.setBounds(267, 108, 161, 29);
 		battleWindowFrame.getContentPane().add(heroSelection);
 		
-		heroPlaying = Team.getHeroes().get(heroSelection.getSelectedIndex());
+		
 		
 		JLabel lblSelectAHero = new JLabel("Select a hero to battle!");
 		lblSelectAHero.setBounds(31, 115, 195, 22);
@@ -116,6 +116,9 @@ public class BattleWindow {
 		JButton fightButton = new JButton("Fight");
 		fightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				heroPlaying = Team.getHeroes().get(heroSelection.getSelectedIndex());
+				
+				
 				openCurrrentGame(heroPlaying);
 			}
 		});
@@ -140,7 +143,9 @@ public class BattleWindow {
 		
 	}
 	public static void removeDeadHeroFromComboBox(Hero hero) {
-		heroSelection.removeItem(hero);
-		//heroSelection = new JComboBox(Team.getHeroNames());
+		//heroSelection.removeItem(hero);
+		heroSelection = new JComboBox(Team.getHeroNames());
+		heroSelection.setBounds(267, 108, 161, 29);
+		battleWindowFrame.getContentPane().add(heroSelection);
 	}
 }
