@@ -70,14 +70,17 @@ public class Team {
 	
 	public static void removePowerUp(int i) {
 		powerUps.remove(i);
+		ShopGUI.updatePowerUpsLabel();
 	}
 	
 	public static void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
+		ShopGUI.updateHealingItemsLabel();
 	}
 	
 	public static void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
+		ShopGUI.updatePowerUpsLabel();
 	}
 	
 	public static int getMoney() {
@@ -85,9 +88,11 @@ public class Team {
 	}
 	public static void addMap() {
 		maps++;
+		ShopGUI.updateNumberMapsLabel();
 	}
 	public static void removeMap() {
 		maps--;
+		ShopGUI.updateNumberMapsLabel();
 	}
 	public static int getNumberMaps() {
 		return maps;
@@ -144,6 +149,7 @@ public class Team {
 	}
 	public static void removeHealingItem(int index) {
 		healingItems.remove(index);
+		ShopGUI.updateHealingItemsLabel();
 	}
 	public static void killHero(Hero hero) {
 		heroes.remove(hero);

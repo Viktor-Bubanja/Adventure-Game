@@ -24,6 +24,7 @@ public class ShopGUI {
 	private static Map map = new Map();
 	private static List<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private static List<HealingItem> healingItems = new ArrayList<HealingItem>();
+	private static JLabel numberMapsLabel = new JLabel("");
 	/**
 	 * Launch the application.
 	 */
@@ -90,11 +91,10 @@ public class ShopGUI {
 		if (Team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else {
+			notEnoughMoneyLabel.setVisible(false);
 			Team.addHealingItem(healingItem);
 			Team.decreaseMoneyBy(cost);	
-			updateHealingItemsLabel();
 		}
-		updateHealingItemsLabel();
 		
 	}
 	
@@ -103,9 +103,11 @@ public class ShopGUI {
 		if (Team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else if (Team.getNumberMaps() < GameEnvironment.getNumberCities() - GameEnvironment.getCurrentCity() + 1){
+			notEnoughMoneyLabel.setVisible(false);
 			Team.addMap();
 			Team.decreaseMoneyBy(cost);	
-			updatePowerUpsLabel();
+			CityGUI.setHasMap(true);
+			CityGUI.showMapButtonAndLabel();
 		} else {
 			tooManyMapsLabel.setVisible(true);
 		}
@@ -118,13 +120,13 @@ public class ShopGUI {
 		if (Team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else {
+			notEnoughMoneyLabel.setVisible(false);
 			Team.decreaseMoneyBy(cost);	
 			Team.addPowerUp(powerUp);
 		}
-		updatePowerUpsLabel();
 	}
 	
-	private static void updateHealingItemsLabel() {
+	public static void updateHealingItemsLabel() {
 		String[] healingItemNames = Team.getHealingItemNames();
 		String healingItemsString = "";
 		for (int i = 0; i < healingItemNames.length; i++) {
@@ -132,13 +134,17 @@ public class ShopGUI {
 		}
 		healingItemsLabel.setText(healingItemsString);
 	}
-	private static void updatePowerUpsLabel() {
+	public static void updatePowerUpsLabel() {
 		String[] powerUpNames = Team.getPowerUpNames();
 		String powerUpsString = "";
 		for (int i = 0; i < powerUpNames.length; i++) {
 			powerUpsString += powerUpNames[i] + " ";
 		}
 		powerUpsLabel.setText(powerUpsString);
+	}
+	public static void updateNumberMapsLabel() {
+		int numberMaps = Team.getNumberMaps();
+		numberMapsLabel.setText(Integer.toString(numberMaps));
 	}
 
 	
@@ -209,7 +215,7 @@ public class ShopGUI {
 		ShopGUIFrame.getContentPane().add(lblShop);
 		
 		
-		notEnoughMoneyLabel.setBounds(277, 489, 310, 25);
+		notEnoughMoneyLabel.setBounds(274, 515, 310, 25);
 		ShopGUIFrame.getContentPane().add(notEnoughMoneyLabel);
 		notEnoughMoneyLabel.setVisible(false);
 		
@@ -339,6 +345,14 @@ public class ShopGUI {
 		JLabel clueCostLabel = new JLabel("$" + Integer.toString(paperScissorsRockClue.getCost()));
 		clueCostLabel.setBounds(450, 103, 70, 15);
 		ShopGUIFrame.getContentPane().add(clueCostLabel);
+		
+		JLabel lblMaps = new JLabel("Maps:");
+		lblMaps.setBounds(118, 471, 70, 15);
+		ShopGUIFrame.getContentPane().add(lblMaps);
+		
+		
+		numberMapsLabel.setBounds(243, 471, 70, 15);
+		ShopGUIFrame.getContentPane().add(numberMapsLabel);
 		tooManyMapsLabel.setVisible(false);
 		
 		

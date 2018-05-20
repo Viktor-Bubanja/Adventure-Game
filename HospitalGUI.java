@@ -17,7 +17,7 @@ public class HospitalGUI {
 	private int healingItemIndex;
 	private int heroIndex;
 	private JFrame HospitalFrame;
-	private static int timeRemaining;
+	private static int timeRemaining = 1;
 	private ActionListener countdown;
 	private static Timer timer;
 	private static ActionListener healProgressListener;
@@ -50,6 +50,7 @@ public class HospitalGUI {
 		heroToHeal = hero;
 		currentHealingItem = healingItem;
 		if (heroToHeal.getHealth() < heroToHeal.getMaxHealth()) {
+			countdownTimerLabel.setVisible(true);
 			timeRemaining = healingItem.getApplicationTime() + 1;
 			currentlyHealingLabel.setVisible(true);
 			timeLeftLabel.setVisible(true);
@@ -85,6 +86,7 @@ public class HospitalGUI {
 		
 		ActionListener countdown = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("yoyo");
 				timeRemaining--;
 				countdownTimerLabel.setText(Integer.toString(timeRemaining));
 				
@@ -94,20 +96,24 @@ public class HospitalGUI {
 					currentlyHealingLabel.setVisible(false);
 					countdownTimerLabel.setText("Done");
 					heroToHeal.heal(currentHealingItem.getHealingAmount());
-					
-					
 				}
 			}
 		};
 		
-		timer = new Timer(1000, countdown);
-		
+
 		
 		HospitalFrame = new JFrame();
 		HospitalFrame.setTitle("Hospital");
 		HospitalFrame.setBounds(100, 100, 1000, 700);
 		HospitalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		HospitalFrame.getContentPane().setLayout(null);
+		
+		countdownTimerLabel.setBounds(721, 312, 70, 15);
+		HospitalFrame.getContentPane().add(countdownTimerLabel);
+		countdownTimerLabel.setVisible(false);
+		
+		
+		
 		
 		currentlyHealingLabel.setBounds(651, 286, 70, 15);
 		HospitalFrame.getContentPane().add(currentlyHealingLabel);
@@ -187,9 +193,8 @@ public class HospitalGUI {
 		progressBar.setBounds(51, 470, 246, 25);
 		HospitalFrame.getContentPane().add(progressBar);
 		
-		
-		countdownTimerLabel.setBounds(721, 312, 70, 15);
-		HospitalFrame.getContentPane().add(countdownTimerLabel);
+		timer = new Timer(1000, countdown);
+
 		
 		
 

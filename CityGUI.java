@@ -14,9 +14,9 @@ import java.awt.event.ActionEvent;
 public class CityGUI {
 
 	public static JFrame CityScreen;
-	private boolean hasMap = false;
-	private JButton useMapButton = new JButton("Use map");
-	private JLabel youHaveAMapLabel = new JLabel("You have a map available to use!");
+	private static boolean hasMap = false;
+	private static JButton useMapButton = new JButton("Use map");
+	private static JLabel youHaveAMapLabel = new JLabel("You have a map available to use!");
 	private JLabel robLabel = new JLabel("Oh no! You've been robbed. You lost a:");
 	private JLabel giftLabel = new JLabel("Congratulations! You've been gifted a:");
 	private static ShopGUI shop = new ShopGUI();
@@ -47,6 +47,9 @@ public class CityGUI {
 	public CityGUI() {
 		initialize();
 	}
+	public static void setHasMap(boolean bool) {
+		hasMap = bool;
+	}
 	
 	public static void enterDistrict(String currentLocation) {
 		if (currentLocation == "SHOP") {
@@ -69,7 +72,7 @@ public class CityGUI {
 		} //else if (currentLocation == "HOMEBASE") {}
 	
 	}
-	private void showMapButtonAndLabel() {
+	public static void showMapButtonAndLabel() {
 		useMapButton.setVisible(true);
 		youHaveAMapLabel.setVisible(true);
 	}

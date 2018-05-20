@@ -131,6 +131,9 @@ public class GuessNumberGUI {
 							BattleWindow.villainDies();
 							guessGameFrame.dispose();
 						}
+						battleWindow.villainDies();
+						goBackButton.setVisible(true);
+						btnPick.setVisible(false);
 					}  else if (guessSlider.getValue() > villainsNumber) {
 						highOrLow.setText("you have another guess, your guess was too high");
 						guessNumber++;
@@ -150,6 +153,9 @@ public class GuessNumberGUI {
 							BattleWindow.villainDies();
 							guessGameFrame.dispose();
 						}
+						battleWindow.villainDies();
+						goBackButton.setVisible(true);
+						btnPick.setVisible(false);
 					} else {
 						textSet = "Sorry you lose, the number was: " + villainsNumber;
 						highOrLow.setText(textSet);
