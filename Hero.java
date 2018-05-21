@@ -75,11 +75,11 @@ public class Hero {
 	public String getType() {
 		return type;
 	}
-	public void doDamage(int damage) {
+	public void doDamage(int damage, Team team, BattleWindow battleWindow) {
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
-			Team.killHero(this);
-			BattleWindow.removeDeadHeroFromComboBox(this);
+			team.killHero(this);
+			battleWindow.removeDeadHeroFromComboBox(this);
 		}
 	}
 	public void addDiceGamePowerUp() {

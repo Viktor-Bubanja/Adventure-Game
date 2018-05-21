@@ -30,20 +30,22 @@ public class PaperScissorsRockGUI {
 	private int villainsDamage;
 	private Villain villain;
 	private Hero heroPlaying;
+	private CityGUI cityGui;
 	private BattleWindow battleWindow;
 	private boolean heroHasPowerUp = false;
 	private final JLabel clueLabel = new JLabel("clue");
-	
+	private Team team;
+	private GameEnvironment gameEnvironment;
 	
 
 
 	//Launch the application.
 	 
-	public static void NewScreen(Villain villain, Hero heroPlaying, BattleWindow battleWindow) {
+	public static void NewScreen(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PaperScissorsRockGUI paperScissorsRockWindow = new PaperScissorsRockGUI(villain, heroPlaying, battleWindow);
+					PaperScissorsRockGUI paperScissorsRockWindow = new PaperScissorsRockGUI(heroPlayingInput, battleWindowInput, gameEnvironmentInput);
 
 					paperScissorsRockWindow.paperScissorsRockFrame.setVisible(true);
 				} catch (Exception e) {
@@ -52,6 +54,27 @@ public class PaperScissorsRockGUI {
 			}
 		});
 	}	
+	//Create the application.
+	 
+	public PaperScissorsRockGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
+		gameEnvironment = gameEnvironmentInput;
+		battleWindow = battleWindowInput;
+		heroPlaying = heroPlayingInput;
+		//villain = villainInput;
+		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
+		cityGui = gameEnvironment.getCurrentCity();
+		villain = gameEnvironment.getVillain(currentCityIndex);
+		team = gameEnvironment.getTeam();
+		
+		villainsDamage = villain.getDamage();
+		if (heroPlaying.getHasPaperScissorsRockPowerUp()) {
+			heroHasPowerUp = true;
+			heroPlaying.setHasPaperScissorsRockPowerUp(false);
+			
+		}
+		initialize();
+	}
+	
 	private int returnRoundResult(HandSign herosMove, HandSign villainsMove) {
 		int loss = 0;
 		int win = 1;
@@ -87,27 +110,9 @@ public class PaperScissorsRockGUI {
 		return labelText;
 	}
 	
-
-	//Create the application.
-	 
-	public PaperScissorsRockGUI(Villain villainInput, Hero heroPlayingInput, BattleWindow battleWindowInput) {
-		battleWindow = battleWindowInput;
-		heroPlaying = heroPlayingInput;
-		villain = villainInput;
-		villainsDamage = villain.getDamage();
-		if (heroPlaying.getHasPaperScissorsRockPowerUp()) {
-			heroHasPowerUp = true;
-			heroPlaying.setHasPaperScissorsRockPowerUp(false);
-			
-		}
-		initialize();
-	}
-	
 	private int getRandomNumber() {
 		return random.nextInt(3);
 	}
-	
-	
 	
 	 //Initialize the contents of the frame.
 	private void initialize() {
@@ -176,6 +181,7 @@ public class PaperScissorsRockGUI {
 			public void actionPerformed(ActionEvent e) {
 				battleWindow.changeGame();
 				paperScissorsRockFrame.dispose();
+				gameEnvironment.openBattleWindow(team, cityGui);
 			}
 		});
 		goBackButton.setBounds(302, 212, 117, 25);
@@ -208,18 +214,21 @@ public class PaperScissorsRockGUI {
 			villain.loseLife();
 			if (villain.getLives() == 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "The villain is now dead!");
-				BattleWindow.villainDies();
+				battleWindow.villainDies();
 				paperScissorsRockFrame.dispose();
+			} else {
+				gameEnvironment.openBattleWindow(team, cityGui);
 			}
 			
 		} else if (numVillainWon == 3) {
 			setButtonsInvisible();
 			gameOver = true;
 			endGameLabels("You lose!");
-			heroPlaying.doDamage(villainsDamage);
+			heroPlaying.doDamage(villainsDamage, team, battleWindow);
 			if (heroPlaying.getHealth() <= 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "Your hero has died!");
 				paperScissorsRockFrame.dispose();
+				gameEnvironment.openBattleWindow(team, cityGui);
 			}
 		}
 		winOrLoseRoundLabel.setText(returnRoundLabelText(roundResult));

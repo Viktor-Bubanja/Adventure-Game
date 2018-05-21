@@ -20,19 +20,23 @@ public class GuessNumberGUI {
 	private Villain villain;
 	private Hero heroPlaying;
 	private int villainsDamage;
+	private Team team;
+	private CityGUI cityGui;
+	private GameEnvironment gameEnvironment;
 	
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Villain villain, Hero heroPlaying, BattleWindow battleWindow) {
+	public static void NewScreen(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GuessNumberGUI guessNumberWindow = new GuessNumberGUI(villain, heroPlaying, battleWindow);
-					if (heroPlaying.getHasGuessNumberPowerUp() || Team.teamHasGambler()) {
+					GuessNumberGUI guessNumberWindow = new GuessNumberGUI(heroPlayingInput, battleWindowInput, gameEnvironmentInput);
+					guessNumberWindow.team = gameEnvironmentInput.getTeam();
+					if (heroPlayingInput.getHasGuessNumberPowerUp() || guessNumberWindow.team.teamHasGambler()) {
 						guessNumberWindow.guessAvailable = 3;
-						heroPlaying.setHasGuessNumberPowerUp(false);
+						heroPlayingInput.setHasGuessNumberPowerUp(false);
 					}
 					guessNumberWindow.guessGameFrame.setVisible(true);
 				} catch (Exception e) {
@@ -42,10 +46,14 @@ public class GuessNumberGUI {
 		});
 	}
 	
-	public GuessNumberGUI(Villain villainInput, Hero heroPlayingInput, BattleWindow battleWindowInput) {
+	public GuessNumberGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
+		gameEnvironment = gameEnvironmentInput;
 		battleWindow = battleWindowInput;
 		heroPlaying = heroPlayingInput;
-		villain = villainInput;
+		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
+		cityGui = gameEnvironment.getCurrentCity();
+		villain = gameEnvironment.getVillain(currentCityIndex);
+		
 		initialize();
 	}
 	
@@ -92,6 +100,7 @@ public class GuessNumberGUI {
 			public void actionPerformed(ActionEvent e) {
 				battleWindow.changeGame();
 				guessGameFrame.dispose();
+				gameEnvironment.openBattleWindow(team, cityGui);
 				
 			}
 		});
@@ -128,7 +137,7 @@ public class GuessNumberGUI {
 						villain.loseLife();
 						if (villain.getLives() == 0) {
 							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
-							BattleWindow.villainDies();
+							battleWindow.villainDies();
 							guessGameFrame.dispose();
 						}
 						battleWindow.villainDies();
@@ -150,7 +159,7 @@ public class GuessNumberGUI {
 						villain.loseLife();
 						if (villain.getLives() == 0) {
 							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
-							BattleWindow.villainDies();
+							battleWindow.villainDies();
 							guessGameFrame.dispose();
 						}
 						battleWindow.villainDies();
@@ -159,7 +168,7 @@ public class GuessNumberGUI {
 					} else {
 						textSet = "Sorry you lose, the number was: " + villainsNumber;
 						highOrLow.setText(textSet);
-						heroPlaying.doDamage(villainsDamage);
+						heroPlaying.doDamage(villainsDamage, team, battleWindow);
 						if (heroPlaying.getHealth() <= 0) {
 							JOptionPane.showMessageDialog(frame, "Your hero has died!");
 						}

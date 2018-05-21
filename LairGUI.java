@@ -10,15 +10,18 @@ import java.awt.event.ActionEvent;
 public class LairGUI {
 
 	private JFrame lairFrame;
+	private CityGUI cityGui;
+	private Team team;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen() {
+	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LairGUI window = new LairGUI();
+					LairGUI window = new LairGUI(teamInput, gameEnvironmentInput, cityGuiInput);
 					window.lairFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,8 +33,16 @@ public class LairGUI {
 	/**
 	 * Create the application.
 	 */
-	public LairGUI() {
+	public LairGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+		team = teamInput;
+		gameEnvironment = gameEnvironmentInput;
+		cityGui = cityGuiInput;
 		initialize();
+	}
+	
+	private void finishedWindow() {
+		cityGui.makeCityVisible();
+		lairFrame.dispose();
 	}
 
 	/**
@@ -44,16 +55,15 @@ public class LairGUI {
 		lairFrame.setBounds(100, 100, 1000, 700);
 		lairFrame.getContentPane().setLayout(null);
 		
-		int currentCity = GameEnvironment.getCurrentCity();
-		Villain villain = GameEnvironment.getVillains().get(currentCity);
+		int currentCity = gameEnvironment.getCurrentCityIndex();
+		Villain villain = gameEnvironment.getVillains().get(currentCity);
 		
 		JButton btnEnterTheLair = new JButton("Enter the lair!");
 		btnEnterTheLair.setBounds(5, 152, 149, 68);
 		btnEnterTheLair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BattleWindow battleWindow = new BattleWindow(villain);
+				gameEnvironment.openBattleWindow(team, cityGui);
 				lairFrame.dispose();
-				battleWindow.NewScreen(villain);
 			}
 		});
 		lairFrame.getContentPane().add(btnEnterTheLair);
@@ -62,8 +72,7 @@ public class LairGUI {
 		btnRunAwaaaaay.setBounds(591, 171, 173, 90);
 		btnRunAwaaaaay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lairFrame.dispose();
-				CityGUI.CityScreen.setVisible(true);
+				finishedWindow();
 			}
 		});
 		lairFrame.getContentPane().add(btnRunAwaaaaay);

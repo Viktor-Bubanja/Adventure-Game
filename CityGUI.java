@@ -13,66 +13,71 @@ import java.awt.event.ActionEvent;
 
 public class CityGUI {
 
-	public static JFrame CityScreen;
-	private static boolean hasMap = false;
-	private static JButton useMapButton = new JButton("Use map");
-	private static JLabel youHaveAMapLabel = new JLabel("You have a map available to use!");
+	private JFrame CityScreen;
+	private boolean usedMap = false;
+	private JButton useMapButton = new JButton("Use map");
+	private JLabel youHaveAMapLabel = new JLabel("You have a map available to use!");
 	private JLabel robLabel = new JLabel("Oh no! You've been robbed. You lost a:");
 	private JLabel giftLabel = new JLabel("Congratulations! You've been gifted a:");
-	private static ShopGUI shop = new ShopGUI();
 	private JLabel randomRobbedItem = new JLabel("");
 	private JLabel randomGiftedItem = new JLabel("");
-
+	private Team team;
+	private GameEnvironment gameEnvironment;
+	private CityGUI cityGuiWindow;
 	
-
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen() {
+	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CityGUI window = new CityGUI();
-					window.CityScreen.setVisible(true);
+					CityGUI cityGuiWindow = new CityGUI(teamInput, gameEnvironmentInput);
+					cityGuiWindow.CityScreen.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
-	public CityGUI() {
+	public CityGUI(Team teamInput, GameEnvironment gameEnvironmentInput) {
+		team = teamInput;
+		gameEnvironment = gameEnvironmentInput;
 		initialize();
 	}
-	public static void setHasMap(boolean bool) {
-		hasMap = bool;
+	public void disposeCity() {
+		CityScreen.dispose();
+	}
+	public void setUsedMap(boolean bool) {
+		usedMap = bool;
+	}
+	public boolean getUsedMap() {
+		return usedMap;
+	}
+	public void makeCityVisible() {
+		CityScreen.setVisible(true);
 	}
 	
-	public static void enterDistrict(String currentLocation) {
+	public void enterDistrict(String currentLocation) {
 		if (currentLocation == "SHOP") {
-			
-			shop.NewScreen();
+			gameEnvironment.openShopScreen(team, this);
 			CityScreen.setVisible(false);
 		} else if (currentLocation == "POWERUPDEN") {
-			PowerUpDenGUI den = new PowerUpDenGUI();
-			den.NewScreen();
+			gameEnvironment.openPowerUpDenScreen(team, this);
 			CityScreen.setVisible(false);
 		} else if (currentLocation == "HOSPITAL") {
-			HospitalGUI hospital = new HospitalGUI();
-			hospital.NewScreen();
+			gameEnvironment.openHospitalScreen(team, this);
 			CityScreen.setVisible(false);
 		} else if (currentLocation == "VILLAINSLAIR") {
-			LairGUI lair = new LairGUI();
-			lair.NewScreen();
-			CityScreen.setVisible(false);
-			
+			gameEnvironment.openLairScreen(team, this);
+			CityScreen.setVisible(false);	
 		} //else if (currentLocation == "HOMEBASE") {}
 	
 	}
-	public static void showMapButtonAndLabel() {
+	public void showMapButtonAndLabel() {
 		useMapButton.setVisible(true);
 		youHaveAMapLabel.setVisible(true);
 	}
@@ -81,18 +86,24 @@ public class CityGUI {
 		youHaveAMapLabel.setVisible(false);
 	}
 	
+	
 	private void giftRandomItem() {
+
 		Random random = new Random();
 		int randomIndex = random.nextInt(3);
 		boolean giftedRandomHealingItem = random.nextBoolean();
+		System.out.println("gifted fdgfdgfd");
+		giftLabel.setVisible(true);
 		if (giftedRandomHealingItem) {
-			HealingItem randomHealingItem = ShopGUI.getHealingItemList().get(randomIndex);
-			Team.addHealingItem(randomHealingItem);
-			giftLabel.setVisible(true);
+			List<HealingItem> healingItems = gameEnvironment.getHealingItemsList();
+			HealingItem randomHealingItem = healingItems.get(randomIndex);
+			team.addHealingItem(randomHealingItem);
+			
 			randomGiftedItem.setText(randomHealingItem.getName());
 		} else {
-			PowerUp randomPowerUp = ShopGUI.getPowerUpList().get(randomIndex);
-			Team.addPowerUp(randomPowerUp);
+			List<PowerUp> powerUps = gameEnvironment.getPowerUpsList();
+			PowerUp randomPowerUp = powerUps.get(randomIndex);
+			team.addPowerUp(randomPowerUp);
 			giftLabel.setVisible(true);
 			randomGiftedItem.setText(randomPowerUp.getName());
 		}
@@ -101,21 +112,25 @@ public class CityGUI {
 		Random random = new Random();
 		boolean robbedRandomHealingItem = random.nextBoolean();
 		if (robbedRandomHealingItem) {
-			int numberHealingItems = Team.getHealingItems().size();
+			int numberHealingItems = team.getHealingItems().size();
+			System.out.println("number healing items ");
+			System.out.println(Integer.toString(numberHealingItems));
 			if (numberHealingItems > 0) {
 				robLabel.setVisible(true);
 				int randomIndex = random.nextInt(numberHealingItems);
-				HealingItem robbedHealingItem = Team.getHealingItems().get(randomIndex);
-				Team.removeHealingItem(randomIndex);
+				HealingItem robbedHealingItem = team.getHealingItems().get(randomIndex);
+				team.removeHealingItem(randomIndex);
 				randomRobbedItem.setText(robbedHealingItem.getName());
 			}
 		} else {
-			int numberPowerUps = Team.getPowerUps().size();
+			int numberPowerUps = team.getPowerUps().size();
+			System.out.println("number power ups");
+			System.out.println(Integer.toString(numberPowerUps));
 			if (numberPowerUps > 0) {
 				int randomIndex = random.nextInt(numberPowerUps);
 				robLabel.setVisible(true);
-				PowerUp robbedPowerUp = Team.getPowerUps().get(randomIndex);
-				Team.removePowerUp(random.nextInt(numberPowerUps));
+				PowerUp robbedPowerUp = team.getPowerUps().get(randomIndex);
+				team.removePowerUp(random.nextInt(numberPowerUps));
 				randomRobbedItem.setText(robbedPowerUp.getName());
 			}
 		}
@@ -125,7 +140,9 @@ public class CityGUI {
 		Random random = new Random();
 		
 		boolean randomEventHappens = random.nextBoolean();
+		//boolean randomEventHappens = true;
 		boolean giftedRandomItem = random.nextBoolean();
+		//boolean giftedRandomItem = false;
 		if (randomEventHappens) {
 			if (giftedRandomItem) {
 				giftRandomItem();
@@ -133,7 +150,6 @@ public class CityGUI {
 				robRandomItem();
 			}
 		}
-		
 	}
 
 	/**
@@ -148,11 +164,9 @@ public class CityGUI {
 		CityScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		CityScreen.getContentPane().setLayout(null);
 		
-		
 		robLabel.setBounds(75, 428, 308, 15);
 		CityScreen.getContentPane().add(robLabel);
 		robLabel.setVisible(false);
-		
 		
 		giftLabel.setBounds(463, 428, 295, 15);
 		CityScreen.getContentPane().add(giftLabel);
@@ -167,12 +181,8 @@ public class CityGUI {
 		youHaveAMapLabel.setBounds(406, 12, 295, 25);
 		youHaveAMapLabel.setVisible(false);
 		CityScreen.getContentPane().add(youHaveAMapLabel);
-		for (int i = 0; i < Team.getHeroes().size(); i++) {
-			System.out.println(Team.getHeroTypes().get(i));
-		}
 		
-		if (Team.getNumberMaps() >0 || Team.teamHasExplorer()) {
-			System.out.println("FDHFDHFDGHGFDHGFD");
+		if (team.getNumberMaps() >0 || team.teamHasExplorer()) {
 			showMapButtonAndLabel();
 		}
 		
@@ -185,12 +195,7 @@ public class CityGUI {
 		Collections.shuffle(positions);
 		positions.add(0,"HOMEBASE");
 		String currentLocation = "HOMEBASE";
-		
-		
-		
 
-		
-		
 		JButton westButton = new JButton("West");
 		westButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -216,8 +221,7 @@ public class CityGUI {
 		northButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String currentLocation = positions.get(1);
-				enterDistrict(currentLocation);
-				
+				enterDistrict(currentLocation);	
 			}
 		});
 		northButton.setBounds(273, 53, 168, 25);
@@ -228,7 +232,6 @@ public class CityGUI {
 			public void actionPerformed(ActionEvent e) {
 				String currentLocation = positions.get(3);
 				enterDistrict(currentLocation);
-				
 			}
 		});
 		southButton.setBounds(273, 309, 180, 25);
@@ -237,11 +240,7 @@ public class CityGUI {
 		JLabel lblHomeBase = new JLabel("Home Base");
 		lblHomeBase.setBounds(273, 181, 110, 15);
 		CityScreen.getContentPane().add(lblHomeBase);
-		
-		
 
-		
-		
 		useMapButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -249,8 +248,10 @@ public class CityGUI {
 				eastButton.setText(positions.get(2));
 				southButton.setText(positions.get(3));
 				westButton.setText(positions.get(4));
+				
+				usedMap = true;
 				hideMapButtonAndLabel();
-				Team.removeMap();
+				team.removeMap();
 				
 			}
 		});
@@ -272,10 +273,6 @@ public class CityGUI {
 		
 		randomGiftedItem.setBounds(541, 465, 134, 15);
 		CityScreen.getContentPane().add(randomGiftedItem);
-		
-
-		
-		
 
 	}
 }

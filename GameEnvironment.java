@@ -1,38 +1,48 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameEnvironment {
-	private static String teamName;
-	private static int numberCities;
-	private static ArrayList<Villain> villains = new ArrayList<Villain>();
-	private static ArrayList<CityGUI> cities = new ArrayList<CityGUI>();
-	private static int currentCity = 0;
+	private String teamName;
+	private int numberCities;
+	private ArrayList<Villain> villains = new ArrayList<Villain>();
+	private ArrayList<CityGUI> cities = new ArrayList<CityGUI>();
+	private int currentCityIndex = -1;
+	private final int MAXNUMBERCITIES = 6;
+	private Team team;
+	private CityGUI currentCity;
 
-	public static ArrayList<Villain> getVillains() {
+	public ArrayList<Villain> getVillains() {
 		return villains;
 	}
 	
-	public static void setTeamName(String inputName) {
+	public void setTeamName(String inputName) {
 		teamName = inputName;
 	}
-	public static void setNumberCities(int inputNumberCities) {
+	public void setNumberCities(int inputNumberCities) {
 		numberCities = inputNumberCities;
 	}
-	public static String getTeamName() {
+	public String getTeamName() {
 		return teamName;
 	}
-	public static int getCurrentCity() {
-		if (currentCity == numberCities - 1)
+	public int getCurrentCityIndex() {
+		if (currentCityIndex == numberCities - 1)
 			return - 1; //We now at the last city with the supervillain
 		else
-			return currentCity;
+			return currentCityIndex;
 	}
-	public static int getNumberCities() {
+	public CityGUI getCurrentCity() {
+		return currentCity;
+	}
+	public ArrayList<CityGUI> getCityList() {
+		return cities;
+	}
+	public int getNumberCities() {
 		return cities.size();
 	}
 	
-	public static String[] getVillainNames() {
+	public String[] getVillainNames() {
 		String[] heroNames = new String[villains.size()];
 		for (int i = 0; i < villains.size(); i++) {
 			heroNames[i] = villains.get(i).getName();
@@ -40,26 +50,12 @@ public class GameEnvironment {
 		return heroNames;
 	}
 	
-	private static void makeCities() {
-		CityGUI city1 = new CityGUI();
-		CityGUI city2 = new CityGUI();
-		CityGUI city3 = new CityGUI();
-		CityGUI city4 = new CityGUI();
-		CityGUI city5 = new CityGUI();
-		CityGUI finalCity = new CityGUI();
-		cities.add(city1);
-		cities.add(city2);
-		cities.add(city3);
-		cities.add(city4);
-		cities.add(city5);
-		cities.add(finalCity);
-	}
-	public static void endGame() {
-		BattleWindow.closeWindow();
+	public void endGame() {
+		//BattleWindow.closeWindow();
 		
 	}
 	
-	private static void makeVillains() {
+	private void makeVillains() {
 		ArrayList<String> games1 = new ArrayList<String>();
 		ArrayList<String> games2 = new ArrayList<String>();
 		ArrayList<String> games3 = new ArrayList<String>();
@@ -87,26 +83,87 @@ public class GameEnvironment {
 		villains.add(superVillain);
 	}
 	
-	public static void main(String[] args) {
-		makeVillains();
-		makeCities();
-		//System.out.println(villains.get(0).getName());
-		//System.out.println(villains.get(1).getName());
-		//System.out.println(villains.get(2).getName());
-		//System.out.println(villains.get(3).getName());
-		//System.out.println(villains.get(4).getName());
-		//System.out.println(villains.get(5).getName());
-		GameSetupGUI.NewScreen(); //start the game already
-		
+	public Villain getVillain(int index) {
+		return villains.get(index);
 	}
 	
-	public static void moveToNewCity() {
-		// TODO Auto-generated method stub
-		cities.get(currentCity).NewScreen();
+	public static void main(String[] args) {
+		GameEnvironment gameEnvironment = new GameEnvironment();
+		gameEnvironment.makeVillains();
+		gameEnvironment.team = new Team(gameEnvironment);
+		//for (int i = 0; i < gameEnvironment.MAXNUMBERCITIES; i++) {
+			//gameEnvironment.cities.add(gameEnvironment.makeCity(gameEnvironment, gameEnvironment.team));
+		//}
 		
-		
-		currentCity++;
-		
+		GameSetupGUI.NewScreen(gameEnvironment, gameEnvironment.team); //start the game already
 	}
+
+	
+	public void moveToNewCity(Team teamInput) {
+		currentCityIndex++; // surely this should be iterated before instantiating city
+		CityGUI cityGui = new CityGUI(teamInput, this);
+		currentCity = cityGui;
+		cityGui.NewScreen(teamInput, this);
+	}
+	
+	public Team getTeam() {
+		return team;
+	}
+	public void openShopScreen(Team team, CityGUI cityGui) {
+		ShopGUI shopGui = new ShopGUI(team, this, cityGui);
+		shopGui.NewScreen(team, this, cityGui);
+	} 
+	public void openPowerUpDenScreen(Team team, CityGUI cityGui) {
+		PowerUpDenGUI powerUpDenGui = new PowerUpDenGUI(team, this, cityGui);
+		powerUpDenGui.NewScreen(team, this, cityGui);
+	}
+	public void openHospitalScreen(Team team, CityGUI cityGui) {
+		HospitalGUI hospitalGui = new HospitalGUI(team, this, cityGui);
+		hospitalGui.NewScreen(team, this, cityGui);
+	}
+	public void openLairScreen(Team team, CityGUI cityGui) {
+		LairGUI lair = new LairGUI(team, this, cityGui);
+		lair.NewScreen(team, this, cityGui);
+	}
+	public void openBattleWindow(Team team, CityGUI cityGui) {
+		BattleWindow battleWindow = new BattleWindow(team, this, cityGui);
+		battleWindow.NewScreen(team, this, cityGui);
+	}
+	public void openGuessNumberGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
+		GuessNumberGUI guessNumberGui = new GuessNumberGUI(heroPlaying, battleWindow, gameEnvironmentInput);
+		guessNumberGui.NewScreen(heroPlaying, battleWindow, gameEnvironmentInput);
+	}
+	
+	public void openPaperScissorsRockGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
+		PaperScissorsRockGUI paperScissorsRockGui = new PaperScissorsRockGUI(heroPlaying, battleWindow, gameEnvironmentInput);
+		paperScissorsRockGui.NewScreen(heroPlaying, battleWindow, gameEnvironmentInput);
+	}
+	
+	public void openDiceGameGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
+		DiceGameGUI diceGameGui = new DiceGameGUI(heroPlaying, battleWindow, gameEnvironmentInput);
+		diceGameGui.NewScreen(heroPlaying, battleWindow, gameEnvironmentInput);
+	}
+	
+	public List<HealingItem> getHealingItemsList() {
+		List<HealingItem> healingItems = new ArrayList<HealingItem>();
+		HealingItem smallPotion = new HealingItem(10, 10, 5, "Small Potion");
+		HealingItem quickPotion = new HealingItem(25, 10, 2, "Quick Potion");
+		HealingItem bigPotion = new HealingItem(40, 20, 10, "Big Potion");
+		healingItems.add(smallPotion);
+		healingItems.add(quickPotion);
+		healingItems.add(bigPotion);
+		return healingItems;
+	}
+	public List<PowerUp> getPowerUpsList() {
+		List<PowerUp> powerUps = new ArrayList<PowerUp>();
+		PowerUp extraRoll = new PowerUp(30, "Extra Roll");
+		PowerUp extraGuess = new PowerUp(50, "Extra Guess");
+		PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
+		powerUps.add(paperScissorsRockClue);
+		powerUps.add(extraGuess);
+		powerUps.add(extraRoll);
+		return powerUps;
+	}
+
 	
 }

@@ -21,17 +21,18 @@ public class GameSetupGUI {
 	private JTextField inputHeroName;
 	private String heroType = "Gambler";
 	private int inputNumHeroes;
-	//GameEnvironment gameEnv = new GameEnvironment();
+	private GameEnvironment gameEnvironment = new GameEnvironment();
+	private Team team;
 	
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen() {
+	public static void NewScreen(GameEnvironment gameEnvironmentInput, Team teamInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameSetupGUI window = new GameSetupGUI();
+					GameSetupGUI window = new GameSetupGUI(gameEnvironmentInput, teamInput);
 					window.setupFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,22 +44,24 @@ public class GameSetupGUI {
 	/**
 	 * Create the application.
 	 */
-	public GameSetupGUI() {
+	public GameSetupGUI(GameEnvironment gameEnvironmentInput, Team teamInput) {
+		gameEnvironment = gameEnvironmentInput;
+		team = teamInput;
 		initialize();
 	}
 	
 	private void addHeroTypeToTeam(String heroType) {
 		if (heroType == "Medic") {
-			Team.setTeamHasMedic(true);
+			team.setTeamHasMedic(true);
 		} else if(heroType == "Gambler") {
-			Team.setTeamHasGambler(true);
+			team.setTeamHasGambler(true);
 		} else if (heroType == "Diplomat") {
-			Team.setTeamHasDiplomat(true);
+			team.setTeamHasDiplomat(true);
 		}
 		else if (heroType == "Explorer") {
-			Team.setTeamHasExplorer(true);
+			team.setTeamHasExplorer(true);
 		} else if (heroType == "Lucky") {
-			Team.setTeamHasLucky(true);
+			team.setTeamHasLucky(true);
 		}
 	}
 
@@ -195,10 +198,10 @@ public class GameSetupGUI {
 		btnAddHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//if inputHeroName.getText().length() 
-				Team.addHero(new Hero(inputHeroName.getText(), heroType));
+				team.addHero(new Hero(inputHeroName.getText(), heroType));
 				inputNumHeroes++; 
 				addHeroTypeToTeam(heroType);
-				lblHeroes.setText(Team.getHeroes().toString());
+				lblHeroes.setText(team.getHeroes().toString());
 				//heroes.add();
 				inputHeroName.setText("");
 				
@@ -254,15 +257,15 @@ public class GameSetupGUI {
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Team.teamHasMedic()) {
-					for (Hero hero: Team.getHeroes()) {
+				if (team.teamHasMedic()) {
+					for (Hero hero: team.getHeroes()) {
 						hero.increaseMaxHealth(20);
 					}
 				}
-				GameEnvironment.setTeamName(txtTeamName.getText());
-				GameEnvironment.setNumberCities(numCities.getValue());
+				gameEnvironment.setTeamName(txtTeamName.getText());
+				gameEnvironment.setNumberCities(numCities.getValue());
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
-				GameEnvironment.moveToNewCity();
+				gameEnvironment.moveToNewCity(team);
 				setupFrame.dispose();
 			}
 		});

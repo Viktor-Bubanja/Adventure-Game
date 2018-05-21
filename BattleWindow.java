@@ -14,23 +14,25 @@ import java.awt.event.ActionEvent;
 
 public class BattleWindow {
 
-	private static JFrame battleWindowFrame;
-	private static Villain villain;
-	private static String currentGame;
+	private JFrame battleWindowFrame;
+	private Villain villain;
+	private String currentGame;
 	private JLabel gameLabel = new JLabel();
-	private static JComboBox heroSelection = new JComboBox(Team.getHeroNames());
-	private static Hero heroPlaying;
-	
+	private Hero heroPlaying;
+	private CityGUI cityGui;
+	private Team team;
+	private GameEnvironment gameEnvironment;
+	private JComboBox heroSelection;
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Villain villainInput) {
+	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BattleWindow window = new BattleWindow(villainInput);
+					BattleWindow window = new BattleWindow(teamInput, gameEnvironmentInput, cityGuiInput);
 					window.battleWindowFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,21 +45,24 @@ public class BattleWindow {
 		return villain.getName();
 	}
 	
-	public static String getGame() {
+	public String getGame() {
 		ArrayList<String> villainsGames = new ArrayList<String>();
 		villainsGames = villain.getGames();
 		Collections.shuffle(villainsGames);
 		return villainsGames.get(0);		
 	}
 
-
 	/**
 	 * Create the application.
 	 * @param villain 
 	 */
 
-	public BattleWindow(Villain villainInput) {
-		villain = villainInput;
+	public BattleWindow(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+		team = teamInput;
+		gameEnvironment = gameEnvironmentInput;
+		cityGui = cityGuiInput;
+		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
+		villain = gameEnvironment.getVillain(currentCityIndex);
 		initialize();
 	}
 	public void changeGame() {
@@ -65,13 +70,14 @@ public class BattleWindow {
 		gameLabel.setText(currentGame);
 		
 	}
-	public void openCurrrentGame(Hero heroPlaying) {
+	public void openCurrentGame(Hero heroPlaying) {
+		battleWindowFrame.dispose();
 		if (currentGame == "paper scissors rock") {
-			PaperScissorsRockGUI.NewScreen(villain, heroPlaying, this);
+			gameEnvironment.openPaperScissorsRockGUI(heroPlaying, this, gameEnvironment);
 		} else if (currentGame == "guess a number") {
-			GuessNumberGUI.NewScreen(villain, heroPlaying, this);
+			gameEnvironment.openGuessNumberGUI(heroPlaying, this, gameEnvironment);
 		} else if (currentGame == "Dice game") {
-			DiceGameGUI.NewScreen(villain, heroPlaying, this);
+			gameEnvironment.openDiceGameGUI(heroPlaying, this, gameEnvironment);
 		}
 	}
 	/**
@@ -79,7 +85,6 @@ public class BattleWindow {
 	 * @param villain 
 	 */
 	private void initialize() {
-		System.out.println(villain.getName());
 		battleWindowFrame = new JFrame();
 		battleWindowFrame.setBounds(100, 100, 1000, 700);
 		battleWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,12 +100,10 @@ public class BattleWindow {
 		lblName.setBounds(165, 28, 341, 22);
 		battleWindowFrame.getContentPane().add(lblName);
 		
-		
+		heroSelection = new JComboBox(team.getHeroNames());
 		heroSelection.setBounds(267, 108, 161, 29);
 		battleWindowFrame.getContentPane().add(heroSelection);
-		
-		
-		
+	
 		JLabel lblSelectAHero = new JLabel("Select a hero to battle!");
 		lblSelectAHero.setBounds(31, 115, 195, 22);
 		battleWindowFrame.getContentPane().add(lblSelectAHero);
@@ -116,35 +119,34 @@ public class BattleWindow {
 		JButton fightButton = new JButton("Fight");
 		fightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				heroPlaying = Team.getHeroes().get(heroSelection.getSelectedIndex());
+				heroPlaying = team.getHeroes().get(heroSelection.getSelectedIndex());
 				
 				
-				openCurrrentGame(heroPlaying);
+				openCurrentGame(heroPlaying);
 			}
 		});
 		fightButton.setBounds(277, 275, 117, 25);
 		battleWindowFrame.getContentPane().add(fightButton);
 	}
 
-	public static void villainDies() {
-		// TODO Auto-generated method stub
+	public void villainDies() {
 		closeWindow();
-		CityGUI.CityScreen.dispose();
-		if (Team.teamHasLucky()) {
-			Team.increaseMoneyBy(200);
+		cityGui.disposeCity();
+		if (team.teamHasLucky()) {
+			team.increaseMoneyBy(200);
 		} else {
-			Team.increaseMoneyBy(100);
+			team.increaseMoneyBy(100);
 		}
-		GameEnvironment.moveToNewCity();
+		gameEnvironment.moveToNewCity(team);
 		
 	}
-	public static void closeWindow() {
+	public void closeWindow() {
 		battleWindowFrame.dispose();
 		
 	}
-	public static void removeDeadHeroFromComboBox(Hero hero) {
+	public void removeDeadHeroFromComboBox(Hero hero) {
 		//heroSelection.removeItem(hero);
-		heroSelection = new JComboBox(Team.getHeroNames());
+		heroSelection = new JComboBox(team.getHeroNames());
 		heroSelection.setBounds(267, 108, 161, 29);
 		battleWindowFrame.getContentPane().add(heroSelection);
 	}

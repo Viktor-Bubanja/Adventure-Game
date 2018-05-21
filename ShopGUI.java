@@ -11,39 +11,44 @@ import java.awt.Font;
 
 public class ShopGUI {
 	private JFrame ShopGUIFrame;
-	private static JLabel notEnoughMoneyLabel = new JLabel("You don't have enough money!");
-	private static JLabel powerUpsLabel = new JLabel("");
-	private static JLabel healingItemsLabel = new JLabel("");
-	private static JLabel tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
-	private static HealingItem smallPotion = new HealingItem(10, 10, 5, "Small Potion");
-	private static HealingItem quickPotion = new HealingItem(25, 10, 2, "Quick Potion");
-	private static HealingItem bigPotion = new HealingItem(40, 20, 10, "Big Potion");
-	private static PowerUp extraRoll = new PowerUp(30, "Extra Roll");
-	private static PowerUp extraGuess = new PowerUp(50, "Extra Guess");
-	private static PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
-	private static Map map = new Map();
+	private JLabel notEnoughMoneyLabel = new JLabel("You don't have enough money!");
+	private JLabel powerUpsLabel = new JLabel("");
+	private JLabel healingItemsLabel = new JLabel("");
+	private JLabel tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
+	private HealingItem smallPotion = new HealingItem(10, 10, 5, "Small Potion");
+	private HealingItem quickPotion = new HealingItem(25, 10, 2, "Quick Potion");
+	private HealingItem bigPotion = new HealingItem(40, 20, 10, "Big Potion");
+	private PowerUp extraRoll = new PowerUp(30, "Extra Roll");
+	private PowerUp extraGuess = new PowerUp(50, "Extra Guess");
+	private PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
+	private Map map = new Map();
 	private static List<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private static List<HealingItem> healingItems = new ArrayList<HealingItem>();
-	private static JLabel numberMapsLabel = new JLabel("");
+	private JLabel numberMapsLabel = new JLabel("");
+	private CityGUI cityGui;
+	private Team team;
+	private GameEnvironment gameEnvironment;
 	/**
 	 * Launch the application.
 	 */
-	public ShopGUI() {
-		System.out.println("SHGJHAHSGDHSGJA");
+	public ShopGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+		team = teamInput;
+		gameEnvironment = gameEnvironmentInput;
 		powerUps.add(paperScissorsRockClue);
 		powerUps.add(extraGuess);
 		powerUps.add(extraRoll);
 		healingItems.add(smallPotion);
 		healingItems.add(quickPotion);
 		healingItems.add(bigPotion);
+		cityGui = cityGuiInput;
 		
 		initialize();
 	}
-	public static void NewScreen() {
+	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShopGUI window = new ShopGUI();
+					ShopGUI window = new ShopGUI(teamInput, gameEnvironmentInput, cityGuiInput);
 					window.ShopGUIFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,33 +56,33 @@ public class ShopGUI {
 			}
 		});
 	}
-	public static List<PowerUp> getPowerUpList() {
+	public List<PowerUp> getPowerUpList() {
 		return powerUps;
 	}
-	public static List<HealingItem> getHealingItemList() {
+	public List<HealingItem> getHealingItemList() {
 		return healingItems;
 	}
 	
-	public static HealingItem getSmallPotion() {
+	public HealingItem getSmallPotion() {
 		return smallPotion;
 	}
 
-	public static HealingItem getQuickPotion() {
+	public HealingItem getQuickPotion() {
 		return quickPotion;
 	}
 
-	public static HealingItem getBigPotion() {
+	public HealingItem getBigPotion() {
 		return bigPotion;
 	}
 
-	public static PowerUp getExtraRoll() {
+	public PowerUp getExtraRoll() {
 		return extraRoll;
 	}
 
-	public static PowerUp getExtraGuess() {
+	public PowerUp getExtraGuess() {
 		return extraGuess;
 	}
-	public static PowerUp getpaperScissorsRockClue() {
+	public PowerUp getpaperScissorsRockClue() {
 		return paperScissorsRockClue;
 	}
 
@@ -86,81 +91,81 @@ public class ShopGUI {
 	 */
 
 	
-	public static void buyHealingItem(HealingItem healingItem) {
+	public void buyHealingItem(HealingItem healingItem) {
 		int cost = healingItem.getCost();
-		if (Team.getMoney() < cost) {
+		if (team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else {
+			
 			notEnoughMoneyLabel.setVisible(false);
-			Team.addHealingItem(healingItem);
-			Team.decreaseMoneyBy(cost);	
+			team.addHealingItem(healingItem);
+			team.decreaseMoneyBy(cost);	
+			updateHealingItemsLabel();
 		}
 		
 	}
 	
-	public static void buyMap(Map map) {
+	public void buyMap(Map map) {
 		int cost = map.getCost();
-		if (Team.getMoney() < cost) {
+		if (team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
-		} else if (Team.getNumberMaps() < GameEnvironment.getNumberCities() - GameEnvironment.getCurrentCity() + 1){
+		} else if (team.getNumberMaps() < gameEnvironment.getNumberCities() - gameEnvironment.getCurrentCityIndex() + 1){
 			notEnoughMoneyLabel.setVisible(false);
-			Team.addMap();
-			Team.decreaseMoneyBy(cost);	
-			CityGUI.setHasMap(true);
-			CityGUI.showMapButtonAndLabel();
+			team.addMap();
+			team.decreaseMoneyBy(cost);	
+			updateNumberMapsLabel();
+			if (!cityGui.getUsedMap()) {
+				cityGui.showMapButtonAndLabel();
+			}
 		} else {
 			tooManyMapsLabel.setVisible(true);
 		}
 		
 	}
 	
-	private static void buyPowerUp(PowerUp powerUp) {
+	private void buyPowerUp(PowerUp powerUp) {
 		
 		int cost = powerUp.getCost();
-		if (Team.getMoney() < cost) {
+		if (team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
 		} else {
 			notEnoughMoneyLabel.setVisible(false);
-			Team.decreaseMoneyBy(cost);	
-			Team.addPowerUp(powerUp);
+			team.decreaseMoneyBy(cost);	
+			team.addPowerUp(powerUp);
+			updatePowerUpsLabel();
 		}
 	}
 	
-	public static void updateHealingItemsLabel() {
-		String[] healingItemNames = Team.getHealingItemNames();
+	public void updateHealingItemsLabel() {
+		String[] healingItemNames = team.getHealingItemNames();
 		String healingItemsString = "";
 		for (int i = 0; i < healingItemNames.length; i++) {
 			healingItemsString += healingItemNames[i] + " ";
 		}
 		healingItemsLabel.setText(healingItemsString);
 	}
-	public static void updatePowerUpsLabel() {
-		String[] powerUpNames = Team.getPowerUpNames();
+	public void updatePowerUpsLabel() {
+		String[] powerUpNames = team.getPowerUpNames();
 		String powerUpsString = "";
 		for (int i = 0; i < powerUpNames.length; i++) {
 			powerUpsString += powerUpNames[i] + " ";
 		}
 		powerUpsLabel.setText(powerUpsString);
 	}
-	public static void updateNumberMapsLabel() {
-		int numberMaps = Team.getNumberMaps();
+	public void updateNumberMapsLabel() {
+		int numberMaps = team.getNumberMaps();
 		numberMapsLabel.setText(Integer.toString(numberMaps));
 	}
-
-	
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		ShopGUIFrame = new JFrame();
 		ShopGUIFrame.setBounds(100, 100, 1000, 700);
 		ShopGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ShopGUIFrame.getContentPane().setLayout(null);
-		
-		
-
-		if (Team.teamHasDiplomat()) {
+		if (team.teamHasDiplomat()) {
 			smallPotion.reduceCost(5);
 			quickPotion.reduceCost(10);
 			bigPotion.reduceCost(15);
@@ -168,8 +173,7 @@ public class ShopGUI {
 			extraGuess.reduceCost(15);
 			paperScissorsRockClue.reduceCost(15);
 		}
-		
-		
+	
 		healingItemsLabel.setBounds(249, 407, 353, 15);
 		ShopGUIFrame.getContentPane().add(healingItemsLabel);
 			
@@ -205,7 +209,7 @@ public class ShopGUI {
 		mapCostLabel.setBounds(580, 280, 70, 15);
 		ShopGUIFrame.getContentPane().add(mapCostLabel);
 		
-		JLabel moneyLeftLabel = new JLabel("Money left: " + Team.getMoney());
+		JLabel moneyLeftLabel = new JLabel("Money left: " + team.getMoney());
 		moneyLeftLabel.setBounds(754, 434, 172, 15);
 		ShopGUIFrame.getContentPane().add(moneyLeftLabel);
 		
@@ -223,7 +227,7 @@ public class ShopGUI {
 		buySmallPotionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyHealingItem(smallPotion);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		buySmallPotionButton.setBounds(52, 307, 117, 25);
@@ -233,7 +237,7 @@ public class ShopGUI {
 		buyQuickPotionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyHealingItem(quickPotion);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		buyQuickPotionButton.setBounds(215, 307, 117, 25);
@@ -243,7 +247,7 @@ public class ShopGUI {
 		buyBigPotionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyHealingItem(bigPotion);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		buyBigPotionButton.setBounds(356, 307, 117, 25);
@@ -253,7 +257,7 @@ public class ShopGUI {
 		buyMapButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyMap(map);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		buyMapButton.setBounds(544, 317, 117, 25);
@@ -262,7 +266,7 @@ public class ShopGUI {
 		JButton btnBackToHome = new JButton("Back to Home Base!");
 		btnBackToHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CityGUI.CityScreen.setVisible(true);
+				cityGui.makeCityVisible();
 				ShopGUIFrame.dispose();
 			}
 		});
@@ -273,7 +277,7 @@ public class ShopGUI {
 		buyExtraRollButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyPowerUp(extraRoll);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		
@@ -282,7 +286,7 @@ public class ShopGUI {
 		buyExtraGuessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyPowerUp(extraGuess);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		
@@ -290,7 +294,7 @@ public class ShopGUI {
 		buyPaperScissorsRockClueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buyPowerUp(paperScissorsRockClue);
-				moneyLeftLabel.setText("Money left: " + Team.getMoney());
+				moneyLeftLabel.setText("Money left: " + team.getMoney());
 			}
 		});
 		buyPaperScissorsRockClueButton.setBounds(432, 140, 101, 25);
@@ -355,12 +359,9 @@ public class ShopGUI {
 		ShopGUIFrame.getContentPane().add(numberMapsLabel);
 		tooManyMapsLabel.setVisible(false);
 		
-		
-		
-
-		
-
-		
+		updatePowerUpsLabel();
+		updateHealingItemsLabel();
+		updateNumberMapsLabel();	
 
 
 	}

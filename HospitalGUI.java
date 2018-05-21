@@ -17,27 +17,30 @@ public class HospitalGUI {
 	private int healingItemIndex;
 	private int heroIndex;
 	private JFrame HospitalFrame;
-	private static int timeRemaining = 1;
+	private int timeRemaining = 1;
 	private ActionListener countdown;
-	private static Timer timer;
-	private static ActionListener healProgressListener;
-	private static Hero heroToHeal;
-	private static HealingItem currentHealingItem;
+	private Timer timer;
+	private ActionListener healProgressListener;
+	private Hero heroToHeal;
+	private HealingItem currentHealingItem;
 	private JProgressBar progressBar = new JProgressBar();
-	private static JLabel currentlyHealingLabel = new JLabel("Healing...");
-	private static JLabel timeLeftLabel = new JLabel("Time left:");
-	private static JLabel countdownTimerLabel = new JLabel("");
-	private static JButton healButton = new JButton("Heal");
-	private static JLabel fullHealthWarningLabel = new JLabel("Hero is already full health!");
+	private JLabel currentlyHealingLabel = new JLabel("Healing...");
+	private JLabel timeLeftLabel = new JLabel("Time left:");
+	private JLabel countdownTimerLabel = new JLabel("");
+	private JButton healButton = new JButton("Heal");
+	private JLabel fullHealthWarningLabel = new JLabel("Hero is already full health!");
+	private CityGUI cityGui;
+	private Team team;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen() {
+	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HospitalGUI window = new HospitalGUI();
+					HospitalGUI window = new HospitalGUI(teamInput, gameEnvironmentInput, cityGuiInput);
 					window.HospitalFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,8 +48,18 @@ public class HospitalGUI {
 			}
 		});
 	}
+	public HospitalGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+		team = teamInput;
+		gameEnvironment = gameEnvironmentInput;
+		cityGui = cityGuiInput;
+		initialize();
+	}
+	private void finishedWindow() {
+		cityGui.makeCityVisible();
+		HospitalFrame.dispose();
+	}
 	
-	private static void healHero(HealingItem healingItem, Hero hero) {
+	private void healHero(HealingItem healingItem, Hero hero) {
 		heroToHeal = hero;
 		currentHealingItem = healingItem;
 		if (heroToHeal.getHealth() < heroToHeal.getMaxHealth()) {
@@ -65,16 +78,13 @@ public class HospitalGUI {
 	/**
 	 * Create the application.
 	 */
-	public HospitalGUI() {
-		initialize();
-	}
-	
 
-	private static String[] getListHealingItemNames() {
-		int numberHealingItems = Team.getHealingItems().size();
+	
+	private String[] getListHealingItemNames() {
+		int numberHealingItems = team.getHealingItems().size();
 		String[] healingItemNames = new String[numberHealingItems];
 		for (int i = 0; i < numberHealingItems; i++) {
-			healingItemNames[i] = Team.getHealingItems().get(i).getName();
+			healingItemNames[i] = team.getHealingItems().get(i).getName();
 		}	
 		return healingItemNames;
 	}
@@ -100,8 +110,6 @@ public class HospitalGUI {
 			}
 		};
 		
-
-		
 		HospitalFrame = new JFrame();
 		HospitalFrame.setTitle("Hospital");
 		HospitalFrame.setBounds(100, 100, 1000, 700);
@@ -111,10 +119,7 @@ public class HospitalGUI {
 		countdownTimerLabel.setBounds(721, 312, 70, 15);
 		HospitalFrame.getContentPane().add(countdownTimerLabel);
 		countdownTimerLabel.setVisible(false);
-		
-		
-		
-		
+	
 		currentlyHealingLabel.setBounds(651, 286, 70, 15);
 		HospitalFrame.getContentPane().add(currentlyHealingLabel);
 		currentlyHealingLabel.setVisible(false);
@@ -136,16 +141,14 @@ public class HospitalGUI {
 		lblHospital.setBounds(312, 12, 166, 23);
 		HospitalFrame.getContentPane().add(lblHospital);
 
-		
 		JLabel lblChooseAHealing = new JLabel("Choose a healing item to use:");
 		lblChooseAHealing.setBounds(70, 192, 227, 15);
 		HospitalFrame.getContentPane().add(lblChooseAHealing);
 
-		JComboBox heroComboBox = new JComboBox(Team.getHeroNames());
+		JComboBox heroComboBox = new JComboBox(team.getHeroNames());
 		heroComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroIndex = heroComboBox.getSelectedIndex();
-				System.out.println(heroIndex);
 				fullHealthWarningLabel.setVisible(false);
 			}
 		});
@@ -161,29 +164,25 @@ public class HospitalGUI {
 		});
 		healingItemComboBox.setBounds(296, 230, 166, 21);
 		HospitalFrame.getContentPane().add(healingItemComboBox);
-		
-		
+				
 		healButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Team.getHealingItems().size() == 0) {
+				if (team.getHealingItems().size() == 0) {
 					System.out.println("You have no potions!");
 				} else {
 					timer.start();
-					healHero(Team.getHealingItems().get(healingItemIndex), Team.getHeroes().get(heroIndex));
+					healHero(team.getHealingItems().get(healingItemIndex), team.getHeroes().get(heroIndex));
 				}
 				
 			}
 		});
 		healButton.setBounds(312, 281, 117, 25);
 		HospitalFrame.getContentPane().add(healButton);
-		
-		
-		
+				
 		JButton btnClose = new JButton("Back to Home Base!");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CityGUI.CityScreen.setVisible(true);
-				HospitalFrame.dispose();
+				finishedWindow();
 			}
 		});
 		btnClose.setBounds(34, 328, 209, 25);
@@ -193,21 +192,7 @@ public class HospitalGUI {
 		progressBar.setBounds(51, 470, 246, 25);
 		HospitalFrame.getContentPane().add(progressBar);
 		
-		timer = new Timer(1000, countdown);
-
-		
-		
-
-		
-
-		
-		
-
-		
-
-		
-
-		
-		
+		timer = new Timer(1000, countdown);	
 	}
+
 }

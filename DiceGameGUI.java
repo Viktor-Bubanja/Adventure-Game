@@ -18,19 +18,22 @@ public class DiceGameGUI {
 	private BattleWindow battleWindow;
 	private boolean heroHasPowerUp = false;
 	private int rollHero;
-	
+	private Team team;
+	private CityGUI cityGui;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Villain villain, Hero heroPlaying, BattleWindow battleWindow) {
+	public static void NewScreen(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DiceGameGUI diceGameWindow = new DiceGameGUI(villain, heroPlaying, battleWindow);
-					if (heroPlaying.getHasDiceGamePowerUp() || Team.teamHasGambler()) {
+					DiceGameGUI diceGameWindow = new DiceGameGUI(heroPlayingInput, battleWindowInput, gameEnvironmentInput);
+					diceGameWindow.team = gameEnvironmentInput.getTeam();
+					if (heroPlayingInput.getHasDiceGamePowerUp() || diceGameWindow.team.teamHasGambler()) {
 						diceGameWindow.heroHasPowerUp = true;
-						heroPlaying.setHasDiceGamePowerUp(false);
+						heroPlayingInput.setHasDiceGamePowerUp(false);
 					}
 					diceGameWindow.diceGameFrame.setVisible(true);
 				} catch (Exception e) {
@@ -43,10 +46,12 @@ public class DiceGameGUI {
 	/**
 	 * Create the application.
 	 */
-	public DiceGameGUI(Villain villainInput, Hero heroPlayingInput, BattleWindow battleWindowInput) {
+	public DiceGameGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
 		battleWindow = battleWindowInput;
 		heroPlaying = heroPlayingInput;
-		villain = villainInput;
+		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
+		cityGui = gameEnvironment.getCurrentCity();
+		villain = gameEnvironment.getVillain(currentCityIndex);
 		initialize();
 	}
 
@@ -92,6 +97,7 @@ public class DiceGameGUI {
 			public void actionPerformed(ActionEvent e) {
 				battleWindow.changeGame();
 				diceGameFrame.dispose();
+				gameEnvironment.openBattleWindow(team, cityGui);
 			}
 		});
 		goBackButton.setBounds(541, 292, 117, 25);
@@ -111,7 +117,6 @@ public class DiceGameGUI {
 					} else {
 						rollHero = randomHeroNumber.nextInt(6) + 1;
 					}
-					
 					int rollVillain = randomVillainNumber.nextInt(6) + 1;
 					labelHeroRoll.setText(Integer.toString(rollHero));
 					labelVillainRoll.setText(Integer.toString(rollVillain));
@@ -125,7 +130,7 @@ public class DiceGameGUI {
 							goBackButton.setVisible(true);
 							if (villain.getLives() == 0) {
 								JOptionPane.showMessageDialog(diceGameFrame, "The villain is now dead!");
-								BattleWindow.villainDies();
+								battleWindow.villainDies();
 								diceGameFrame.dispose();
 							}
 							
@@ -137,7 +142,7 @@ public class DiceGameGUI {
 						if (villainWon == 3) {
 							gameOver = true;
 							resultLabel.setText("You lose the game!");
-							heroPlaying.doDamage(villainsDamage);
+							heroPlaying.doDamage(villainsDamage, team, battleWindow);
 							goBackButton.setVisible(true);
 							if (heroPlaying.getHealth() <= 0)
 								JOptionPane.showMessageDialog(diceGameFrame, "Your hero has died!");

@@ -8,20 +8,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PowerUpDenGUI {
+	private JFrame powerUpDenGUIFrame;
 	private int powerUpIndex;
 	private int heroIndex;
-
-	private JFrame powerUpDenGUIFrame;
+	private CityGUI cityGui;
+	private Team team;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen() {
+	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironment, CityGUI cityGui) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PowerUpDenGUI window = new PowerUpDenGUI();
-					window.powerUpDenGUIFrame.setVisible(true);
+					PowerUpDenGUI powerUpDenFrame = new PowerUpDenGUI(teamInput, gameEnvironment, cityGui);
+					powerUpDenFrame.powerUpDenGUIFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -30,10 +32,10 @@ public class PowerUpDenGUI {
 	}
 	
 	private String[] getListPowerUpNames() {
-		int numberPowerUps = Team.getPowerUps().size();
+		int numberPowerUps = team.getPowerUps().size();
 		String[] powerUpNames = new String[numberPowerUps];
 		for (int i = 0; i < numberPowerUps; i++) {
-			powerUpNames[i] = Team.getPowerUps().get(i).getName();
+			powerUpNames[i] = team.getPowerUps().get(i).getName();
 		}	
 		return powerUpNames;
 	}
@@ -54,7 +56,10 @@ public class PowerUpDenGUI {
 	/**
 	 * Create the application.
 	 */
-	public PowerUpDenGUI() {
+	public PowerUpDenGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+		team = teamInput;
+		gameEnvironment = gameEnvironmentInput;
+		cityGui = cityGuiInput;
 		initialize();
 	}
 
@@ -84,7 +89,7 @@ public class PowerUpDenGUI {
 		lblChooseAHero.setBounds(50, 121, 300, 20);
 		powerUpDenGUIFrame.getContentPane().add(lblChooseAHero);
 		
-		JComboBox heroSelectionBox = new JComboBox(Team.getHeroNames());
+		JComboBox heroSelectionBox = new JComboBox(team.getHeroNames());
 		heroSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroIndex = heroSelectionBox.getSelectedIndex();
@@ -96,7 +101,7 @@ public class PowerUpDenGUI {
 		JButton btnBackToHome = new JButton("Back to Home Base!");
 		btnBackToHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CityGUI.CityScreen.setVisible(true);
+				cityGui.makeCityVisible();
 				powerUpDenGUIFrame.dispose();
 			}
 		});
@@ -106,10 +111,10 @@ public class PowerUpDenGUI {
 		JButton applyPowerUpButton = new JButton("Apply");
 		applyPowerUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Team.getPowerUps().size() == 0) {
+				if (team.getPowerUps().size() == 0) {
 					System.out.println("You have no Power Ups!");
 				} else {
-					applyPowerUp(Team.getPowerUps().get(powerUpIndex), Team.getHeroes().get(heroIndex));
+					applyPowerUp(team.getPowerUps().get(powerUpIndex), team.getHeroes().get(heroIndex));
 				}
 			}
 		});

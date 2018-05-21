@@ -3,106 +3,110 @@ import java.util.ArrayList;
 public class Team {
 	
 	public String teamName;
-	private static int numberHeroes;	
-	private static int money = 300; //Some random amount later
-	private static int maps = 0;
-	private static ArrayList<Hero> heroes = new ArrayList<Hero>();
-	private static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
-	private static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
-	private static boolean medicInTeam = false;
-	private static boolean gamblerInTeam = false;
-	private static boolean diplomatInTeam = false;
-	private static boolean explorerInTeam = false;
-	private static boolean luckyInTeam = false;
+	private int numberHeroes;	
+	private int money = 300; //Some random amount later
+	private int maps = 0;
+	private ArrayList<Hero> heroes = new ArrayList<Hero>();
+	private ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
+	private ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
+	private boolean medicInTeam = false;
+	private boolean gamblerInTeam = false;
+	private boolean diplomatInTeam = false;
+	private boolean explorerInTeam = false;
+	private boolean luckyInTeam = false;
+	private GameEnvironment gameEnvironment;
 	
-	public static boolean teamHasMedic() {
+	public Team(GameEnvironment gameEnvironmentInput) {
+		gameEnvironment = gameEnvironmentInput;
+	}
+
+	public boolean teamHasMedic() {
 		return medicInTeam;
 	}
 
-	public static void setTeamHasMedic(boolean teamHasMedic) {
-		Team.medicInTeam = teamHasMedic;
+	public void setTeamHasMedic(boolean teamHasMedic) {
+		medicInTeam = teamHasMedic;
 	}
 
-	public static boolean teamHasGambler() {
+	public boolean teamHasGambler() {
 		return gamblerInTeam;
 	}
 
-	public static void setTeamHasGambler(boolean teamHasGambler) {
-		Team.gamblerInTeam = teamHasGambler;
+	public void setTeamHasGambler(boolean teamHasGambler) {
+		gamblerInTeam = teamHasGambler;
 	}
 
-	public static boolean teamHasDiplomat() {
+	public boolean teamHasDiplomat() {
 		return diplomatInTeam;
 	}
 
-	public static void setTeamHasDiplomat(boolean teamHasDiplomat) {
-		Team.diplomatInTeam = teamHasDiplomat;
+	public void setTeamHasDiplomat(boolean teamHasDiplomat) {
+		diplomatInTeam = teamHasDiplomat;
 	}
 
-	public static boolean teamHasExplorer() {
+	public boolean teamHasExplorer() {
 		return explorerInTeam;
 	}
 
-	public static void setTeamHasExplorer(boolean teamHasExplorer) {
-		Team.explorerInTeam = teamHasExplorer;
+	public void setTeamHasExplorer(boolean teamHasExplorer) {
+		explorerInTeam = teamHasExplorer;
 	}
 
-	public static boolean teamHasLucky() {
+	public boolean teamHasLucky() {
 		return luckyInTeam;
 	}
 
-	public static void setTeamHasLucky(boolean teamHasLucky) {
-		Team.luckyInTeam = teamHasLucky;
-	}
-	
-	
-	public Team(String name, int number_of_heroes) {
-		teamName = name;
-		numberHeroes = number_of_heroes;
+	public void setTeamHasLucky(boolean teamHasLucky) {
+		luckyInTeam = teamHasLucky;
 	}
 
-	public static void decreaseMoneyBy(int cost) {
+	public void setTeamName(String teamNameInput, int numberHeroesInput ) {
+		teamName = teamNameInput;
+		numberHeroes = numberHeroesInput;
+	}
+
+	public void decreaseMoneyBy(int cost) {
 		money -= cost;
 	}
-	public static void increaseMoneyBy(int reward) {
+	public void increaseMoneyBy(int reward) {
 		money += reward;
 	}
 	
-	public static void removePowerUp(int i) {
+	public void removePowerUp(int i ) {
 		powerUps.remove(i);
-		ShopGUI.updatePowerUpsLabel();
 	}
 	
-	public static void addHealingItem(HealingItem healingItem) {
+	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
-		ShopGUI.updateHealingItemsLabel();
 	}
 	
-	public static void addPowerUp(PowerUp powerUp) {
-		powerUps.add(powerUp);
-		ShopGUI.updatePowerUpsLabel();
-	}
 	
-	public static int getMoney() {
-		return money;
-	}
-	public static void addMap() {
+	
+
+	public void addMap() {
 		maps++;
-		ShopGUI.updateNumberMapsLabel();
+
 	}
-	public static void removeMap() {
-		maps--;
-		ShopGUI.updateNumberMapsLabel();
+	public void removeMap() {
+		maps -= 1;
 	}
-	public static int getNumberMaps() {
+	public int getNumberMaps() {
 		return maps;
 	}
+	
+	public int getMoney() {
+		return money;
+	}
+	public void addPowerUp(PowerUp powerUp) {
+		powerUps.add(powerUp);
+
+	}
 			
-	public static int getNumberHeroes() {
+	public int getNumberHeroes() {
 		return heroes.size();
 	}
 	
-	public static String[] getHeroNames() {
+	public String[] getHeroNames() {
 		String[] heroNames = new String[heroes.size()];
 		for (int i = 0; i < heroes.size(); i++) {
 			heroNames[i] = heroes.get(i).getName();
@@ -111,21 +115,21 @@ public class Team {
 		
 		return heroNames;
 	}
-	public static ArrayList<String> getHeroTypes() {
+	public ArrayList<String> getHeroTypes() {
 		ArrayList<String> heroTypes = new ArrayList<String>();
 		for (int i = 0; i < heroes.size(); i++) {
 			heroTypes.add(heroes.get(i).getType());
 		}
 		return heroTypes;
 	}
-	public static String[] getHealingItemNames() {
+	public String[] getHealingItemNames() {
 		String[] healingItemNames = new String[healingItems.size()];
 		for (int i = 0; i < healingItems.size(); i++ ) {
 			healingItemNames[i] = healingItems.get(i).getName();
 		}
 		return healingItemNames;
 	}
-	public static String[] getPowerUpNames() {
+	public String[] getPowerUpNames() {
 		String[] powerUpNames = new String[powerUps.size()];
 		for (int i = 0; i < powerUps.size(); i++ ) {
 			powerUpNames[i] = powerUps.get(i).getName();
@@ -133,37 +137,30 @@ public class Team {
 		return powerUpNames;
 	}
 	
-	public static ArrayList<HealingItem> getHealingItems() {
+	public ArrayList<HealingItem> getHealingItems() {
 		return healingItems;
 	}
 	
-	public static ArrayList<Hero> getHeroes() {
+	public ArrayList<Hero> getHeroes() {
 		return heroes;
 	}
-	public static void addHero(Hero hero) {
+	public void addHero(Hero hero) {
 		heroes.add(hero);
 	}
 	
-	public static ArrayList<PowerUp> getPowerUps() {
+	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
 	}
-	public static void removeHealingItem(int index) {
+	public void removeHealingItem(int index) {
 		healingItems.remove(index);
-		ShopGUI.updateHealingItemsLabel();
+		//ShopGUI.updateHealingItemsLabel();
 	}
-	public static void killHero(Hero hero) {
+	public void killHero(Hero hero) {
 		heroes.remove(hero);
 		if (heroes.size() == 0) {
-			GameEnvironment.endGame();
+			gameEnvironment.endGame();
 		}
 	}
-			
-	public static void main(String[] args) {
-		Team newTeam = new Team("trht", 2);
-	}
-
-	
-	
 	
 	
 }
