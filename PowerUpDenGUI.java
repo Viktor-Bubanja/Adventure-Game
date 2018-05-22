@@ -14,6 +14,7 @@ public class PowerUpDenGUI {
 	private CityGUI cityGui;
 	private Team team;
 	private GameEnvironment gameEnvironment;
+	private JComboBox powerUpSelectionBox;
 
 	/**
 	 * Launch the application.
@@ -49,8 +50,14 @@ public class PowerUpDenGUI {
 		case "Clue for Paper Scissors Rock":	hero.setHasPaperScissorsRockPowerUp(true);
 												break;
 		}
-		System.out.println(hero.getPowerUps());
-
+		team.removePowerUp(powerUp);
+		removePowerUpFromSelectionBox(powerUpName);
+	}
+	private void removePowerUpFromSelectionBox(String powerUpName) {
+		powerUpSelectionBox.removeItem(powerUpName);
+		if (team.getPowerUps().size() > 0) {
+			powerUpSelectionBox.setSelectedIndex(0);
+		}
 	}
 
 	/**
@@ -72,7 +79,7 @@ public class PowerUpDenGUI {
 		powerUpDenGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		powerUpDenGUIFrame.getContentPane().setLayout(null);
 		
-		JComboBox powerUpSelectionBox = new JComboBox(getListPowerUpNames());
+		powerUpSelectionBox = new JComboBox(getListPowerUpNames());
 		powerUpSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				powerUpIndex = powerUpSelectionBox.getSelectedIndex();
@@ -114,14 +121,18 @@ public class PowerUpDenGUI {
 				if (team.getPowerUps().size() == 0) {
 					System.out.println("You have no Power Ups!");
 				} else {
+					
+					System.out.println(team.getPowerUps());
+					System.out.println(powerUpIndex);
 					applyPowerUp(team.getPowerUps().get(powerUpIndex), team.getHeroes().get(heroIndex));
+					
+					
 				}
+				
 			}
 		});
 		applyPowerUpButton.setBounds(283, 282, 117, 25);
 		powerUpDenGUIFrame.getContentPane().add(applyPowerUpButton);
-		
-		
 	}
 	
 }

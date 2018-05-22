@@ -262,6 +262,7 @@ public class GameSetupGUI {
 						hero.increaseMaxHealth(20);
 					}
 				}
+				gameEnvironment.startTimer();
 				gameEnvironment.setTeamName(txtTeamName.getText());
 				gameEnvironment.setNumberCities(numCities.getValue());
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)

@@ -56,6 +56,9 @@ public class Hero {
 	
 	public void heal(int amountToHeal) {
 		currentHealth += amountToHeal;
+		if (currentHealth > maxHealth) {
+			currentHealth = maxHealth;
+		}
 	}
 	public int getHealth() {
 		return currentHealth;

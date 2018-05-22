@@ -120,8 +120,6 @@ public class BattleWindow {
 		fightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroPlaying = team.getHeroes().get(heroSelection.getSelectedIndex());
-				
-				
 				openCurrentGame(heroPlaying);
 			}
 		});

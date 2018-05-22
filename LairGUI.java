@@ -86,5 +86,4 @@ public class LairGUI {
 		VillainLabel.setBounds(211, 229, 306, 150);
 		lairFrame.getContentPane().add(VillainLabel);
 	}
-
 }

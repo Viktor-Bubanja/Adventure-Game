@@ -21,6 +21,7 @@ public class DiceGameGUI {
 	private Team team;
 	private CityGUI cityGui;
 	private GameEnvironment gameEnvironment;
+	private JButton buttonRollDice = new JButton("Roll Dice!");
 
 	/**
 	 * Launch the application.
@@ -49,6 +50,7 @@ public class DiceGameGUI {
 	public DiceGameGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
 		battleWindow = battleWindowInput;
 		heroPlaying = heroPlayingInput;
+		gameEnvironment = gameEnvironmentInput;
 		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
 		cityGui = gameEnvironment.getCurrentCity();
 		villain = gameEnvironment.getVillain(currentCityIndex);
@@ -106,7 +108,7 @@ public class DiceGameGUI {
 		JLabel labelHeroRoll = new JLabel("0");
 		labelHeroRoll.setBounds(77, 122, 70, 15);
 		diceGameFrame.getContentPane().add(labelHeroRoll);
-		JButton buttonRollDice = new JButton("Roll Dice!");
+		
 		buttonRollDice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!gameOver) {
@@ -125,6 +127,7 @@ public class DiceGameGUI {
 						heroWon++;
 						if (heroWon == 3) {
 							gameOver = true;
+							buttonRollDice.setVisible(false);
 							resultLabel.setText("You win the game!");
 							villain.loseLife();
 							goBackButton.setVisible(true);
@@ -132,6 +135,9 @@ public class DiceGameGUI {
 								JOptionPane.showMessageDialog(diceGameFrame, "The villain is now dead!");
 								battleWindow.villainDies();
 								diceGameFrame.dispose();
+							}
+							if (gameEnvironment.finalCity()) {
+								gameEnvironment.gameWon();
 							}
 							
 						}
@@ -141,6 +147,7 @@ public class DiceGameGUI {
 						villainWon++;
 						if (villainWon == 3) {
 							gameOver = true;
+							buttonRollDice.setVisible(false);
 							resultLabel.setText("You lose the game!");
 							heroPlaying.doDamage(villainsDamage, team, battleWindow);
 							goBackButton.setVisible(true);

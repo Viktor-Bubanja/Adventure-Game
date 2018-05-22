@@ -101,7 +101,6 @@ public class GuessNumberGUI {
 				battleWindow.changeGame();
 				guessGameFrame.dispose();
 				gameEnvironment.openBattleWindow(team, cityGui);
-				
 			}
 		});
 		goBackButton.setBounds(319, 237, 117, 25);
@@ -118,6 +117,9 @@ public class GuessNumberGUI {
 						villain.loseLife();
 						if (villain.getLives() == 0) {
 							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+						}
+						if (gameEnvironment.finalCity()) {
+							gameEnvironment.gameWon();
 						}
 						battleWindow.villainDies();
 						goBackButton.setVisible(true);
@@ -137,10 +139,12 @@ public class GuessNumberGUI {
 						villain.loseLife();
 						if (villain.getLives() == 0) {
 							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+							if (gameEnvironment.finalCity()) {
+								gameEnvironment.gameWon();
+							}
 							battleWindow.villainDies();
 							guessGameFrame.dispose();
 						}
-						battleWindow.villainDies();
 						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
 					}  else if (guessSlider.getValue() > villainsNumber) {
@@ -159,7 +163,9 @@ public class GuessNumberGUI {
 						villain.loseLife();
 						if (villain.getLives() == 0) {
 							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
-							battleWindow.villainDies();
+							if (gameEnvironment.finalCity()) {
+								gameEnvironment.gameWon();
+							}
 							guessGameFrame.dispose();
 						}
 						battleWindow.villainDies();

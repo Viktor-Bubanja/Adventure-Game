@@ -1,7 +1,12 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+
 
 public class GameEnvironment {
 	private String teamName;
@@ -12,9 +17,24 @@ public class GameEnvironment {
 	private final int MAXNUMBERCITIES = 6;
 	private Team team;
 	private CityGUI currentCity;
+	
+	private long lStartTime;
 
 	public ArrayList<Villain> getVillains() {
 		return villains;
+	}
+	public void startTimer() {
+		lStartTime = System.currentTimeMillis();
+	}
+	public String getEndTime() {
+		long endTimeLong = System.currentTimeMillis() - lStartTime;
+		Integer endTimeInt = (int) (long) endTimeLong;
+		String displayTime = String.format("%d min, %d sec", 
+				TimeUnit.MILLISECONDS.toMinutes(endTimeLong),
+				TimeUnit.MILLISECONDS.toSeconds(endTimeLong),
+				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTimeLong))
+				);
+		return displayTime;
 	}
 	
 	public void setTeamName(String inputName) {
@@ -27,10 +47,7 @@ public class GameEnvironment {
 		return teamName;
 	}
 	public int getCurrentCityIndex() {
-		if (currentCityIndex == numberCities - 1)
-			return - 1; //We now at the last city with the supervillain
-		else
-			return currentCityIndex;
+		return currentCityIndex;
 	}
 	public CityGUI getCurrentCity() {
 		return currentCity;
@@ -63,8 +80,8 @@ public class GameEnvironment {
 		ArrayList<String> games5 = new ArrayList<String>();
 		ArrayList<String> games6 = new ArrayList<String>();
 		games1.add("paper scissors rock");
-		games1.add("guess a number");
-		games1.add("Dice game");
+		//games1.add("guess a number");
+		//games1.add("Dice game");
 		games2.add("guess a number");
 		games2.add("paper scissors rock");
 		games2.add("guess a number");
@@ -73,7 +90,7 @@ public class GameEnvironment {
 		Villain villain3 = new Villain("you a bitch", games1, "villain three", 70);
 		Villain villain4 = new Villain("ohh whats that", games1, "villain four", 70);
 		Villain villain5 = new Villain("im da bomd you not", games1, "villain five", 70);
-		Villain superVillain = new Villain("you a big fat nob", games1, "Super", 70);
+		Villain superVillain = new Villain("you a big fat nob", games1, "Super Villain", 70);
 		villains.add(villain1);
 		villains.add(villain2);
 		villains.add(villain3);
@@ -84,18 +101,24 @@ public class GameEnvironment {
 	}
 	
 	public Villain getVillain(int index) {
-		return villains.get(index);
+		if (finalCity()) {
+			return villains.get(MAXNUMBERCITIES);
+		} else {
+			return villains.get(index);
+		}	
 	}
 	
 	public static void main(String[] args) {
 		GameEnvironment gameEnvironment = new GameEnvironment();
 		gameEnvironment.makeVillains();
 		gameEnvironment.team = new Team(gameEnvironment);
+		gameEnvironment.gameWon();
 		//for (int i = 0; i < gameEnvironment.MAXNUMBERCITIES; i++) {
 			//gameEnvironment.cities.add(gameEnvironment.makeCity(gameEnvironment, gameEnvironment.team));
 		//}
 		
 		GameSetupGUI.NewScreen(gameEnvironment, gameEnvironment.team); //start the game already
+		
 	}
 
 	
@@ -163,6 +186,17 @@ public class GameEnvironment {
 		powerUps.add(extraGuess);
 		powerUps.add(extraRoll);
 		return powerUps;
+	}
+	public boolean finalCity() {
+		if (currentCityIndex == numberCities - 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public void gameWon() {
+		GameWonGUI gameWonGui = new GameWonGUI(this);
+		gameWonGui.NewScreen(this);
 	}
 
 	

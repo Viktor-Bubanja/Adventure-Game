@@ -24,6 +24,7 @@ public class CityGUI {
 	private Team team;
 	private GameEnvironment gameEnvironment;
 	private CityGUI cityGuiWindow;
+	private JLabel finalCityLabel = new JLabel("Final City!");
 	
 	/**
 	 * Launch the application.
@@ -130,12 +131,11 @@ public class CityGUI {
 				int randomIndex = random.nextInt(numberPowerUps);
 				robLabel.setVisible(true);
 				PowerUp robbedPowerUp = team.getPowerUps().get(randomIndex);
-				team.removePowerUp(random.nextInt(numberPowerUps));
+				team.removePowerUp(robbedPowerUp);
 				randomRobbedItem.setText(robbedPowerUp.getName());
 			}
 		}
 	}
-	
 	private void randomEvent() {
 		Random random = new Random();
 		
@@ -151,13 +151,10 @@ public class CityGUI {
 			}
 		}
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		
 		CityScreen = new JFrame();
 		CityScreen.setTitle("");
 		CityScreen.setBounds(100, 100, 1000, 700);
@@ -185,7 +182,6 @@ public class CityGUI {
 		if (team.getNumberMaps() >0 || team.teamHasExplorer()) {
 			showMapButtonAndLabel();
 		}
-		
 		int currentPosition = 0;
 		List<String> positions = new ArrayList<String>();
 		positions.add("SHOP");
@@ -251,12 +247,11 @@ public class CityGUI {
 				
 				usedMap = true;
 				hideMapButtonAndLabel();
-				team.removeMap();
-				
+				if (!team.teamHasExplorer()) {
+					team.removeMap();		
+				}
 			}
 		});
-
-		
 		JButton close = new JButton("Close");
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -266,13 +261,18 @@ public class CityGUI {
 		close.setBounds(0, 309, 117, 25);
 		CityScreen.getContentPane().add(close);
 		
-		
 		randomRobbedItem.setBounds(162, 465, 134, 15);
 		CityScreen.getContentPane().add(randomRobbedItem);
 		
-		
 		randomGiftedItem.setBounds(541, 465, 134, 15);
 		CityScreen.getContentPane().add(randomGiftedItem);
+		
+		finalCityLabel.setBounds(30, 58, 189, 33);
+		CityScreen.getContentPane().add(finalCityLabel);
+		if (!gameEnvironment.finalCity()) {
+			finalCityLabel.setVisible(false);
+		}
+		
 
 	}
 }

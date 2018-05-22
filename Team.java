@@ -72,20 +72,18 @@ public class Team {
 		money += reward;
 	}
 	
-	public void removePowerUp(int i ) {
-		powerUps.remove(i);
+	public void removePowerUp(PowerUp powerUp) {
+		System.out.println(powerUps);
+		powerUps.remove(powerUp);
+		System.out.println(powerUps);
 	}
 	
 	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
 	}
-	
-	
-	
 
 	public void addMap() {
 		maps++;
-
 	}
 	public void removeMap() {
 		maps -= 1;
@@ -99,7 +97,6 @@ public class Team {
 	}
 	public void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
-
 	}
 			
 	public int getNumberHeroes() {
@@ -112,7 +109,6 @@ public class Team {
 			heroNames[i] = heroes.get(i).getName();
 			//System.out.println(heroNames[i]);
 		}
-		
 		return heroNames;
 	}
 	public ArrayList<String> getHeroTypes() {
@@ -161,6 +157,4 @@ public class Team {
 			gameEnvironment.endGame();
 		}
 	}
-	
-	
 }
