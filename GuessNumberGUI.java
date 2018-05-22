@@ -13,7 +13,8 @@ public class GuessNumberGUI {
 
 	private JFrame guessGameFrame;
 	private int villainsNumber;
-	private int guessAvailable = 2;
+	private int maxGuesses = 2;
+	private int guessesLeft;
 	private int guessNumber = 1;
 	private BattleWindow battleWindow;
 	private Villain villain;
@@ -22,6 +23,7 @@ public class GuessNumberGUI {
 	private Team team;
 	private CityGUI cityGui;
 	private GameEnvironment gameEnvironment;
+	private JLabel numGuessesLeftLabel;
 
 	public void makeVisible() {
 		this.guessGameFrame.setVisible(true);
@@ -35,10 +37,14 @@ public class GuessNumberGUI {
 		cityGui = gameEnvironment.getCurrentCity();
 		villain = gameEnvironment.getVillain(currentCityIndex);
 		this.team = gameEnvironmentInput.getTeam();
-		if (heroPlayingInput.getHasGuessNumberPowerUp() || this.team.teamHasGambler()) {
-			this.guessAvailable = 3;
+		if (heroPlayingInput.getHasGuessNumberPowerUp()) {
+			maxGuesses++;
 			heroPlayingInput.setHasGuessNumberPowerUp(false);
+		}
+		if (heroPlayingInput.getType() == "Gambler") {
+			maxGuesses++;	
 		}	
+		guessesLeft = maxGuesses;
 		initialize();
 	}
 	
@@ -70,6 +76,14 @@ public class GuessNumberGUI {
 		pickLabel.setBounds(46, 12, 250, 30);
 		guessGameFrame.getContentPane().add(pickLabel);
 		
+		JLabel lblGuessesLeft = new JLabel("Guesses left:");
+		lblGuessesLeft.setBounds(546, 80, 155, 30);
+		guessGameFrame.getContentPane().add(lblGuessesLeft);
+		
+		JLabel numGuessesLeftLabel = new JLabel(Integer.toString(guessesLeft));
+		numGuessesLeftLabel.setBounds(713, 88, 70, 15);
+		guessGameFrame.getContentPane().add(numGuessesLeftLabel);
+		
 		JLabel highOrLow = new JLabel("");
 		highOrLow.setBounds(12, 97, 424, 58);
 		guessGameFrame.getContentPane().add(highOrLow);
@@ -93,7 +107,7 @@ public class GuessNumberGUI {
 			public void actionPerformed(ActionEvent e) {
 				String textSet;
 				
-				if (guessNumber == 1) { //First guess
+				if (guessesLeft == maxGuesses) { //First guess
 					if (guessSlider.getValue() == villainsNumber) {
 						highOrLow.setText("Wow you got it on the first try!");
 						villain.loseLife();
@@ -111,14 +125,12 @@ public class GuessNumberGUI {
 						btnPick.setVisible(false);
 					} else if (guessSlider.getValue() > villainsNumber) {
 						highOrLow.setText("you have another guess, your guess was too high");
-						guessNumber++;
 					} else if (guessSlider.getValue() < villainsNumber) {
-						guessNumber++;
 						highOrLow.setText("you have another guess, your guess was too low");
 					}
 					
 					
-				} else if (guessNumber < guessAvailable) { 
+				} else if (guessesLeft > 1) { 
 					if (guessSlider.getValue() == villainsNumber) {
 						highOrLow.setText("Great guess! You got it with guesses to spare");
 						villain.loseLife();
@@ -136,15 +148,13 @@ public class GuessNumberGUI {
 						btnPick.setVisible(false);
 					}  else if (guessSlider.getValue() > villainsNumber) {
 						highOrLow.setText("you have another guess, your guess was too high");
-						guessNumber++;
 					} else if (guessSlider.getValue() < villainsNumber) {
-						guessNumber++;
 						highOrLow.setText("you have another guess, your guess was too low");
 						
 						
 					}
 						
-				} else if (guessNumber == guessAvailable) { // last guess
+				} else if (guessesLeft == 1) { // last guess
 					if (guessSlider.getValue() == villainsNumber) {
 						highOrLow.setText("Great guess! You got it on your last guess");
 						villain.loseLife();
@@ -176,32 +186,16 @@ public class GuessNumberGUI {
 							}
 						btnPick.setVisible(false);
 					}
-				}
-				
 					
-				/*} else if (guessAvailable > guessNumber) { 
-					if (guessSlider.getValue() == villainsNumber) {
-						highOrLow.setText("Great guess! You got it with guesses to spare");
-						villain.loseLife();
-						if (villain.getLives() == 0) {
-							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
-							BattleWindow.villainDies();
-							guessGameFrame.dispose();
-						}
-						goBackButton.setVisible(true);
-						btnPick.setVisible(false);						
-					} else if (guessSlider.getValue() > villainsNumber) {
-						highOrLow.setText("you have another guess, your guess was too high");
-					} else if (guessSlider.getValue() < villainsNumber) {
-						highOrLow.setText("you have another guess, your guess was too low");
-					}
-				} */
-				
-				//System.out.println("Available after: " + guessAvailable);
+				}
+				guessesLeft--;
+				numGuessesLeftLabel.setText(Integer.toString(guessesLeft));
 			}
 
 		});
 		btnPick.setBounds(300, 54, 117, 25);
 		guessGameFrame.getContentPane().add(btnPick);
+		
+
 	}
 }

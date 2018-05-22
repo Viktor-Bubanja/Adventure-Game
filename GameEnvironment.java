@@ -29,9 +29,6 @@ public class GameEnvironment {
 	public String getEndTime() {
 		long endTimeLong = System.currentTimeMillis() - lStartTime;
 		String displayTime = String.format("%d min, %d sec", 
-				//TimeUnit.MILLISECONDS.toMinutes(endTimeLong),
-				//TimeUnit.MILLISECONDS.toSeconds(endTimeLong) -
-				//TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTimeLong))
 				(int) ((endTimeLong / (1000 * 60)) % 60),
 				(int) ((endTimeLong / 1000) % 60)
 				);

@@ -39,8 +39,8 @@ public class DiceGameGUI {
 		cityGui = gameEnvironment.getCurrentCity();
 		villain = gameEnvironment.getVillain(currentCityIndex);
 		this.team = gameEnvironmentInput.getTeam();
-		if (heroPlayingInput.getHasDiceGamePowerUp() || this.team.teamHasGambler()) {
-			this.heroHasPowerUp = true;
+		if (heroPlayingInput.getHasDiceGamePowerUp() || heroPlayingInput.getType() == "Gambler") {
+			heroHasPowerUp = true;
 			heroPlayingInput.setHasDiceGamePowerUp(false);
 		}
 		initialize();

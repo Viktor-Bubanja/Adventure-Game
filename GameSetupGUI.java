@@ -47,8 +47,7 @@ public class GameSetupGUI {
 			team.setTeamHasGambler(true);
 		} else if (heroType == "Diplomat") {
 			team.setTeamHasDiplomat(true);
-		}
-		else if (heroType == "Explorer") {
+		} else if (heroType == "Explorer") {
 			team.setTeamHasExplorer(true);
 		} else if (heroType == "Lucky") {
 			team.setTeamHasLucky(true);

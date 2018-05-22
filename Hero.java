@@ -17,10 +17,10 @@ public class Hero {
 		name = inputName;
 		type = inputType;
 		if (type == "Gambler") {
-			maxHealth = 2;
+			maxHealth = 150;
 			recoveryRate = 8;
 		} else if (type == "Medic") {
-			maxHealth = 1;
+			maxHealth = 200;
 			recoveryRate = 15;
 		} else if (type == "Diplomat") {
 			maxHealth = 200;
