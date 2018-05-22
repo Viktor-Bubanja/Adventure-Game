@@ -73,13 +73,13 @@ public class Team {
 	}
 	
 	public void removePowerUp(PowerUp powerUp) {
-		System.out.println(powerUps);
 		powerUps.remove(powerUp);
-		System.out.println(powerUps);
 	}
 	
 	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
+		System.out.println("healing items : ");
+		System.out.println(healingItems);
 	}
 
 	public void addMap() {
@@ -97,6 +97,8 @@ public class Team {
 	}
 	public void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
+		System.out.println("power ups: ");
+		System.out.println(powerUps);
 	}
 			
 	public int getNumberHeroes() {
@@ -147,9 +149,8 @@ public class Team {
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
 	}
-	public void removeHealingItem(int index) {
-		healingItems.remove(index);
-		//ShopGUI.updateHealingItemsLabel();
+	public void removeHealingItem(HealingItem healingItem) {
+		healingItems.remove(healingItem);
 	}
 	public void killHero(Hero hero) {
 		heroes.remove(hero);

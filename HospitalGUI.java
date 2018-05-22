@@ -10,7 +10,6 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
-import javax.swing.JProgressBar;
 
 public class HospitalGUI {
 
@@ -23,7 +22,6 @@ public class HospitalGUI {
 	private ActionListener healProgressListener;
 	private Hero heroToHeal;
 	private HealingItem currentHealingItem;
-	private JProgressBar progressBar = new JProgressBar();
 	private JLabel currentlyHealingLabel = new JLabel("Healing...");
 	private JLabel timeLeftLabel = new JLabel("Time left:");
 	private JLabel countdownTimerLabel = new JLabel("");
@@ -32,6 +30,7 @@ public class HospitalGUI {
 	private CityGUI cityGui;
 	private Team team;
 	private GameEnvironment gameEnvironment;
+	private JComboBox healingItemComboBox;
 
 	/**
 	 * Launch the application.
@@ -63,6 +62,9 @@ public class HospitalGUI {
 		heroToHeal = hero;
 		currentHealingItem = healingItem;
 		if (heroToHeal.getHealth() < heroToHeal.getMaxHealth()) {
+			team.removeHealingItem(healingItem);
+			
+			removeHealingItemFromComboBox(healingItem.getName());
 			countdownTimerLabel.setVisible(true);
 			timeRemaining = healingItem.getApplicationTime() + 1;
 			currentlyHealingLabel.setVisible(true);
@@ -72,6 +74,12 @@ public class HospitalGUI {
 			
 		} else {
 			fullHealthWarningLabel.setVisible(true);
+		}
+	}
+	private void removeHealingItemFromComboBox(String healingItemName) {
+		healingItemComboBox.removeItem(healingItemName);
+		if (team.getHealingItems().size() > 0) {
+			healingItemComboBox.setSelectedIndex(0);
 		}
 	}
 
@@ -93,10 +101,8 @@ public class HospitalGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
 		ActionListener countdown = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("yoyo");
 				timeRemaining--;
 				countdownTimerLabel.setText(Integer.toString(timeRemaining));
 				
@@ -156,7 +162,7 @@ public class HospitalGUI {
 		heroComboBox.setBounds(296, 122, 166, 21);
 		HospitalFrame.getContentPane().add(heroComboBox);
 		
-		JComboBox healingItemComboBox = new JComboBox(getListHealingItemNames());
+		healingItemComboBox = new JComboBox(getListHealingItemNames());
 		healingItemComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				healingItemIndex = healingItemComboBox.getSelectedIndex();
@@ -188,9 +194,7 @@ public class HospitalGUI {
 		btnClose.setBounds(34, 328, 209, 25);
 		HospitalFrame.getContentPane().add(btnClose);
 		
-		
-		progressBar.setBounds(51, 470, 246, 25);
-		HospitalFrame.getContentPane().add(progressBar);
+
 		
 		timer = new Timer(1000, countdown);	
 	}

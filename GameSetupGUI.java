@@ -75,15 +75,6 @@ public class GameSetupGUI {
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		
-		/*Map map = new Map();
-		HealingItem smallPotion = new HealingItem(10, 1, 20, "Small Potion");
-		HealingItem quickPotion = new HealingItem(25, 1, 5, "Quick Potion");
-		HealingItem bigPotion = new HealingItem(40, 2, 10, "Big Potion");
-		List<HealingItem> healingItems = new ArrayList<HealingItem>();
-		healingItems.add(smallPotion);
-		healingItems.add(quickPotion);
-		healingItems.add(bigPotion); */
-		
 		JLabel lblWhatWouldYou = new JLabel("What would you like your super team to be called?");
 		lblWhatWouldYou.setBounds(2, -7, 378, 59);
 		setupFrame.getContentPane().add(lblWhatWouldYou);

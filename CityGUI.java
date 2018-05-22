@@ -120,7 +120,7 @@ public class CityGUI {
 				robLabel.setVisible(true);
 				int randomIndex = random.nextInt(numberHealingItems);
 				HealingItem robbedHealingItem = team.getHealingItems().get(randomIndex);
-				team.removeHealingItem(randomIndex);
+				team.removeHealingItem(robbedHealingItem);
 				randomRobbedItem.setText(robbedHealingItem.getName());
 			}
 		} else {

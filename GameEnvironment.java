@@ -28,11 +28,12 @@ public class GameEnvironment {
 	}
 	public String getEndTime() {
 		long endTimeLong = System.currentTimeMillis() - lStartTime;
-		Integer endTimeInt = (int) (long) endTimeLong;
 		String displayTime = String.format("%d min, %d sec", 
-				TimeUnit.MILLISECONDS.toMinutes(endTimeLong),
-				TimeUnit.MILLISECONDS.toSeconds(endTimeLong),
-				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTimeLong))
+				//TimeUnit.MILLISECONDS.toMinutes(endTimeLong),
+				//TimeUnit.MILLISECONDS.toSeconds(endTimeLong) -
+				//TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTimeLong))
+				(int) ((endTimeLong / (1000 * 60)) % 60),
+				(int) ((endTimeLong / 1000) % 60)
 				);
 		return displayTime;
 	}
@@ -80,8 +81,8 @@ public class GameEnvironment {
 		ArrayList<String> games5 = new ArrayList<String>();
 		ArrayList<String> games6 = new ArrayList<String>();
 		games1.add("paper scissors rock");
-		//games1.add("guess a number");
-		//games1.add("Dice game");
+		games1.add("guess a number");
+		games1.add("Dice game");
 		games2.add("guess a number");
 		games2.add("paper scissors rock");
 		games2.add("guess a number");
@@ -113,17 +114,12 @@ public class GameEnvironment {
 		gameEnvironment.makeVillains();
 		gameEnvironment.team = new Team(gameEnvironment);
 		gameEnvironment.gameWon();
-		//for (int i = 0; i < gameEnvironment.MAXNUMBERCITIES; i++) {
-			//gameEnvironment.cities.add(gameEnvironment.makeCity(gameEnvironment, gameEnvironment.team));
-		//}
-		
 		GameSetupGUI.NewScreen(gameEnvironment, gameEnvironment.team); //start the game already
-		
 	}
 
 	
 	public void moveToNewCity(Team teamInput) {
-		currentCityIndex++; // surely this should be iterated before instantiating city
+		currentCityIndex++; 
 		CityGUI cityGui = new CityGUI(teamInput, this);
 		currentCity = cityGui;
 		cityGui.NewScreen(teamInput, this);

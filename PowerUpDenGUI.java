@@ -31,8 +31,12 @@ public class PowerUpDenGUI {
 			}
 		});
 	}
-	
+	/**
+	 * 
+	 * @return 
+	 */
 	private String[] getListPowerUpNames() {
+
 		int numberPowerUps = team.getPowerUps().size();
 		String[] powerUpNames = new String[numberPowerUps];
 		for (int i = 0; i < numberPowerUps; i++) {
