@@ -2,6 +2,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameWonGUI {
 
@@ -42,10 +45,18 @@ public class GameWonGUI {
 		JLabel lblGameOver = new JLabel("Game Over");
 		lblGameOver.setBounds(266, 30, 113, 22);
 		gameWonFrame.getContentPane().add(lblGameOver);
+		
+		JButton closeAllButton = new JButton("I'm amazing, close all");
+		closeAllButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//gameEnvironment.closeAll();
+			}
+		});
+		closeAllButton.setBounds(452, 239, 216, 85);
+		gameWonFrame.getContentPane().add(closeAllButton);
 	}
 
 	public void makeVisible() {
 		this.gameWonFrame.setVisible(true);
 	}
-
 }

@@ -15,6 +15,8 @@ public class PowerUpDenGUI {
 	private Team team;
 	private GameEnvironment gameEnvironment;
 	private JComboBox powerUpSelectionBox;
+	private JLabel heroAlreadyHasPowerUpLabel;
+	private JLabel noPowerUpsLabel;
 
 	/**
 	 * Launch the application.
@@ -39,16 +41,35 @@ public class PowerUpDenGUI {
 	}
 	private void applyPowerUp(PowerUp powerUp, Hero hero) {
 		String powerUpName = powerUp.getName();
+		boolean usedPowerUp = false;
 		switch (powerUpName) {
-		case "Extra Roll":	hero.setHasDiceGamePowerUp(true);
+		case "Extra Roll":	if (!hero.getHasDiceGamePowerUp()) {
+								hero.setHasDiceGamePowerUp(true);
+								usedPowerUp = true;
+							} else {
+								heroAlreadyHasPowerUpLabel.setVisible(true);
+							}
 							break;
-		case "Extra Guess":	hero.setHasGuessNumberPowerUp(true);
+		case "Extra Guess":	if (!hero.getHasGuessNumberPowerUp()) {
+								hero.setHasGuessNumberPowerUp(true);
+								usedPowerUp = true;
+							} else {
+								heroAlreadyHasPowerUpLabel.setVisible(true);
+							}
 							break;
-		case "Clue for Paper Scissors Rock":	hero.setHasPaperScissorsRockPowerUp(true);
+		case "Clue for Paper Scissors Rock":	if (!hero.getHasPaperScissorsRockPowerUp()) {
+													hero.setHasPaperScissorsRockPowerUp(true);
+													usedPowerUp = true;
+												} else {
+													heroAlreadyHasPowerUpLabel.setVisible(true);
+												}
 												break;
 		}
-		team.removePowerUp(powerUp);
-		removePowerUpFromSelectionBox(powerUpName);
+		if (usedPowerUp) {
+			team.removePowerUp(powerUp);
+			removePowerUpFromSelectionBox(powerUpName);
+		}
+
 	}
 	private void removePowerUpFromSelectionBox(String powerUpName) {
 		powerUpSelectionBox.removeItem(powerUpName);
@@ -76,9 +97,20 @@ public class PowerUpDenGUI {
 		powerUpDenGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		powerUpDenGUIFrame.getContentPane().setLayout(null);
 		
+		heroAlreadyHasPowerUpLabel = new JLabel("Hero already has this power up");
+		heroAlreadyHasPowerUpLabel.setBounds(462, 212, 238, 25);
+		powerUpDenGUIFrame.getContentPane().add(heroAlreadyHasPowerUpLabel);
+		heroAlreadyHasPowerUpLabel.setVisible(false);
+		
+		JLabel noPowerUpsLabel = new JLabel("You have no power ups!");
+		noPowerUpsLabel.setBounds(269, 341, 193, 15);
+		powerUpDenGUIFrame.getContentPane().add(noPowerUpsLabel);
+		noPowerUpsLabel.setVisible(false);
+		
 		powerUpSelectionBox = new JComboBox(getListPowerUpNames());
 		powerUpSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				heroAlreadyHasPowerUpLabel.setVisible(false);
 				powerUpIndex = powerUpSelectionBox.getSelectedIndex();
 			}
 		});
@@ -96,6 +128,7 @@ public class PowerUpDenGUI {
 		JComboBox heroSelectionBox = new JComboBox(team.getHeroNames());
 		heroSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				heroAlreadyHasPowerUpLabel.setVisible(false);
 				heroIndex = heroSelectionBox.getSelectedIndex();
 			}
 		});
@@ -116,20 +149,19 @@ public class PowerUpDenGUI {
 		applyPowerUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (team.getPowerUps().size() == 0) {
-					System.out.println("You have no Power Ups!");
+					noPowerUpsLabel.setVisible(true);
 				} else {
-					
-					System.out.println(team.getPowerUps());
-					System.out.println(powerUpIndex);
 					applyPowerUp(team.getPowerUps().get(powerUpIndex), team.getHeroes().get(heroIndex));
 					
-					
 				}
-				
 			}
 		});
 		applyPowerUpButton.setBounds(283, 282, 117, 25);
 		powerUpDenGUIFrame.getContentPane().add(applyPowerUpButton);
+		
+
+		
+
 	}
 	
 }

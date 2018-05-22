@@ -98,7 +98,7 @@ public class GameEnvironment {
 	
 	public Villain getVillain(int index) {
 		if (finalCity()) {
-			return villains.get(MAXNUMBERCITIES);
+			return villains.get(MAXNUMBERCITIES-1);
 		} else {
 			return villains.get(index);
 		}	
@@ -111,15 +111,20 @@ public class GameEnvironment {
 		GameEnvironment gameEnvironment = new GameEnvironment();
 		gameEnvironment.makeVillains();
 		gameEnvironment.team = new Team(gameEnvironment);
-		gameEnvironment.gameWon();
+		
 		GameSetupGUI gameSetupGui = new GameSetupGUI(gameEnvironment, gameEnvironment.team);
 		gameSetupGui.makeVisible();
 	}
 	public void moveToNewCity(Team teamInput) {
-		currentCityIndex++; 
-		CityGUI cityGui = new CityGUI(teamInput, this);
-		cityGui.makeWindowVisible();
-		currentCity = cityGui;
+		if (finalCity()) {
+			this.gameWon();
+		} else {
+			currentCityIndex++; 
+			CityGUI cityGui = new CityGUI(teamInput, this);
+			cityGui.makeWindowVisible();
+			currentCity = cityGui;
+		}
+		
 	}
 	public void openShopScreen(Team team, CityGUI cityGui) {
 		ShopGUI shopGui = new ShopGUI(team, this, cityGui);
@@ -191,6 +196,12 @@ public class GameEnvironment {
 		} else {
 			return false;
 		}
+	}
+	public boolean herosLeft() {
+		if (team.getHeroes().size() == 0)
+			return false;
+		else
+			return true;
 	}
 
 

@@ -19,8 +19,8 @@ public class CityGUI {
 	private JLabel youHaveAMapLabel = new JLabel("You have a map available to use!");
 	private JLabel robLabel = new JLabel("Oh no! You've been robbed. You lost a:");
 	private JLabel giftLabel = new JLabel("Congratulations! You've been gifted a:");
-	private JLabel randomRobbedItem = new JLabel("");
-	private JLabel randomGiftedItem = new JLabel("");
+	private JLabel randomRobbedItemLabel = new JLabel("");
+	private JLabel randomGiftedItemLabel = new JLabel("");
 	private Team team;
 	private GameEnvironment gameEnvironment;
 	private CityGUI cityGuiWindow;
@@ -105,13 +105,13 @@ public class CityGUI {
 			HealingItem randomHealingItem = healingItems.get(randomIndex);
 			team.addHealingItem(randomHealingItem);
 			
-			randomGiftedItem.setText(randomHealingItem.getName());
+			randomGiftedItemLabel.setText(randomHealingItem.getName());
 		} else {
 			List<PowerUp> powerUps = gameEnvironment.getPowerUpsList();
 			PowerUp randomPowerUp = powerUps.get(randomIndex);
 			team.addPowerUp(randomPowerUp);
 			giftLabel.setVisible(true);
-			randomGiftedItem.setText(randomPowerUp.getName());
+			randomGiftedItemLabel.setText(randomPowerUp.getName());
 		}
 	}
 	private void robRandomItem() {
@@ -126,7 +126,7 @@ public class CityGUI {
 				int randomIndex = random.nextInt(numberHealingItems);
 				HealingItem robbedHealingItem = team.getHealingItems().get(randomIndex);
 				team.removeHealingItem(robbedHealingItem);
-				randomRobbedItem.setText(robbedHealingItem.getName());
+				randomRobbedItemLabel.setText(robbedHealingItem.getName());
 			}
 		} else {
 			int numberPowerUps = team.getPowerUps().size();
@@ -137,7 +137,7 @@ public class CityGUI {
 				robLabel.setVisible(true);
 				PowerUp robbedPowerUp = team.getPowerUps().get(randomIndex);
 				team.removePowerUp(robbedPowerUp);
-				randomRobbedItem.setText(robbedPowerUp.getName());
+				randomRobbedItemLabel.setText(robbedPowerUp.getName());
 			}
 		}
 	}
@@ -266,11 +266,11 @@ public class CityGUI {
 		close.setBounds(0, 309, 117, 25);
 		CityScreen.getContentPane().add(close);
 		
-		randomRobbedItem.setBounds(162, 465, 134, 15);
-		CityScreen.getContentPane().add(randomRobbedItem);
+		randomRobbedItemLabel.setBounds(162, 465, 134, 15);
+		CityScreen.getContentPane().add(randomRobbedItemLabel);
 		
-		randomGiftedItem.setBounds(541, 465, 134, 15);
-		CityScreen.getContentPane().add(randomGiftedItem);
+		randomGiftedItemLabel.setBounds(541, 465, 134, 15);
+		CityScreen.getContentPane().add(randomGiftedItemLabel);
 		
 		finalCityLabel.setBounds(30, 58, 189, 33);
 		CityScreen.getContentPane().add(finalCityLabel);

@@ -118,17 +118,18 @@ public class DiceGameGUI {
 							gameOver = true;
 							buttonRollDice.setVisible(false);
 							resultLabel.setText("You win the game!");
-							villain.loseLife();
 							goBackButton.setVisible(true);
+							villain.loseLife();
 							if (villain.getLives() == 0) {
 								JOptionPane.showMessageDialog(diceGameFrame, "The villain is now dead!");
-								battleWindow.villainDies();
-								diceGameFrame.dispose();
+								if (gameEnvironment.finalCity()) {
+									gameEnvironment.gameWon();
+									diceGameFrame.dispose();
+								} else {
+									battleWindow.villainDies();
+									diceGameFrame.dispose();
+								}
 							}
-							if (gameEnvironment.finalCity()) {
-								gameEnvironment.gameWon();
-							}
-							
 						}
 						heroWonLabel.setText(Integer.toString(heroWon));
 					} else if (rollVillain > rollHero) {
@@ -138,10 +139,18 @@ public class DiceGameGUI {
 							gameOver = true;
 							buttonRollDice.setVisible(false);
 							resultLabel.setText("You lose the game!");
-							heroPlaying.doDamage(villainsDamage, team, battleWindow);
 							goBackButton.setVisible(true);
-							if (heroPlaying.getHealth() <= 0)
-								JOptionPane.showMessageDialog(diceGameFrame, "Your hero has died!");
+							heroPlaying.doDamage(villainsDamage, team, battleWindow);
+							if (heroPlaying.getHealth() <= 0) {
+								if (gameEnvironment.herosLeft()) {
+									JOptionPane.showMessageDialog(diceGameFrame, "Your hero has died!");
+									diceGameFrame.dispose();
+									gameEnvironment.openBattleWindow(team, cityGui);
+								} else {
+									diceGameFrame.dispose();
+									gameEnvironment.gameLost();
+								}
+							}
 						}
 						villainWonLabel.setText(Integer.toString(villainWon));
 					} else {

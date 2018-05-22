@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 
 public class GuessNumberGUI {
 
-	private JFrame frame;
 	private JFrame guessGameFrame;
 	private int villainsNumber;
 	private int guessAvailable = 2;
@@ -24,7 +23,6 @@ public class GuessNumberGUI {
 	private CityGUI cityGui;
 	private GameEnvironment gameEnvironment;
 
-	
 	public void makeVisible() {
 		this.guessGameFrame.setVisible(true);
 	}
@@ -48,15 +46,12 @@ public class GuessNumberGUI {
 	 * Create the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("Guess the Number Battle");
 		guessGameFrame = new JFrame();
+		guessGameFrame.setTitle("Guess the Number Battle");
 		guessGameFrame.setBounds(100, 100, 1000, 700);
 		guessGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		guessGameFrame.getContentPane().setLayout(null);
-		
-		
-		
+
 		Random random = new Random();
 		villainsNumber = random.nextInt(10);
 		villainsNumber++; //Due to it being 0 - 9 so we want 1 - 10
@@ -103,12 +98,15 @@ public class GuessNumberGUI {
 						highOrLow.setText("Wow you got it on the first try!");
 						villain.loseLife();
 						if (villain.getLives() == 0) {
-							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+							JOptionPane.showMessageDialog(guessGameFrame, "The villain is now dead!");
+							if (gameEnvironment.finalCity()) {
+								gameEnvironment.gameWon();
+								guessGameFrame.dispose();
+							} else {
+								battleWindow.villainDies();
+								guessGameFrame.dispose();
+							}
 						}
-						if (gameEnvironment.finalCity()) {
-							gameEnvironment.gameWon();
-						}
-						battleWindow.villainDies();
 						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
 					} else if (guessSlider.getValue() > villainsNumber) {
@@ -122,15 +120,17 @@ public class GuessNumberGUI {
 					
 				} else if (guessNumber < guessAvailable) { 
 					if (guessSlider.getValue() == villainsNumber) {
-						highOrLow.setText("Great guess! You got it");
+						highOrLow.setText("Great guess! You got it with guesses to spare");
 						villain.loseLife();
 						if (villain.getLives() == 0) {
-							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+							JOptionPane.showMessageDialog(guessGameFrame, "The villain is now dead!");
 							if (gameEnvironment.finalCity()) {
 								gameEnvironment.gameWon();
+								guessGameFrame.dispose();
+							} else {
+								battleWindow.villainDies();
+								guessGameFrame.dispose();
 							}
-							battleWindow.villainDies();
-							guessGameFrame.dispose();
 						}
 						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
@@ -146,26 +146,34 @@ public class GuessNumberGUI {
 						
 				} else if (guessNumber == guessAvailable) { // last guess
 					if (guessSlider.getValue() == villainsNumber) {
-						highOrLow.setText("Great guess! You got it");
+						highOrLow.setText("Great guess! You got it on your last guess");
 						villain.loseLife();
 						if (villain.getLives() == 0) {
-							JOptionPane.showMessageDialog(frame, "The villain is now dead!");
+							JOptionPane.showMessageDialog(guessGameFrame, "The villain is now dead!");
 							if (gameEnvironment.finalCity()) {
 								gameEnvironment.gameWon();
+								guessGameFrame.dispose();
+							} else {
+								battleWindow.villainDies();
+								guessGameFrame.dispose();
 							}
-							guessGameFrame.dispose();
 						}
-						battleWindow.villainDies();
 						goBackButton.setVisible(true);
 						btnPick.setVisible(false);
 					} else {
 						textSet = "Sorry you lose, the number was: " + villainsNumber;
 						highOrLow.setText(textSet);
-						heroPlaying.doDamage(villainsDamage, team, battleWindow);
-						if (heroPlaying.getHealth() <= 0) {
-							JOptionPane.showMessageDialog(frame, "Your hero has died!");
-						}
 						goBackButton.setVisible(true);
+						heroPlaying.doDamage(villainsDamage, team, battleWindow);
+						if (heroPlaying.getHealth() <= 0)
+							if (gameEnvironment.herosLeft()) {
+								JOptionPane.showMessageDialog(guessGameFrame, "Your hero has died!");
+								guessGameFrame.dispose();
+								gameEnvironment.openBattleWindow(team, cityGui);
+							} else {
+								guessGameFrame.dispose();
+								gameEnvironment.gameLost();
+							}
 						btnPick.setVisible(false);
 					}
 				}

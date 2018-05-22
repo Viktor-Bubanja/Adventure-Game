@@ -19,29 +19,12 @@ public class GameSetupGUI {
 	private JFrame setupFrame;
 	private JTextField txtTeamName;
 	private JTextField inputHeroName;
-	private String heroType = "Gambler";
+	private String heroTypeCurrentlySelected = "Gambler";
 	private int inputNumHeroes;
-	private GameEnvironment gameEnvironment = new GameEnvironment();
+	private GameEnvironment gameEnvironment;
 	private Team team;
 	
-	
-	/**
-	 * Launch the application.
-	 */
-	/**
-	public static void NewScreen(GameEnvironment gameEnvironmentInput, Team teamInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameSetupGUI window = new GameSetupGUI(gameEnvironmentInput, teamInput);
-					window.setupFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
+
 	public void makeVisible() {
 		this.setupFrame.setVisible(true);
 	}
@@ -149,28 +132,28 @@ public class GameSetupGUI {
 		JButton btnPreviousHero = new JButton("Previous Hero");
 		btnPreviousHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (heroType == "Gambler") {
-					heroType = "Lucky";
+				if (heroTypeCurrentlySelected == "Gambler") {
+					heroTypeCurrentlySelected = "Lucky";
 					picGambler.setVisible(false);
 					picLucky.setVisible(true);
-				} else if (heroType == "Medic") {
-					heroType = "Gambler";
+				} else if (heroTypeCurrentlySelected == "Medic") {
+					heroTypeCurrentlySelected = "Gambler";
 					picMedic.setVisible(false);
 					picGambler.setVisible(true);
-				} else if (heroType == "Diplomat") {
-					heroType = "Medic";
+				} else if (heroTypeCurrentlySelected == "Diplomat") {
+					heroTypeCurrentlySelected = "Medic";
 					picDiplomat.setVisible(false);
 					picMedic.setVisible(true);
-				} else if (heroType == "Tank") {
-					heroType = "Diplomat";
+				} else if (heroTypeCurrentlySelected == "Tank") {
+					heroTypeCurrentlySelected = "Diplomat";
 					picTank.setVisible(false);
 					picDiplomat.setVisible(true);
-				} else if (heroType == "Explorer") {
-					heroType = "Tank";
+				} else if (heroTypeCurrentlySelected == "Explorer") {
+					heroTypeCurrentlySelected = "Tank";
 					picExplorer.setVisible(false);
 					picTank.setVisible(true);
-				} else if (heroType == "Lucky") {
-					heroType = "Explorer";
+				} else if (heroTypeCurrentlySelected == "Lucky") {
+					heroTypeCurrentlySelected = "Explorer";
 					picLucky.setVisible(false);
 					picExplorer.setVisible(true);
 				}
@@ -195,9 +178,9 @@ public class GameSetupGUI {
 		btnAddHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//if inputHeroName.getText().length() 
-				team.addHero(new Hero(inputHeroName.getText(), heroType));
+				team.addHero(new Hero(inputHeroName.getText(), heroTypeCurrentlySelected));
 				inputNumHeroes++; 
-				addHeroTypeToTeam(heroType);
+				addHeroTypeToTeam(heroTypeCurrentlySelected);
 				lblHeroes.setText(team.getHeroes().toString());
 				//heroes.add();
 				inputHeroName.setText("");
@@ -217,28 +200,28 @@ public class GameSetupGUI {
 		JButton btnNextHero = new JButton("Next Hero");
 		btnNextHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (heroType == "Gambler") {
-					heroType = "Medic";
+				if (heroTypeCurrentlySelected == "Gambler") {
+					heroTypeCurrentlySelected = "Medic";
 					picGambler.setVisible(false);
 					picMedic.setVisible(true);
-				} else if (heroType == "Medic") {
-					heroType = "Diplomat";
+				} else if (heroTypeCurrentlySelected == "Medic") {
+					heroTypeCurrentlySelected = "Diplomat";
 					picMedic.setVisible(false);
 					picDiplomat.setVisible(true);
-				} else if (heroType == "Diplomat") {
-					heroType = "Tank";
+				} else if (heroTypeCurrentlySelected == "Diplomat") {
+					heroTypeCurrentlySelected = "Tank";
 					picDiplomat.setVisible(false);
 					picTank.setVisible(true);
-				} else if (heroType == "Tank") {
-					heroType = "Explorer";
+				} else if (heroTypeCurrentlySelected == "Tank") {
+					heroTypeCurrentlySelected = "Explorer";
 					picTank.setVisible(false);
 					picExplorer.setVisible(true);
-				} else if (heroType == "Explorer") {
-					heroType = "Lucky";
+				} else if (heroTypeCurrentlySelected == "Explorer") {
+					heroTypeCurrentlySelected = "Lucky";
 					picExplorer.setVisible(false);
 					picLucky.setVisible(true);
-				} else if (heroType == "Lucky") {
-					heroType = "Gambler";
+				} else if (heroTypeCurrentlySelected == "Lucky") {
+					heroTypeCurrentlySelected = "Gambler";
 					picLucky.setVisible(false);
 					picGambler.setVisible(true);
 				}
@@ -261,7 +244,8 @@ public class GameSetupGUI {
 				}
 				gameEnvironment.startTimer();
 				gameEnvironment.setTeamName(txtTeamName.getText());
-				gameEnvironment.setNumberCities(numCities.getValue());
+				//gameEnvironment.setNumberCities(numCities.getValue());
+				gameEnvironment.setNumberCities(1);
 				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
 				gameEnvironment.moveToNewCity(team);
 				setupFrame.dispose();

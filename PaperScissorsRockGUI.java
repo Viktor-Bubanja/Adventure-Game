@@ -189,7 +189,6 @@ public class PaperScissorsRockGUI {
 			secondRandomNumber = random.nextInt(3);
 		}
 		String clue = "Clue: The Villain is going to choose either " + HandSign.parseType(randomNumber) + " or " + HandSign.parseType(secondRandomNumber);
-		System.out.println(clue);
 		clueLabel.setText(clue);
 	}
 	
@@ -204,11 +203,13 @@ public class PaperScissorsRockGUI {
 			villain.loseLife();
 			if (villain.getLives() == 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "The villain is now dead!");
-				battleWindow.villainDies();
 				if (gameEnvironment.finalCity()) {
 					gameEnvironment.gameWon();
+					paperScissorsRockFrame.dispose();
+				} else {
+					battleWindow.villainDies();
+					paperScissorsRockFrame.dispose();
 				}
-				paperScissorsRockFrame.dispose();
 			} else {
 				//gameEnvironment.openBattleWindow(team, cityGui);
 			}
@@ -219,9 +220,15 @@ public class PaperScissorsRockGUI {
 			endGameLabels("You lose!");
 			heroPlaying.doDamage(villainsDamage, team, battleWindow);
 			if (heroPlaying.getHealth() <= 0) {
-				JOptionPane.showMessageDialog(paperScissorsRockFrame, "Your hero has died!");
-				//paperScissorsRockFrame.dispose();
-				//gameEnvironment.openBattleWindow(team, cityGui);
+				if (gameEnvironment.herosLeft()) {
+					JOptionPane.showMessageDialog(paperScissorsRockFrame, "Your hero has died!");
+					paperScissorsRockFrame.dispose();
+					gameEnvironment.openBattleWindow(team, cityGui);
+				} else {
+					paperScissorsRockFrame.dispose();
+					gameEnvironment.gameLost();
+				}
+				
 			}
 		}
 		winOrLoseRoundLabel.setText(returnRoundLabelText(roundResult));
@@ -244,4 +251,3 @@ public class PaperScissorsRockGUI {
 		goBackButton.setVisible(true);
 	}
 }
-
