@@ -83,7 +83,7 @@ public class GameEnvironment {
 		Villain villain3 = new Villain("you a bitch", games1, "villain three", 70);
 		Villain villain4 = new Villain("ohh whats that", games1, "villain four", 70);
 		Villain villain5 = new Villain("im da bomd you not", games1, "villain five", 70);
-		Villain superVillain = new Villain("you a big fat nob", games1, "Super Villain", 70);
+		Villain superVillain = new Villain("you a big fat nob", games1, "Super Villain", 150);
 		villains.add(villain1);
 		villains.add(villain2);
 		villains.add(villain3);

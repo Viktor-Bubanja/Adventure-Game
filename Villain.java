@@ -6,7 +6,6 @@ public class Villain {
 	private String name;
 	private int damage;
 	private int lives = 3;
-	//Might need boolean for supervillain
 	
 	public String getTaunt() {
 		return taunt;
@@ -33,5 +32,8 @@ public class Villain {
 		games = inputGames;
 		name = inputName;
 		damage = inputDamage;
+		if (name == "Super Villain") {
+			lives = 5;
+		}
 	}
 }

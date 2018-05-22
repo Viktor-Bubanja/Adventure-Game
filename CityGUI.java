@@ -26,21 +26,7 @@ public class CityGUI {
 	private CityGUI cityGuiWindow;
 	private JLabel finalCityLabel = new JLabel("Final City!");
 	
-	/**
-	 * Launch the application.
-	 */
-	/* public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CityGUI cityGuiWindow = new CityGUI(teamInput, gameEnvironmentInput);
-					cityGuiWindow.CityScreen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	} */
+
 	/**
 	 * Create the application.
 	 */
@@ -94,7 +80,6 @@ public class CityGUI {
 	
 	
 	private void giftRandomItem() {
-
 		Random random = new Random();
 		int randomIndex = random.nextInt(3);
 		boolean giftedRandomHealingItem = random.nextBoolean();
@@ -119,8 +104,6 @@ public class CityGUI {
 		boolean robbedRandomHealingItem = random.nextBoolean();
 		if (robbedRandomHealingItem) {
 			int numberHealingItems = team.getHealingItems().size();
-			System.out.println("number healing items ");
-			System.out.println(Integer.toString(numberHealingItems));
 			if (numberHealingItems > 0) {
 				robLabel.setVisible(true);
 				int randomIndex = random.nextInt(numberHealingItems);
@@ -130,8 +113,6 @@ public class CityGUI {
 			}
 		} else {
 			int numberPowerUps = team.getPowerUps().size();
-			System.out.println("number power ups");
-			System.out.println(Integer.toString(numberPowerUps));
 			if (numberPowerUps > 0) {
 				int randomIndex = random.nextInt(numberPowerUps);
 				robLabel.setVisible(true);

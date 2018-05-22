@@ -53,8 +53,9 @@ public class Hero {
 		hasGuessNumberPowerUp = true;
 	}
 
-	public void heal(int amountToHeal) {
-		currentHealth += amountToHeal;
+	public void heal(double healingInput) {
+		int toHeal = (int) (healingInput * maxHealth);
+		currentHealth += toHeal;
 		if (currentHealth > maxHealth) {
 			currentHealth = maxHealth;
 		}
@@ -67,7 +68,7 @@ public class Hero {
 	}
 	public String toString() {
 		String toReturn;
-		toReturn = "Heroes name: " + name + ". \n Herotype: " + type + ". \nHe has " + Integer.toString(currentHealth) + " health.";
+		toReturn = "Heroes name: " + name + ". Herotype: " + type + ". He has " + Integer.toString(currentHealth) + " health.\n";
 		return toReturn;
 	}
 	

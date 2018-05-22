@@ -3,11 +3,11 @@ public class HealingItem {
 
 	private int applicationTime;
 	private int cost;
-	private int healingAmount;
+	private double healingAmount;
 	private String name;
 	
 	
-	public HealingItem (int costInput, int healingAmountInput, int applicationTimeInput, String nameInput) {
+	public HealingItem (int costInput, double healingAmountInput, int applicationTimeInput, String nameInput) {
 		cost = costInput;
 		healingAmount = healingAmountInput;
 		applicationTime = applicationTimeInput;
@@ -22,7 +22,7 @@ public class HealingItem {
 	public int getApplicationTime() {
 		return applicationTime;
 	}
-	public int getHealingAmount() {
+	public double getHealingAmount() {
 		return healingAmount;
 	}
 	public String getName() {

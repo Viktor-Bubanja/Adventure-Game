@@ -4,7 +4,7 @@ public class Team {
 	
 	public String teamName;
 	private int numberHeroes;	
-	private int money = 300; //Some random amount later
+	private int money = 100; //Some random amount later
 	private int maps = 0;
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
@@ -86,8 +86,6 @@ public class Team {
 	}
 	public void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
-		System.out.println("power ups: ");
-		System.out.println(powerUps);
 	}
 			
 	public int getNumberHeroes() {
@@ -145,12 +143,16 @@ public class Team {
 		heroes.remove(hero);
 		switch (hero.getType()) {
 		case "Medic":		setTeamHasMedic(false);
+							for (Hero heroItem: this.getHeroes()) {
+								heroItem.decreaseMaxHealth(75);
+							}
 							break;
 		case "Explorer":	setTeamHasExplorer(false);
 							break;
 		case "Lucky":		setTeamHasLucky(false);
 							break;
 		case "Diplomat":	setTeamHasDiplomat(false);
+		
 							break;
 		
 		}
