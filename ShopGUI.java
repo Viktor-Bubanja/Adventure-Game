@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class ShopGUI {
-	private JFrame ShopGUIFrame;
+	private JFrame shopGUIFrame;
 	private JLabel notEnoughMoneyLabel = new JLabel("You don't have enough money!");
 	private JLabel powerUpsLabel = new JLabel("");
 	private JLabel healingItemsLabel = new JLabel("");
@@ -46,7 +46,7 @@ public class ShopGUI {
 	}
 	
 	public void makeVisible() {
-		this.ShopGUIFrame.setVisible(true);
+		this.shopGUIFrame.setVisible(true);
 	}
 	
 	public List<PowerUp> getPowerUpList() {
@@ -154,10 +154,10 @@ public class ShopGUI {
 	 */
 	private void initialize() {
 		
-		ShopGUIFrame = new JFrame();
-		ShopGUIFrame.setBounds(100, 100, 1000, 700);
-		ShopGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ShopGUIFrame.getContentPane().setLayout(null);
+		shopGUIFrame = new JFrame();
+		shopGUIFrame.setBounds(100, 100, 1000, 700);
+		shopGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		shopGUIFrame.getContentPane().setLayout(null);
 		if (team.teamHasDiplomat()) {
 			smallPotion.reduceCost(5);
 			quickPotion.reduceCost(10);
@@ -168,52 +168,52 @@ public class ShopGUI {
 		}
 	
 		healingItemsLabel.setBounds(249, 407, 353, 15);
-		ShopGUIFrame.getContentPane().add(healingItemsLabel);
+		shopGUIFrame.getContentPane().add(healingItemsLabel);
 			
 		JLabel lblSmallPotion = new JLabel("Small Potion");
 		lblSmallPotion.setBounds(47, 238, 122, 15);
-		ShopGUIFrame.getContentPane().add(lblSmallPotion);
+		shopGUIFrame.getContentPane().add(lblSmallPotion);
 		
 		JLabel lblQuickPotion = new JLabel("Quick Potion");
 		lblQuickPotion.setBounds(210, 238, 122, 15);
-		ShopGUIFrame.getContentPane().add(lblQuickPotion);
+		shopGUIFrame.getContentPane().add(lblQuickPotion);
 		
 		JLabel lblBigPotion = new JLabel("Big Potion");
 		lblBigPotion.setBounds(380, 238, 122, 15);
-		ShopGUIFrame.getContentPane().add(lblBigPotion);
+		shopGUIFrame.getContentPane().add(lblBigPotion);
 		
 		JLabel lblMap = new JLabel("Map");
 		lblMap.setBounds(580, 238, 122, 15);
-		ShopGUIFrame.getContentPane().add(lblMap);
+		shopGUIFrame.getContentPane().add(lblMap);
 		
 		JLabel smallPotionCostLabel = new JLabel("$" + Integer.toString(smallPotion.getCost()));
 		smallPotionCostLabel.setBounds(99, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(smallPotionCostLabel);
+		shopGUIFrame.getContentPane().add(smallPotionCostLabel);
 		
 		JLabel quickPotionCostLabel = new JLabel("$" + Integer.toString(quickPotion.getCost()));
 		quickPotionCostLabel.setBounds(243, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(quickPotionCostLabel);
+		shopGUIFrame.getContentPane().add(quickPotionCostLabel);
 		
 		JLabel bigPotionCostLabel = new JLabel("$" + Integer.toString(bigPotion.getCost()));
 		bigPotionCostLabel.setBounds(403, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(bigPotionCostLabel);
+		shopGUIFrame.getContentPane().add(bigPotionCostLabel);
 		
 		JLabel mapCostLabel = new JLabel("$" + Integer.toString(map.getCost()));
 		mapCostLabel.setBounds(580, 280, 70, 15);
-		ShopGUIFrame.getContentPane().add(mapCostLabel);
+		shopGUIFrame.getContentPane().add(mapCostLabel);
 		
 		JLabel moneyLeftLabel = new JLabel("Money left: " + team.getMoney());
 		moneyLeftLabel.setBounds(754, 434, 172, 15);
-		ShopGUIFrame.getContentPane().add(moneyLeftLabel);
+		shopGUIFrame.getContentPane().add(moneyLeftLabel);
 		
 		JLabel lblShop = new JLabel("Shop");
 		lblShop.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblShop.setBounds(47, 12, 117, 36);
-		ShopGUIFrame.getContentPane().add(lblShop);
+		shopGUIFrame.getContentPane().add(lblShop);
 		
 		
 		notEnoughMoneyLabel.setBounds(274, 515, 310, 25);
-		ShopGUIFrame.getContentPane().add(notEnoughMoneyLabel);
+		shopGUIFrame.getContentPane().add(notEnoughMoneyLabel);
 		notEnoughMoneyLabel.setVisible(false);
 		
 		JButton buySmallPotionButton = new JButton("Buy");
@@ -224,7 +224,7 @@ public class ShopGUI {
 			}
 		});
 		buySmallPotionButton.setBounds(52, 307, 117, 25);
-		ShopGUIFrame.getContentPane().add(buySmallPotionButton);
+		shopGUIFrame.getContentPane().add(buySmallPotionButton);
 		
 		JButton buyQuickPotionButton = new JButton("Buy");
 		buyQuickPotionButton.addActionListener(new ActionListener() {
@@ -234,7 +234,7 @@ public class ShopGUI {
 			}
 		});
 		buyQuickPotionButton.setBounds(215, 307, 117, 25);
-		ShopGUIFrame.getContentPane().add(buyQuickPotionButton);
+		shopGUIFrame.getContentPane().add(buyQuickPotionButton);
 		
 		JButton buyBigPotionButton = new JButton("Buy");
 		buyBigPotionButton.addActionListener(new ActionListener() {
@@ -244,7 +244,7 @@ public class ShopGUI {
 			}
 		});
 		buyBigPotionButton.setBounds(356, 307, 117, 25);
-		ShopGUIFrame.getContentPane().add(buyBigPotionButton);
+		shopGUIFrame.getContentPane().add(buyBigPotionButton);
 		
 		JButton buyMapButton = new JButton("Buy");
 		buyMapButton.addActionListener(new ActionListener() {
@@ -254,17 +254,17 @@ public class ShopGUI {
 			}
 		});
 		buyMapButton.setBounds(544, 317, 117, 25);
-		ShopGUIFrame.getContentPane().add(buyMapButton);
+		shopGUIFrame.getContentPane().add(buyMapButton);
 		
 		JButton btnBackToHome = new JButton("Back to Home Base!");
 		btnBackToHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cityGui.makeCityVisible();
-				ShopGUIFrame.dispose();
+				shopGUIFrame.dispose();
 			}
 		});
 		btnBackToHome.setBounds(597, 531, 189, 25);
-		ShopGUIFrame.getContentPane().add(btnBackToHome);
+		shopGUIFrame.getContentPane().add(btnBackToHome);
 		
 		JButton buyExtraRollButton = new JButton("Buy");
 		buyExtraRollButton.addActionListener(new ActionListener() {
@@ -291,65 +291,65 @@ public class ShopGUI {
 			}
 		});
 		buyPaperScissorsRockClueButton.setBounds(432, 140, 101, 25);
-		ShopGUIFrame.getContentPane().add(buyPaperScissorsRockClueButton);
+		shopGUIFrame.getContentPane().add(buyPaperScissorsRockClueButton);
 		buyExtraGuessButton.setBounds(221, 140, 101, 25);
-		ShopGUIFrame.getContentPane().add(buyExtraGuessButton);
+		shopGUIFrame.getContentPane().add(buyExtraGuessButton);
 		
 		JLabel lblNewLabel = new JLabel("Extra Roll");
 		lblNewLabel.setBounds(47, 71, 101, 25);
-		ShopGUIFrame.getContentPane().add(lblNewLabel);
+		shopGUIFrame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblExtraGuess = new JLabel("Extra Guess");
 		lblExtraGuess.setBounds(210, 73, 108, 20);
-		ShopGUIFrame.getContentPane().add(lblExtraGuess);
+		shopGUIFrame.getContentPane().add(lblExtraGuess);
 		
 		JLabel lblClueForPaper = new JLabel("Clue for Paper Scissors Rock");
 		lblClueForPaper.setBounds(380, 76, 241, 15);
-		ShopGUIFrame.getContentPane().add(lblClueForPaper);
+		shopGUIFrame.getContentPane().add(lblClueForPaper);
 		
 
 		buyExtraRollButton.setBounds(47, 140, 101, 25);
-		ShopGUIFrame.getContentPane().add(buyExtraRollButton);
+		shopGUIFrame.getContentPane().add(buyExtraRollButton);
 		
 		JLabel lblInventory = new JLabel("Inventory:");
 		lblInventory.setBounds(59, 370, 110, 15);
-		ShopGUIFrame.getContentPane().add(lblInventory);
+		shopGUIFrame.getContentPane().add(lblInventory);
 		
 		JLabel lblHealingItems = new JLabel("Healing Items:");
 		lblHealingItems.setBounds(118, 397, 122, 25);
-		ShopGUIFrame.getContentPane().add(lblHealingItems);
+		shopGUIFrame.getContentPane().add(lblHealingItems);
 		
 		JLabel lblPowerUps = new JLabel("Power Ups:");
 		lblPowerUps.setBounds(118, 444, 108, 15);
-		ShopGUIFrame.getContentPane().add(lblPowerUps);
+		shopGUIFrame.getContentPane().add(lblPowerUps);
 		
 		
 		powerUpsLabel.setBounds(259, 444, 413, 15);
-		ShopGUIFrame.getContentPane().add(powerUpsLabel);
+		shopGUIFrame.getContentPane().add(powerUpsLabel);
 		
 		
 		tooManyMapsLabel.setBounds(503, 365, 344, 25);
-		ShopGUIFrame.getContentPane().add(tooManyMapsLabel);
+		shopGUIFrame.getContentPane().add(tooManyMapsLabel);
 		
 		JLabel extraRollCostLabel = new JLabel("$" + Integer.toString(extraRoll.getCost()));
 		extraRollCostLabel.setBounds(52, 108, 70, 15);
-		ShopGUIFrame.getContentPane().add(extraRollCostLabel);
+		shopGUIFrame.getContentPane().add(extraRollCostLabel);
 		
 		JLabel extraGuessCostLabel = new JLabel("$" + Integer.toString(extraGuess.getCost()));
 		extraGuessCostLabel.setBounds(243, 113, 70, 15);
-		ShopGUIFrame.getContentPane().add(extraGuessCostLabel);
+		shopGUIFrame.getContentPane().add(extraGuessCostLabel);
 		
 		JLabel clueCostLabel = new JLabel("$" + Integer.toString(paperScissorsRockClue.getCost()));
 		clueCostLabel.setBounds(450, 103, 70, 15);
-		ShopGUIFrame.getContentPane().add(clueCostLabel);
+		shopGUIFrame.getContentPane().add(clueCostLabel);
 		
 		JLabel lblMaps = new JLabel("Maps:");
 		lblMaps.setBounds(118, 471, 70, 15);
-		ShopGUIFrame.getContentPane().add(lblMaps);
+		shopGUIFrame.getContentPane().add(lblMaps);
 		
 		
 		numberMapsLabel.setBounds(243, 471, 70, 15);
-		ShopGUIFrame.getContentPane().add(numberMapsLabel);
+		shopGUIFrame.getContentPane().add(numberMapsLabel);
 		tooManyMapsLabel.setVisible(false);
 		
 		updatePowerUpsLabel();

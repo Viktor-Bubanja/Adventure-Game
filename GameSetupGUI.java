@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
 import javax.swing.ImageIcon;
 import java.awt.Rectangle;
+import java.awt.Color;
 
 public class GameSetupGUI {
 
@@ -23,6 +24,7 @@ public class GameSetupGUI {
 	private int inputNumHeroes;
 	private GameEnvironment gameEnvironment;
 	private Team team;
+	private JLabel teamLengthRequirementLabel;
 	
 
 	public void makeVisible() {
@@ -63,17 +65,22 @@ public class GameSetupGUI {
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		
-		JLabel lblWhatWouldYou = new JLabel("What would you like your super team to be called?");
+		JLabel lblWhatWouldYou = new JLabel("");
 		lblWhatWouldYou.setBounds(2, -7, 378, 59);
 		setupFrame.getContentPane().add(lblWhatWouldYou);
 		
 		txtTeamName = new JTextField();
 		txtTeamName.setBounds(22, 38, 306, 25);
-		txtTeamName.setText("Must be between 2 and 10 chars long!");
+		txtTeamName.setText(" ");
 		txtTeamName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTeamName.setToolTipText("Wowwo cools!");
 		setupFrame.getContentPane().add(txtTeamName);
 		txtTeamName.setColumns(10);
+		
+		JLabel addSomeHeroesLabel = new JLabel("Add some heroes");
+		addSomeHeroesLabel.setBounds(397, 575, 129, 16);
+		setupFrame.getContentPane().add(addSomeHeroesLabel);
+		addSomeHeroesLabel.setVisible(false);
 		
 		inputHeroName = new JTextField();
 		inputHeroName.setBounds(379, 454, 134, 31);
@@ -84,8 +91,13 @@ public class GameSetupGUI {
 		inputCheck.setBounds(423, 131, 181, 26);
 		setupFrame.getContentPane().add(inputCheck);
 		
+		teamLengthRequirementLabel = new JLabel("Make your team name between two and ten characters");
+		//teamLengthRequirementLabel.setForeground(Color.BLACK);
+		teamLengthRequirementLabel.setBounds(12, 103, 425, 16);
+		setupFrame.getContentPane().add(teamLengthRequirementLabel);
+		
 		JLabel lblHeroes = new JLabel("List of Heroes");
-		lblHeroes.setBounds(62, 12, 981, 260);
+		lblHeroes.setBounds(42, 75, 906, 134);
 		setupFrame.getContentPane().add(lblHeroes);
 		
 		JLabel picGambler = new JLabel("Pic Gambler");
@@ -120,13 +132,9 @@ public class GameSetupGUI {
 		JLabel lblNewLabel = new JLabel("How many cities to explore?");
 		lblNewLabel.setBounds(377, 6, 302, 31);
 		setupFrame.getContentPane().add(lblNewLabel);
-
-		JLabel sliderLabel = new JLabel("3             4              5             6");
-		sliderLabel.setBounds(383, 64, 296, 26);
-		setupFrame.getContentPane().add(sliderLabel);
 		
 		JLabel lblAddUpTo = new JLabel("");
-		lblAddUpTo.setBounds(19, 67, 401, 39);
+		lblAddUpTo.setBounds(22, 173, 401, 39);
 		setupFrame.getContentPane().add(lblAddUpTo);
 		
 		JButton btnPreviousHero = new JButton("Previous Hero");
@@ -164,13 +172,14 @@ public class GameSetupGUI {
 		
 		//Slider to choose number cities
 		JSlider numCities = new JSlider();
+		numCities.setPaintLabels(true);
 		numCities.setValue(3);
 		numCities.setMajorTickSpacing(1);
 		numCities.setSnapToTicks(true);
 		numCities.setPaintTicks(true);
 		numCities.setMinimum(3);
 		numCities.setMaximum(6);
-		numCities.setBounds(379, 46, 200, 16);
+		numCities.setBounds(379, 38, 200, 45);
 		setupFrame.getContentPane().add(numCities);
 		
 		/** This is the button to add a new hero **/
@@ -237,21 +246,39 @@ public class GameSetupGUI {
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean allRequirementsPassed = true;
 				if (team.teamHasMedic()) {
 					for (Hero hero: team.getHeroes()) {
 						hero.increaseMaxHealth(20);
 					}
 				}
-				gameEnvironment.startTimer();
-				gameEnvironment.setTeamName(txtTeamName.getText());
-				//gameEnvironment.setNumberCities(numCities.getValue());
-				gameEnvironment.setNumberCities(1);
-				//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
-				gameEnvironment.moveToNewCity(team);
-				setupFrame.dispose();
+				if (inputNumHeroes == 0) {
+					addSomeHeroesLabel.setVisible(true);
+					allRequirementsPassed = false;
+				}
+					
+				if (txtTeamName.getText().length() > 10 || txtTeamName.getText().length() < 2) {
+					teamLengthRequirementLabel.setForeground(Color.RED);
+					allRequirementsPassed = false;
+				}
+				
+				if (allRequirementsPassed) {
+					gameEnvironment.startTimer();
+					gameEnvironment.setTeamName(txtTeamName.getText());
+					//gameEnvironment.setNumberCities(numCities.getValue());
+					gameEnvironment.setNumberCities(1);
+					//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
+					gameEnvironment.moveToNewCity(team);
+					setupFrame.dispose();
+				}
+
 			}
 		});
 		btnDone.setBounds(841, 570, 117, 25);
 		setupFrame.getContentPane().add(btnDone);	
+		
+
+		
+
 	}
 }
