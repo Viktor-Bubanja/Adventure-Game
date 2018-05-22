@@ -43,20 +43,20 @@ public class PowerUpDenGUI {
 		String powerUpName = powerUp.getName();
 		boolean usedPowerUp = false;
 		switch (powerUpName) {
-		case "Extra Roll":	if (!hero.getHasDiceGamePowerUp()) {
-								hero.setHasDiceGamePowerUp(true);
-								usedPowerUp = true;
-							} else {
-								heroAlreadyHasPowerUpLabel.setVisible(true);
-							}
-							break;
-		case "Extra Guess":	if (!hero.getHasGuessNumberPowerUp()) {
-								hero.setHasGuessNumberPowerUp(true);
-								usedPowerUp = true;
-							} else {
-								heroAlreadyHasPowerUpLabel.setVisible(true);
-							}
-							break;
+		case "Extra Roll":						if (!hero.getHasDiceGamePowerUp()) {
+													hero.setHasDiceGamePowerUp(true);
+													usedPowerUp = true;
+												} else {
+													heroAlreadyHasPowerUpLabel.setVisible(true);
+												}
+												break;
+		case "Extra Guess":						if (!hero.getHasGuessNumberPowerUp()) {
+													hero.setHasGuessNumberPowerUp(true);
+													usedPowerUp = true;
+												} else {
+													heroAlreadyHasPowerUpLabel.setVisible(true);
+												}
+												break;
 		case "Clue for Paper Scissors Rock":	if (!hero.getHasPaperScissorsRockPowerUp()) {
 													hero.setHasPaperScissorsRockPowerUp(true);
 													usedPowerUp = true;

@@ -102,7 +102,7 @@ public class ShopGUI {
 		int cost = map.getCost();
 		if (team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
-		} else if (team.getNumberMaps() < gameEnvironment.getNumberCities() - gameEnvironment.getCurrentCityIndex() + 1){
+		} else if (team.getNumberMaps() < gameEnvironment.getNumberCities() - gameEnvironment.getCurrentCityIndex()){
 			notEnoughMoneyLabel.setVisible(false);
 			team.addMap();
 			team.decreaseMoneyBy(cost);	
@@ -113,11 +113,9 @@ public class ShopGUI {
 		} else {
 			tooManyMapsLabel.setVisible(true);
 		}
-		
 	}
 	
 	private void buyPowerUp(PowerUp powerUp) {
-		
 		int cost = powerUp.getCost();
 		if (team.getMoney() < cost) {
 			notEnoughMoneyLabel.setVisible(true);
@@ -307,7 +305,6 @@ public class ShopGUI {
 		lblClueForPaper.setBounds(380, 76, 241, 15);
 		shopGUIFrame.getContentPane().add(lblClueForPaper);
 		
-
 		buyExtraRollButton.setBounds(47, 140, 101, 25);
 		shopGUIFrame.getContentPane().add(buyExtraRollButton);
 		
@@ -323,10 +320,8 @@ public class ShopGUI {
 		lblPowerUps.setBounds(118, 444, 108, 15);
 		shopGUIFrame.getContentPane().add(lblPowerUps);
 		
-		
 		powerUpsLabel.setBounds(259, 444, 413, 15);
 		shopGUIFrame.getContentPane().add(powerUpsLabel);
-		
 		
 		tooManyMapsLabel.setBounds(503, 365, 344, 25);
 		shopGUIFrame.getContentPane().add(tooManyMapsLabel);

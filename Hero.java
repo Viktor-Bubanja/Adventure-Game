@@ -53,7 +53,6 @@ public class Hero {
 		hasGuessNumberPowerUp = true;
 	}
 
-	
 	public void heal(int amountToHeal) {
 		currentHealth += amountToHeal;
 		if (currentHealth > maxHealth) {

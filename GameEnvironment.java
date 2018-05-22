@@ -54,7 +54,7 @@ public class GameEnvironment {
 		return cities;
 	}
 	public int getNumberCities() {
-		return cities.size();
+		return numberCities;
 	}
 	
 	public String[] getVillainNames() {

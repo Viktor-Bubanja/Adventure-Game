@@ -10,7 +10,6 @@ public class Team {
 	private ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 	private ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
 	private boolean medicInTeam = false;
-	private boolean gamblerInTeam = false;
 	private boolean diplomatInTeam = false;
 	private boolean explorerInTeam = false;
 	private boolean luckyInTeam = false;
@@ -26,14 +25,6 @@ public class Team {
 
 	public void setTeamHasMedic(boolean teamHasMedic) {
 		medicInTeam = teamHasMedic;
-	}
-
-	public boolean teamHasGambler() {
-		return gamblerInTeam;
-	}
-
-	public void setTeamHasGambler(boolean teamHasGambler) {
-		gamblerInTeam = teamHasGambler;
 	}
 
 	public boolean teamHasDiplomat() {
@@ -152,6 +143,17 @@ public class Team {
 	}
 	public void killHero(Hero hero) {
 		heroes.remove(hero);
+		switch (hero.getType()) {
+		case "Medic":		setTeamHasMedic(false);
+							break;
+		case "Explorer":	setTeamHasExplorer(false);
+							break;
+		case "Lucky":		setTeamHasLucky(false);
+							break;
+		case "Diplomat":	setTeamHasDiplomat(false);
+							break;
+		
+		}
 		if (heroes.size() == 0) {
 			gameEnvironment.gameLost();
 		}

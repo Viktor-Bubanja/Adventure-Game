@@ -43,8 +43,6 @@ public class GameSetupGUI {
 	private void addHeroTypeToTeam(String heroType) {
 		if (heroType == "Medic") {
 			team.setTeamHasMedic(true);
-		} else if(heroType == "Gambler") {
-			team.setTeamHasGambler(true);
 		} else if (heroType == "Diplomat") {
 			team.setTeamHasDiplomat(true);
 		} else if (heroType == "Explorer") {
@@ -255,17 +253,15 @@ public class GameSetupGUI {
 					addSomeHeroesLabel.setVisible(true);
 					allRequirementsPassed = false;
 				}
-					
 				if (txtTeamName.getText().length() > 10 || txtTeamName.getText().length() < 2) {
 					teamLengthRequirementLabel.setForeground(Color.RED);
 					allRequirementsPassed = false;
 				}
-				
 				if (allRequirementsPassed) {
 					gameEnvironment.startTimer();
 					gameEnvironment.setTeamName(txtTeamName.getText());
-					//gameEnvironment.setNumberCities(numCities.getValue());
-					gameEnvironment.setNumberCities(1);
+					gameEnvironment.setNumberCities(numCities.getValue());
+					//gameEnvironment.setNumberCities(1);
 					//Game_Environment.setNumberHeroes(heroes.size());//length of the list of heroes)
 					gameEnvironment.moveToNewCity(team);
 					setupFrame.dispose();
