@@ -188,8 +188,6 @@ public class PaperScissorsRockGUI {
 		while (secondRandomNumber == randomNumber) {
 			secondRandomNumber = random.nextInt(3);
 		}
-		System.out.println("clueclueclue");
-		testLabel.setText("HSDHSHSFHSFHG");
 		String clue = "Clue: The Villain is going to choose either " + HandSign.parseType(randomNumber) + " or " + HandSign.parseType(secondRandomNumber);
 		System.out.println(clue);
 		clueLabel.setText(clue);
@@ -206,7 +204,6 @@ public class PaperScissorsRockGUI {
 			villain.loseLife();
 			if (villain.getLives() == 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "The villain is now dead!");
-
 				battleWindow.villainDies();
 				if (gameEnvironment.finalCity()) {
 					gameEnvironment.gameWon();
