@@ -44,18 +44,11 @@ public class ShopGUI {
 		
 		initialize();
 	}
-	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ShopGUI window = new ShopGUI(teamInput, gameEnvironmentInput, cityGuiInput);
-					window.ShopGUIFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public void makeVisible() {
+		this.ShopGUIFrame.setVisible(true);
 	}
+	
 	public List<PowerUp> getPowerUpList() {
 		return powerUps;
 	}

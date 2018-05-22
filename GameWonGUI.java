@@ -9,22 +9,6 @@ public class GameWonGUI {
 	private GameEnvironment gameEnvironment;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void NewScreen(GameEnvironment gameEnvironmentInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameWonGUI window = new GameWonGUI(gameEnvironmentInput);
-					window.gameWonFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public GameWonGUI(GameEnvironment gameEnvironmentInput) {
@@ -58,6 +42,10 @@ public class GameWonGUI {
 		JLabel lblGameOver = new JLabel("Game Over");
 		lblGameOver.setBounds(266, 30, 113, 22);
 		gameWonFrame.getContentPane().add(lblGameOver);
+	}
+
+	public void makeVisible() {
+		this.gameWonFrame.setVisible(true);
 	}
 
 }

@@ -19,17 +19,10 @@ public class PowerUpDenGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironment, CityGUI cityGui) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PowerUpDenGUI powerUpDenFrame = new PowerUpDenGUI(teamInput, gameEnvironment, cityGui);
-					powerUpDenFrame.powerUpDenGUIFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	
+	public void makeVisible() {
+		this.powerUpDenGUIFrame.setVisible(true);
 	}
 	/**
 	 * 

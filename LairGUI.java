@@ -17,17 +17,9 @@ public class LairGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LairGUI window = new LairGUI(teamInput, gameEnvironmentInput, cityGuiInput);
-					window.lairFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	public void makeVisible() {
+		this.lairFrame.setVisible(true);
 	}
 
 	/**

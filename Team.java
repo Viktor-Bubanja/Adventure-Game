@@ -78,8 +78,6 @@ public class Team {
 	
 	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
-		System.out.println("healing items : ");
-		System.out.println(healingItems);
 	}
 
 	public void addMap() {
@@ -155,7 +153,7 @@ public class Team {
 	public void killHero(Hero hero) {
 		heroes.remove(hero);
 		if (heroes.size() == 0) {
-			gameEnvironment.endGame();
+			gameEnvironment.gameLost();
 		}
 	}
 }

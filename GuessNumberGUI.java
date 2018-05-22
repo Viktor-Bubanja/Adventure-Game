@@ -23,27 +23,10 @@ public class GuessNumberGUI {
 	private Team team;
 	private CityGUI cityGui;
 	private GameEnvironment gameEnvironment;
+
 	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void NewScreen(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuessNumberGUI guessNumberWindow = new GuessNumberGUI(heroPlayingInput, battleWindowInput, gameEnvironmentInput);
-					guessNumberWindow.team = gameEnvironmentInput.getTeam();
-					if (heroPlayingInput.getHasGuessNumberPowerUp() || guessNumberWindow.team.teamHasGambler()) {
-						guessNumberWindow.guessAvailable = 3;
-						heroPlayingInput.setHasGuessNumberPowerUp(false);
-					}
-					guessNumberWindow.guessGameFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void makeVisible() {
+		this.guessGameFrame.setVisible(true);
 	}
 	
 	public GuessNumberGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
@@ -53,7 +36,11 @@ public class GuessNumberGUI {
 		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
 		cityGui = gameEnvironment.getCurrentCity();
 		villain = gameEnvironment.getVillain(currentCityIndex);
-		
+		this.team = gameEnvironmentInput.getTeam();
+		if (heroPlayingInput.getHasGuessNumberPowerUp() || this.team.teamHasGambler()) {
+			this.guessAvailable = 3;
+			heroPlayingInput.setHasGuessNumberPowerUp(false);
+		}	
 		initialize();
 	}
 	

@@ -27,18 +27,9 @@ public class BattleWindow {
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BattleWindow window = new BattleWindow(teamInput, gameEnvironmentInput, cityGuiInput);
-					window.battleWindowFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	public void makeVisible() {
+		this.battleWindowFrame.setVisible(true);
 	}
 	
 	public String getVillain () {

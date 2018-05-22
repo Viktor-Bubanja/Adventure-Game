@@ -28,6 +28,7 @@ public class GameSetupGUI {
 	/**
 	 * Launch the application.
 	 */
+	/**
 	public static void NewScreen(GameEnvironment gameEnvironmentInput, Team teamInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,6 +40,10 @@ public class GameSetupGUI {
 				}
 			}
 		});
+	}
+	*/
+	public void makeVisible() {
+		this.setupFrame.setVisible(true);
 	}
 
 	/**
@@ -97,7 +102,7 @@ public class GameSetupGUI {
 		setupFrame.getContentPane().add(inputCheck);
 		
 		JLabel lblHeroes = new JLabel("List of Heroes");
-		lblHeroes.setBounds(70, 27, 973, 245);
+		lblHeroes.setBounds(62, 12, 981, 260);
 		setupFrame.getContentPane().add(lblHeroes);
 		
 		JLabel picGambler = new JLabel("Pic Gambler");
@@ -176,6 +181,7 @@ public class GameSetupGUI {
 		
 		//Slider to choose number cities
 		JSlider numCities = new JSlider();
+		numCities.setValue(3);
 		numCities.setMajorTickSpacing(1);
 		numCities.setSnapToTicks(true);
 		numCities.setPaintTicks(true);

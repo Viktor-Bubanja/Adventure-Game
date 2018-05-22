@@ -38,22 +38,11 @@ public class PaperScissorsRockGUI {
 	private GameEnvironment gameEnvironment;
 	private JLabel testLabel = new JLabel("");
 	
-	
-	//Launch the application.
-	 
-	public static void NewScreen(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PaperScissorsRockGUI paperScissorsRockWindow = new PaperScissorsRockGUI(heroPlayingInput, battleWindowInput, gameEnvironmentInput);
-					paperScissorsRockWindow.paperScissorsRockFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}	
 	//Create the application.
+	
+	public void makeVisible() {
+		this.paperScissorsRockFrame.setVisible(true);
+	}
 	 
 	public PaperScissorsRockGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
 		gameEnvironment = gameEnvironmentInput;
@@ -68,7 +57,6 @@ public class PaperScissorsRockGUI {
 		villainsDamage = villain.getDamage();
 		if (heroPlaying.getHasPaperScissorsRockPowerUp()) {
 			heroHasPowerUp = true;
-
 			heroPlaying.setHasPaperScissorsRockPowerUp(false);
 		}
 		initialize();
@@ -91,7 +79,6 @@ public class PaperScissorsRockGUI {
         	numVillainWon++;
             return loss;
         } else {
-            System.out.println("You won!");
             numHeroWon++;
             return win;
         }

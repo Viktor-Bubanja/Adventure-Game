@@ -29,7 +29,7 @@ public class CityGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput) {
+	/* public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -40,11 +40,16 @@ public class CityGUI {
 				}
 			}
 		});
-	}
+	} */
 	/**
 	 * Create the application.
 	 */
+	public void makeWindowVisible() {
+		this.CityScreen.setVisible(true);
+	}
+	
 	public CityGUI(Team teamInput, GameEnvironment gameEnvironmentInput) {
+		
 		team = teamInput;
 		gameEnvironment = gameEnvironmentInput;
 		initialize();

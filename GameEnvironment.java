@@ -68,11 +68,6 @@ public class GameEnvironment {
 		return heroNames;
 	}
 	
-	public void endGame() {
-		//BattleWindow.closeWindow();
-		
-	}
-	
 	private void makeVillains() {
 		ArrayList<String> games1 = new ArrayList<String>();
 		ArrayList<String> games2 = new ArrayList<String>();
@@ -108,60 +103,67 @@ public class GameEnvironment {
 			return villains.get(index);
 		}	
 	}
-	
+	public Team getTeam() {
+		return team;
+	}
+
 	public static void main(String[] args) {
 		GameEnvironment gameEnvironment = new GameEnvironment();
 		gameEnvironment.makeVillains();
 		gameEnvironment.team = new Team(gameEnvironment);
 		gameEnvironment.gameWon();
-		GameSetupGUI.NewScreen(gameEnvironment, gameEnvironment.team); //start the game already
+		GameSetupGUI gameSetupGui = new GameSetupGUI(gameEnvironment, gameEnvironment.team);
+		gameSetupGui.makeVisible();
 	}
-
-	
 	public void moveToNewCity(Team teamInput) {
 		currentCityIndex++; 
 		CityGUI cityGui = new CityGUI(teamInput, this);
+		cityGui.makeWindowVisible();
 		currentCity = cityGui;
-		cityGui.NewScreen(teamInput, this);
-	}
-	
-	public Team getTeam() {
-		return team;
 	}
 	public void openShopScreen(Team team, CityGUI cityGui) {
 		ShopGUI shopGui = new ShopGUI(team, this, cityGui);
-		shopGui.NewScreen(team, this, cityGui);
+		shopGui.makeVisible();
 	} 
 	public void openPowerUpDenScreen(Team team, CityGUI cityGui) {
 		PowerUpDenGUI powerUpDenGui = new PowerUpDenGUI(team, this, cityGui);
-		powerUpDenGui.NewScreen(team, this, cityGui);
+		powerUpDenGui.makeVisible();
 	}
 	public void openHospitalScreen(Team team, CityGUI cityGui) {
 		HospitalGUI hospitalGui = new HospitalGUI(team, this, cityGui);
-		hospitalGui.NewScreen(team, this, cityGui);
+		hospitalGui.makeVisible();
 	}
 	public void openLairScreen(Team team, CityGUI cityGui) {
 		LairGUI lair = new LairGUI(team, this, cityGui);
-		lair.NewScreen(team, this, cityGui);
+		lair.makeVisible();
 	}
 	public void openBattleWindow(Team team, CityGUI cityGui) {
 		BattleWindow battleWindow = new BattleWindow(team, this, cityGui);
-		battleWindow.NewScreen(team, this, cityGui);
+		battleWindow.makeVisible();
 	}
 	public void openGuessNumberGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
 		GuessNumberGUI guessNumberGui = new GuessNumberGUI(heroPlaying, battleWindow, gameEnvironmentInput);
-		guessNumberGui.NewScreen(heroPlaying, battleWindow, gameEnvironmentInput);
+		guessNumberGui.makeVisible();
 	}
 	
 	public void openPaperScissorsRockGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
 		PaperScissorsRockGUI paperScissorsRockGui = new PaperScissorsRockGUI(heroPlaying, battleWindow, gameEnvironmentInput);
-		paperScissorsRockGui.NewScreen(heroPlaying, battleWindow, gameEnvironmentInput);
+		paperScissorsRockGui.makeVisible();
 	}
 	
 	public void openDiceGameGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
 		DiceGameGUI diceGameGui = new DiceGameGUI(heroPlaying, battleWindow, gameEnvironmentInput);
-		diceGameGui.NewScreen(heroPlaying, battleWindow, gameEnvironmentInput);
+		diceGameGui.makeVisible();
 	}
+	public void gameWon() {
+		GameWonGUI gameWonGui = new GameWonGUI(this);
+		gameWonGui.makeVisible();
+	}
+	public void gameLost() {
+		GameLostGUI gameLostGui = new GameLostGUI();
+		gameLostGui.makeVisible();
+	}
+	
 	
 	public List<HealingItem> getHealingItemsList() {
 		List<HealingItem> healingItems = new ArrayList<HealingItem>();
@@ -190,10 +192,7 @@ public class GameEnvironment {
 			return false;
 		}
 	}
-	public void gameWon() {
-		GameWonGUI gameWonGui = new GameWonGUI(this);
-		gameWonGui.NewScreen(this);
-	}
+
 
 	
 }

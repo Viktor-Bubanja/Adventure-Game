@@ -23,25 +23,9 @@ public class DiceGameGUI {
 	private GameEnvironment gameEnvironment;
 	private JButton buttonRollDice = new JButton("Roll Dice!");
 
-	/**
-	 * Launch the application.
-	 */
-	public static void NewScreen(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DiceGameGUI diceGameWindow = new DiceGameGUI(heroPlayingInput, battleWindowInput, gameEnvironmentInput);
-					diceGameWindow.team = gameEnvironmentInput.getTeam();
-					if (heroPlayingInput.getHasDiceGamePowerUp() || diceGameWindow.team.teamHasGambler()) {
-						diceGameWindow.heroHasPowerUp = true;
-						heroPlayingInput.setHasDiceGamePowerUp(false);
-					}
-					diceGameWindow.diceGameFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public void makeVisible() {
+		this.diceGameFrame.setVisible(true);
 	}
 
 	/**
@@ -54,6 +38,11 @@ public class DiceGameGUI {
 		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
 		cityGui = gameEnvironment.getCurrentCity();
 		villain = gameEnvironment.getVillain(currentCityIndex);
+		this.team = gameEnvironmentInput.getTeam();
+		if (heroPlayingInput.getHasDiceGamePowerUp() || this.team.teamHasGambler()) {
+			this.heroHasPowerUp = true;
+			heroPlayingInput.setHasDiceGamePowerUp(false);
+		}
 		initialize();
 	}
 

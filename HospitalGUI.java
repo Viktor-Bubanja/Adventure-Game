@@ -35,18 +35,11 @@ public class HospitalGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void NewScreen(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HospitalGUI window = new HospitalGUI(teamInput, gameEnvironmentInput, cityGuiInput);
-					window.HospitalFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public void makeVisible() {
+		this.HospitalFrame.setVisible(true);
 	}
+	
 	public HospitalGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		team = teamInput;
 		gameEnvironment = gameEnvironmentInput;
