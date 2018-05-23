@@ -71,19 +71,21 @@ public class GameEnvironment {
 		ArrayList<String> games3 = new ArrayList<String>();
 		ArrayList<String> games4 = new ArrayList<String>();
 		ArrayList<String> games5 = new ArrayList<String>();
-		ArrayList<String> games6 = new ArrayList<String>();
-		games1.add("paper scissors rock");
-		games1.add("guess a number");
-		games1.add("Dice game");
-		games2.add("guess a number");
-		games2.add("paper scissors rock");
-		games2.add("guess a number");
-		Villain villain1 = new Villain("come here boa", games1, "villain one", 100);
-		Villain villain2 = new Villain("oy m8 you wont", games1, "villain two", 50);
-		Villain villain3 = new Villain("you a bitch", games1, "villain three", 70);
-		Villain villain4 = new Villain("ohh whats that", games1, "villain four", 70);
-		Villain villain5 = new Villain("im da bomd you not", games1, "villain five", 70);
-		Villain superVillain = new Villain("you a big fat nob", games1, "Super Villain", 150);
+		games1.add("paper scissors rock");		//The Indigo Spark and Super
+		games1.add("guess a number");			//The Indigo Spark and Super
+		games1.add("Dice game");				//The Indigo Spark and Super
+		games2.add("guess a number");			//The Master Mind
+		games2.add("Dice game");				//The Master Mind
+		games3.add("guess a number");			//Mysterio
+		games5.add("paper scissors rock");		//Edward Scissor Hands
+		games4.add("Dice game");				//King Fusion 
+		games4.add("paper scissors rock");
+		Villain villain1 = new Villain("Go home and be a family man!", games1, "The Indigo Spark", 100);
+		Villain villain2 = new Villain("You spoony bard!", games4, "King Fusion", 50);
+		Villain villain3 = new Villain("I'm gonna cut you up", games5, "Edward Scissor Hands", 70);
+		Villain villain4 = new Villain("You can try...", games2, "The Master Mind", 70);
+		Villain villain5 = new Villain("I am so Mysterious, you'll never know what I'm thinking", games3, "Mysterio", 70);
+		Villain superVillain = new Villain("Hah, I am almighty! You can never defeat me", games1, "The All Knowing Super Villain", 150);
 		villains.add(villain1);
 		villains.add(villain2);
 		villains.add(villain3);
