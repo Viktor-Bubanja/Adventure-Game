@@ -71,7 +71,7 @@ public class Hero {
 	}
 	public String toString() {
 		String toReturn;
-		toReturn = "Heroes name: " + name + ". Herotype: " + type + ". He has " + Integer.toString(currentHealth) + " health.\n";
+		toReturn = "Heroes name: " + name + ". Herotype: " + type + ". He has " + Integer.toString(currentHealth) + "/" + maxHealth +" health.\n";
 		return toReturn;
 	}
 	
