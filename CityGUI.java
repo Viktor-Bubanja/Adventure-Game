@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class CityGUI {
 
@@ -25,6 +26,7 @@ public class CityGUI {
 	private GameEnvironment gameEnvironment;
 	private CityGUI cityGuiWindow;
 	private JLabel finalCityLabel = new JLabel("Final City!");
+	private final JLabel backgroundPic = new JLabel("");
 	
 
 	/**
@@ -83,7 +85,6 @@ public class CityGUI {
 		Random random = new Random();
 		int randomIndex = random.nextInt(3);
 		boolean giftedRandomHealingItem = random.nextBoolean();
-		System.out.println("gifted fdgfdgfd");
 		giftLabel.setVisible(true);
 		if (giftedRandomHealingItem) {
 			List<HealingItem> healingItems = gameEnvironment.getHealingItemsList();
@@ -255,6 +256,10 @@ public class CityGUI {
 		
 		finalCityLabel.setBounds(30, 58, 189, 33);
 		CityScreen.getContentPane().add(finalCityLabel);
+		backgroundPic.setIcon(new ImageIcon(CityGUI.class.getResource("/Images/forestbackground.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 700);
+		
+		CityScreen.getContentPane().add(backgroundPic);
 		if (!gameEnvironment.finalCity()) {
 			finalCityLabel.setVisible(false);
 		}

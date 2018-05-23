@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import java.awt.Rectangle;
 import java.awt.Color;
 import javax.swing.JTextArea;
+import java.awt.Dimension;
 
 public class GameSetupGUI {
 
@@ -57,9 +58,8 @@ public class GameSetupGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
 		setupFrame = new JFrame("Main setup frame");
-		setupFrame.setBounds(new Rectangle(0, 0, 1000, 700));
+		setupFrame.setBounds(new Rectangle(0, 0, 1200, 891));
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		
@@ -91,6 +91,7 @@ public class GameSetupGUI {
 		inputHeroName.setColumns(10);
 
 		JTextArea heroesListLabel = new JTextArea();
+		heroesListLabel.setEditable(false);
 		heroesListLabel.setBounds(22, 118, 457, 51);
 		setupFrame.getContentPane().add(heroesListLabel);
 		
@@ -127,23 +128,20 @@ public class GameSetupGUI {
 		picTank.setBounds(379, 181, 117, 31);
 		setupFrame.getContentPane().add(picTank);
 		
-		JLabel picExplorer = new JLabel("Pic Explorer");
+		JLabel picExplorer = new JLabel();
+		picExplorer.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/dora.png")));
 		picExplorer.setVisible(false);
-		picExplorer.setBounds(379, 302, 124, 39);
-		setupFrame.getContentPane().add(picExplorer);
 		
 		JLabel picLucky = new JLabel("Pic Lucky");
 		picLucky.setVisible(false);
 		picLucky.setBounds(379, 189, 117, 50);
 		setupFrame.getContentPane().add(picLucky);
+		picExplorer.setBounds(359, 152, 228, 350);
+		setupFrame.getContentPane().add(picExplorer);
 		
 		JLabel lblNewLabel = new JLabel("How many cities to explore?");
 		lblNewLabel.setBounds(377, 6, 302, 31);
 		setupFrame.getContentPane().add(lblNewLabel);
-		
-		JLabel lblAddUpTo = new JLabel("");
-		lblAddUpTo.setBounds(22, 173, 401, 39);
-		setupFrame.getContentPane().add(lblAddUpTo);
 		
 		JButton btnPreviousHero = new JButton("Previous Hero");
 		btnPreviousHero.addActionListener(new ActionListener() {
@@ -194,11 +192,11 @@ public class GameSetupGUI {
 		JButton btnAddHero = new JButton("Add hero");
 		btnAddHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				matchedNameLabel.setVisible(true);
+				String listLabelString = "";
 				boolean matched = false;
 				if (team.getNumberHeroes() < 3) {
 					for (String name: team.getHeroNames()) {
-						if (inputHeroName.getText() == name) {
+						if (inputHeroName.getText().equals(name)) {
 							matched = true;
 						}
 					}
@@ -206,19 +204,20 @@ public class GameSetupGUI {
 						team.addHero(new Hero(inputHeroName.getText(), heroTypeCurrentlySelected));
 						inputNumHeroes++; 
 						addHeroTypeToTeam(heroTypeCurrentlySelected);
-						heroesListLabel.setText(team.getHeroes().toString());
+						for (Hero hero: team.getHeroes()) {
+							listLabelString = listLabelString + hero.toString();
+						}
+						heroesListLabel.setText(listLabelString);
 						inputHeroName.setText("");
 					} else {
 						matchedNameLabel.setVisible(true);
 					}
-					
-					
 				} else {
 					fullHeroesLabel.setVisible(true);
 				}
 			}
 		});
-		btnAddHero.setBounds(379, 511, 145, 25);
+		btnAddHero.setBounds(389, 495, 145, 25);
 		setupFrame.getContentPane().add(btnAddHero);
 		
 		JButton btnNextHero = new JButton("Next Hero");
@@ -282,6 +281,11 @@ public class GameSetupGUI {
 		});
 		btnDone.setBounds(841, 570, 117, 25);
 		setupFrame.getContentPane().add(btnDone);	
+		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/scrollbackgrond.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 871);
+		setupFrame.getContentPane().add(backgroundPic);
 		
 		
 		
