@@ -75,17 +75,19 @@ public class GameSetupGUI {
 		txtTeamName.setColumns(10);
 		
 		JLabel fullHeroesLabel = new JLabel("You can't add any more heroes");
+		fullHeroesLabel.setForeground(Color.RED);
 		fullHeroesLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		fullHeroesLabel.setBounds(216, 668, 306, 20);
 		setupFrame.getContentPane().add(fullHeroesLabel);
 		fullHeroesLabel.setVisible(false);
 		
 		JTextArea heroesListLabel = new JTextArea();
+		heroesListLabel.setFont(new Font("Dialog", Font.BOLD, 12));
 		heroesListLabel.setRows(4);
 		heroesListLabel.setBackground(Color.WHITE);
 		heroesListLabel.setOpaque(false);
 		heroesListLabel.setEditable(false);
-		heroesListLabel.setBounds(26, 484, 320, 60);
+		heroesListLabel.setBounds(35, 349, 387, 143);
 		setupFrame.getContentPane().add(heroesListLabel);
 		
 		JLabel addSomeHeroesLabel = new JLabel("Add some heroes");
@@ -96,11 +98,13 @@ public class GameSetupGUI {
 		addSomeHeroesLabel.setVisible(false);
 		
 		inputHeroName = new JTextField();
-		inputHeroName.setBounds(500, 620, 200, 31);
+		inputHeroName.setBounds(500, 620, 200, 30);
 		setupFrame.getContentPane().add(inputHeroName);
 		inputHeroName.setColumns(10);
 		
 		JLabel matchedNameLabel = new JLabel("A hero already exists with that name");
+		matchedNameLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		matchedNameLabel.setForeground(Color.RED);
 		matchedNameLabel.setBounds(175, 627, 314, 16);
 		setupFrame.getContentPane().add(matchedNameLabel);
 		matchedNameLabel.setVisible(false);
@@ -157,9 +161,16 @@ public class GameSetupGUI {
 		lblNewLabel.setBounds(400, 50, 400, 31);
 		setupFrame.getContentPane().add(lblNewLabel);
 		
+		JLabel enterNameLabel = new JLabel("Enter a name!");
+		enterNameLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		enterNameLabel.setForeground(Color.RED);
+		enterNameLabel.setBounds(749, 620, 150, 30);
+		setupFrame.getContentPane().add(enterNameLabel);
+		enterNameLabel.setVisible(false);
+		
 		JTextArea luckyDescriptionTextArea = new JTextArea();
 		luckyDescriptionTextArea.setEditable(false);
-		luckyDescriptionTextArea.setText("Type: Lucky \n\nMaximum Health: 250 \n\nRecovery Rate: 9 \n\nSpecial Ability: Increases \nmoney reward for defeating\na Villain by 100.");
+		luckyDescriptionTextArea.setText("Type: Lucky \n\nMaximum Health: 250 \n\nRecovery Rate: 20 \n\nSpecial Ability: Increases \nmoney reward for defeating\na Villain by 100.");
 		luckyDescriptionTextArea.setRows(4);
 		luckyDescriptionTextArea.setOpaque(false);
 		luckyDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -169,7 +180,7 @@ public class GameSetupGUI {
 		luckyDescriptionTextArea.setVisible(false);
 		
 		JTextArea medicDescriptionTextArea = new JTextArea();
-		medicDescriptionTextArea.setText("Type: Medic \n\nMaximum Health: 200 \n\nRecovery Rate: 15 \n\nSpecial Ability: Increases \neveryone's max health by \n75.");
+		medicDescriptionTextArea.setText("Type: Medic \n\nMaximum Health: 200 \n\nRecovery Rate: 40 \n\nSpecial Ability: Increases \neveryone's max health by \n75.");
 		medicDescriptionTextArea.setRows(4);
 		medicDescriptionTextArea.setOpaque(false);
 		medicDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -180,7 +191,7 @@ public class GameSetupGUI {
 		medicDescriptionTextArea.setVisible(false);
 		
 		JTextArea gamblerDescriptionTextArea = new JTextArea();
-		gamblerDescriptionTextArea.setText("Type: Gambler \n\nMaximum Health: 150 \n\nRecovery Rate: 8 \n\nSpecial Ability: Extra guess\nduring Guess the Number. \nHigher chance of winning \nat Dice Game.");
+		gamblerDescriptionTextArea.setText("Type: Gambler \n\nMaximum Health: 150 \n\nRecovery Rate: 20 \n\nSpecial Ability: Extra guess\nduring Guess the Number. \nHigher chance of winning \nat Dice Game.");
 		gamblerDescriptionTextArea.setRows(4);
 		gamblerDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
 		gamblerDescriptionTextArea.setBackground(Color.WHITE);
@@ -190,7 +201,7 @@ public class GameSetupGUI {
 		gamblerDescriptionTextArea.setVisible(true);
 		
 		JTextArea explorerDescriptionTextArea = new JTextArea();
-		explorerDescriptionTextArea.setText("Type: Explorer \n\nMaximum Health: 200 \n\nRecovery Rate: 8 \n\nSpecial Ability: Has a map \nfor every city.");
+		explorerDescriptionTextArea.setText("Type: Explorer \n\nMaximum Health: 200 \n\nRecovery Rate: 20 \n\nSpecial Ability: Has a map \nfor every city.");
 		explorerDescriptionTextArea.setRows(4);
 		explorerDescriptionTextArea.setOpaque(false);
 		explorerDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -212,8 +223,10 @@ public class GameSetupGUI {
 		setupFrame.getContentPane().add(tankDescriptionTextArea);
 		tankDescriptionTextArea.setVisible(false);
 		
+
+		
 		JTextArea diplomatDescriptionTextArea = new JTextArea();
-		diplomatDescriptionTextArea.setText("Type: Diplomat \n\nMaximum Health: 200 \n\nRecovery Rate: 8 \n\nSpecial Ability: Decreases \nprices in the Shop.");
+		diplomatDescriptionTextArea.setText("Type: Diplomat \n\nMaximum Health: 200 \n\nRecovery Rate: 20 \n\nSpecial Ability: Decreases \nprices in the Shop.");
 		diplomatDescriptionTextArea.setRows(4);
 		diplomatDescriptionTextArea.setOpaque(false);
 		diplomatDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -282,19 +295,24 @@ public class GameSetupGUI {
 		numCities.setBounds(500, 100, 200, 45);
 		setupFrame.getContentPane().add(numCities);
 		
-		/** This is the button to add a new hero **/
 		JButton btnAddHero = new JButton("Add hero");
 		btnAddHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String listLabelString = "";
 				boolean matched = false;
+				boolean nameLongEnough = false;
 				if (team.getNumberHeroes() < 3) {
 					for (String name: team.getHeroNames()) {
 						if (inputHeroName.getText().equals(name)) {
 							matched = true;
+							
 						}
 					}
-					if (!matched) {
+					if (inputHeroName.getText().length() > 0) {
+						nameLongEnough = true;
+						enterNameLabel.setVisible(false);
+					}
+					if (!matched && nameLongEnough) {
 						matchedNameLabel.setVisible(false);
 						team.addHero(new Hero(inputHeroName.getText(), heroTypeCurrentlySelected));
 						inputNumHeroes++; 
@@ -305,7 +323,12 @@ public class GameSetupGUI {
 						heroesListLabel.setText(listLabelString);
 						inputHeroName.setText("");
 					} else {
-						matchedNameLabel.setVisible(true);
+						if (matched) {
+							matchedNameLabel.setVisible(true);
+						}
+						if (!nameLongEnough) {
+							enterNameLabel.setVisible(true);
+						}
 					}
 				} else {
 					fullHeroesLabel.setVisible(true);
@@ -396,6 +419,8 @@ public class GameSetupGUI {
 		lblPickYourTeam.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPickYourTeam.setBounds(500, 173, 200, 15);
 		setupFrame.getContentPane().add(lblPickYourTeam);
+		
+
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setHorizontalAlignment(SwingConstants.CENTER);
