@@ -146,7 +146,7 @@ public class GameSetupGUI {
 		picLucky.setHorizontalAlignment(SwingConstants.CENTER);
 		picLucky.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/lucky.png")));
 		picLucky.setVisible(false);
-		picLucky.setBounds(500, 310, 200, 270);
+		picLucky.setBounds(510, 310, 200, 270);
 		setupFrame.getContentPane().add(picLucky);
 		picExplorer.setBounds(500, 310, 200, 270);
 		setupFrame.getContentPane().add(picExplorer);
@@ -265,7 +265,7 @@ public class GameSetupGUI {
 				}
 			}
 		});
-		btnPreviousHero.setBounds(288, 583, 134, 25);
+		btnPreviousHero.setBounds(288, 583, 135, 25);
 		setupFrame.getContentPane().add(btnPreviousHero);
 		
 		//Slider to choose number cities
@@ -358,7 +358,7 @@ public class GameSetupGUI {
 				}
 			}
 		});
-		btnNextHero.setBounds(764, 583, 145, 25);
+		btnNextHero.setBounds(764, 583, 135, 25);
 		setupFrame.getContentPane().add(btnNextHero);
 		
 		JButton btnDone = new JButton("Done");

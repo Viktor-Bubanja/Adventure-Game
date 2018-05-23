@@ -219,7 +219,7 @@ public class ShopGUI {
 		JLabel lblShop = new JLabel("Shop");
 		lblShop.setHorizontalAlignment(SwingConstants.CENTER);
 		lblShop.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblShop.setBounds(540, 12, 120, 73);
+		lblShop.setBounds(540, 20, 120, 73);
 		shopGUIFrame.getContentPane().add(lblShop);
 		notEnoughMoneyLabel.setForeground(new Color(255, 0, 0));
 		notEnoughMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -385,11 +385,11 @@ public class ShopGUI {
 		
 		JLabel innKeeperPic = new JLabel("");
 		innKeeperPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/innkeeper.png")));
-		innKeeperPic.setBounds(911, 78, 140, 205);
+		innKeeperPic.setBounds(934, 39, 226, 296);
 		shopGUIFrame.getContentPane().add(innKeeperPic);
 		
 		JLabel speechLabel = new JLabel("Welcome to my Shop!");
-		speechLabel.setBounds(782, 97, 244, 25);
+		speechLabel.setBounds(836, 55, 166, 30);
 		shopGUIFrame.getContentPane().add(speechLabel);
 		
 		JLabel backgroundPic = new JLabel("");

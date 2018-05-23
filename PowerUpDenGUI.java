@@ -99,12 +99,12 @@ public class PowerUpDenGUI {
 		powerUpDenGUIFrame.getContentPane().setLayout(null);
 		
 		heroAlreadyHasPowerUpLabel = new JLabel("Hero already has this power up");
-		heroAlreadyHasPowerUpLabel.setBounds(462, 212, 238, 25);
+		heroAlreadyHasPowerUpLabel.setBounds(826, 308, 238, 25);
 		powerUpDenGUIFrame.getContentPane().add(heroAlreadyHasPowerUpLabel);
 		heroAlreadyHasPowerUpLabel.setVisible(false);
 		
 		JLabel noPowerUpsLabel = new JLabel("You have no power ups!");
-		noPowerUpsLabel.setBounds(269, 341, 193, 15);
+		noPowerUpsLabel.setBounds(559, 497, 193, 15);
 		powerUpDenGUIFrame.getContentPane().add(noPowerUpsLabel);
 		noPowerUpsLabel.setVisible(false);
 		
@@ -115,7 +115,7 @@ public class PowerUpDenGUI {
 				powerUpIndex = powerUpSelectionBox.getSelectedIndex();
 			}
 		});
-		powerUpSelectionBox.setBounds(220, 75, 238, 34);
+		powerUpSelectionBox.setBounds(475, 75, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(powerUpSelectionBox);
 		
 		JLabel lblChooseAPower = new JLabel("Choose a Power Up:");
@@ -133,7 +133,7 @@ public class PowerUpDenGUI {
 				heroIndex = heroSelectionBox.getSelectedIndex();
 			}
 		});
-		heroSelectionBox.setBounds(220, 166, 249, 34);
+		heroSelectionBox.setBounds(475, 366, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(heroSelectionBox);
 		
 		JButton btnBackToHome = new JButton("Back to Home Base!");
@@ -143,7 +143,7 @@ public class PowerUpDenGUI {
 				powerUpDenGUIFrame.dispose();
 			}
 		});
-		btnBackToHome.setBounds(519, 331, 204, 34);
+		btnBackToHome.setBounds(980, 680, 180, 60);
 		powerUpDenGUIFrame.getContentPane().add(btnBackToHome);
 		
 		JButton applyPowerUpButton = new JButton("Apply");
@@ -157,7 +157,7 @@ public class PowerUpDenGUI {
 				}
 			}
 		});
-		applyPowerUpButton.setBounds(283, 282, 117, 25);
+		applyPowerUpButton.setBounds(572, 440, 117, 25);
 		powerUpDenGUIFrame.getContentPane().add(applyPowerUpButton);
 		
 		JLabel backgroundPic = new JLabel("");

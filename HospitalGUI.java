@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
+import javax.swing.SwingConstants;
 
 public class HospitalGUI {
 
@@ -115,34 +116,41 @@ public class HospitalGUI {
 		HospitalFrame.setBounds(100, 100, 1200, 800);
 		HospitalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		HospitalFrame.getContentPane().setLayout(null);
+		countdownTimerLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		
-		countdownTimerLabel.setBounds(721, 312, 70, 15);
+		countdownTimerLabel.setBounds(973, 288, 105, 15);
 		HospitalFrame.getContentPane().add(countdownTimerLabel);
 		countdownTimerLabel.setVisible(false);
+		currentlyHealingLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 	
-		currentlyHealingLabel.setBounds(651, 286, 70, 15);
+		currentlyHealingLabel.setBounds(900, 239, 113, 15);
 		HospitalFrame.getContentPane().add(currentlyHealingLabel);
 		currentlyHealingLabel.setVisible(false);
+		fullHealthWarningLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		fullHealthWarningLabel.setBounds(631, 364, 214, 15);
+		fullHealthWarningLabel.setBounds(500, 557, 200, 15);
 		HospitalFrame.getContentPane().add(fullHealthWarningLabel);
 		fullHealthWarningLabel.setVisible(false);
+		timeLeftLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		
-		timeLeftLabel.setBounds(594, 312, 70, 15);
+		timeLeftLabel.setBounds(856, 288, 105, 15);
 		HospitalFrame.getContentPane().add(timeLeftLabel);
 		timeLeftLabel.setVisible(false);
 		
 		JLabel lblChooseAHero = new JLabel("Choose a hero to heal");
-		lblChooseAHero.setBounds(75, 70, 202, 21);
+		lblChooseAHero.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblChooseAHero.setBounds(488, 245, 227, 32);
 		HospitalFrame.getContentPane().add(lblChooseAHero);
 		
 		JLabel lblHospital = new JLabel("Hospital");
-		lblHospital.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblHospital.setBounds(312, 12, 166, 23);
+		lblHospital.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHospital.setFont(new Font("Dialog", Font.BOLD, 40));
+		lblHospital.setBounds(500, 20, 200, 48);
 		HospitalFrame.getContentPane().add(lblHospital);
 
 		JLabel lblChooseAHealing = new JLabel("Choose a healing item to use:");
-		lblChooseAHealing.setBounds(70, 192, 227, 15);
+		lblChooseAHealing.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblChooseAHealing.setBounds(461, 388, 290, 18);
 		HospitalFrame.getContentPane().add(lblChooseAHealing);
 
 		JComboBox heroComboBox = new JComboBox(team.getHeroNames());
@@ -153,7 +161,7 @@ public class HospitalGUI {
 			}
 		});
 
-		heroComboBox.setBounds(296, 122, 166, 21);
+		heroComboBox.setBounds(475, 289, 250, 30);
 		HospitalFrame.getContentPane().add(heroComboBox);
 		
 		healingItemComboBox = new JComboBox(getListHealingItemNames());
@@ -162,7 +170,7 @@ public class HospitalGUI {
 				healingItemIndex = healingItemComboBox.getSelectedIndex();
 			}
 		});
-		healingItemComboBox.setBounds(296, 230, 166, 21);
+		healingItemComboBox.setBounds(475, 430, 250, 30);
 		HospitalFrame.getContentPane().add(healingItemComboBox);
 				
 		healButton.addActionListener(new ActionListener() {
@@ -176,7 +184,7 @@ public class HospitalGUI {
 				
 			}
 		});
-		healButton.setBounds(312, 281, 117, 25);
+		healButton.setBounds(540, 490, 120, 40);
 		HospitalFrame.getContentPane().add(healButton);
 				
 		JButton btnClose = new JButton("Back to Home Base!");
@@ -185,7 +193,7 @@ public class HospitalGUI {
 				finishedWindow();
 			}
 		});
-		btnClose.setBounds(34, 328, 209, 25);
+		btnClose.setBounds(980, 680, 180, 60);
 		HospitalFrame.getContentPane().add(btnClose);
 		
 		JLabel backgroundPic = new JLabel("");
