@@ -18,24 +18,27 @@ public class Hero {
 		type = inputType;
 		if (type == "Gambler") {
 			maxHealth = 150;
-			recoveryRate = 8;
+			recoveryRate = 20;
 		} else if (type == "Medic") {
 			maxHealth = 200;
-			recoveryRate = 15;
+			recoveryRate = 40;
 		} else if (type == "Diplomat") {
 			maxHealth = 200;
-			recoveryRate = 8;
+			recoveryRate = 20;
 		} else if (type == "Tank") {
 			maxHealth = 400;
 			recoveryRate = 10;
 		} else if (type == "Explorer") {
 			maxHealth = 200;
-			recoveryRate = 8;
+			recoveryRate = 20;
 		} else if (type == "Lucky") {
 			maxHealth = 250;
-			recoveryRate = 9;
+			recoveryRate = 20;
 		}
 		currentHealth = maxHealth;
+	}
+	public int getRecoveryRate() {
+		return recoveryRate;
 	}
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;

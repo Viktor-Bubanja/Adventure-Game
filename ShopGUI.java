@@ -18,9 +18,9 @@ public class ShopGUI {
 	private JLabel powerUpsLabel = new JLabel("");
 	private JLabel healingItemsLabel = new JLabel("");
 	private JLabel tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
-	private HealingItem smallPotion = new HealingItem(10, 0.25, 5, "Small Potion");
-	private HealingItem quickPotion = new HealingItem(25, 0.25, 2, "Quick Potion");
-	private HealingItem bigPotion = new HealingItem(40, 0.5, 10, "Big Potion");
+	private HealingItem smallPotion = new HealingItem(10, 0.25, 16, "Small Potion");
+	private HealingItem quickPotion = new HealingItem(25, 0.25, 8, "Quick Potion");
+	private HealingItem bigPotion = new HealingItem(40, 0.5, 32, "Big Potion");
 	private PowerUp extraRoll = new PowerUp(40, "Extra Roll");
 	private PowerUp extraGuess = new PowerUp(40, "Extra Guess");
 	private PowerUp paperScissorsRockClue = new PowerUp(60, "Clue for Paper Scissors Rock");
