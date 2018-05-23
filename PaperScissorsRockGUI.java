@@ -111,7 +111,7 @@ public class PaperScissorsRockGUI {
 		paperScissorsRockFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		paperScissorsRockFrame.getContentPane().setLayout(null);
 		
-		clueLabel = new JLabel("dhgfh");
+		clueLabel = new JLabel("");
 		clueLabel.setBounds(412, 64, 574, 72);
 		paperScissorsRockFrame.getContentPane().add(clueLabel);
 		
