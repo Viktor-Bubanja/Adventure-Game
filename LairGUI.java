@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -44,7 +45,7 @@ public class LairGUI {
 		lairFrame = new JFrame();
 		lairFrame.setTitle("Villains Lair");
 		lairFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		lairFrame.setBounds(100, 100, 1000, 700);
+		lairFrame.setBounds(100, 100, 1200, 800);
 		lairFrame.getContentPane().setLayout(null);
 		
 		int currentCity = gameEnvironment.getCurrentCityIndex();
@@ -77,5 +78,11 @@ public class LairGUI {
 		VillainLabel.setText(villain.getName());
 		VillainLabel.setBounds(211, 229, 306, 150);
 		lairFrame.getContentPane().add(VillainLabel);
+		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		lairFrame.getContentPane().add(backgroundPic);
+		
 	}
 }

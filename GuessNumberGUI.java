@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -54,7 +55,7 @@ public class GuessNumberGUI {
 	private void initialize() {
 		guessGameFrame = new JFrame();
 		guessGameFrame.setTitle("Guess the Number Battle");
-		guessGameFrame.setBounds(100, 100, 1000, 700);
+		guessGameFrame.setBounds(100, 100, 1200, 800);
 		guessGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		guessGameFrame.getContentPane().setLayout(null);
 
@@ -195,6 +196,11 @@ public class GuessNumberGUI {
 		});
 		btnPick.setBounds(300, 54, 117, 25);
 		guessGameFrame.getContentPane().add(btnPick);
+		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		guessGameFrame.getContentPane().add(backgroundPic);
 		
 
 	}

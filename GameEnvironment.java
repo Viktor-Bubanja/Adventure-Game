@@ -17,7 +17,7 @@ public class GameEnvironment {
 	private final int MAXNUMBERCITIES = 6;
 	private Team team;
 	private CityGUI currentCity;
-	
+	private ArrayList<String> cityBackgrounds = new ArrayList<String>();
 	private long lStartTime;
 
 	public ArrayList<Villain> getVillains() {
@@ -100,6 +100,27 @@ public class GameEnvironment {
 			return villains.get(index);
 		}	
 	}
+	public void makeCityBackgrounds() {
+		cityBackgrounds.add("/Images/blue.jpg");
+		cityBackgrounds.add("/Images/couldyBackground.png");
+		cityBackgrounds.add("/Images/atlantic.jpeg");
+		cityBackgrounds.add("/Images/forestbackground.jpg");
+		cityBackgrounds.add("/Images/teampunkBackground.jpg");
+		cityBackgrounds.add("/Images/slime.png");
+		Collections.shuffle(cityBackgrounds);
+		cityBackgrounds.add("/Images/lava.jpg");
+	}
+	public ArrayList<String> getCitybackgrounds() {
+		return cityBackgrounds;
+	}
+	public String getBackground(int index) {
+		if (finalCity()) {
+			return cityBackgrounds.get(MAXNUMBERCITIES);
+		} else {
+			return cityBackgrounds.get(index);
+		}	
+	}
+	
 	public Team getTeam() {
 		return team;
 	}
@@ -108,8 +129,8 @@ public class GameEnvironment {
 		GameEnvironment gameEnvironment = new GameEnvironment();
 		gameEnvironment.makeVillains();
 		gameEnvironment.team = new Team(gameEnvironment);
-		
 		GameSetupGUI gameSetupGui = new GameSetupGUI(gameEnvironment, gameEnvironment.team);
+		gameEnvironment.makeCityBackgrounds();
 		gameSetupGui.makeVisible();
 	}
 	public void moveToNewCity(Team teamInput) {

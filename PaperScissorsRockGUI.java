@@ -3,6 +3,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -106,7 +107,7 @@ public class PaperScissorsRockGUI {
 		testLabel.setBounds(609, 306, 70, 15);
 
 		paperScissorsRockFrame = new JFrame();
-		paperScissorsRockFrame.setBounds(100, 100, 1000, 700);
+		paperScissorsRockFrame.setBounds(100, 100, 1200, 800);
 		paperScissorsRockFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		paperScissorsRockFrame.getContentPane().setLayout(null);
 		
@@ -178,6 +179,10 @@ public class PaperScissorsRockGUI {
 		goBackButton.setVisible(false);
 		paperScissorsRockFrame.getContentPane().add(goBackButton);
 		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		paperScissorsRockFrame.getContentPane().add(backgroundPic);
 		
 		paperScissorsRockFrame.getContentPane().add(testLabel);
 		

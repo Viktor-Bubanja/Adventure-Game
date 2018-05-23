@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -93,7 +94,7 @@ public class PowerUpDenGUI {
 	 */
 	private void initialize() {
 		powerUpDenGUIFrame = new JFrame();
-		powerUpDenGUIFrame.setBounds(100, 100, 737, 438);
+		powerUpDenGUIFrame.setBounds(100, 100, 1200, 800);
 		powerUpDenGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		powerUpDenGUIFrame.getContentPane().setLayout(null);
 		
@@ -159,7 +160,10 @@ public class PowerUpDenGUI {
 		applyPowerUpButton.setBounds(283, 282, 117, 25);
 		powerUpDenGUIFrame.getContentPane().add(applyPowerUpButton);
 		
-
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		powerUpDenGUIFrame.getContentPane().add(backgroundPic);
 		
 
 	}

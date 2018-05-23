@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -111,7 +112,7 @@ public class HospitalGUI {
 		
 		HospitalFrame = new JFrame();
 		HospitalFrame.setTitle("Hospital");
-		HospitalFrame.setBounds(100, 100, 1000, 700);
+		HospitalFrame.setBounds(100, 100, 1200, 800);
 		HospitalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		HospitalFrame.getContentPane().setLayout(null);
 		
@@ -187,6 +188,10 @@ public class HospitalGUI {
 		btnClose.setBounds(34, 328, 209, 25);
 		HospitalFrame.getContentPane().add(btnClose);
 		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		HospitalFrame.getContentPane().add(backgroundPic);
 
 		
 		timer = new Timer(1000, countdown);	

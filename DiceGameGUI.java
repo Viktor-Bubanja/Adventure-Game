@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,7 +53,7 @@ public class DiceGameGUI {
 	private void initialize() {
 		
 		diceGameFrame = new JFrame();
-		diceGameFrame.setBounds(100, 100, 1000, 700);
+		diceGameFrame.setBounds(100, 100, 1200, 800);
 		diceGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		diceGameFrame.getContentPane().setLayout(null);
 
@@ -183,6 +184,9 @@ public class DiceGameGUI {
 		tallyVillainLabel.setBounds(232, 231, 70, 15);
 		diceGameFrame.getContentPane().add(tallyVillainLabel);
 		
-		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		diceGameFrame.getContentPane().add(backgroundPic);
 	}
 }

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -77,7 +78,7 @@ public class BattleWindow {
 	 */
 	private void initialize() {
 		battleWindowFrame = new JFrame();
-		battleWindowFrame.setBounds(100, 100, 1000, 700);
+		battleWindowFrame.setBounds(100, 100, 1200, 800);
 		battleWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		battleWindowFrame.getContentPane().setLayout(null);
 		
@@ -116,6 +117,11 @@ public class BattleWindow {
 		});
 		fightButton.setBounds(277, 275, 117, 25);
 		battleWindowFrame.getContentPane().add(fightButton);
+		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(BattleWindow.class.getResource("/Images/battlearena.jpg")));
+		backgroundPic.setBounds(-240, 0, 1504, 800);
+		battleWindowFrame.getContentPane().add(backgroundPic);
 	}
 
 	public void villainDies() {

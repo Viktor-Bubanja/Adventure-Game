@@ -16,6 +16,8 @@ import java.awt.Rectangle;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.border.BevelBorder;
 
 public class GameSetupGUI {
 
@@ -59,7 +61,7 @@ public class GameSetupGUI {
 	 */
 	private void initialize() {
 		setupFrame = new JFrame("Main setup frame");
-		setupFrame.setBounds(new Rectangle(0, 0, 1200, 891));
+		setupFrame.setBounds(new Rectangle(100, 100, 1200, 800));
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		
@@ -68,7 +70,7 @@ public class GameSetupGUI {
 		setupFrame.getContentPane().add(lblWhatWouldYou);
 		
 		txtTeamName = new JTextField();
-		txtTeamName.setBounds(22, 38, 306, 25);
+		txtTeamName.setBounds(450, 252, 300, 25);
 		txtTeamName.setText(" ");
 		txtTeamName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTeamName.setToolTipText("Wowwo cools!");
@@ -76,27 +78,30 @@ public class GameSetupGUI {
 		txtTeamName.setColumns(10);
 		
 		JLabel fullHeroesLabel = new JLabel("You can't add any more heroes");
-		fullHeroesLabel.setBounds(580, 516, 237, 25);
+		fullHeroesLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		fullHeroesLabel.setBounds(216, 668, 306, 20);
 		setupFrame.getContentPane().add(fullHeroesLabel);
 		fullHeroesLabel.setVisible(false);
 		
 		JLabel addSomeHeroesLabel = new JLabel("Add some heroes");
-		addSomeHeroesLabel.setBounds(397, 575, 129, 16);
+		addSomeHeroesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		addSomeHeroesLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		addSomeHeroesLabel.setBounds(480, 700, 240, 45);
 		setupFrame.getContentPane().add(addSomeHeroesLabel);
 		addSomeHeroesLabel.setVisible(false);
 		
 		inputHeroName = new JTextField();
-		inputHeroName.setBounds(379, 454, 134, 31);
+		inputHeroName.setBounds(500, 620, 200, 31);
 		setupFrame.getContentPane().add(inputHeroName);
 		inputHeroName.setColumns(10);
 
 		JTextArea heroesListLabel = new JTextArea();
 		heroesListLabel.setEditable(false);
-		heroesListLabel.setBounds(22, 118, 457, 51);
+		heroesListLabel.setBounds(12, 22, 477, 72);
 		setupFrame.getContentPane().add(heroesListLabel);
 		
 		JLabel matchedNameLabel = new JLabel("A hero already exists with that name");
-		matchedNameLabel.setBounds(580, 499, 314, 16);
+		matchedNameLabel.setBounds(175, 627, 314, 16);
 		setupFrame.getContentPane().add(matchedNameLabel);
 		matchedNameLabel.setVisible(false);
 		
@@ -106,26 +111,26 @@ public class GameSetupGUI {
 		
 		teamLengthRequirementLabel = new JLabel("Make your team name between two and ten characters");
 		//teamLengthRequirementLabel.setForeground(Color.BLACK);
-		teamLengthRequirementLabel.setBounds(12, 90, 425, 16);
+		teamLengthRequirementLabel.setBounds(394, 229, 425, 16);
 		setupFrame.getContentPane().add(teamLengthRequirementLabel);
 		
 		JLabel picGambler = new JLabel("Pic Gambler");
-		picGambler.setBounds(379, 267, 147, 50);
+		picGambler.setBounds(942, 338, 147, 50);
 		setupFrame.getContentPane().add(picGambler);
 		
 		JLabel picMedic = new JLabel("Medic Pic");
 		picMedic.setVisible(false);
-		picMedic.setBounds(377, 240, 87, 50);
+		picMedic.setBounds(1002, 318, 87, 50);
 		setupFrame.getContentPane().add(picMedic);
 		
 		JLabel picDiplomat = new JLabel("Pic Diplomat");
 		picDiplomat.setVisible(false);
-		picDiplomat.setBounds(379, 224, 166, 31);
+		picDiplomat.setBounds(993, 397, 166, 31);
 		setupFrame.getContentPane().add(picDiplomat);
 		
 		JLabel picTank = new JLabel("Pic Tank");
 		picTank.setVisible(false);
-		picTank.setBounds(379, 181, 117, 31);
+		picTank.setBounds(1042, 295, 117, 31);
 		setupFrame.getContentPane().add(picTank);
 		
 		JLabel picExplorer = new JLabel();
@@ -134,13 +139,13 @@ public class GameSetupGUI {
 		
 		JLabel picLucky = new JLabel("Pic Lucky");
 		picLucky.setVisible(false);
-		picLucky.setBounds(379, 189, 117, 50);
+		picLucky.setBounds(987, 412, 117, 50);
 		setupFrame.getContentPane().add(picLucky);
-		picExplorer.setBounds(359, 152, 228, 350);
+		picExplorer.setBounds(522, 338, 240, 270);
 		setupFrame.getContentPane().add(picExplorer);
 		
 		JLabel lblNewLabel = new JLabel("How many cities to explore?");
-		lblNewLabel.setBounds(377, 6, 302, 31);
+		lblNewLabel.setBounds(501, 126, 302, 31);
 		setupFrame.getContentPane().add(lblNewLabel);
 		
 		JButton btnPreviousHero = new JButton("Previous Hero");
@@ -173,11 +178,13 @@ public class GameSetupGUI {
 				}
 			}
 		});
-		btnPreviousHero.setBounds(207, 317, 134, 25);
+		btnPreviousHero.setBounds(288, 583, 134, 25);
 		setupFrame.getContentPane().add(btnPreviousHero);
 		
 		//Slider to choose number cities
 		JSlider numCities = new JSlider();
+		numCities.setBackground(Color.WHITE);
+		numCities.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		numCities.setPaintLabels(true);
 		numCities.setValue(3);
 		numCities.setMajorTickSpacing(1);
@@ -185,7 +192,7 @@ public class GameSetupGUI {
 		numCities.setPaintTicks(true);
 		numCities.setMinimum(3);
 		numCities.setMaximum(6);
-		numCities.setBounds(379, 38, 200, 45);
+		numCities.setBounds(500, 169, 200, 45);
 		setupFrame.getContentPane().add(numCities);
 		
 		/** This is the button to add a new hero **/
@@ -201,6 +208,7 @@ public class GameSetupGUI {
 						}
 					}
 					if (!matched) {
+						matchedNameLabel.setVisible(false);
 						team.addHero(new Hero(inputHeroName.getText(), heroTypeCurrentlySelected));
 						inputNumHeroes++; 
 						addHeroTypeToTeam(heroTypeCurrentlySelected);
@@ -214,10 +222,11 @@ public class GameSetupGUI {
 					}
 				} else {
 					fullHeroesLabel.setVisible(true);
+					matchedNameLabel.setVisible(false);
 				}
 			}
 		});
-		btnAddHero.setBounds(389, 495, 145, 25);
+		btnAddHero.setBounds(540, 660, 120, 40);
 		setupFrame.getContentPane().add(btnAddHero);
 		
 		JButton btnNextHero = new JButton("Next Hero");
@@ -250,7 +259,7 @@ public class GameSetupGUI {
 				}
 			}
 		});
-		btnNextHero.setBounds(625, 317, 145, 25);
+		btnNextHero.setBounds(764, 583, 145, 25);
 		setupFrame.getContentPane().add(btnNextHero);
 		
 		JButton btnDone = new JButton("Done");
@@ -279,12 +288,12 @@ public class GameSetupGUI {
 				}
 			}
 		});
-		btnDone.setBounds(841, 570, 117, 25);
+		btnDone.setBounds(980, 680, 180, 60);
 		setupFrame.getContentPane().add(btnDone);	
 		
 		JLabel backgroundPic = new JLabel("");
-		backgroundPic.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/scrollbackgrond.jpg")));
-		backgroundPic.setBounds(0, 0, 1200, 871);
+		backgroundPic.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, -7, 1200, 800);
 		setupFrame.getContentPane().add(backgroundPic);
 		
 		

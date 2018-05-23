@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -24,7 +25,7 @@ public class GameLostGUI {
 	 */
 	private void initialize() {
 		gameOverFrame = new JFrame();
-		gameOverFrame.setBounds(100, 100, 662, 372);
+		gameOverFrame.setBounds(100, 100, 1200, 800);
 		gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameOverFrame.getContentPane().setLayout(null);
 		
@@ -40,5 +41,10 @@ public class GameLostGUI {
 		JLabel lblAllYourHeroes = new JLabel("All your heroes died");
 		lblAllYourHeroes.setBounds(255, 190, 181, 15);
 		gameOverFrame.getContentPane().add(lblAllYourHeroes);
+		
+		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setBounds(0, 0, 1200, 800);
+		gameOverFrame.getContentPane().add(backgroundPic);
 	}
 }

@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
 
 public class CityGUI {
 
@@ -144,25 +146,33 @@ public class CityGUI {
 	private void initialize() {
 		CityScreen = new JFrame();
 		CityScreen.setTitle("");
-		CityScreen.setBounds(100, 100, 1000, 700);
+		CityScreen.setBounds(100, 100, 1200, 800);
 		CityScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		CityScreen.getContentPane().setLayout(null);
+		robLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		robLabel.setForeground(new Color(255, 255, 255));
 		
-		robLabel.setBounds(75, 428, 308, 15);
+		
+		
+		robLabel.setBounds(70, 548, 395, 15);
 		CityScreen.getContentPane().add(robLabel);
 		robLabel.setVisible(false);
+		giftLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		giftLabel.setForeground(new Color(255, 255, 255));
 		
-		giftLabel.setBounds(463, 428, 295, 15);
+		giftLabel.setBounds(703, 548, 405, 15);
 		CityScreen.getContentPane().add(giftLabel);
 		giftLabel.setVisible(false);
 		
 		randomEvent();
 		
-		useMapButton.setBounds(494, 53, 117, 25);
+		useMapButton.setBounds(921, 110, 120, 40);
 		CityScreen.getContentPane().add(useMapButton);
 		useMapButton.setVisible(false);
+		youHaveAMapLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		youHaveAMapLabel.setForeground(new Color(255, 255, 255));
 		
-		youHaveAMapLabel.setBounds(406, 12, 295, 25);
+		youHaveAMapLabel.setBounds(830, 73, 331, 25);
 		youHaveAMapLabel.setVisible(false);
 		CityScreen.getContentPane().add(youHaveAMapLabel);
 		
@@ -187,7 +197,7 @@ public class CityGUI {
 				
 			}
 		});
-		westButton.setBounds(30, 172, 189, 33);
+		westButton.setBounds(200, 275, 180, 60);
 		CityScreen.getContentPane().add(westButton);
 		
 		JButton eastButton = new JButton("East");
@@ -197,7 +207,7 @@ public class CityGUI {
 				enterDistrict(currentLocation);
 			}
 		});
-		eastButton.setBounds(463, 176, 181, 25);
+		eastButton.setBounds(820, 275, 180, 60);
 		CityScreen.getContentPane().add(eastButton);
 		
 		JButton northButton = new JButton("North");
@@ -207,7 +217,7 @@ public class CityGUI {
 				enterDistrict(currentLocation);	
 			}
 		});
-		northButton.setBounds(273, 53, 168, 25);
+		northButton.setBounds(510, 100, 180, 60);
 		CityScreen.getContentPane().add(northButton);
 		
 		JButton southButton = new JButton("South");
@@ -217,11 +227,14 @@ public class CityGUI {
 				enterDistrict(currentLocation);
 			}
 		});
-		southButton.setBounds(273, 309, 180, 25);
+		southButton.setBounds(510, 450, 180, 60);
 		CityScreen.getContentPane().add(southButton);
 		
 		JLabel lblHomeBase = new JLabel("Home Base");
-		lblHomeBase.setBounds(273, 181, 110, 15);
+		lblHomeBase.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblHomeBase.setForeground(new Color(255, 255, 255));
+		lblHomeBase.setBackground(new Color(0, 0, 0));
+		lblHomeBase.setBounds(510, 283, 180, 40);
 		CityScreen.getContentPane().add(lblHomeBase);
 
 		useMapButton.addActionListener(new ActionListener() {
@@ -239,27 +252,32 @@ public class CityGUI {
 				}
 			}
 		});
-		JButton close = new JButton("Close");
+		JButton close = new JButton("I Give Up");
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CityScreen.dispose();
 			}
 		});
-		close.setBounds(0, 309, 117, 25);
+		close.setBounds(59, 685, 120, 40);
 		CityScreen.getContentPane().add(close);
+		randomRobbedItemLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		randomRobbedItemLabel.setForeground(new Color(255, 255, 255));
 		
-		randomRobbedItemLabel.setBounds(162, 465, 134, 15);
+		randomRobbedItemLabel.setBounds(154, 585, 265, 25);
 		CityScreen.getContentPane().add(randomRobbedItemLabel);
+		randomGiftedItemLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		randomGiftedItemLabel.setForeground(new Color(255, 255, 255));
 		
-		randomGiftedItemLabel.setBounds(541, 465, 134, 15);
+		randomGiftedItemLabel.setBounds(786, 575, 265, 25);
 		CityScreen.getContentPane().add(randomGiftedItemLabel);
 		
 		finalCityLabel.setBounds(30, 58, 189, 33);
 		CityScreen.getContentPane().add(finalCityLabel);
-		backgroundPic.setIcon(new ImageIcon(CityGUI.class.getResource("/Images/forestbackground.jpg")));
-		backgroundPic.setBounds(0, 0, 1200, 700);
-		
+		System.out.println(gameEnvironment.getBackground(gameEnvironment.getCurrentCityIndex()));
+		backgroundPic.setIcon(new ImageIcon(CityGUI.class.getResource(gameEnvironment.getBackground(gameEnvironment.getCurrentCityIndex()))));
+		backgroundPic.setBounds(0, 0, 1200, 800);
 		CityScreen.getContentPane().add(backgroundPic);
+		
 		if (!gameEnvironment.finalCity()) {
 			finalCityLabel.setVisible(false);
 		}
