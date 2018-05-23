@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class HospitalGUI {
 
@@ -126,9 +127,11 @@ public class HospitalGUI {
 		currentlyHealingLabel.setBounds(900, 239, 113, 15);
 		HospitalFrame.getContentPane().add(currentlyHealingLabel);
 		currentlyHealingLabel.setVisible(false);
+		fullHealthWarningLabel.setForeground(Color.RED);
+		fullHealthWarningLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		fullHealthWarningLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		fullHealthWarningLabel.setBounds(500, 557, 200, 15);
+		fullHealthWarningLabel.setBounds(450, 557, 300, 15);
 		HospitalFrame.getContentPane().add(fullHealthWarningLabel);
 		fullHealthWarningLabel.setVisible(false);
 		timeLeftLabel.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -152,6 +155,13 @@ public class HospitalGUI {
 		lblChooseAHealing.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblChooseAHealing.setBounds(461, 388, 290, 18);
 		HospitalFrame.getContentPane().add(lblChooseAHealing);
+		
+		JLabel noPotionsLabel = new JLabel("You have no Potions!");
+		noPotionsLabel.setForeground(Color.RED);
+		noPotionsLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		noPotionsLabel.setBounds(770, 430, 200, 30);
+		HospitalFrame.getContentPane().add(noPotionsLabel);
+		noPotionsLabel.setVisible(false);
 
 		JComboBox heroComboBox = new JComboBox(team.getHeroNames());
 		heroComboBox.addActionListener(new ActionListener() {
@@ -176,7 +186,7 @@ public class HospitalGUI {
 		healButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (team.getHealingItems().size() == 0) {
-					System.out.println("You have no potions!");
+					noPotionsLabel.setVisible(true);
 				} else {
 					timer.start();
 					healHero(team.getHealingItems().get(healingItemIndex), team.getHeroes().get(heroIndex));
@@ -195,6 +205,8 @@ public class HospitalGUI {
 		});
 		btnClose.setBounds(980, 680, 180, 60);
 		HospitalFrame.getContentPane().add(btnClose);
+		
+
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
