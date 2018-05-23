@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 
 public class PaperScissorsRockGUI {
@@ -111,20 +112,29 @@ public class PaperScissorsRockGUI {
 		paperScissorsRockFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		paperScissorsRockFrame.getContentPane().setLayout(null);
 		
-		clueLabel = new JLabel("dhgfh");
-		clueLabel.setBounds(412, 64, 574, 72);
+		clueLabel = new JLabel("");
+		clueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		clueLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		clueLabel.setBounds(300, 230, 600, 72);
 		paperScissorsRockFrame.getContentPane().add(clueLabel);
+		lblVillainGot.setFont(new Font("Dialog", Font.BOLD, 20));
 		
-		lblVillainGot.setBounds(51, 121, 87, 15);
+		lblVillainGot.setBounds(458, 170, 150, 30);
 		paperScissorsRockFrame.getContentPane().add(lblVillainGot);
+		villainsMoveLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		villainsMoveLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		
-		villainsMoveLabel.setBounds(178, 142, 70, 15);
+		villainsMoveLabel.setBounds(629, 170, 150, 30);
 		paperScissorsRockFrame.getContentPane().add(villainsMoveLabel);
+		winOrLoseRoundLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		winOrLoseRoundLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		
-		winOrLoseRoundLabel.setBounds(349, 142, 70, 15);
+		winOrLoseRoundLabel.setBounds(400, 399, 400, 60);
 		paperScissorsRockFrame.getContentPane().add(winOrLoseRoundLabel);
+		lblPaperScissorsRock.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPaperScissorsRock.setFont(new Font("Dialog", Font.BOLD, 40));
 		
-		lblPaperScissorsRock.setBounds(139, 12, 151, 15);
+		lblPaperScissorsRock.setBounds(350, 40, 500, 100);
 		paperScissorsRockFrame.getContentPane().add(lblPaperScissorsRock);
 		
 		int randomNumber = getRandomNumber();
@@ -140,7 +150,7 @@ public class PaperScissorsRockGUI {
 				
 			}
 		});
-		paperButton.setBounds(42, 64, 96, 25);
+		paperButton.setBounds(160, 500, 180, 60);
 		paperScissorsRockFrame.getContentPane().add(paperButton);
 		
 		
@@ -151,7 +161,7 @@ public class PaperScissorsRockGUI {
 				} 
 			}
 		});
-		scissorsButton.setBounds(167, 64, 96, 25);
+		scissorsButton.setBounds(510, 500, 180, 60);
 		paperScissorsRockFrame.getContentPane().add(scissorsButton);
 		
 		
@@ -160,11 +170,12 @@ public class PaperScissorsRockGUI {
 				buttonClicked(2);
 			}
 		});
-		rockButton.setBounds(298, 64, 96, 25);
+		rockButton.setBounds(860, 500, 180, 60);
 		paperScissorsRockFrame.getContentPane().add(rockButton);
+		winOrLoseGameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		winOrLoseGameLabel.setFont(new Font("Dialog", Font.BOLD, 55));
-		winOrLoseGameLabel.setBounds(12, 39, 424, 165);
+		winOrLoseGameLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		winOrLoseGameLabel.setBounds(375, 450, 450, 165);
 		winOrLoseGameLabel.setVisible(false);
 		paperScissorsRockFrame.getContentPane().add(winOrLoseGameLabel);
 		
@@ -175,7 +186,7 @@ public class PaperScissorsRockGUI {
 				gameEnvironment.openBattleWindow(team, cityGui);
 			}
 		});
-		goBackButton.setBounds(302, 212, 117, 25);
+		goBackButton.setBounds(980, 680, 180, 60);
 		goBackButton.setVisible(false);
 		paperScissorsRockFrame.getContentPane().add(goBackButton);
 		

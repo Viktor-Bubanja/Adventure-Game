@@ -145,7 +145,7 @@ public class HospitalGUI {
 		JLabel lblHospital = new JLabel("Hospital");
 		lblHospital.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHospital.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblHospital.setBounds(500, 20, 200, 48);
+		lblHospital.setBounds(500, 40, 200, 50);
 		HospitalFrame.getContentPane().add(lblHospital);
 
 		JLabel lblChooseAHealing = new JLabel("Choose a healing item to use:");
@@ -161,7 +161,7 @@ public class HospitalGUI {
 			}
 		});
 
-		heroComboBox.setBounds(475, 289, 250, 30);
+		heroComboBox.setBounds(475, 290, 250, 30);
 		HospitalFrame.getContentPane().add(heroComboBox);
 		
 		healingItemComboBox = new JComboBox(getListHealingItemNames());

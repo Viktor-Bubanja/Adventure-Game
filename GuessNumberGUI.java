@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class GuessNumberGUI {
 
@@ -70,23 +72,27 @@ public class GuessNumberGUI {
 		guessSlider.setMajorTickSpacing(1);
 		guessSlider.setMinimum(1);
 		guessSlider.setMaximum(10);
-		guessSlider.setBounds(32, 54, 245, 41);
+		guessSlider.setBounds(475, 350, 250, 40);
 		guessGameFrame.getContentPane().add(guessSlider);
 		
 		JLabel pickLabel = new JLabel("Pick a number, any number!");
-		pickLabel.setBounds(46, 12, 250, 30);
+		pickLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		pickLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		pickLabel.setBounds(450, 234, 300, 30);
 		guessGameFrame.getContentPane().add(pickLabel);
 		
 		JLabel lblGuessesLeft = new JLabel("Guesses left:");
-		lblGuessesLeft.setBounds(546, 80, 155, 30);
+		lblGuessesLeft.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblGuessesLeft.setBounds(498, 276, 150, 30);
 		guessGameFrame.getContentPane().add(lblGuessesLeft);
 		
 		JLabel numGuessesLeftLabel = new JLabel(Integer.toString(guessesLeft));
-		numGuessesLeftLabel.setBounds(713, 88, 70, 15);
+		numGuessesLeftLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		numGuessesLeftLabel.setBounds(669, 280, 44, 22);
 		guessGameFrame.getContentPane().add(numGuessesLeftLabel);
 		
 		JLabel highOrLow = new JLabel("");
-		highOrLow.setBounds(12, 97, 424, 58);
+		highOrLow.setBounds(375, 534, 450, 58);
 		guessGameFrame.getContentPane().add(highOrLow);
 		
 		villainsDamage = villain.getDamage();
@@ -100,7 +106,7 @@ public class GuessNumberGUI {
 				gameEnvironment.openBattleWindow(team, cityGui);
 			}
 		});
-		goBackButton.setBounds(319, 237, 117, 25);
+		goBackButton.setBounds(980, 680, 180, 60);
 		guessGameFrame.getContentPane().add(goBackButton);
 		
 		JButton btnPick = new JButton("Pick!");
@@ -194,8 +200,14 @@ public class GuessNumberGUI {
 			}
 
 		});
-		btnPick.setBounds(300, 54, 117, 25);
+		btnPick.setBounds(510, 450, 180, 60);
 		guessGameFrame.getContentPane().add(btnPick);
+		
+		JLabel lblNewLabel = new JLabel("Guess the Number");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		lblNewLabel.setBounds(350, 40, 500, 100);
+		guessGameFrame.getContentPane().add(lblNewLabel);
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));

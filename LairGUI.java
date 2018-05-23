@@ -6,6 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 
 public class LairGUI {
@@ -52,7 +54,7 @@ public class LairGUI {
 		Villain villain = gameEnvironment.getVillains().get(currentCity);
 		
 		JButton btnEnterTheLair = new JButton("Enter the lair!");
-		btnEnterTheLair.setBounds(5, 152, 149, 68);
+		btnEnterTheLair.setBounds(510, 450, 180, 60);
 		btnEnterTheLair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gameEnvironment.openBattleWindow(team, cityGui);
@@ -61,23 +63,32 @@ public class LairGUI {
 		});
 		lairFrame.getContentPane().add(btnEnterTheLair);
 		
-		JButton btnRunAwaaaaay = new JButton("Run awaaaaay!");
-		btnRunAwaaaaay.setBounds(591, 171, 173, 90);
-		btnRunAwaaaaay.addActionListener(new ActionListener() {
+		JButton backToHomeBaseButton = new JButton("Back to Home base");
+		backToHomeBaseButton.setBounds(980, 680, 180, 60);
+		backToHomeBaseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();
 			}
 		});
-		lairFrame.getContentPane().add(btnRunAwaaaaay);
+		lairFrame.getContentPane().add(backToHomeBaseButton);
 		
-		JLabel toFightLabel = new JLabel("The Villain you will be fighting issssss....");
-		toFightLabel.setBounds(189, 152, 351, 68);
+		JLabel toFightLabel = new JLabel("The Villain you will be fighting is:");
+		toFightLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		toFightLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		toFightLabel.setBounds(425, 265, 350, 68);
 		lairFrame.getContentPane().add(toFightLabel);
 		
 		JLabel VillainLabel = new JLabel("");
+		VillainLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		VillainLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		VillainLabel.setText(villain.getName());
-		VillainLabel.setBounds(211, 229, 306, 150);
+		VillainLabel.setBounds(475, 345, 250, 50);
 		lairFrame.getContentPane().add(VillainLabel);
+		
+		JLabel lblNewLabel = new JLabel("Villain's Lair");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		lblNewLabel.setBounds(450, 40, 300, 100);
+		lairFrame.getContentPane().add(lblNewLabel);
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));

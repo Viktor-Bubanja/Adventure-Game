@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class PowerUpDenGUI {
 	private JFrame powerUpDenGUIFrame;
@@ -99,12 +102,13 @@ public class PowerUpDenGUI {
 		powerUpDenGUIFrame.getContentPane().setLayout(null);
 		
 		heroAlreadyHasPowerUpLabel = new JLabel("Hero already has this power up");
-		heroAlreadyHasPowerUpLabel.setBounds(826, 308, 238, 25);
+		heroAlreadyHasPowerUpLabel.setForeground(Color.RED);
+		heroAlreadyHasPowerUpLabel.setBounds(781, 433, 238, 25);
 		powerUpDenGUIFrame.getContentPane().add(heroAlreadyHasPowerUpLabel);
 		heroAlreadyHasPowerUpLabel.setVisible(false);
 		
 		JLabel noPowerUpsLabel = new JLabel("You have no power ups!");
-		noPowerUpsLabel.setBounds(559, 497, 193, 15);
+		noPowerUpsLabel.setBounds(523, 552, 193, 15);
 		powerUpDenGUIFrame.getContentPane().add(noPowerUpsLabel);
 		noPowerUpsLabel.setVisible(false);
 		
@@ -115,15 +119,17 @@ public class PowerUpDenGUI {
 				powerUpIndex = powerUpSelectionBox.getSelectedIndex();
 			}
 		});
-		powerUpSelectionBox.setBounds(475, 75, 250, 30);
+		powerUpSelectionBox.setBounds(475, 290, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(powerUpSelectionBox);
 		
 		JLabel lblChooseAPower = new JLabel("Choose a Power Up:");
-		lblChooseAPower.setBounds(50, 43, 178, 20);
+		lblChooseAPower.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblChooseAPower.setBounds(500, 388, 200, 25);
 		powerUpDenGUIFrame.getContentPane().add(lblChooseAPower);
 		
 		JLabel lblChooseAHero = new JLabel("Choose a Hero to apply the Power Up to:");
-		lblChooseAHero.setBounds(50, 121, 300, 20);
+		lblChooseAHero.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblChooseAHero.setBounds(400, 245, 400, 25);
 		powerUpDenGUIFrame.getContentPane().add(lblChooseAHero);
 		
 		JComboBox heroSelectionBox = new JComboBox(team.getHeroNames());
@@ -133,7 +139,7 @@ public class PowerUpDenGUI {
 				heroIndex = heroSelectionBox.getSelectedIndex();
 			}
 		});
-		heroSelectionBox.setBounds(475, 366, 250, 30);
+		heroSelectionBox.setBounds(475, 430, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(heroSelectionBox);
 		
 		JButton btnBackToHome = new JButton("Back to Home Base!");
@@ -157,8 +163,14 @@ public class PowerUpDenGUI {
 				}
 			}
 		});
-		applyPowerUpButton.setBounds(572, 440, 117, 25);
+		applyPowerUpButton.setBounds(540, 490, 120, 40);
 		powerUpDenGUIFrame.getContentPane().add(applyPowerUpButton);
+		
+		JLabel lblPowerupDen = new JLabel("PowerUp Den");
+		lblPowerupDen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPowerupDen.setFont(new Font("Dialog", Font.BOLD, 40));
+		lblPowerupDen.setBounds(400, 40, 400, 50);
+		powerUpDenGUIFrame.getContentPane().add(lblPowerupDen);
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
@@ -167,5 +179,4 @@ public class PowerUpDenGUI {
 		
 
 	}
-	
 }

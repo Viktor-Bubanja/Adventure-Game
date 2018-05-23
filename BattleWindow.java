@@ -12,6 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class BattleWindow {
 
@@ -59,6 +62,9 @@ public class BattleWindow {
 	}
 	public void changeGame() {
 		currentGame = getGame();
+		gameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		gameLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		gameLabel.setForeground(Color.WHITE);
 		gameLabel.setText(currentGame);
 		
 	}
@@ -85,27 +91,39 @@ public class BattleWindow {
 		changeGame();
 		
 		JLabel lblTaunt = new JLabel(villain.getTaunt());
-		lblTaunt.setBounds(175, 60, 341, 22);
+		lblTaunt.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTaunt.setForeground(Color.WHITE);
+		lblTaunt.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTaunt.setBounds(425, 125, 350, 22);
 		battleWindowFrame.getContentPane().add(lblTaunt);
 		
 		JLabel lblName = new JLabel(villain.getName());
-		lblName.setBounds(165, 28, 341, 22);
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblName.setForeground(Color.WHITE);
+		lblName.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblName.setBounds(425, 50, 350, 22);
 		battleWindowFrame.getContentPane().add(lblName);
 		
 		heroSelection = new JComboBox(team.getHeroNames());
-		heroSelection.setBounds(267, 108, 161, 29);
+		heroSelection.setBounds(475, 430, 250, 30);
 		battleWindowFrame.getContentPane().add(heroSelection);
 	
 		JLabel lblSelectAHero = new JLabel("Select a hero to battle!");
-		lblSelectAHero.setBounds(31, 115, 195, 22);
+		lblSelectAHero.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSelectAHero.setForeground(Color.WHITE);
+		lblSelectAHero.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblSelectAHero.setBounds(475, 380, 250, 22);
 		battleWindowFrame.getContentPane().add(lblSelectAHero);
 		
 		JLabel lblIChallengeYou = new JLabel("The villain challenges you to: ");
-		lblIChallengeYou.setBounds(31, 175, 222, 22);
+		lblIChallengeYou.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIChallengeYou.setForeground(Color.WHITE);
+		lblIChallengeYou.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblIChallengeYou.setBounds(450, 268, 300, 22);
 		battleWindowFrame.getContentPane().add(lblIChallengeYou);
 		
 		
-		gameLabel.setBounds(267, 209, 175, 15);
+		gameLabel.setBounds(500, 302, 200, 15);
 		battleWindowFrame.getContentPane().add(gameLabel);
 		
 		JButton fightButton = new JButton("Fight");
@@ -115,7 +133,7 @@ public class BattleWindow {
 				openCurrentGame(heroPlaying);
 			}
 		});
-		fightButton.setBounds(277, 275, 117, 25);
+		fightButton.setBounds(510, 550, 180, 60);
 		battleWindowFrame.getContentPane().add(fightButton);
 		
 		JLabel backgroundPic = new JLabel("");
