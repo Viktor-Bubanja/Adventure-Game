@@ -178,9 +178,9 @@ public class DiceGameGUI {
 		lblYouGot.setBounds(300, 190, 150, 30);
 		diceGameFrame.getContentPane().add(lblYouGot);
 		
-		JLabel lblVillainGot = new JLabel("villain got:");
+		JLabel lblVillainGot = new JLabel("Villain rolled:");
 		lblVillainGot.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblVillainGot.setBounds(705, 190, 150, 30);
+		lblVillainGot.setBounds(705, 190, 170, 30);
 		diceGameFrame.getContentPane().add(lblVillainGot);
 		
 		JLabel scoreLabel = new JLabel("Score");

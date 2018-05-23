@@ -21,7 +21,7 @@ public class PaperScissorsRockGUI {
 	private HandSign villainsMove;
 	private JLabel lblPaperScissorsRock = new JLabel("Paper Scissors Rock");
 	private JLabel winOrLoseGameLabel = new JLabel("");
-	private JLabel lblVillainGot = new JLabel("Villain got:");
+	private JLabel lblVillainGot = new JLabel("Villain chose:");
 	private JLabel villainsMoveLabel = new JLabel("");
 	private JLabel winOrLoseRoundLabel = new JLabel("");
 	private JButton goBackButton = new JButton("Go Back!");
@@ -117,9 +117,10 @@ public class PaperScissorsRockGUI {
 		clueLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		clueLabel.setBounds(300, 230, 600, 72);
 		paperScissorsRockFrame.getContentPane().add(clueLabel);
+		lblVillainGot.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVillainGot.setFont(new Font("Dialog", Font.BOLD, 20));
 		
-		lblVillainGot.setBounds(458, 170, 150, 30);
+		lblVillainGot.setBounds(400, 170, 200, 30);
 		paperScissorsRockFrame.getContentPane().add(lblVillainGot);
 		villainsMoveLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		villainsMoveLabel.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -219,6 +220,7 @@ public class PaperScissorsRockGUI {
 			villain.loseLife();
 			if (villain.getLives() == 0) {
 				JOptionPane.showMessageDialog(paperScissorsRockFrame, "The villain is now dead!");
+				goBackButton.setVisible(false);
 				if (gameEnvironment.finalCity()) {
 					gameEnvironment.gameWon();
 					paperScissorsRockFrame.dispose();
@@ -237,6 +239,7 @@ public class PaperScissorsRockGUI {
 			heroPlaying.doDamage(villainsDamage, team, battleWindow);
 			if (heroPlaying.getHealth() <= 0) {
 				if (gameEnvironment.herosLeft()) {
+					goBackButton.setVisible(false);
 					JOptionPane.showMessageDialog(paperScissorsRockFrame, "Your hero has died!");
 					paperScissorsRockFrame.dispose();
 					gameEnvironment.openBattleWindow(team, cityGui);
@@ -260,6 +263,7 @@ public class PaperScissorsRockGUI {
 		paperButton.setVisible(false);
 		scissorsButton.setVisible(false);
 		rockButton.setVisible(false);
+		
 	}
 	private void endGameLabels(String gameResult) {
 		winOrLoseGameLabel.setText(gameResult);

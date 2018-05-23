@@ -192,9 +192,9 @@ public class GameEnvironment {
 	
 	public List<HealingItem> getHealingItemsList() {
 		List<HealingItem> healingItems = new ArrayList<HealingItem>();
-		HealingItem smallPotion = new HealingItem(10, 10, 5, "Small Potion");
-		HealingItem quickPotion = new HealingItem(25, 10, 2, "Quick Potion");
-		HealingItem bigPotion = new HealingItem(40, 20, 10, "Big Potion");
+		HealingItem smallPotion = new HealingItem(10, 0.25, 16, "Small Potion");
+		HealingItem quickPotion = new HealingItem(25, 0.25, 8, "Quick Potion");
+		HealingItem bigPotion = new HealingItem(40, 0.5, 32, "Big Potion");
 		healingItems.add(smallPotion);
 		healingItems.add(quickPotion);
 		healingItems.add(bigPotion);
@@ -202,12 +202,12 @@ public class GameEnvironment {
 	}
 	public List<PowerUp> getPowerUpsList() {
 		List<PowerUp> powerUps = new ArrayList<PowerUp>();
-		PowerUp extraRoll = new PowerUp(30, "Extra Roll");
-		PowerUp extraGuess = new PowerUp(50, "Extra Guess");
-		PowerUp paperScissorsRockClue = new PowerUp(50, "Clue for Paper Scissors Rock");
+		PowerUp goldenDie = new PowerUp(40, "Golden Die");
+		PowerUp extraGuess = new PowerUp(40, "Extra Guess");
+		PowerUp paperScissorsRockClue = new PowerUp(60, "Clue for Paper Scissors Rock");
 		powerUps.add(paperScissorsRockClue);
 		powerUps.add(extraGuess);
-		powerUps.add(extraRoll);
+		powerUps.add(goldenDie);
 		return powerUps;
 	}
 	public boolean finalCity() {

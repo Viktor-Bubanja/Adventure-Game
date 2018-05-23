@@ -47,7 +47,7 @@ public class PowerUpDenGUI {
 		String powerUpName = powerUp.getName();
 		boolean usedPowerUp = false;
 		switch (powerUpName) {
-		case "Extra Roll":						if (!hero.getHasDiceGamePowerUp()) {
+		case "Golden Die":						if (!hero.getHasDiceGamePowerUp()) {
 													hero.setHasDiceGamePowerUp(true);
 													usedPowerUp = true;
 												} else {
@@ -119,7 +119,7 @@ public class PowerUpDenGUI {
 				powerUpIndex = powerUpSelectionBox.getSelectedIndex();
 			}
 		});
-		powerUpSelectionBox.setBounds(475, 290, 250, 30);
+		powerUpSelectionBox.setBounds(475, 430, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(powerUpSelectionBox);
 		
 		JLabel lblChooseAPower = new JLabel("Choose a Power Up:");
@@ -139,7 +139,7 @@ public class PowerUpDenGUI {
 				heroIndex = heroSelectionBox.getSelectedIndex();
 			}
 		});
-		heroSelectionBox.setBounds(475, 430, 250, 30);
+		heroSelectionBox.setBounds(475, 290, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(heroSelectionBox);
 		
 		JButton btnBackToHome = new JButton("Back to Home Base!");

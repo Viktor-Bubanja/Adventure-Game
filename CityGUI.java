@@ -30,6 +30,7 @@ public class CityGUI {
 	private GameEnvironment gameEnvironment;
 	private CityGUI cityGuiWindow;
 	private final JLabel backgroundPic = new JLabel("");
+	private JTextArea heroesListLabel;
 	
 
 	/**
@@ -82,12 +83,12 @@ public class CityGUI {
 		useMapButton.setVisible(false);
 		youHaveAMapLabel.setVisible(false);
 	}
-	
-	
+
 	private void giftRandomItem() {
-		Random random = new Random();
-		int randomIndex = random.nextInt(3);
-		boolean giftedRandomHealingItem = random.nextBoolean();
+		Random random1 = new Random();
+		Random random2 = new Random();
+		int randomIndex = random1.nextInt(3);
+		boolean giftedRandomHealingItem = random2.nextBoolean();
 		giftLabel.setVisible(true);
 		if (giftedRandomHealingItem) {
 			List<HealingItem> healingItems = gameEnvironment.getHealingItemsList();
@@ -104,13 +105,14 @@ public class CityGUI {
 		}
 	}
 	private void robRandomItem() {
-		Random random = new Random();
-		boolean robbedRandomHealingItem = random.nextBoolean();
+		Random random1 = new Random();
+		Random random2 = new Random();
+		boolean robbedRandomHealingItem = random1.nextBoolean();
 		if (robbedRandomHealingItem) {
 			int numberHealingItems = team.getHealingItems().size();
 			if (numberHealingItems > 0) {
 				robLabel.setVisible(true);
-				int randomIndex = random.nextInt(numberHealingItems);
+				int randomIndex = random2.nextInt(numberHealingItems);
 				HealingItem robbedHealingItem = team.getHealingItems().get(randomIndex);
 				team.removeHealingItem(robbedHealingItem);
 				randomRobbedItemLabel.setText(robbedHealingItem.getName());
@@ -118,7 +120,7 @@ public class CityGUI {
 		} else {
 			int numberPowerUps = team.getPowerUps().size();
 			if (numberPowerUps > 0) {
-				int randomIndex = random.nextInt(numberPowerUps);
+				int randomIndex = random2.nextInt(numberPowerUps);
 				robLabel.setVisible(true);
 				PowerUp robbedPowerUp = team.getPowerUps().get(randomIndex);
 				team.removePowerUp(robbedPowerUp);
@@ -127,12 +129,10 @@ public class CityGUI {
 		}
 	}
 	private void randomEvent() {
-		Random random = new Random();
-		
-		boolean randomEventHappens = random.nextBoolean();
-		//boolean randomEventHappens = true;
-		boolean giftedRandomItem = random.nextBoolean();
-		//boolean giftedRandomItem = false;
+		Random random1 = new Random();
+		Random random2 = new Random();
+		boolean randomEventHappens = random1.nextBoolean();
+		boolean giftedRandomItem = random2.nextBoolean();
 		if (randomEventHappens) {
 			if (giftedRandomItem) {
 				giftRandomItem();
@@ -140,6 +140,13 @@ public class CityGUI {
 				robRandomItem();
 			}
 		}
+	}
+	public void updateHeroListLabel() {
+		String heroesListString = "";
+		for (Hero hero: team.getHeroes()) {
+			heroesListString = heroesListString + hero.toString();
+		}
+		heroesListLabel.setText(heroesListString);
 	}
 	/**
 	 * Initialize the contents of the frame.
@@ -165,8 +172,8 @@ public class CityGUI {
 			finalCityLabel.setText("You are in city: " + (gameEnvironment.getCurrentCityIndex() + 1) + "/" + gameEnvironment.getNumberCities());;
 		}
 		
-		String heroesListString = "";
-		JTextArea heroesListLabel = new JTextArea();
+		
+		heroesListLabel = new JTextArea();
 		heroesListLabel.setFont(new Font("Dialog", Font.PLAIN, 17));
 		heroesListLabel.setForeground(Color.WHITE);
 		heroesListLabel.setRows(3);
@@ -174,11 +181,8 @@ public class CityGUI {
 		heroesListLabel.setOpaque(false);
 		heroesListLabel.setEditable(false);
 		heroesListLabel.setBounds(50, 620, 851, 60);
-		for (Hero hero: team.getHeroes()) {
-			heroesListString = heroesListString + hero.toString();
-		}
-		heroesListLabel.setText(heroesListString);
 		cityScreenFrame.getContentPane().add(heroesListLabel);
+		updateHeroListLabel();
 		
 		robLabel.setBounds(70, 548, 395, 15);
 		cityScreenFrame.getContentPane().add(robLabel);

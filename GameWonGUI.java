@@ -32,7 +32,7 @@ public class GameWonGUI {
 		gameWonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameWonFrame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Congradulations! Your Team beat all the Villains");
+		JLabel lblNewLabel = new JLabel("Congradulations! Your Team, " + gameEnvironment.getTeamName() + " beat all the Villains");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(300, 422, 600, 22);

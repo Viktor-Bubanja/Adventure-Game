@@ -38,6 +38,7 @@ public class Hero {
 		currentHealth = maxHealth;
 	}
 	public int getRecoveryRate() {
+		System.out.println(recoveryRate);;
 		return recoveryRate;
 	}
 	public ArrayList<PowerUp> getPowerUps() {
@@ -71,7 +72,7 @@ public class Hero {
 	}
 	public String toString() {
 		String toReturn;
-		toReturn = "Heroes name: " + name + ". Herotype: " + type + ". He has " + Integer.toString(currentHealth) + "/" + maxHealth +" health.\n";
+		toReturn = "Name: " + name + ". Herotype: " + type + ". Health: " + Integer.toString(currentHealth) + "/" + maxHealth +"\n";
 		return toReturn;
 	}
 	

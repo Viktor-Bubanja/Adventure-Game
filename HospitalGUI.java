@@ -59,10 +59,11 @@ public class HospitalGUI {
 		currentHealingItem = healingItem;
 		if (heroToHeal.getHealth() < heroToHeal.getMaxHealth()) {
 			team.removeHealingItem(healingItem);
-			
 			removeHealingItemFromComboBox(healingItem.getName());
 			countdownTimerLabel.setVisible(true);
 			timeRemaining = (healingItem.getApplicationTime() * 10 )/ heroToHeal.getRecoveryRate();
+			System.out.println(heroToHeal.getRecoveryRate());
+			System.out.println(healingItem.getApplicationTime());
 			currentlyHealingLabel.setVisible(true);
 			timeLeftLabel.setVisible(true);
 			healButton.setVisible(false);
@@ -71,6 +72,7 @@ public class HospitalGUI {
 		} else {
 			fullHealthWarningLabel.setVisible(true);
 		}
+		
 	}
 	private void removeHealingItemFromComboBox(String healingItemName) {
 		healingItemComboBox.removeItem(healingItemName);
@@ -108,6 +110,7 @@ public class HospitalGUI {
 					currentlyHealingLabel.setVisible(false);
 					countdownTimerLabel.setText("Done");
 					heroToHeal.heal(currentHealingItem.getHealingAmount());
+					cityGui.updateHeroListLabel();
 				}
 			}
 		};
@@ -188,7 +191,7 @@ public class HospitalGUI {
 				if (team.getHealingItems().size() == 0) {
 					noPotionsLabel.setVisible(true);
 				} else {
-					timer.start();
+					
 					healHero(team.getHealingItems().get(healingItemIndex), team.getHeroes().get(heroIndex));
 				}
 				
