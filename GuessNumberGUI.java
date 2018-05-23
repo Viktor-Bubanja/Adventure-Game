@@ -11,6 +11,7 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class GuessNumberGUI {
 
@@ -66,6 +67,7 @@ public class GuessNumberGUI {
 		villainsNumber++; //Due to it being 0 - 9 so we want 1 - 10
 		
 		JSlider guessSlider = new JSlider();
+		guessSlider.setBackground(Color.WHITE);
 		guessSlider.setPaintTicks(true);
 		guessSlider.setPaintLabels(true);
 		guessSlider.setValue(5);
@@ -92,6 +94,7 @@ public class GuessNumberGUI {
 		guessGameFrame.getContentPane().add(numGuessesLeftLabel);
 		
 		JLabel highOrLow = new JLabel("");
+		highOrLow.setHorizontalAlignment(SwingConstants.CENTER);
 		highOrLow.setBounds(375, 534, 450, 58);
 		guessGameFrame.getContentPane().add(highOrLow);
 		

@@ -94,14 +94,14 @@ public class BattleWindow {
 		lblTaunt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTaunt.setForeground(Color.WHITE);
 		lblTaunt.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblTaunt.setBounds(425, 125, 350, 22);
+		lblTaunt.setBounds(300, 125, 600, 22);
 		battleWindowFrame.getContentPane().add(lblTaunt);
 		
 		JLabel lblName = new JLabel(villain.getName());
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Dialog", Font.BOLD, 24));
-		lblName.setBounds(425, 50, 350, 22);
+		lblName.setBounds(300, 50, 600, 22);
 		battleWindowFrame.getContentPane().add(lblName);
 		
 		heroSelection = new JComboBox(team.getHeroNames());
