@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
 
 public class GameSetupGUI {
 
@@ -65,12 +66,8 @@ public class GameSetupGUI {
 		setupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupFrame.getContentPane().setLayout(null);
 		
-		JLabel lblWhatWouldYou = new JLabel("");
-		lblWhatWouldYou.setBounds(2, -7, 378, 59);
-		setupFrame.getContentPane().add(lblWhatWouldYou);
-		
 		txtTeamName = new JTextField();
-		txtTeamName.setBounds(450, 252, 300, 25);
+		txtTeamName.setBounds(450, 200, 300, 25);
 		txtTeamName.setText(" ");
 		txtTeamName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTeamName.setToolTipText("Wowwo cools!");
@@ -83,6 +80,12 @@ public class GameSetupGUI {
 		setupFrame.getContentPane().add(fullHeroesLabel);
 		fullHeroesLabel.setVisible(false);
 		
+		JTextArea heroesListLabel = new JTextArea();
+		heroesListLabel.setBackground(UIManager.getColor("Label.background"));
+		heroesListLabel.setEditable(false);
+		heroesListLabel.setBounds(26, 484, 320, 60);
+		setupFrame.getContentPane().add(heroesListLabel);
+		
 		JLabel addSomeHeroesLabel = new JLabel("Add some heroes");
 		addSomeHeroesLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		addSomeHeroesLabel.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -94,58 +97,62 @@ public class GameSetupGUI {
 		inputHeroName.setBounds(500, 620, 200, 31);
 		setupFrame.getContentPane().add(inputHeroName);
 		inputHeroName.setColumns(10);
-
-		JTextArea heroesListLabel = new JTextArea();
-		heroesListLabel.setEditable(false);
-		heroesListLabel.setBounds(12, 22, 477, 72);
-		setupFrame.getContentPane().add(heroesListLabel);
 		
 		JLabel matchedNameLabel = new JLabel("A hero already exists with that name");
 		matchedNameLabel.setBounds(175, 627, 314, 16);
 		setupFrame.getContentPane().add(matchedNameLabel);
 		matchedNameLabel.setVisible(false);
 		
-		JLabel inputCheck = new JLabel("");
-		inputCheck.setBounds(423, 131, 181, 26);
-		setupFrame.getContentPane().add(inputCheck);
-		
 		teamLengthRequirementLabel = new JLabel("Make your team name between two and ten characters");
 		//teamLengthRequirementLabel.setForeground(Color.BLACK);
-		teamLengthRequirementLabel.setBounds(394, 229, 425, 16);
+		teamLengthRequirementLabel.setBounds(394, 240, 425, 16);
 		setupFrame.getContentPane().add(teamLengthRequirementLabel);
 		
-		JLabel picGambler = new JLabel("Pic Gambler");
-		picGambler.setBounds(942, 338, 147, 50);
+		JLabel picGambler = new JLabel("");
+		picGambler.setHorizontalAlignment(SwingConstants.CENTER);
+		picGambler.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/gambler.png")));
+		picGambler.setBounds(500, 310, 200, 270);
 		setupFrame.getContentPane().add(picGambler);
 		
-		JLabel picMedic = new JLabel("Medic Pic");
+		JLabel picMedic = new JLabel("");
+		picMedic.setHorizontalAlignment(SwingConstants.CENTER);
+		picMedic.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/medic.png")));
 		picMedic.setVisible(false);
-		picMedic.setBounds(1002, 318, 87, 50);
+		picMedic.setBounds(500, 310, 200, 270);
 		setupFrame.getContentPane().add(picMedic);
 		
-		JLabel picDiplomat = new JLabel("Pic Diplomat");
+		JLabel picDiplomat = new JLabel("");
+		picDiplomat.setHorizontalAlignment(SwingConstants.CENTER);
+		picDiplomat.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/diplomat.png")));
 		picDiplomat.setVisible(false);
-		picDiplomat.setBounds(993, 397, 166, 31);
+		picDiplomat.setBounds(500, 310, 200, 270);
 		setupFrame.getContentPane().add(picDiplomat);
 		
-		JLabel picTank = new JLabel("Pic Tank");
+		JLabel picTank = new JLabel("");
+		picTank.setHorizontalAlignment(SwingConstants.CENTER);
+		picTank.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/tank.png")));
 		picTank.setVisible(false);
-		picTank.setBounds(1042, 295, 117, 31);
+		picTank.setBounds(440, 276, 270, 340);
 		setupFrame.getContentPane().add(picTank);
 		
 		JLabel picExplorer = new JLabel();
+		picExplorer.setHorizontalAlignment(SwingConstants.CENTER);
 		picExplorer.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/dora.png")));
 		picExplorer.setVisible(false);
 		
-		JLabel picLucky = new JLabel("Pic Lucky");
+		JLabel picLucky = new JLabel("");
+		picLucky.setHorizontalAlignment(SwingConstants.CENTER);
+		picLucky.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/lucky.png")));
 		picLucky.setVisible(false);
-		picLucky.setBounds(987, 412, 117, 50);
+		picLucky.setBounds(500, 310, 200, 270);
 		setupFrame.getContentPane().add(picLucky);
-		picExplorer.setBounds(522, 338, 240, 270);
+		picExplorer.setBounds(500, 310, 200, 270);
 		setupFrame.getContentPane().add(picExplorer);
 		
-		JLabel lblNewLabel = new JLabel("How many cities to explore?");
-		lblNewLabel.setBounds(501, 126, 302, 31);
+		JLabel lblNewLabel = new JLabel("How many cities do you want to explore?");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(400, 50, 400, 31);
 		setupFrame.getContentPane().add(lblNewLabel);
 		
 		JButton btnPreviousHero = new JButton("Previous Hero");
@@ -192,7 +199,7 @@ public class GameSetupGUI {
 		numCities.setPaintTicks(true);
 		numCities.setMinimum(3);
 		numCities.setMaximum(6);
-		numCities.setBounds(500, 169, 200, 45);
+		numCities.setBounds(500, 100, 200, 45);
 		setupFrame.getContentPane().add(numCities);
 		
 		/** This is the button to add a new hero **/
@@ -291,9 +298,16 @@ public class GameSetupGUI {
 		btnDone.setBounds(980, 680, 180, 60);
 		setupFrame.getContentPane().add(btnDone);	
 		
+		JLabel lblPickYourTeam = new JLabel("Pick your team name");
+		lblPickYourTeam.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblPickYourTeam.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPickYourTeam.setBounds(500, 173, 200, 15);
+		setupFrame.getContentPane().add(lblPickYourTeam);
+		
 		JLabel backgroundPic = new JLabel("");
+		backgroundPic.setHorizontalAlignment(SwingConstants.CENTER);
 		backgroundPic.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/notsodarkScroll.jpg")));
-		backgroundPic.setBounds(0, -7, 1200, 800);
+		backgroundPic.setBounds(0, 0, 1200, 800);
 		setupFrame.getContentPane().add(backgroundPic);
 		
 		
