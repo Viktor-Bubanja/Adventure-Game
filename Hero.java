@@ -29,7 +29,7 @@ public class Hero {
 			maxHealth = 400;
 			recoveryRate = 10;
 		} else if (type == "Explorer") {
-			maxHealth = 300;
+			maxHealth = 200;
 			recoveryRate = 8;
 		} else if (type == "Lucky") {
 			maxHealth = 250;

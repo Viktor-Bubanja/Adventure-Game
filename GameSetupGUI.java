@@ -81,6 +81,7 @@ public class GameSetupGUI {
 		fullHeroesLabel.setVisible(false);
 		
 		JTextArea heroesListLabel = new JTextArea();
+		heroesListLabel.setRows(4);
 		heroesListLabel.setBackground(Color.WHITE);
 		heroesListLabel.setOpaque(false);
 		heroesListLabel.setEditable(false);
@@ -156,33 +157,111 @@ public class GameSetupGUI {
 		lblNewLabel.setBounds(400, 50, 400, 31);
 		setupFrame.getContentPane().add(lblNewLabel);
 		
+		JTextArea luckyDescriptionTextArea = new JTextArea();
+		luckyDescriptionTextArea.setEditable(false);
+		luckyDescriptionTextArea.setText("Type: Lucky \n\nMaximum Health: 250 \n\nRecovery Rate: 9 \n\nSpecial Ability: Increases \nmoney reward for defeating\na Villain by 100.");
+		luckyDescriptionTextArea.setRows(4);
+		luckyDescriptionTextArea.setOpaque(false);
+		luckyDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
+		luckyDescriptionTextArea.setBackground(Color.WHITE);
+		luckyDescriptionTextArea.setBounds(745, 349, 200, 182);
+		setupFrame.getContentPane().add(luckyDescriptionTextArea);
+		luckyDescriptionTextArea.setVisible(false);
+		
+		JTextArea medicDescriptionTextArea = new JTextArea();
+		medicDescriptionTextArea.setText("Type: Medic \n\nMaximum Health: 200 \n\nRecovery Rate: 15 \n\nSpecial Ability: Increases \neveryone's max health by \n75.");
+		medicDescriptionTextArea.setRows(4);
+		medicDescriptionTextArea.setOpaque(false);
+		medicDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
+		medicDescriptionTextArea.setEditable(false);
+		medicDescriptionTextArea.setBackground(Color.WHITE);
+		medicDescriptionTextArea.setBounds(745, 349, 200, 182);
+		setupFrame.getContentPane().add(medicDescriptionTextArea);
+		medicDescriptionTextArea.setVisible(false);
+		
+		JTextArea gamblerDescriptionTextArea = new JTextArea();
+		gamblerDescriptionTextArea.setText("Type: Gambler \n\nMaximum Health: 150 \n\nRecovery Rate: 8 \n\nSpecial Ability: Extra guess\nduring Guess the Number. \nHigher chance of winning \nat Dice Game.");
+		gamblerDescriptionTextArea.setRows(4);
+		gamblerDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
+		gamblerDescriptionTextArea.setBackground(Color.WHITE);
+		gamblerDescriptionTextArea.setOpaque(false);
+		gamblerDescriptionTextArea.setEditable(false);
+		gamblerDescriptionTextArea.setBounds(745, 349, 200, 182);
+		gamblerDescriptionTextArea.setVisible(true);
+		
+		JTextArea explorerDescriptionTextArea = new JTextArea();
+		explorerDescriptionTextArea.setText("Type: Explorer \n\nMaximum Health: 200 \n\nRecovery Rate: 8 \n\nSpecial Ability: Has a map \nfor every city.");
+		explorerDescriptionTextArea.setRows(4);
+		explorerDescriptionTextArea.setOpaque(false);
+		explorerDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
+		explorerDescriptionTextArea.setEditable(false);
+		explorerDescriptionTextArea.setBackground(Color.WHITE);
+		explorerDescriptionTextArea.setBounds(745, 349, 200, 182);
+		setupFrame.getContentPane().add(explorerDescriptionTextArea);
+		setupFrame.getContentPane().add(gamblerDescriptionTextArea);
+		explorerDescriptionTextArea.setVisible(false);
+		
+		JTextArea tankDescriptionTextArea = new JTextArea();
+		tankDescriptionTextArea.setText("Type: Tank \n\nMaximum Health: 400 \n\nRecovery Rate: 10 \n\nSpecial Ability: High \nmaximum health.");
+		tankDescriptionTextArea.setRows(4);
+		tankDescriptionTextArea.setOpaque(false);
+		tankDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
+		tankDescriptionTextArea.setEditable(false);
+		tankDescriptionTextArea.setBackground(Color.WHITE);
+		tankDescriptionTextArea.setBounds(745, 349, 200, 182);
+		setupFrame.getContentPane().add(tankDescriptionTextArea);
+		tankDescriptionTextArea.setVisible(false);
+		
+		JTextArea diplomatDescriptionTextArea = new JTextArea();
+		diplomatDescriptionTextArea.setText("Type: Diplomat \n\nMaximum Health: 200 \n\nRecovery Rate: 8 \n\nSpecial Ability: Decreases \nprices in the Shop.");
+		diplomatDescriptionTextArea.setRows(4);
+		diplomatDescriptionTextArea.setOpaque(false);
+		diplomatDescriptionTextArea.setFont(new Font("Dialog", Font.BOLD, 12));
+		diplomatDescriptionTextArea.setEditable(false);
+		diplomatDescriptionTextArea.setBackground(Color.WHITE);
+		diplomatDescriptionTextArea.setBounds(745, 349, 200, 182);
+		setupFrame.getContentPane().add(diplomatDescriptionTextArea);
+		diplomatDescriptionTextArea.setVisible(false);
+		
 		JButton btnPreviousHero = new JButton("Previous Hero");
 		btnPreviousHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (heroTypeCurrentlySelected == "Gambler") {
 					heroTypeCurrentlySelected = "Lucky";
 					picGambler.setVisible(false);
+					gamblerDescriptionTextArea.setVisible(false);
 					picLucky.setVisible(true);
+					luckyDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Medic") {
 					heroTypeCurrentlySelected = "Gambler";
 					picMedic.setVisible(false);
+					medicDescriptionTextArea.setVisible(false);
 					picGambler.setVisible(true);
+					gamblerDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Diplomat") {
 					heroTypeCurrentlySelected = "Medic";
 					picDiplomat.setVisible(false);
+					diplomatDescriptionTextArea.setVisible(false);
 					picMedic.setVisible(true);
+					medicDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Tank") {
 					heroTypeCurrentlySelected = "Diplomat";
 					picTank.setVisible(false);
+					tankDescriptionTextArea.setVisible(false);
 					picDiplomat.setVisible(true);
+					diplomatDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Explorer") {
 					heroTypeCurrentlySelected = "Tank";
 					picExplorer.setVisible(false);
+					explorerDescriptionTextArea.setVisible(false);
 					picTank.setVisible(true);
+					tankDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Lucky") {
 					heroTypeCurrentlySelected = "Explorer";
 					picLucky.setVisible(false);
+					luckyDescriptionTextArea.setVisible(false);
 					picExplorer.setVisible(true);
+					explorerDescriptionTextArea.setVisible(true);
 				}
 			}
 		});
@@ -243,27 +322,39 @@ public class GameSetupGUI {
 				if (heroTypeCurrentlySelected == "Gambler") {
 					heroTypeCurrentlySelected = "Medic";
 					picGambler.setVisible(false);
+					gamblerDescriptionTextArea.setVisible(false);
 					picMedic.setVisible(true);
+					medicDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Medic") {
 					heroTypeCurrentlySelected = "Diplomat";
 					picMedic.setVisible(false);
+					medicDescriptionTextArea.setVisible(false);
 					picDiplomat.setVisible(true);
+					diplomatDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Diplomat") {
 					heroTypeCurrentlySelected = "Tank";
 					picDiplomat.setVisible(false);
+					diplomatDescriptionTextArea.setVisible(false);
 					picTank.setVisible(true);
+					tankDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Tank") {
 					heroTypeCurrentlySelected = "Explorer";
 					picTank.setVisible(false);
+					tankDescriptionTextArea.setVisible(false);
 					picExplorer.setVisible(true);
+					explorerDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Explorer") {
 					heroTypeCurrentlySelected = "Lucky";
 					picExplorer.setVisible(false);
+					explorerDescriptionTextArea.setVisible(false);
 					picLucky.setVisible(true);
+					luckyDescriptionTextArea.setVisible(true);
 				} else if (heroTypeCurrentlySelected == "Lucky") {
 					heroTypeCurrentlySelected = "Gambler";
 					picLucky.setVisible(false);
+					luckyDescriptionTextArea.setVisible(false);
 					picGambler.setVisible(true);
+					gamblerDescriptionTextArea.setVisible(true);
 				}
 			}
 		});
@@ -296,6 +387,7 @@ public class GameSetupGUI {
 				}
 			}
 		});
+		
 		btnDone.setBounds(980, 680, 180, 60);
 		setupFrame.getContentPane().add(btnDone);	
 		
@@ -309,9 +401,6 @@ public class GameSetupGUI {
 		backgroundPic.setHorizontalAlignment(SwingConstants.CENTER);
 		backgroundPic.setIcon(new ImageIcon(GameSetupGUI.class.getResource("/Images/notsodarkScroll.jpg")));
 		backgroundPic.setBounds(0, 0, 1200, 800);
-		setupFrame.getContentPane().add(backgroundPic);
-		
-		
-		
+		setupFrame.getContentPane().add(backgroundPic);	
 	}
 }
