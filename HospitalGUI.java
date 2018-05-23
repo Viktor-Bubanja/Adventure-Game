@@ -60,7 +60,7 @@ public class HospitalGUI {
 			
 			removeHealingItemFromComboBox(healingItem.getName());
 			countdownTimerLabel.setVisible(true);
-			timeRemaining = healingItem.getApplicationTime() + 1;
+			timeRemaining = healingItem.getApplicationTime() + hero.getRecoveryRate();
 			currentlyHealingLabel.setVisible(true);
 			timeLeftLabel.setVisible(true);
 			healButton.setVisible(false);
