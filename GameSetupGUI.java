@@ -81,7 +81,8 @@ public class GameSetupGUI {
 		fullHeroesLabel.setVisible(false);
 		
 		JTextArea heroesListLabel = new JTextArea();
-		heroesListLabel.setBackground(UIManager.getColor("Label.background"));
+		heroesListLabel.setBackground(Color.WHITE);
+		heroesListLabel.setOpaque(false);
 		heroesListLabel.setEditable(false);
 		heroesListLabel.setBounds(26, 484, 320, 60);
 		setupFrame.getContentPane().add(heroesListLabel);
