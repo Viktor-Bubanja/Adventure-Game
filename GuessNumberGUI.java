@@ -20,7 +20,7 @@ public class GuessNumberGUI {
 	private int maxGuesses = 2;
 	private int guessesLeft;
 	private int guessNumber = 1;
-	private BattleWindow battleWindow;
+	private BattleWindowGUI battleWindowGui;
 	private Villain villain;
 	private Hero heroPlaying;
 	private int villainsDamage;
@@ -33,9 +33,9 @@ public class GuessNumberGUI {
 		this.guessGameFrame.setVisible(true);
 	}
 	
-	public GuessNumberGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
+	public GuessNumberGUI(Hero heroPlayingInput, BattleWindowGUI battleWindowInputGui, GameEnvironment gameEnvironmentInput) {
 		gameEnvironment = gameEnvironmentInput;
-		battleWindow = battleWindowInput;
+		battleWindowGui = battleWindowInputGui;
 		heroPlaying = heroPlayingInput;
 		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
 		cityGui = gameEnvironment.getCurrentCity();
@@ -104,7 +104,7 @@ public class GuessNumberGUI {
 		goBackButton.setVisible(false);
 		goBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				battleWindow.changeGame();
+				battleWindowGui.changeGame();
 				guessGameFrame.dispose();
 				gameEnvironment.openBattleWindow(team, cityGui);
 			}
@@ -127,7 +127,7 @@ public class GuessNumberGUI {
 								gameEnvironment.gameWon();
 								guessGameFrame.dispose();
 							} else {
-								battleWindow.villainDies();
+								battleWindowGui.villainDies();
 								guessGameFrame.dispose();
 							}
 						}
@@ -150,7 +150,7 @@ public class GuessNumberGUI {
 								gameEnvironment.gameWon();
 								guessGameFrame.dispose();
 							} else {
-								battleWindow.villainDies();
+								battleWindowGui.villainDies();
 								guessGameFrame.dispose();
 							}
 						}
@@ -174,7 +174,7 @@ public class GuessNumberGUI {
 								gameEnvironment.gameWon();
 								guessGameFrame.dispose();
 							} else {
-								battleWindow.villainDies();
+								battleWindowGui.villainDies();
 								guessGameFrame.dispose();
 							}
 						}
@@ -184,7 +184,7 @@ public class GuessNumberGUI {
 						textSet = "Sorry you lose, the number was: " + villainsNumber;
 						highOrLow.setText(textSet);
 						goBackButton.setVisible(true);
-						heroPlaying.doDamage(villainsDamage, team, battleWindow);
+						heroPlaying.doDamage(villainsDamage, team, battleWindowGui);
 						if (heroPlaying.getHealth() <= 0)
 							if (gameEnvironment.herosLeft()) {
 								JOptionPane.showMessageDialog(guessGameFrame, "Your hero has died!");

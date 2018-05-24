@@ -65,7 +65,7 @@ public class GameEnvironment {
 		return heroNames;
 	}
 	
-	private void makeVillains() {
+	public void makeVillains() {
 		ArrayList<String> games1 = new ArrayList<String>();
 		ArrayList<String> games2 = new ArrayList<String>();
 		ArrayList<String> games3 = new ArrayList<String>();
@@ -163,21 +163,21 @@ public class GameEnvironment {
 		lair.makeVisible();
 	}
 	public void openBattleWindow(Team team, CityGUI cityGui) {
-		BattleWindow battleWindow = new BattleWindow(team, this, cityGui);
-		battleWindow.makeVisible();
+		BattleWindowGUI battleWindowGui = new BattleWindowGUI(team, this, cityGui);
+		battleWindowGui.makeVisible();
 	}
-	public void openGuessNumberGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
-		GuessNumberGUI guessNumberGui = new GuessNumberGUI(heroPlaying, battleWindow, gameEnvironmentInput);
+	public void openGuessNumberGUI(Hero heroPlaying, BattleWindowGUI battleWindowGui, GameEnvironment gameEnvironmentInput) {
+		GuessNumberGUI guessNumberGui = new GuessNumberGUI(heroPlaying, battleWindowGui, gameEnvironmentInput);
 		guessNumberGui.makeVisible();
 	}
 	
-	public void openPaperScissorsRockGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
-		PaperScissorsRockGUI paperScissorsRockGui = new PaperScissorsRockGUI(heroPlaying, battleWindow, gameEnvironmentInput);
+	public void openPaperScissorsRockGUI(Hero heroPlaying, BattleWindowGUI battleWindowGui, GameEnvironment gameEnvironmentInput) {
+		PaperScissorsRockGUI paperScissorsRockGui = new PaperScissorsRockGUI(heroPlaying, battleWindowGui, gameEnvironmentInput);
 		paperScissorsRockGui.makeVisible();
 	}
 	
-	public void openDiceGameGUI(Hero heroPlaying, BattleWindow battleWindow, GameEnvironment gameEnvironmentInput) {
-		DiceGameGUI diceGameGui = new DiceGameGUI(heroPlaying, battleWindow, gameEnvironmentInput);
+	public void openDiceGameGUI(Hero heroPlaying, BattleWindowGUI battleWindowGui, GameEnvironment gameEnvironmentInput) {
+		DiceGameGUI diceGameGui = new DiceGameGUI(heroPlaying, battleWindowGui, gameEnvironmentInput);
 		diceGameGui.makeVisible();
 	}
 	public void gameWon() {

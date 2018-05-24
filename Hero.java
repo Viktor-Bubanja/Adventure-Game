@@ -37,8 +37,11 @@ public class Hero {
 		}
 		currentHealth = maxHealth;
 	}
+	public void setCurrentHealth(int currentHealthInput) {
+		currentHealth = currentHealthInput;
+	}
+	
 	public int getRecoveryRate() {
-		System.out.println(recoveryRate);;
 		return recoveryRate;
 	}
 	public ArrayList<PowerUp> getPowerUps() {
@@ -82,11 +85,13 @@ public class Hero {
 	public String getType() {
 		return type;
 	}
-	public void doDamage(int damage, Team team, BattleWindow battleWindow) {
+	public void doDamage(int damage, Team team, BattleWindowGUI battleWindowGui) {
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
-			team.killHero(this);
-			battleWindow.removeDeadHeroFromComboBox(this);
+			if (battleWindowGui != null) {
+				team.killHero(this);
+				battleWindowGui.removeDeadHeroFromComboBox(this);
+			}			
 		}
 	}
 	public void addDiceGamePowerUp() {

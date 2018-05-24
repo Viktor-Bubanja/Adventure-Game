@@ -33,7 +33,7 @@ public class PaperScissorsRockGUI {
 	private Villain villain;
 	private Hero heroPlaying;
 	private CityGUI cityGui;
-	private BattleWindow battleWindow;
+	private BattleWindowGUI battleWindowGui;
 	private boolean heroHasPowerUp = false;
 	private JLabel clueLabel = new JLabel("");
 	private Team team;
@@ -46,9 +46,9 @@ public class PaperScissorsRockGUI {
 		this.paperScissorsRockFrame.setVisible(true);
 	}
 	 
-	public PaperScissorsRockGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
+	public PaperScissorsRockGUI(Hero heroPlayingInput, BattleWindowGUI battleWindowInputGui, GameEnvironment gameEnvironmentInput) {
 		gameEnvironment = gameEnvironmentInput;
-		battleWindow = battleWindowInput;
+		battleWindowGui = battleWindowInputGui;
 		heroPlaying = heroPlayingInput;
 		//villain = villainInput;
 		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
@@ -182,7 +182,7 @@ public class PaperScissorsRockGUI {
 		
 		goBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				battleWindow.changeGame();
+				battleWindowGui.changeGame();
 				paperScissorsRockFrame.dispose();
 				gameEnvironment.openBattleWindow(team, cityGui);
 			}
@@ -225,7 +225,7 @@ public class PaperScissorsRockGUI {
 					gameEnvironment.gameWon();
 					paperScissorsRockFrame.dispose();
 				} else {
-					battleWindow.villainDies();
+					battleWindowGui.villainDies();
 					paperScissorsRockFrame.dispose();
 				}
 			} else {
@@ -236,7 +236,7 @@ public class PaperScissorsRockGUI {
 			setButtonsInvisible();
 			gameOver = true;
 			endGameLabels("You lose!");
-			heroPlaying.doDamage(villainsDamage, team, battleWindow);
+			heroPlaying.doDamage(villainsDamage, team, battleWindowGui);
 			if (heroPlaying.getHealth() <= 0) {
 				if (gameEnvironment.herosLeft()) {
 					goBackButton.setVisible(false);

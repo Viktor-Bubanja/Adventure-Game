@@ -18,7 +18,7 @@ public class DiceGameGUI {
 	private JFrame diceGameFrame;
 	private Villain villain;
 	private Hero heroPlaying;
-	private BattleWindow battleWindow;
+	private BattleWindowGUI battleWindowGui;
 	private boolean heroHasPowerUp = false;
 	private int rollHero;
 	private Team team;
@@ -34,8 +34,8 @@ public class DiceGameGUI {
 	/**
 	 * Create the application.
 	 */
-	public DiceGameGUI(Hero heroPlayingInput, BattleWindow battleWindowInput, GameEnvironment gameEnvironmentInput) {
-		battleWindow = battleWindowInput;
+	public DiceGameGUI(Hero heroPlayingInput, BattleWindowGUI battleWindowGuiInput, GameEnvironment gameEnvironmentInput) {
+		battleWindowGui = battleWindowGuiInput;
 		heroPlaying = heroPlayingInput;
 		gameEnvironment = gameEnvironmentInput;
 		int currentCityIndex = gameEnvironment.getCurrentCityIndex();
@@ -93,7 +93,7 @@ public class DiceGameGUI {
 		goBackButton.setVisible(false);
 		goBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				battleWindow.changeGame();
+				battleWindowGui.changeGame();
 				diceGameFrame.dispose();
 				gameEnvironment.openBattleWindow(team, cityGui);
 			}
@@ -135,7 +135,7 @@ public class DiceGameGUI {
 									gameEnvironment.gameWon();
 									diceGameFrame.dispose();
 								} else {
-									battleWindow.villainDies();
+									battleWindowGui.villainDies();
 									diceGameFrame.dispose();
 								}
 							}
@@ -150,7 +150,7 @@ public class DiceGameGUI {
 							goBackButton.setVisible(true);
 							winOrLoseGameLabel.setText("You Lost!");
 							
-							heroPlaying.doDamage(villainsDamage, team, battleWindow);
+							heroPlaying.doDamage(villainsDamage, team, battleWindowGui);
 							if (heroPlaying.getHealth() <= 0) {
 								if (gameEnvironment.herosLeft()) {
 									JOptionPane.showMessageDialog(diceGameFrame, "Your hero has died!");
