@@ -12,27 +12,46 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 public class DiceGameGUI {
-	private int villainWon = 0;
-	private int heroWon = 0;
-	private boolean gameOver = false;
+	/**
+	 * Attributes:
+	 * The frame for the DiceGame GUI to display
+	 * The game Environment handling the game
+	 * The villain you are currently fighting
+	 * The hero you select to play with
+	 * The current city you are fighting in.
+	 * Your team
+	 * The battleWindowGUI handling the fight
+	 * keeping track of the number of times villain has won. The game is first to 3
+	 * keeping track of the number of times your Hero has won. The game is first to 3
+	 * Your roll
+	 * boolean indicating if the game is over
+	 * boolean that asks if you have the Golden Die PowerUp
+	 * Button that rolls you and the villains Dice
+	 */
 	private JFrame diceGameFrame;
+	private GameEnvironment gameEnvironment;
 	private Villain villain;
 	private Hero heroPlaying;
-	private BattleWindowGUI battleWindowGui;
-	private boolean heroHasPowerUp = false;
-	private int rollHero;
-	private Team team;
 	private CityGUI cityGui;
-	private GameEnvironment gameEnvironment;
-	private JButton buttonRollDice = new JButton("Roll Dice!");
+	private Team team;
+	private BattleWindowGUI battleWindowGui;
+	private int villainWon = 0;
+	private int heroWon = 0;
+	private int rollHero;
+	private boolean gameOver = false;
+	private boolean heroHasPowerUp = false;
+	private JButton rollDiceButton;
 
-	
+	/**
+	 * Sets the dice game to visible
+	 */
 	public void makeVisible() {
 		this.diceGameFrame.setVisible(true);
 	}
-
 	/**
-	 * Create the application.
+	 * @param heroPlayingInput Hero
+	 * @param battleWindowGuiInput BattleWindowGUI
+	 * @param gameEnvironmentInput GameEnvironment
 	 */
 	public DiceGameGUI(Hero heroPlayingInput, BattleWindowGUI battleWindowGuiInput, GameEnvironment gameEnvironmentInput) {
 		battleWindowGui = battleWindowGuiInput;
@@ -61,35 +80,35 @@ public class DiceGameGUI {
 
 		int villainsDamage = villain.getDamage();
 		
-		JLabel labelVillainRoll = new JLabel("0");
-		labelVillainRoll.setHorizontalAlignment(SwingConstants.CENTER);
-		labelVillainRoll.setFont(new Font("Dialog", Font.BOLD, 20));
-		labelVillainRoll.setBounds(757, 235, 30, 20);
-		diceGameFrame.getContentPane().add(labelVillainRoll);
+		JLabel villainRollLabel = new JLabel("0");
+		villainRollLabel.setHorizontalAlignment(SwingConstants.CENTER); //Display the villains roll
+		villainRollLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		villainRollLabel.setBounds(757, 235, 30, 20);
+		diceGameFrame.getContentPane().add(villainRollLabel);
 		
 		JLabel winOrLoseGameLabel = new JLabel("");
-		winOrLoseGameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		winOrLoseGameLabel.setHorizontalAlignment(SwingConstants.CENTER); //Display whether you've won or lost the game
 		winOrLoseGameLabel.setFont(new Font("Dialog", Font.BOLD, 40));
 		winOrLoseGameLabel.setBounds(203, 311, 800, 207);
 		diceGameFrame.getContentPane().add(winOrLoseGameLabel);
 		
 		JLabel winOrLoseLabel = new JLabel("");
-		winOrLoseLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		winOrLoseLabel.setHorizontalAlignment(SwingConstants.CENTER); //Display whether you've won or lost the round
 		winOrLoseLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		winOrLoseLabel.setBounds(450, 311, 300, 20);
 		diceGameFrame.getContentPane().add(winOrLoseLabel);
 		
 		JLabel heroWonLabel = new JLabel("0");
-		heroWonLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		heroWonLabel.setFont(new Font("Dialog", Font.BOLD, 17)); //Display how many games the hero has won
 		heroWonLabel.setBounds(487, 620, 70, 15);
 		diceGameFrame.getContentPane().add(heroWonLabel);
 		
 		JLabel villainWonLabel = new JLabel("0");
-		villainWonLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		villainWonLabel.setFont(new Font("Dialog", Font.BOLD, 17)); //Display how many games the Villain has won
 		villainWonLabel.setBounds(809, 620, 70, 15);
 		diceGameFrame.getContentPane().add(villainWonLabel);
 		
-		JButton goBackButton = new JButton("Go Back!");
+		JButton goBackButton = new JButton("Go Back!"); //Button that sends you back to the battle window after a game
 		goBackButton.setVisible(false);
 		goBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,41 +120,42 @@ public class DiceGameGUI {
 		goBackButton.setBounds(980, 680, 180, 60);
 		diceGameFrame.getContentPane().add(goBackButton);
 		
-		JLabel labelHeroRoll = new JLabel("0");
-		labelHeroRoll.setHorizontalAlignment(SwingConstants.CENTER);
-		labelHeroRoll.setFont(new Font("Dialog", Font.BOLD, 20));
-		labelHeroRoll.setBounds(350, 235, 30, 20);
-		diceGameFrame.getContentPane().add(labelHeroRoll);
+		JLabel heroRollLabel = new JLabel("0");
+		heroRollLabel.setHorizontalAlignment(SwingConstants.CENTER);  //Displays your roll
+		heroRollLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		heroRollLabel.setBounds(350, 235, 30, 20);
+		diceGameFrame.getContentPane().add(heroRollLabel);
 		
-		buttonRollDice.addActionListener(new ActionListener() {
+		rollDiceButton = new JButton("Roll Dice!");
+		rollDiceButton.addActionListener(new ActionListener() { //Roll the dice
 			public void actionPerformed(ActionEvent e) {
 				if (!gameOver) {
 					Random randomHeroNumber = new Random();
 					Random randomVillainNumber = new Random();
 					if (heroHasPowerUp) {
-						rollHero = randomHeroNumber.nextInt(4) + 3;
+						rollHero = randomHeroNumber.nextInt(4) + 3; //Cant roll less than a 3 due to power up
 					} else {
 						rollHero = randomHeroNumber.nextInt(6) + 1;
 					}
 					int rollVillain = randomVillainNumber.nextInt(6) + 1;
-					labelHeroRoll.setText(Integer.toString(rollHero));
-					labelVillainRoll.setText(Integer.toString(rollVillain));
+					heroRollLabel.setText(Integer.toString(rollHero));
+					villainRollLabel.setText(Integer.toString(rollVillain));
 					if (rollHero > rollVillain) {
 						winOrLoseLabel.setText("You win this round");
 						heroWon++;
 						if (heroWon == 3) {
 							winOrLoseGameLabel.setText("You Won!");
 							gameOver = true;
-							buttonRollDice.setVisible(false);
+							rollDiceButton.setVisible(false);
 							goBackButton.setVisible(true);
 							villain.loseLife();
-							if (villain.getLives() == 0) {
+							if (villain.getLives() == 0) { //Villain dies
 								JOptionPane.showMessageDialog(diceGameFrame, "The villain is now dead!");
-								if (gameEnvironment.finalCity()) {
+								if (gameEnvironment.finalCity()) { //In last city so game now over
 									gameEnvironment.gameWon();
 									diceGameFrame.dispose();
-								} else {
-									battleWindowGui.villainDies();
+								} else { 
+									battleWindowGui.villainDies(); // next city
 									diceGameFrame.dispose();
 								}
 							}
@@ -146,18 +166,18 @@ public class DiceGameGUI {
 						villainWon++;
 						if (villainWon == 3) {
 							gameOver = true;
-							buttonRollDice.setVisible(false);
+							rollDiceButton.setVisible(false);
 							goBackButton.setVisible(true);
 							winOrLoseGameLabel.setText("You Lost!");
 							
 							heroPlaying.doDamage(villainsDamage, team, battleWindowGui);
 							if (heroPlaying.getHealth() <= 0) {
-								if (gameEnvironment.herosLeft()) {
+								if (gameEnvironment.herosLeft()) {//no heroes left so game now over
 									JOptionPane.showMessageDialog(diceGameFrame, "Your hero has died!");
 									diceGameFrame.dispose();
 									gameEnvironment.openBattleWindow(team, cityGui);
 								} else {
-									diceGameFrame.dispose();
+									diceGameFrame.dispose();//have to fight with next hero
 									gameEnvironment.gameLost();
 								}
 							}
@@ -170,18 +190,18 @@ public class DiceGameGUI {
 				}
 			}
 		});
-		buttonRollDice.setBounds(510, 400, 180, 60);
-		diceGameFrame.getContentPane().add(buttonRollDice);
+		rollDiceButton.setBounds(510, 400, 180, 60);
+		diceGameFrame.getContentPane().add(rollDiceButton);
 		
-		JLabel lblYouGot = new JLabel("You rolled:");
-		lblYouGot.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblYouGot.setBounds(300, 190, 150, 30);
-		diceGameFrame.getContentPane().add(lblYouGot);
+		JLabel youGotLabel = new JLabel("You rolled:"); 
+		youGotLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		youGotLabel.setBounds(300, 190, 150, 30);
+		diceGameFrame.getContentPane().add(youGotLabel);
 		
-		JLabel lblVillainGot = new JLabel("Villain rolled:");
-		lblVillainGot.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblVillainGot.setBounds(705, 190, 170, 30);
-		diceGameFrame.getContentPane().add(lblVillainGot);
+		JLabel villainGotLabel = new JLabel("Villain rolled:");
+		villainGotLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		villainGotLabel.setBounds(705, 190, 170, 30);
+		diceGameFrame.getContentPane().add(villainGotLabel);
 		
 		JLabel scoreLabel = new JLabel("Score");
 		scoreLabel.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -198,16 +218,14 @@ public class DiceGameGUI {
 		tallyVillainLabel.setBounds(717, 620, 70, 15);
 		diceGameFrame.getContentPane().add(tallyVillainLabel);
 		
-		JLabel lblNewLabel = new JLabel("Dice Game");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(450, 40, 300, 100);
-		diceGameFrame.getContentPane().add(lblNewLabel);
-		
+		JLabel diceGameLabel = new JLabel("Dice Game");
+		diceGameLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		diceGameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		diceGameLabel.setBounds(450, 40, 300, 100);
+		diceGameFrame.getContentPane().add(diceGameLabel);
 
-		
 		JLabel backgroundPic = new JLabel("");
-		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));// background picture of the scroll
 		backgroundPic.setBounds(0, 0, 1200, 800);
 		diceGameFrame.getContentPane().add(backgroundPic);
 	}

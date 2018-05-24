@@ -12,6 +12,10 @@ import java.awt.event.ActionEvent;
 
 public class GameLostGUI {
 
+	/**
+	 * Attributes:
+	 * The frame for the gameOver GUI to display
+	 */
 	private JFrame gameOverFrame;
 
 	/**
@@ -20,7 +24,9 @@ public class GameLostGUI {
 	public GameLostGUI() {
 		initialize();
 	}
-	
+	/**
+	 * Makes the gameLost window visible
+	 */
 	public void makeVisible() {
 		this.gameOverFrame.setVisible(true);
 	}
@@ -34,24 +40,24 @@ public class GameLostGUI {
 		gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameOverFrame.getContentPane().setLayout(null);
 		
-		JLabel lblGameOver = new JLabel("Game Over");
-		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGameOver.setFont(new Font("Dialog", Font.BOLD, 51));
-		lblGameOver.setBounds(400, 70, 400, 100);
-		gameOverFrame.getContentPane().add(lblGameOver);
+		JLabel gameOverLabel = new JLabel("Game Over");
+		gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		gameOverLabel.setFont(new Font("Dialog", Font.BOLD, 51));
+		gameOverLabel.setBounds(400, 70, 400, 100);
+		gameOverFrame.getContentPane().add(gameOverLabel);
 		
-		JLabel lblYouLost = new JLabel("You Lost!");
-		lblYouLost.setForeground(Color.RED);
-		lblYouLost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblYouLost.setFont(new Font("Dialog", Font.BOLD, 80));
-		lblYouLost.setBounds(350, 300, 500, 100);
-		gameOverFrame.getContentPane().add(lblYouLost);
+		JLabel youLostLabel = new JLabel("You Lost!");
+		youLostLabel.setForeground(Color.RED);
+		youLostLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		youLostLabel.setFont(new Font("Dialog", Font.BOLD, 80));
+		youLostLabel.setBounds(350, 300, 500, 100);
+		gameOverFrame.getContentPane().add(youLostLabel);
 		
-		JLabel lblAllYourHeroes = new JLabel("All your heroes died");
-		lblAllYourHeroes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAllYourHeroes.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblAllYourHeroes.setBounds(450, 569, 300, 15);
-		gameOverFrame.getContentPane().add(lblAllYourHeroes);
+		JLabel allYourHeroesLabel = new JLabel("All your heroes died");
+		allYourHeroesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		allYourHeroesLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		allYourHeroesLabel.setBounds(450, 569, 300, 15);
+		gameOverFrame.getContentPane().add(allYourHeroesLabel);
 		
 		JButton closeButton = new JButton("Close");
 		closeButton.addActionListener(new ActionListener() {

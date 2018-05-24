@@ -17,29 +17,41 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 
 public class BattleWindowGUI {
-
+/**
+ * Attributes:
+ * The frame to display
+ * The game Environment handling the game
+ * The villain you are currently fighting
+ * The hero you select to play with
+ * The current city you are fighting in.
+ * Your team
+ * The game the villain challenges you to play
+ * Label that displays the game you are challenged to play
+ */
 	private JFrame battleWindowFrame;
+	private GameEnvironment gameEnvironment;
 	private Villain villain;
-	private String currentGame;
-	private JLabel gameLabel = new JLabel();
 	private Hero heroPlaying;
 	private CityGUI cityGui;
 	private Team team;
-	private GameEnvironment gameEnvironment;
-	private JComboBox heroSelection;
-	
-	/**
-	 * Launch the application.
-	 */
-
+	private String currentGame;
+	private JLabel gameLabel;
+	private JComboBox<String> heroSelection;
+/**
+ * Sets the battle window to visible
+ */
 	public void makeVisible() {
 		this.battleWindowFrame.setVisible(true);
 	}
-	
+	/**
+	 * @return String The name of the villain you are fighting
+	 */
 	public String getVillain () {
 		return villain.getName();
 	}
-	
+	/**
+	 * @return String A random game from the list of games the Villain currently fighting likes to play
+	 */
 	public String getGame() {
 		ArrayList<String> villainsGames = new ArrayList<String>();
 		villainsGames = villain.getGames();
@@ -47,11 +59,12 @@ public class BattleWindowGUI {
 		return villainsGames.get(0);		
 	}
 
-	/**
-	 * Create the application.
-	 * @param villain 
-	 */
-
+/**
+ * Initializes a Battle window, the window where you are locked in a fight with a villain
+ * @param teamInput Team
+ * @param gameEnvironmentInput GameEnvironmentt
+ * @param cityGuiInput CityGUI
+ */
 	public BattleWindowGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		team = teamInput;
 		gameEnvironment = gameEnvironmentInput;
@@ -60,14 +73,24 @@ public class BattleWindowGUI {
 		villain = gameEnvironment.getVillain(currentCityIndex);
 		initialize();
 	}
+/**
+ * change the label displaying the game you are challenged too
+ */
 	public void changeGame() {
 		currentGame = getGame();
+		gameLabel = new JLabel();
 		gameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		gameLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		gameLabel.setForeground(Color.WHITE);
 		gameLabel.setText(currentGame);
+		gameLabel.setBounds(500, 302, 200, 15);
+		battleWindowFrame.getContentPane().add(gameLabel);
 		
 	}
+	/**
+	 * Opens the game GUI of the game the villain challenges you too
+	 * @param heroPlaying Your hero you have selected to fight with
+	 */
 	public void openCurrentGame(Hero heroPlaying) {
 		battleWindowFrame.dispose();
 		if (currentGame == "paper scissors rock") {
@@ -78,9 +101,9 @@ public class BattleWindowGUI {
 			gameEnvironment.openDiceGameGUI(heroPlaying, this, gameEnvironment);
 		}
 	}
+	
 	/**
 	 * Initialize the contents of the frame.
-	 * @param villain 
 	 */
 	private void initialize() {
 		battleWindowFrame = new JFrame();
@@ -88,45 +111,41 @@ public class BattleWindowGUI {
 		battleWindowFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		battleWindowFrame.getContentPane().setLayout(null);
 		
-		changeGame();
+		changeGame(); // Selects and displays the first game you are challenges
 		
-		JLabel lblTaunt = new JLabel(villain.getTaunt());
-		lblTaunt.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTaunt.setForeground(Color.WHITE);
-		lblTaunt.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblTaunt.setBounds(300, 125, 600, 22);
-		battleWindowFrame.getContentPane().add(lblTaunt);
+		JLabel tauntLabel = new JLabel(villain.getTaunt()); //Label displaying the villains taunt
+		tauntLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		tauntLabel.setForeground(Color.WHITE);
+		tauntLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		tauntLabel.setBounds(300, 125, 600, 22);
+		battleWindowFrame.getContentPane().add(tauntLabel);
 		
-		JLabel lblName = new JLabel(villain.getName());
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblName.setForeground(Color.WHITE);
-		lblName.setFont(new Font("Dialog", Font.BOLD, 24));
-		lblName.setBounds(300, 50, 600, 22);
-		battleWindowFrame.getContentPane().add(lblName);
+		JLabel nameLabel = new JLabel(villain.getName());		//Label displaying the villains name
+		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setFont(new Font("Dialog", Font.BOLD, 24));
+		nameLabel.setBounds(300, 50, 600, 22);
+		battleWindowFrame.getContentPane().add(nameLabel);
 		
-		heroSelection = new JComboBox(team.getHeroNames());
+		heroSelection = new JComboBox<String>(team.getHeroNames()); //Combobox to select your hero
 		heroSelection.setBounds(475, 430, 250, 30);
 		battleWindowFrame.getContentPane().add(heroSelection);
 	
-		JLabel lblSelectAHero = new JLabel("Select a hero to battle!");
-		lblSelectAHero.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelectAHero.setForeground(Color.WHITE);
-		lblSelectAHero.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblSelectAHero.setBounds(475, 380, 250, 22);
-		battleWindowFrame.getContentPane().add(lblSelectAHero);
+		JLabel selectAHeroLabel = new JLabel("Select a hero to battle!");  //Label Instructions for you to select a hero to battle with
+		selectAHeroLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		selectAHeroLabel.setForeground(Color.WHITE);
+		selectAHeroLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		selectAHeroLabel.setBounds(475, 380, 250, 22);
+		battleWindowFrame.getContentPane().add(selectAHeroLabel);
 		
-		JLabel lblIChallengeYou = new JLabel("The villain challenges you to: ");
-		lblIChallengeYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIChallengeYou.setForeground(Color.WHITE);
-		lblIChallengeYou.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblIChallengeYou.setBounds(450, 268, 300, 22);
-		battleWindowFrame.getContentPane().add(lblIChallengeYou);
+		JLabel challengeYouLabel = new JLabel("The villain challenges you to: ");  //Label challenge too:
+		challengeYouLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		challengeYouLabel.setForeground(Color.WHITE);
+		challengeYouLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		challengeYouLabel.setBounds(450, 268, 300, 22);
+		battleWindowFrame.getContentPane().add(challengeYouLabel);
 		
-		
-		gameLabel.setBounds(500, 302, 200, 15);
-		battleWindowFrame.getContentPane().add(gameLabel);
-		
-		JButton fightButton = new JButton("Fight");
+		JButton fightButton = new JButton("Fight");				//Button that starts the fight in the selected game with the selected hero
 		fightButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroPlaying = team.getHeroes().get(heroSelection.getSelectedIndex());
@@ -136,12 +155,16 @@ public class BattleWindowGUI {
 		fightButton.setBounds(510, 550, 180, 60);
 		battleWindowFrame.getContentPane().add(fightButton);
 		
-		JLabel backgroundPic = new JLabel("");
+		JLabel backgroundPic = new JLabel("");   // Background pic of the arena
 		backgroundPic.setIcon(new ImageIcon(BattleWindowGUI.class.getResource("/Images/battlearena.jpg")));
 		backgroundPic.setBounds(-240, 0, 1504, 800);
 		battleWindowFrame.getContentPane().add(backgroundPic);
 	}
-
+/**
+ * Called when you have won a game
+ * Moves you to a new city
+ * Gives you a reward for killing the villain
+ */
 	public void villainDies() {
 		closeWindow();
 		cityGui.disposeCity();
@@ -153,13 +176,21 @@ public class BattleWindowGUI {
 		gameEnvironment.moveToNewCity(team);
 		
 	}
+	/**
+	 * Disposes of the current battle window
+	 */
 	public void closeWindow() {
 		battleWindowFrame.dispose();
 		
 	}
+	/**
+	 * Called when a hero dies
+	 * Removes him from the select hero ComboBox
+	 * @param hero The Hero to remove
+	 */
 	public void removeDeadHeroFromComboBox(Hero hero) {
 		//heroSelection.removeItem(hero);
-		heroSelection = new JComboBox(team.getHeroNames());
+		heroSelection = new JComboBox<String>(team.getHeroNames());
 		heroSelection.setBounds(267, 108, 161, 29);
 		battleWindowFrame.getContentPane().add(heroSelection);
 	}

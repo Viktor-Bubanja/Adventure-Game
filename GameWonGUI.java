@@ -11,16 +11,26 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 
 public class GameWonGUI {
-
+	/**
+	 * Attributes:
+	 * The frame for the DiceGame GUI to display
+	 * The game Environment handling the game
+	 */
 	private JFrame gameWonFrame;
 	private GameEnvironment gameEnvironment;
 
 	/**
-	 * Create the application.
+	 * @param gameEnvironmentInput GameEnvironment
 	 */
 	public GameWonGUI(GameEnvironment gameEnvironmentInput) {
 		gameEnvironment = gameEnvironmentInput;
 		initialize();
+	}
+	/**
+	 * Makes the game won frame visible
+	 */
+	public void makeVisible() {
+		this.gameWonFrame.setVisible(true);
 	}
 
 	/**
@@ -32,32 +42,32 @@ public class GameWonGUI {
 		gameWonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameWonFrame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Congradulations! Your Team, " + gameEnvironment.getTeamName() + " beat all the Villains");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(175, 422, 850, 22);
-		gameWonFrame.getContentPane().add(lblNewLabel);
+		JLabel congratulationsLabel = new JLabel("Congradulations! Your Team, " + gameEnvironment.getTeamName() + " beat all the Villains");
+		congratulationsLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		congratulationsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		congratulationsLabel.setBounds(175, 422, 850, 22);
+		gameWonFrame.getContentPane().add(congratulationsLabel);
 		
-		JLabel lblTimeTaken = new JLabel("Time taken:");
-		lblTimeTaken.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblTimeTaken.setBounds(432, 554, 150, 25);
-		gameWonFrame.getContentPane().add(lblTimeTaken);
+		JLabel timeTakenLabel = new JLabel("Time taken:");
+		timeTakenLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		timeTakenLabel.setBounds(432, 554, 150, 25);
+		gameWonFrame.getContentPane().add(timeTakenLabel);
 		
 		gameEnvironment.getEndTime();
 		
-		JLabel timeTabel = new JLabel(gameEnvironment.getEndTime());
-		timeTabel.setFont(new Font("Dialog", Font.BOLD, 20));
-		timeTabel.setBounds(630, 554, 158, 25);
-		gameWonFrame.getContentPane().add(timeTabel);
+		JLabel timeLabel = new JLabel(gameEnvironment.getEndTime()); //stops the timer and displays it
+		timeLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		timeLabel.setBounds(630, 554, 158, 25);
+		gameWonFrame.getContentPane().add(timeLabel);
 		
-		JLabel lblGameOver = new JLabel("Game Over");
-		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGameOver.setFont(new Font("Dialog", Font.BOLD, 51));
-		lblGameOver.setBounds(400, 70, 400, 100);
-		gameWonFrame.getContentPane().add(lblGameOver);
+		JLabel gameOverLabel = new JLabel("Game Over");
+		gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		gameOverLabel.setFont(new Font("Dialog", Font.BOLD, 51));
+		gameOverLabel.setBounds(400, 70, 400, 100);
+		gameWonFrame.getContentPane().add(gameOverLabel);
 		
-		JButton closeAllButton = new JButton("Close");
-		closeAllButton.addActionListener(new ActionListener() {
+		JButton closeAllButton = new JButton("Done!");
+		closeAllButton.addActionListener(new ActionListener() { //Closes this frame
 			public void actionPerformed(ActionEvent e) {
 				gameWonFrame.dispose();
 			}
@@ -65,19 +75,15 @@ public class GameWonGUI {
 		closeAllButton.setBounds(980, 680, 180, 60);
 		gameWonFrame.getContentPane().add(closeAllButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("You Win!");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 80));
-		lblNewLabel_1.setBounds(350, 300, 500, 100);
-		gameWonFrame.getContentPane().add(lblNewLabel_1);
+		JLabel youWinLabel = new JLabel("You Win!");
+		youWinLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		youWinLabel.setFont(new Font("Dialog", Font.BOLD, 80));
+		youWinLabel.setBounds(350, 300, 500, 100);
+		gameWonFrame.getContentPane().add(youWinLabel);
 		
 		JLabel backgroundPic = new JLabel("");
-		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
+		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg"))); // background picture of the scroll
 		backgroundPic.setBounds(0, 0, 1200, 800);
 		gameWonFrame.getContentPane().add(backgroundPic);
-	}
-
-	public void makeVisible() {
-		this.gameWonFrame.setVisible(true);
 	}
 }
