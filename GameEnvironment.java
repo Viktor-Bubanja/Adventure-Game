@@ -45,7 +45,11 @@ public class GameEnvironment {
 		return teamName;
 	}
 	public int getCurrentCityIndex() {
-		return currentCityIndex;
+		if (currentCityIndex == numberCities - 1) {
+			return MAXNUMBERCITIES - 1;
+		} else {
+			return currentCityIndex;
+		}
 	}
 	public CityGUI getCurrentCity() {
 		return currentCity;
@@ -80,12 +84,13 @@ public class GameEnvironment {
 		games5.add("paper scissors rock");		//Edward Scissor Hands
 		games4.add("Dice game");				//King Fusion 
 		games4.add("paper scissors rock");
-		Villain villain1 = new Villain("Go home and be a family man!", games1, "The Indigo Spark", 100);
-		Villain villain2 = new Villain("You spoony bard!", games4, "King Fusion", 50);
-		Villain villain3 = new Villain("I'm gonna cut you up", games5, "Edward Scissor Hands", 70);
-		Villain villain4 = new Villain("You can try...", games2, "The Master Mind", 70);
-		Villain villain5 = new Villain("I am so Mysterious, you'll never know what I'm thinking", games3, "Mysterio", 70);
-		Villain superVillain = new Villain("Hah, I am almighty! You can never defeat me", games1, "The All Knowing Super Villain", 150);
+		Villain villain1 = new TheIndigoSpark(games1);
+		Villain villain2 = new TheMasterMind(games2);
+		Villain villain3 = new Mysterio(games3);
+		Villain villain4 = new KingFusion(games4);
+		Villain villain5 = new EdwardScissorHands(games5);
+		Villain superVillain = new SuperVillain(games1);
+
 		villains.add(villain1);
 		villains.add(villain2);
 		villains.add(villain3);
