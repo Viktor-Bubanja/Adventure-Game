@@ -1,8 +1,17 @@
+/**
+ * 
+ * Enumerator HandSign
+ * Used for converting the villain's and hero's turns between different forms.
+ *
+ */
 public enum HandSign {
 	PAPER, SCISSORS, ROCK;
-	
+	/**
+	 * 
+	 * @param int value. Integer representing paper, scissors, or rock.
+	 * @return HandSign. Returns either PAPER, SCISSORS, or ROCK.
+	 */
 	public static HandSign parseType(int value) {
-		value = Character.toUpperCase(value);
 		if (value == 0) 
 			return PAPER;
 		else if (value == 1)
@@ -12,7 +21,11 @@ public enum HandSign {
 		else 
 			return null;
 	}
-	
+	/**
+	 * 
+	 * @param HandSign handSign. 
+	 * @return String stringValue. Returns either Paper, Scissors, or Rock to display in the Paper Scissors Rock GUI.
+	 */
 	public static String toString(HandSign handSign) {
 		String stringValue;
 		if (handSign == PAPER) {

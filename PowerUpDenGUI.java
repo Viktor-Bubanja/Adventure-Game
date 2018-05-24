@@ -12,27 +12,35 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 
 public class PowerUpDenGUI {
+	/**
+	 * Power Up Den GUI class
+	 * Hero's can apply power ups while in the power up den.
+	 * Attributes:
+	 * JFrame for the PowerUpDenGUI
+	 * Index of the power up the player selected from the combo box.
+	 * Index of the hero the player selected from the combo box.
+	 * The current city you are fighting in.
+	 * Your team
+	 * The game environment handling the game.
+	 * Combo box for selecting which power up to apply.
+	 * Warning label if hero already has a power up.
+	 */
 	private JFrame powerUpDenGUIFrame;
 	private int powerUpIndex;
 	private int heroIndex;
 	private CityGUI cityGui;
 	private Team team;
-	private GameEnvironment gameEnvironment;
-	private JComboBox powerUpSelectionBox;
+	private JComboBox<String> powerUpSelectionBox;
 	private JLabel heroAlreadyHasPowerUpLabel;
-	private JLabel noPowerUpsLabel;
-
 	/**
-	 * Launch the application.
+	 * Makes the window visible when first initialized.
 	 */
-
-	
 	public void makeVisible() {
 		this.powerUpDenGUIFrame.setVisible(true);
 	}
 	/**
 	 * 
-	 * @return 
+	 * @return String[] powerUpNames. List of power up names to display in the combo box.
 	 */
 	private String[] getListPowerUpNames() {
 
@@ -43,6 +51,14 @@ public class PowerUpDenGUI {
 		}	
 		return powerUpNames;
 	}
+	/**
+	 * Applies a given power up to a given hero. 
+	 * Only applies if the hero does not already have the power up.
+	 * Removes the power up from the teams inventory.
+	 * Removes the power up from the power up combo box.
+	 * @param PowerUp powerUp
+	 * @param Hero hero
+	 */
 	private void applyPowerUp(PowerUp powerUp, Hero hero) {
 		String powerUpName = powerUp.getName();
 		boolean usedPowerUp = false;
@@ -73,8 +89,11 @@ public class PowerUpDenGUI {
 			team.removePowerUp(powerUp);
 			removePowerUpFromSelectionBox(powerUpName);
 		}
-
 	}
+	/**
+	 * Removes power up from selection box after a power up is consumed.
+	 * @param String powerUpName. Name of power up to remove from combo box.
+	 */
 	private void removePowerUpFromSelectionBox(String powerUpName) {
 		powerUpSelectionBox.removeItem(powerUpName);
 		if (team.getPowerUps().size() > 0) {
@@ -82,12 +101,14 @@ public class PowerUpDenGUI {
 		}
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public PowerUpDenGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+/**
+ * Calls initialize()
+ * @param Team teamInput
+ * @param Gameenvironment gameEnvironmentInput
+ * @param CityGUI cityGuiInput
+ */
+	public PowerUpDenGUI(Team teamInput, CityGUI cityGuiInput) {
 		team = teamInput;
-		gameEnvironment = gameEnvironmentInput;
 		cityGui = cityGuiInput;
 		initialize();
 	}
@@ -95,6 +116,8 @@ public class PowerUpDenGUI {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+	
 	private void initialize() {
 		powerUpDenGUIFrame = new JFrame();
 		powerUpDenGUIFrame.setBounds(100, 100, 1200, 800);
@@ -112,10 +135,10 @@ public class PowerUpDenGUI {
 		powerUpDenGUIFrame.getContentPane().add(noPowerUpsLabel);
 		noPowerUpsLabel.setVisible(false);
 		
-		powerUpSelectionBox = new JComboBox(getListPowerUpNames());
+		powerUpSelectionBox = new JComboBox<String>(getListPowerUpNames());
 		powerUpSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				heroAlreadyHasPowerUpLabel.setVisible(false);
+				heroAlreadyHasPowerUpLabel.setVisible(false); 
 				powerUpIndex = powerUpSelectionBox.getSelectedIndex();
 			}
 		});
@@ -132,10 +155,10 @@ public class PowerUpDenGUI {
 		lblChooseAHero.setBounds(400, 245, 400, 25);
 		powerUpDenGUIFrame.getContentPane().add(lblChooseAHero);
 		
-		JComboBox heroSelectionBox = new JComboBox(team.getHeroNames());
+		JComboBox<String> heroSelectionBox = new JComboBox<String>(team.getHeroNames());
 		heroSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				heroAlreadyHasPowerUpLabel.setVisible(false);
+				heroAlreadyHasPowerUpLabel.setVisible(false); //When the player changes the selected hero, warning label is made invisible.
 				heroIndex = heroSelectionBox.getSelectedIndex();
 			}
 		});
@@ -156,10 +179,9 @@ public class PowerUpDenGUI {
 		applyPowerUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (team.getPowerUps().size() == 0) {
-					noPowerUpsLabel.setVisible(true);
+					noPowerUpsLabel.setVisible(true); //If the team doesn't have any power ups, displays a warning label.
 				} else {
 					applyPowerUp(team.getPowerUps().get(powerUpIndex), team.getHeroes().get(heroIndex));
-					
 				}
 			}
 		});

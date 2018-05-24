@@ -1,59 +1,90 @@
 import java.util.ArrayList;
 
 public class Team {
-	
+	/**
+	 * Attributes:
+	 * Team name
+	 * Current money, initially set to 100.
+	 * Number of maps, initially set to 0.
+	 * ArrayList of heroes
+	 * ArrayList of power ups in the teams inventory.
+	 * ArrayList of healing items in the teams inventory.
+	 * Boolean variables for whether the team contains a Medic, Diplomat, Explorer or Lucky hero, as their special abilities affect the whole team.
+	 * Game environment
+	 */
 	public String teamName;
 	private int money = 100; //Some random amount later
 	private int maps = 0;
-	private ArrayList<Hero> heroes = new ArrayList<Hero>();
-	private ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
-	private ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
+	private ArrayList<Hero> heroes;
+	private ArrayList<PowerUp> powerUps;
+	private ArrayList<HealingItem> healingItems;
 	private boolean medicInTeam = false;
 	private boolean diplomatInTeam = false;
 	private boolean explorerInTeam = false;
 	private boolean luckyInTeam = false;
 	private GameEnvironment gameEnvironment;
-	
+	/**
+	 * 
+	 * @param gameEnvironmentInput 
+	 */
 	public Team(GameEnvironment gameEnvironmentInput) {
+		heroes = new ArrayList<Hero>();
+		powerUps = new ArrayList<PowerUp>();
+		healingItems = new ArrayList<HealingItem>();
 		gameEnvironment = gameEnvironmentInput;
 	}
-
+	/**
+	 * 
+	 * @return boolean medicInTeam. True if the team contains Medic hero.
+	 */
 	public boolean teamHasMedic() {
 		return medicInTeam;
 	}
-
+	/**
+	 * 
+	 * @param boolean teamHasMedic. True if the team contains Medic hero.
+	 */
 	public void setTeamHasMedic(boolean teamHasMedic) {
 		medicInTeam = teamHasMedic;
 	}
-
+	/**
+	 * 
+	 * @return boolean diplomatInTeam. True if the team contains Diplomat hero.
+	 */
 	public boolean teamHasDiplomat() {
 		return diplomatInTeam;
 	}
-
+	/**
+	 * 
+	 * @param boolean teamHasDiplomat. True if the team contains Diplomat hero.
+	 */
 	public void setTeamHasDiplomat(boolean teamHasDiplomat) {
 		diplomatInTeam = teamHasDiplomat;
 	}
-
+	/**
+	 * 
+	 * @return boolean explorerInTeam. True if the team contains Explorer hero.
+	 */
 	public boolean teamHasExplorer() {
 		return explorerInTeam;
 	}
 	/**
 	 * 
-	 * @param teamHasExplorer Boolean variable. True if the team contains Explorer hero.
+	 * @param boolean teamHasExplorer. True if the team contains Explorer hero.
 	 */
 	public void setTeamHasExplorer(boolean teamHasExplorer) {
 		explorerInTeam = teamHasExplorer;
 	}
 	/**
 	 * 
-	 * @return Boolean variable luckyInTeam. True if the team contains Lucky hero.
+	 * @return boolean luckyInTeam. True if the team contains Lucky hero.
 	 */
 	public boolean teamHasLucky() {
 		return luckyInTeam;
 	}
 	/**
 	 * 
-	 * @param teamHasLucky Boolean variable True if the team contains Lucky hero.
+	 * @param boolean teamHasLucky. True if the team contains Lucky hero.
 	 */
 	public void setTeamHasLucky(boolean teamHasLucky) {
 		luckyInTeam = teamHasLucky;
@@ -61,7 +92,7 @@ public class Team {
 	/**
 	 * Sets the name of the team to what the user inputs.
 	 * Called during the setup of the game.
-	 * @param teamNameInput Name of team
+	 * @param String teamNameInput Name of team
 	 */
 	public void setTeamName(String teamNameInput) {
 		teamName = teamNameInput;
@@ -69,7 +100,7 @@ public class Team {
 	/**
 	 * Decreases the amount of money the team has.
 	 * Called from the ShopGUI after purchasing an item.
-	 * @param cost Amount to decreases teams money by.
+	 * @param int cost Amount to decreases teams money by.
 	 */
 	public void decreaseMoneyBy(int cost) {
 		money -= cost;
@@ -83,14 +114,14 @@ public class Team {
 	}
 	/**
 	 * Removes a power up from the teams inventory.
-	 * @param powerUp Power up to be removed.
+	 * @param powerUp PowerUp. Power up to be removed.
 	 */
 	public void removePowerUp(PowerUp powerUp) {
 		powerUps.remove(powerUp);
 	}
 	/**
 	 * Adds a healing item to the teams inventory.
-	 * @param healingItem Healing item to be removed.
+	 * @param healingItem HealingItem. Healing item to be removed.
 	 */
 	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
@@ -109,35 +140,35 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return Number of maps left in the team.
+	 * @return int Number of maps left in the team.
 	 */
 	public int getNumberMaps() {
 		return maps;
 	}
 	/**
 	 * 
-	 * @return Money left in the team.
+	 * @return int Money left in the team.
 	 */
 	public int getMoney() {
 		return money;
 	}
 	/** Adds a power up to the inventory of the team.
 	 * 
-	 * @param powerUp
+	 * @param powerUp PowerUp
 	 */
 	public void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
 	}
 	/**
 	 * 		
-	 * @return Number of heroes in the team.
+	 * @return int Number of heroes in the team.
 	 */
 	public int getNumberHeroes() {
 		return heroes.size();
 	}
 	/**
 	 * 
-	 * @return List of the names of the heroes in the team to display in JComboBoxes throughout the game.
+	 * @return String[] List of the names of the heroes in the team to display in JComboBoxes throughout the game.
 	 */
 	public String[] getHeroNames() {
 		String[] heroNames = new String[heroes.size()];
@@ -148,7 +179,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return ArrayList of hero types in the team.
+	 * @return ArrayList<String> List of hero types in the team.
 	 */
 	public ArrayList<String> getHeroTypes() {
 		ArrayList<String> heroTypes = new ArrayList<String>();
@@ -159,7 +190,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return List of the names of the healing items to display in JComboBoxes throughout the game.
+	 * @return String[] List of the names of the healing items to display in JComboBoxes throughout the game.
 	 */
 	public String[] getHealingItemNames() {
 		String[] healingItemNames = new String[healingItems.size()];
@@ -170,7 +201,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return List of the names of the power ups to display in JComboBoxes throughout the game.
+	 * @return String[] List of the names of the power ups to display in JComboBoxes throughout the game.
 	 */
 	public String[] getPowerUpNames() {
 		String[] powerUpNames = new String[powerUps.size()];
@@ -181,35 +212,35 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return ArrayList of healing items in the teams inventory.
+	 * @return ArrayList<HealingItem> List of healing items in the teams inventory.
 	 */
 	public ArrayList<HealingItem> getHealingItems() {
 		return healingItems;
 	}
 	/**
 	 * 
-	 * @return ArrayList of heroes in the team.
+	 * @return ArrayList<Hero> List of heroes in the team.
 	 */
 	public ArrayList<Hero> getHeroes() {
 		return heroes;
 	}
 	/** Adds a hero to the team.
 	 * 
-	 * @param hero 
+	 * @param hero Hero
 	 */
 	public void addHero(Hero hero) {
 		heroes.add(hero);
 	}
 	/**
 	 * 
-	 * @return ArrayList of the power ups in the teams inventory.
+	 * @return ArrayList<PowerUp> List of the power ups in the teams inventory.
 	 */
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
 	}
 	/** Removes a healing item from the teams inventory.
 	 * 
-	 * @param healingItem
+	 * @param healingItem HealingItem
 	 */
 	public void removeHealingItem(HealingItem healingItem) {
 		healingItems.remove(healingItem);

@@ -11,22 +11,30 @@ import javax.swing.SwingConstants;
 
 
 public class LairGUI {
-
+	/**
+	 * Attributes:
+	 * JFrame for the Lair GUI.
+	 * The city the team is currently in.
+	 * The team.
+	 * The game environment handling the game.
+	 */
 	private JFrame lairFrame;
 	private CityGUI cityGui;
 	private Team team;
 	private GameEnvironment gameEnvironment;
 
 	/**
-	 * Launch the application.
+	 * Makes the lair window visible when first initialized.
 	 */
-
 	public void makeVisible() {
 		this.lairFrame.setVisible(true);
 	}
 
 	/**
-	 * Create the application.
+	 * Calls initialize()
+	 * @param Team teamInput
+	 * @param GameEnvironment gameEnvironmentInput
+	 * @param CityGUI cityGuiInput
 	 */
 	public LairGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		team = teamInput;
@@ -34,7 +42,9 @@ public class LairGUI {
 		cityGui = cityGuiInput;
 		initialize();
 	}
-	
+	/**
+	 * If the team chooses to go back to the city, makes city visible again and closes the lair window.
+	 */
 	private void finishedWindow() {
 		cityGui.makeCityVisible();
 		lairFrame.dispose();
@@ -51,7 +61,7 @@ public class LairGUI {
 		lairFrame.getContentPane().setLayout(null);
 		
 		int currentCity = gameEnvironment.getCurrentCityIndex();
-		Villain villain = gameEnvironment.getVillains().get(currentCity);
+		Villain villain = gameEnvironment.getVillains().get(currentCity); //gets the villain corresponding to the current city.
 		
 		JButton btnEnterTheLair = new JButton("Enter the lair!");
 		btnEnterTheLair.setBounds(510, 450, 180, 60);

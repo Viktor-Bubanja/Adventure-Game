@@ -50,21 +50,21 @@ class HeroTest {
 
 	@Test
 	final void testAddPaperScissorsRockPowerUp() {
-		hero.addPaperScissorsRockPowerUp();
+		hero.setHasPaperScissorsRockPowerUp(true);
 		boolean hasPaperScissorsRockPowerUp = hero.getHasPaperScissorsRockPowerUp();
 		assertEquals(true, hasPaperScissorsRockPowerUp);
 	}
 
 	@Test
 	final void testAddGuessNumberPowerUp() {
-		hero.addGuessNumberPowerUp();
+		hero.setHasGuessNumberPowerUp(true);
 		boolean hasGuessNumberPowerUp = hero.getHasGuessNumberPowerUp();
 		assertEquals(true, hasGuessNumberPowerUp);
 	}
 	
 	@Test
 	final void testAddDiceGamePowerUp() {
-		hero.addDiceGamePowerUp();
+		hero.setHasDiceGamePowerUp(true);
 		boolean hasDiceGamePowerUp = hero.getHasDiceGamePowerUp();
 		assertEquals(true, hasDiceGamePowerUp);
 	}

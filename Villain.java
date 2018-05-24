@@ -2,25 +2,20 @@ import java.util.ArrayList;
 
 public class Villain {
 	/**
-	 * Taunt of the Villain.
+	 * 
+	 * Attributes:
+	 * Taunt of the Villain
+	 * ArrayList containing possible games the Villain might play.
+	 * Villains name
+	 * Villains damage
+	 * Number of lives left. Initially three if the Villain is not a Super Villain, otherwise five.
 	 */
 	private String taunt;
-	/**
-	 *  List of Strings which represent the possible games the Villain might play.
-	 */
 	private ArrayList<String> games;
-	/**
-	 *  Villains name
-	 */
 	private String name;
-	/**
-	 *  Damage that the Villain deals.
-	 */
 	private int damage;
-	/**
-	 *  Number of remaining lives of the Villain.
-	 */
 	private int lives = 3;
+	
 	/**
 	 * 
 	 * @return Taunt of the Villain
@@ -30,14 +25,14 @@ public class Villain {
 	}
 	/**
 	 * 
-	 * @return Name of Villain
+	 * @return String Name of Villain
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
 	 * 
-	 * @return List of possible games Villain might play.
+	 * @return ArrayList<String> List of possible games Villain might play.
 	 */
 	public ArrayList<String> getGames() {
 		return games;
@@ -50,24 +45,24 @@ public class Villain {
 	}
 	/**
 	 * 
-	 * @return Number of lives Villain has remaining.
+	 * @return int Number of lives Villain has remaining.
 	 */
 	public int getLives() {
 		return lives;
 	}
 	/**
 	 * 
-	 * @return Damage that the Villain deals.
+	 * @return int Damage that the Villain deals.
 	 */
 	public int getDamage() {
 		return damage;
 	}
 	/** Constructor for the Villain class.
 	 *  The Super Villain has five lives, all other Villains have three.
-	 * @param inputTaunt Taunt that the Villain says in the BattleScreen.
-	 * @param inputGames List of possible games the Villain might play.
-	 * @param inputName Villains name
-	 * @param inputDamage Damage that the Villain deals.
+	 * @param String inputTaunt Taunt that the Villain says in the BattleScreen.
+	 * @param ArrayList<String> inputGames List of possible games the Villain might play.
+	 * @param String inputName Villains name
+	 * @param int inputDamage Damage that the Villain deals.
 	 */
 	public Villain(String inputTaunt, ArrayList<String> inputGames, String inputName, int inputDamage) {
 		taunt = inputTaunt;

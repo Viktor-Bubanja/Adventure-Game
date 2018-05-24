@@ -13,33 +13,69 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 
 public class ShopGUI {
+
+	
+	/**
+	 * Shop GUI Class.
+	 * The team can buy healing items, power ups, and maps from the shop.
+	 * Attributes:
+	 * JFrame for the ShopGUI.
+	 * Small Potion (Subclass of HealingItem). Heals hero by 25%.
+	 * Quick Potion (Subclass of HealingItem). Heals hero by 25% quickly.
+	 * Big Potion (Subclass of HealingItem). Heals the hero by 50%.
+	 * Golden Die (Subclass of PowerUp). In the Dice Game, a hero with this power up can only roll higher than or equal to 3.
+	 * Extra Guess (Subclass of PowerUp). In the Guess the Number Game, a hero with this power up has an extra guess to guess the number.
+	 * Paper Scissors Rock Clue (Subclass of PowerUp). In the Paper Scissors Rock Game, a hero with this power up gets a clue indicating what the Villain's move might be.
+	 * Map. Reveals the layout of the city.
+	 * The current city you are fighting in.
+	 * Your team
+	 * The game environment handling the game.
+	 * List of power ups the team can buy.
+	 * List of healing items the team can buy.
+	 * Warning labels and Labels showing the inventory of the team.
+	 * 
+	 */
 	private JFrame shopGUIFrame;
-	private JLabel notEnoughMoneyLabel = new JLabel("You don't have enough money!");
-	private JLabel powerUpsLabel = new JLabel("");
-	private JLabel healingItemsLabel = new JLabel("");
-	private JLabel tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
-	private HealingItem smallPotion = new SmallPotion();
-	private HealingItem quickPotion = new QuickPotion();
-	private HealingItem bigPotion = new BigPotion();
-	private PowerUp goldenDie = new GoldenDie();
-	private PowerUp extraGuess = new ExtraGuess();
-	private PowerUp paperScissorsRockClue = new PaperScissorsRockClue();
-	private Map map = new Map();
-	private static List<PowerUp> powerUps = new ArrayList<PowerUp>();
-	private static List<HealingItem> healingItems = new ArrayList<HealingItem>();
-	private JLabel numberMapsLabel = new JLabel("");
+	private HealingItem smallPotion;
+	private HealingItem quickPotion;
+	private HealingItem bigPotion;
+	private PowerUp goldenDie;
+	private PowerUp extraGuess;
+	private PowerUp paperScissorsRockClue;
+	private Map map;
 	private CityGUI cityGui;
 	private Team team;
 	private GameEnvironment gameEnvironment;
+	private static List<PowerUp> powerUps;
+	private static List<HealingItem> healingItems;
+	private JLabel notEnoughMoneyLabel;
+	private JLabel powerUpsLabel;
+	private JLabel healingItemsLabel;
+	private JLabel tooManyMapsLabel;
+	private JLabel numberMapsLabel;
+	
 	/**
-	 * Launch the application.
+	 * Adds power ups to list of power ups, and adds healing items to list of healing items.
+	 * Calls initialize()
+	 * @param Team teamInput.
+	 * @param GameEnvironment gameEnvironmentInput
+	 * @param CityGUI cityGuiInput
 	 */
 	public ShopGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
+		map = new Map();
+		smallPotion = new SmallPotion();
+		quickPotion = new QuickPotion();
+		bigPotion = new BigPotion();
+		goldenDie = new GoldenDie();
+		extraGuess = new ExtraGuess();
+		paperScissorsRockClue = new PaperScissorsRockClue();
 		team = teamInput;
 		gameEnvironment = gameEnvironmentInput;
+		powerUps = new ArrayList<PowerUp>();
 		powerUps.add(paperScissorsRockClue);
 		powerUps.add(extraGuess);
 		powerUps.add(goldenDie);
+		healingItems = new ArrayList<HealingItem>();
 		healingItems.add(smallPotion);
 		healingItems.add(quickPotion);
 		healingItems.add(bigPotion);
@@ -47,46 +83,76 @@ public class ShopGUI {
 		
 		initialize();
 	}
-	
+	/**
+	 * Makes the window visible when first initialized.
+	 */
 	public void makeVisible() {
 		this.shopGUIFrame.setVisible(true);
 	}
-	
+	/**
+	 * 
+	 * @return List<PowerUp>  powerUps
+	 */
 	public List<PowerUp> getPowerUpList() {
 		return powerUps;
 	}
+	/**
+	 * 
+	 * @return List<HealingItem> healingItems
+	 */
 	public List<HealingItem> getHealingItemList() {
 		return healingItems;
 	}
-	
+	/**
+	 * 
+	 * @return HealingItem smallPotion
+	 */
 	public HealingItem getSmallPotion() {
 		return smallPotion;
 	}
-
+	/**
+	 * 
+	 * @return HealingItem quickPotion
+	 */
 	public HealingItem getQuickPotion() {
 		return quickPotion;
 	}
-
+	/**
+	 * 
+	 * @return HealingItem bigPotion
+	 */
 	public HealingItem getBigPotion() {
 		return bigPotion;
 	}
-
+	/**
+	 * 
+	 * @return PowerUp goldenDie
+	 */
 	public PowerUp getGoldenDie() {
 		return goldenDie;
 	}
-
+	/**
+	 * 
+	 * @return PowerUp extraGuess
+	 */
 	public PowerUp getExtraGuess() {
 		return extraGuess;
 	}
+	/**
+	 * 
+	 * @return PowerUp paperScissorsRockClue
+	 */
 	public PowerUp getpaperScissorsRockClue() {
 		return paperScissorsRockClue;
 	}
 
-	/**
-	 * Create the application.
-	 */
 
-	
+	/**
+	 * Method for purchasing a healing item.
+	 * If the team has enough money, adds the healing item to the teams inventory, and reduces their money by
+	 * the cost of the item.
+	 * @param HealingItem healingItem
+	 */
 	public void buyHealingItem(HealingItem healingItem) {
 		int cost = healingItem.getCost();
 		if (team.getMoney() < cost) {
@@ -100,7 +166,12 @@ public class ShopGUI {
 		}
 		
 	}
-	
+	/**
+	 * Method for purchasing a healing item.
+	 * If the team has enough money, and doesn't already have a map for each city, adds the map to their inventory
+	 * and reduces their money by the cost of the item.
+	 * @param Map map
+	 */
 	public void buyMap(Map map) {
 		int cost = map.getCost();
 		if (team.getMoney() < cost) {
@@ -110,14 +181,17 @@ public class ShopGUI {
 			team.addMap();
 			team.decreaseMoneyBy(cost);	
 			updateNumberMapsLabel();
-			if (!cityGui.getUsedMap()) {
-				cityGui.showMapButtonAndLabel();
-			}
+			cityGui.showMapButtonAndLabel();
+			
 		} else {
 			tooManyMapsLabel.setVisible(true);
 		}
 	}
-	
+	/**
+	 * Method for purchasing a power up.
+	 * If the team has enough money, adds the power up to their inventory, and reduces their money by the cost of the item.
+	 * @param PowerUp powerUp
+	 */
 	private void buyPowerUp(PowerUp powerUp) {
 		int cost = powerUp.getCost();
 		if (team.getMoney() < cost) {
@@ -129,7 +203,10 @@ public class ShopGUI {
 			updatePowerUpsLabel();
 		}
 	}
-	
+	/**
+	 * Updates the label showing the healing items in the teams inventory after the team either consumes a healing item,
+	 * or buys a healing item.
+	 */
 	public void updateHealingItemsLabel() {
 		String[] healingItemNames = team.getHealingItemNames();
 		String healingItemsString = "";
@@ -138,6 +215,10 @@ public class ShopGUI {
 		}
 		healingItemsLabel.setText(healingItemsString);
 	}
+	/**
+	 * Updates the label showing the power ups in the teams inventory after the team either consumes a power up,
+	 * or buys a power up.
+	 */
 	public void updatePowerUpsLabel() {
 		String[] powerUpNames = team.getPowerUpNames();
 		String powerUpsString = "";
@@ -146,19 +227,24 @@ public class ShopGUI {
 		}
 		powerUpsLabel.setText(powerUpsString);
 	}
+	/**
+	 * Updates the label showing the number of maps in the teams inventory after the team either uses a map,
+	 * or buys a map.
+	 */
 	public void updateNumberMapsLabel() {
 		int numberMaps = team.getNumberMaps();
 		numberMapsLabel.setText(Integer.toString(numberMaps));
 	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
 		shopGUIFrame = new JFrame();
 		shopGUIFrame.setBounds(100, 100, 1200, 800);
 		shopGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		shopGUIFrame.getContentPane().setLayout(null);
+		// Checks if the team has a diplomat, if so, reduces the cost of items in the shop.
 		if (team.teamHasDiplomat()) {
 			smallPotion.reduceCost(5);
 			quickPotion.reduceCost(10);
@@ -167,7 +253,8 @@ public class ShopGUI {
 			extraGuess.reduceCost(15);
 			paperScissorsRockClue.reduceCost(15);
 		}
-	
+		
+		healingItemsLabel = new JLabel("");
 		healingItemsLabel.setBounds(820, 360, 353, 20);
 		shopGUIFrame.getContentPane().add(healingItemsLabel);
 			
@@ -222,6 +309,7 @@ public class ShopGUI {
 		lblShop.setFont(new Font("Dialog", Font.BOLD, 40));
 		lblShop.setBounds(540, 20, 120, 73);
 		shopGUIFrame.getContentPane().add(lblShop);
+		notEnoughMoneyLabel = new JLabel("You don't have enough money!");
 		notEnoughMoneyLabel.setForeground(new Color(255, 0, 0));
 		notEnoughMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		notEnoughMoneyLabel.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -345,14 +433,15 @@ public class ShopGUI {
 		lblPowerUps.setBounds(700, 400, 108, 20);
 		shopGUIFrame.getContentPane().add(lblPowerUps);
 		
+		powerUpsLabel = new JLabel("");
 		powerUpsLabel.setBounds(820, 400, 366, 20);
 		shopGUIFrame.getContentPane().add(powerUpsLabel);
-		tooManyMapsLabel.setFont(new Font("Dialog", Font.BOLD, 16));
 		
+		tooManyMapsLabel = new JLabel("You already have maps for all remaining cities!");
+		tooManyMapsLabel.setFont(new Font("Dialog", Font.BOLD, 16));
 		tooManyMapsLabel.setBounds(188, 628, 413, 25);
 		shopGUIFrame.getContentPane().add(tooManyMapsLabel);
 		tooManyMapsLabel.setVisible(false);
-		
 		
 		JLabel extraRollCostLabel = new JLabel("$" + Integer.toString(goldenDie.getCost()));
 		extraRollCostLabel.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -373,7 +462,7 @@ public class ShopGUI {
 		lblMaps.setBounds(700, 440, 70, 20);
 		shopGUIFrame.getContentPane().add(lblMaps);
 		
-		
+		numberMapsLabel = new JLabel("");
 		numberMapsLabel.setBounds(820, 440, 70, 20);
 		shopGUIFrame.getContentPane().add(numberMapsLabel);
 		
@@ -433,8 +522,7 @@ public class ShopGUI {
 		backgroundPic.setBounds(0, 0, 1200, 800);
 		shopGUIFrame.getContentPane().add(backgroundPic);
 		
-		
-		
+		// Updates labels when a ShopGUI window is opened in case the team consumed a power up or healing item, or used a map
 		updatePowerUpsLabel();
 		updateHealingItemsLabel();
 		updateNumberMapsLabel();	
