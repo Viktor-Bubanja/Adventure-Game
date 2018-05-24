@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GameEnvironmentTest {
+	private GameEnvironment gameEnvironment;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -18,7 +19,8 @@ class GameEnvironmentTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		GameEnvironment gameEnvironment = new GameEnvironment();
+		gameEnvironment = new GameEnvironment();
+		
 	}
 
 	@AfterEach
@@ -26,28 +28,10 @@ class GameEnvironmentTest {
 	}
 
 	@Test
-	final void testStartTimer() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	final void testMain() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	final void testMoveToNewCity() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	final void testFinalCity() {
-		fail("Not yet implemented");
+		gameEnvironment.setNumberCities(0);
+		boolean inFinalCityBool;
+		inFinalCityBool = gameEnvironment.finalCity();
+		assertTrue(inFinalCityBool);
 	}
-
-	@Test
-	final void testHerosLeft() {
-		fail("Not yet implemented");
-	}
-
 }
