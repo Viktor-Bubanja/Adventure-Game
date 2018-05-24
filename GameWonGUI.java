@@ -56,8 +56,9 @@ public class GameWonGUI {
 		gameEnvironment.getEndTime();
 		
 		JLabel timeLabel = new JLabel(gameEnvironment.getEndTime()); //stops the timer and displays it
+		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		timeLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-		timeLabel.setBounds(630, 554, 158, 25);
+		timeLabel.setBounds(580, 554, 203, 25);
 		gameWonFrame.getContentPane().add(timeLabel);
 		
 		JLabel gameOverLabel = new JLabel("Game Over");
