@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Team {
 	
 	public String teamName;
-	private int numberHeroes;	
 	private int money = 100; //Some random amount later
 	private int maps = 0;
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
@@ -51,9 +50,8 @@ public class Team {
 		luckyInTeam = teamHasLucky;
 	}
 
-	public void setTeamName(String teamNameInput, int numberHeroesInput ) {
+	public void setTeamName(String teamNameInput) {
 		teamName = teamNameInput;
-		numberHeroes = numberHeroesInput;
 	}
 
 	public void decreaseMoneyBy(int cost) {
@@ -96,7 +94,6 @@ public class Team {
 		String[] heroNames = new String[heroes.size()];
 		for (int i = 0; i < heroes.size(); i++) {
 			heroNames[i] = heroes.get(i).getName();
-			//System.out.println(heroNames[i]);
 		}
 		return heroNames;
 	}
@@ -152,9 +149,7 @@ public class Team {
 		case "Lucky":		setTeamHasLucky(false);
 							break;
 		case "Diplomat":	setTeamHasDiplomat(false);
-		
 							break;
-		
 		}
 		if (heroes.size() == 0) {
 			gameEnvironment.gameLost();
