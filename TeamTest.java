@@ -8,10 +8,11 @@ import org.junit.jupiter.api.Test;
 
 class TeamTest {
 	private Team team;
+	private GameEnvironment gameEnvironment;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-
+		
 	}
 
 	@AfterAll
@@ -20,8 +21,8 @@ class TeamTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		GameEnvironment gameEnvironment = new GameEnvironment();
-		Team team = new Team(gameEnvironment);
+		gameEnvironment = new GameEnvironment();
+		team = new Team(gameEnvironment);
 	}
 
 	@AfterEach
@@ -39,47 +40,71 @@ class TeamTest {
 
 	@Test
 	final void testIncreaseMoneyBy() {
-		fail("Not yet implemented");
+		int initialMoney = team.getMoney();
+		int reward = 10;
+		team.increaseMoneyBy(reward);
+		int finalMoney = team.getMoney();
+		assertEquals(initialMoney + reward, finalMoney);
 	}
 
 	@Test
 	final void testRemovePowerUp() {
-		fail("Not yet implemented");
+		PowerUp powerUp = new PowerUp(0, "Name input");
+		team.addPowerUp(powerUp);
+		team.removePowerUp(powerUp);
+		assertFalse(team.getPowerUps().contains(powerUp));
 	}
 
 	@Test
 	final void testAddHealingItem() {
-		fail("Not yet implemented");
+		HealingItem healingItem = new HealingItem(0, 0, 0, "Name input");
+		team.addHealingItem(healingItem);
+		assertTrue(team.getHealingItems().contains(healingItem));
 	}
 
 	@Test
 	final void testAddMap() {
-		fail("Not yet implemented");
+		Map map = new Map();
+		team.addMap();
+		assertTrue(team.getNumberMaps() == 1);
 	}
 
 	@Test
 	final void testRemoveMap() {
-		fail("Not yet implemented");
+		Map map = new Map();
+		team.addMap();
+		team.removeMap();
+		assertTrue(team.getNumberMaps() == 0);
 	}
 
 	@Test
 	final void testAddPowerUp() {
-		fail("Not yet implemented");
+		PowerUp powerUp = new PowerUp(0, "Name input");
+		team.addPowerUp(powerUp);
+		assertTrue(team.getPowerUps().contains(powerUp));
 	}
 
 	@Test
 	final void testAddHero() {
-		fail("Not yet implemented");
+		Hero hero = new Hero("Name input", "Type input");
+		team.addHero(hero);
+		assertTrue(team.getHeroes().contains(hero));
 	}
 
 	@Test
 	final void testRemoveHealingItem() {
-		fail("Not yet implemented");
+		HealingItem healingItem = new HealingItem(0, 0, 0, "Name input");
+		team.addHealingItem(healingItem);
+		team.removeHealingItem(healingItem);
+		assertFalse(team.getHealingItems().contains(healingItem));
 	}
 
 	@Test
 	final void testKillHero() {
-		fail("Not yet implemented");
+		Hero hero = new Hero("Name input", "Type input");
+		team.addHero(hero);
+		team.killHero(hero);
+		assertFalse(team.getHeroes().contains(hero));
 	}
 
 }
