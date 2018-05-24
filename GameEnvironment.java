@@ -184,7 +184,7 @@ public class GameEnvironment {
 	 */
 	public String getBackground(int index) {
 		if (finalCity()) {
-			return cityBackgrounds.get(MAXNUMBERCITIES);
+			return cityBackgrounds.get(MAXNUMBERCITIES - 1);
 		} else {
 			return cityBackgrounds.get(index);
 		}	

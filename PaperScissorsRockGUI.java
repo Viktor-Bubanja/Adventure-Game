@@ -34,7 +34,7 @@ public class PaperScissorsRockGUI {
 	 * Labels displaying the game title, the round result, the villains move, and the game result.
 	 */
 	private JFrame paperScissorsRockFrame;
-	private Random random;
+	private Random random = new Random();
 	private int numVillainWon = 0;
 	private int numHeroWon = 0;
 	private HandSign herosMove;
@@ -73,7 +73,6 @@ public class PaperScissorsRockGUI {
 	 * @param GamEnvironment gameEnvironmentInput
 	 */
 	public PaperScissorsRockGUI(Hero heroPlayingInput, BattleWindowGUI battleWindowInputGui, GameEnvironment gameEnvironmentInput) {
-		random = new Random();
 		gameEnvironment = gameEnvironmentInput;
 		battleWindowGui = battleWindowInputGui;
 		heroPlaying = heroPlayingInput;
@@ -170,6 +169,13 @@ public class PaperScissorsRockGUI {
 		villainsMoveLabel.setBounds(629, 170, 150, 30);
 		paperScissorsRockFrame.getContentPane().add(villainsMoveLabel);
 		
+		winOrLoseGameLabel = new JLabel("");
+		winOrLoseGameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		winOrLoseGameLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		winOrLoseGameLabel.setBounds(375, 450, 450, 165);
+		winOrLoseGameLabel.setVisible(false);
+		paperScissorsRockFrame.getContentPane().add(winOrLoseGameLabel);
+		
 		winOrLoseRoundLabel = new JLabel("");
 		winOrLoseRoundLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		winOrLoseRoundLabel.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -204,9 +210,7 @@ public class PaperScissorsRockGUI {
 		scissorsButton = new JButton("Scissors");
 		scissorsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!gameOver) {
-					buttonClicked(1); //1 indicated the player chose scissors.
-				} 
+				buttonClicked(1); //1 indicated the player chose scissors.
 			}
 		});
 		scissorsButton.setBounds(510, 500, 180, 60);
@@ -220,13 +224,6 @@ public class PaperScissorsRockGUI {
 		});
 		rockButton.setBounds(860, 500, 180, 60);
 		paperScissorsRockFrame.getContentPane().add(rockButton);
-		
-		winOrLoseGameLabel = new JLabel("");
-		winOrLoseGameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		winOrLoseGameLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-		winOrLoseGameLabel.setBounds(375, 450, 450, 165);
-		winOrLoseGameLabel.setVisible(false);
-		paperScissorsRockFrame.getContentPane().add(winOrLoseGameLabel);
 		
 		goBackButton = new JButton("Go Back!");
 		goBackButton.addActionListener(new ActionListener() {
@@ -288,6 +285,7 @@ public class PaperScissorsRockGUI {
 					battleWindowGui.villainDies();
 					paperScissorsRockFrame.dispose();
 				}
+			}
 			
 		} else if (numVillainWon == 3) {
 			setButtonsInvisible();
@@ -311,12 +309,13 @@ public class PaperScissorsRockGUI {
 		//Displays next clue.
 		if (!gameOver) {
 			int randomNumber = getRandomNumber();
+			
 			if (heroHasPowerUp) {
 				giveClue(randomNumber);
 			}
 			villainsMove = HandSign.parseType(randomNumber);
 		}
-		}
+		
 	}
 	/**
 	 * Hides the Paper, Scissors and Rock buttons after the game is over.

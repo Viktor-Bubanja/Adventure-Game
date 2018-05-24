@@ -126,26 +126,30 @@ public class HospitalGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		ActionListener countdown = new ActionListener() { //gets called every second by the timer.
-			public void actionPerformed(ActionEvent e) {
-				timeRemaining--;
-				countdownTimerLabel.setText(Integer.toString(timeRemaining));
-				if (timeRemaining <= 0) { //healing is finished
-					timer.stop();
-					healButton.setVisible(true);
-					currentlyHealingLabel.setVisible(false);
-					countdownTimerLabel.setText("Done");
-					heroToHeal.heal(currentHealingItem.getHealingAmount());
-					cityGui.updateHeroListLabel(); //updates the status of the healed hero's health in the City GUI after healing.
-				}
-			}
-		};
-		
 		HospitalFrame = new JFrame();
 		HospitalFrame.setTitle("Hospital");
 		HospitalFrame.setBounds(100, 100, 1200, 800);
 		HospitalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		HospitalFrame.getContentPane().setLayout(null);
+		
+		JLabel noPotionsLabel = new JLabel("You have no Potions!");
+		noPotionsLabel.setForeground(Color.RED);
+		noPotionsLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		noPotionsLabel.setBounds(770, 430, 200, 30);
+		HospitalFrame.getContentPane().add(noPotionsLabel);
+		noPotionsLabel.setVisible(false);
+		
+		healButton = new JButton("Heal");		
+		healButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (team.getHealingItems().size() == 0) {
+					noPotionsLabel.setVisible(true); //Displayed if team doesn't have any potions.
+				} else {
+					healHero(team.getHealingItems().get(healingItemIndex), team.getHeroes().get(heroIndex));
+				}
+				
+			}
+		});
 		
 		countdownTimerLabel = new JLabel("");
 		countdownTimerLabel.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -157,6 +161,7 @@ public class HospitalGUI {
 		currentlyHealingLabel.setFont(new Font("Dialog", Font.BOLD, 17));
 		currentlyHealingLabel.setBounds(900, 239, 113, 15);
 		HospitalFrame.getContentPane().add(currentlyHealingLabel);
+		currentlyHealingLabel.setVisible(false);
 		
 		fullHealthWarningLabel = new JLabel("Hero is already full health!");
 		fullHealthWarningLabel.setForeground(Color.RED);
@@ -187,15 +192,8 @@ public class HospitalGUI {
 		lblChooseAHealing.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblChooseAHealing.setBounds(461, 388, 290, 18);
 		HospitalFrame.getContentPane().add(lblChooseAHealing);
-		
-		JLabel noPotionsLabel = new JLabel("You have no Potions!");
-		noPotionsLabel.setForeground(Color.RED);
-		noPotionsLabel.setFont(new Font("Dialog", Font.BOLD, 17));
-		noPotionsLabel.setBounds(770, 430, 200, 30);
-		HospitalFrame.getContentPane().add(noPotionsLabel);
-		noPotionsLabel.setVisible(false);
 
-		JComboBox<String> heroComboBox = new JComboBox<String>(team.getHeroNames());
+		JComboBox heroComboBox = new JComboBox(team.getHeroNames());
 		heroComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroIndex = heroComboBox.getSelectedIndex();
@@ -206,7 +204,7 @@ public class HospitalGUI {
 		heroComboBox.setBounds(475, 290, 250, 30);
 		HospitalFrame.getContentPane().add(heroComboBox);
 		
-		healingItemComboBox = new JComboBox<String>(getListHealingItemNames());
+		healingItemComboBox = new JComboBox(getListHealingItemNames());
 		healingItemComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				healingItemIndex = healingItemComboBox.getSelectedIndex();
@@ -214,18 +212,7 @@ public class HospitalGUI {
 		});
 		healingItemComboBox.setBounds(475, 430, 250, 30);
 		HospitalFrame.getContentPane().add(healingItemComboBox);
-		JButton healButton = new JButton("Heal");		
-		healButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (team.getHealingItems().size() == 0) {
-					noPotionsLabel.setVisible(true); //Displayed if team doesn't have any potions.
-				} else {
-					
-					healHero(team.getHealingItems().get(healingItemIndex), team.getHeroes().get(heroIndex));
-				}
-				
-			}
-		});
+		
 		healButton.setBounds(540, 490, 120, 40);
 		HospitalFrame.getContentPane().add(healButton);
 				
@@ -237,6 +224,21 @@ public class HospitalGUI {
 		});
 		btnClose.setBounds(980, 680, 180, 60);
 		HospitalFrame.getContentPane().add(btnClose);
+		
+		ActionListener countdown = new ActionListener() { //gets called every second by the timer.
+			public void actionPerformed(ActionEvent e) {
+				timeRemaining--;
+				countdownTimerLabel.setText(Integer.toString(timeRemaining));
+				if (timeRemaining <= 0) { //healing is finished
+					timer.stop();
+					healButton.setVisible(true);
+					currentlyHealingLabel.setVisible(false);
+					countdownTimerLabel.setText("Done");
+					heroToHeal.heal(currentHealingItem.getHealingAmount());
+					cityGui.updateHeroListLabel(); //updates the status of the healed hero's health in the City GUI after healing.
+				}
+			}
+		};
 	
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
