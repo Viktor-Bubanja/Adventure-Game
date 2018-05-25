@@ -103,9 +103,8 @@ public class PowerUpDenGUI {
 
 /**
  * Calls initialize()
- * @param Team teamInput
- * @param Gameenvironment gameEnvironmentInput
- * @param CityGUI cityGuiInput
+ * @param teamInput Team 
+ * @param cityGuiInput CityGUI 
  */
 	public PowerUpDenGUI(Team teamInput, CityGUI cityGuiInput) {
 		team = teamInput;
@@ -116,8 +115,6 @@ public class PowerUpDenGUI {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	
-	
 	private void initialize() {
 		powerUpDenGUIFrame = new JFrame();
 		powerUpDenGUIFrame.setBounds(100, 100, 1200, 800);

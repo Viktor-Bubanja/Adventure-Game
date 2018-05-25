@@ -9,27 +9,27 @@ public class PowerUp {
 	private String name;
 	
 	/**
-	 * @param int costInput
-	 * @param String nameInput
+	 * @param costInput int 
+	 * @param nameInput String 
 	 */
 	public PowerUp (int costInput, String nameInput) {
 		cost = costInput;
 		name = nameInput;
 	}
 	/**
-	 * @return int cost
+	 * @return cost int 
 	 */
 	public int getCost() {
 		return cost;
 	}
 	/**
-	 * @return String name
+	 * @return name String 
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
-	 * @param int reduceBy
+	 * @param reduceBy int 
 	 */
 	public void reduceCost(int reduceBy) {
 		cost -= reduceBy;

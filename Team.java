@@ -25,7 +25,7 @@ public class Team {
 	private GameEnvironment gameEnvironment;
 	/**
 	 * 
-	 * @param gameEnvironmentInput 
+	 * @param gameEnvironmentInput GameEnvironment
 	 */
 	public Team(GameEnvironment gameEnvironmentInput) {
 		heroes = new ArrayList<Hero>();
@@ -42,7 +42,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @param boolean teamHasMedic. True if the team contains Medic hero.
+	 * @param teamHasMedic boolean. True if the team contains Medic hero.
 	 */
 	public void setTeamHasMedic(boolean teamHasMedic) {
 		medicInTeam = teamHasMedic;
@@ -56,7 +56,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @param boolean teamHasDiplomat. True if the team contains Diplomat hero.
+	 * @param teamHasDiplomat boolean. True if the team contains Diplomat hero.
 	 */
 	public void setTeamHasDiplomat(boolean teamHasDiplomat) {
 		diplomatInTeam = teamHasDiplomat;
@@ -70,7 +70,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @param boolean teamHasExplorer. True if the team contains Explorer hero.
+	 * @param teamHasExplorer boolean. True if the team contains Explorer hero.
 	 */
 	public void setTeamHasExplorer(boolean teamHasExplorer) {
 		explorerInTeam = teamHasExplorer;
@@ -84,7 +84,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @param boolean teamHasLucky. True if the team contains Lucky hero.
+	 * @param teamHasLucky boolean. True if the team contains Lucky hero.
 	 */
 	public void setTeamHasLucky(boolean teamHasLucky) {
 		luckyInTeam = teamHasLucky;
@@ -92,7 +92,7 @@ public class Team {
 	/**
 	 * Sets the name of the team to what the user inputs.
 	 * Called during the setup of the game.
-	 * @param String teamNameInput Name of team
+	 * @param teamNameInput String Name of team
 	 */
 	public void setTeamName(String teamNameInput) {
 		teamName = teamNameInput;
@@ -100,14 +100,14 @@ public class Team {
 	/**
 	 * Decreases the amount of money the team has.
 	 * Called from the ShopGUI after purchasing an item.
-	 * @param int cost Amount to decreases teams money by.
+	 * @param cost int Amount to decreases teams money by.
 	 */
 	public void decreaseMoneyBy(int cost) {
 		money -= cost;
 	}
 	/**
 	 * Increases the amount of money the team has by a given amount after defeating a villain.
-	 * @param reward Amount of money given to the team.
+	 * @param reward int Amount of money given to the team.
 	 */
 	public void increaseMoneyBy(int reward) {
 		money += reward;
@@ -179,7 +179,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return ArrayList<String> List of hero types in the team.
+	 * @return ArrayList List of hero types in the team.
 	 */
 	public ArrayList<String> getHeroTypes() {
 		ArrayList<String> heroTypes = new ArrayList<String>();
@@ -212,14 +212,14 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return ArrayList<HealingItem> List of healing items in the teams inventory.
+	 * @return ArrayList List of healing items in the teams inventory.
 	 */
 	public ArrayList<HealingItem> getHealingItems() {
 		return healingItems;
 	}
 	/**
 	 * 
-	 * @return ArrayList<Hero> List of heroes in the team.
+	 * @return ArrayListList of heroes in the team.
 	 */
 	public ArrayList<Hero> getHeroes() {
 		return heroes;
@@ -233,7 +233,7 @@ public class Team {
 	}
 	/**
 	 * 
-	 * @return ArrayList<PowerUp> List of the power ups in the teams inventory.
+	 * @return ArrayList List of the power ups in the teams inventory.
 	 */
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;

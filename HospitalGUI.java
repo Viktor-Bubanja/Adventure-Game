@@ -56,8 +56,8 @@ public class HospitalGUI {
 	}
 	/**
 	 * Calls initialize()
-	 * @param Team teamInput
-	 * @param CityGUI cityGuiInput
+	 * @param teamInput Team 
+	 * @param cityGuiInput CityGUI 
 	 */
 	public HospitalGUI(Team teamInput, CityGUI cityGuiInput) {
 		team = teamInput;
@@ -77,8 +77,8 @@ public class HospitalGUI {
 	 * Calculates the healing time by multiplying the application time of the healing item by 10 then dividing by the hero's recovery rate.
 	 * (The higher the recovery rate, the lower the healing time)
 	 * Player can only heal one hero at a time.
-	 * @param HealingItem healingItem
-	 * @param Hero hero
+	 * @param healingItem HealingItem 
+	 * @param hero Hero 
 	 */
 	private void healHero(HealingItem healingItem, Hero hero) {
 		heroToHeal = hero;
@@ -100,7 +100,7 @@ public class HospitalGUI {
 	}
 	/**
 	 * After consuming, removes the healing item from the healing item combo box.
-	 * @param String healingItemName. Name of healing item to be removed.
+	 * @param healingItemName String . Name of healing item to be removed.
 	 */
 	private void removeHealingItemFromComboBox(String healingItemName) {
 		healingItemComboBox.removeItem(healingItemName);

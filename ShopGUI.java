@@ -57,9 +57,9 @@ public class ShopGUI {
 	/**
 	 * Adds power ups to list of power ups, and adds healing items to list of healing items.
 	 * Calls initialize()
-	 * @param Team teamInput.
-	 * @param GameEnvironment gameEnvironmentInput
-	 * @param CityGUI cityGuiInput
+	 * @param teamInput Team .
+	 * @param gameEnvironmentInput GameEnvironment 
+	 * @param cityGuiInput CityGUI 
 	 */
 	public ShopGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		map = new Map();
@@ -91,14 +91,14 @@ public class ShopGUI {
 	}
 	/**
 	 * 
-	 * @return List<PowerUp>  powerUps
+	 * @return List  powerUps
 	 */
 	public List<PowerUp> getPowerUpList() {
 		return powerUps;
 	}
 	/**
 	 * 
-	 * @return List<HealingItem> healingItems
+	 * @return List healingItems
 	 */
 	public List<HealingItem> getHealingItemList() {
 		return healingItems;
@@ -151,7 +151,7 @@ public class ShopGUI {
 	 * Method for purchasing a healing item.
 	 * If the team has enough money, adds the healing item to the teams inventory, and reduces their money by
 	 * the cost of the item.
-	 * @param HealingItem healingItem
+	 * @param healingItem HealingItem 
 	 */
 	public void buyHealingItem(HealingItem healingItem) {
 		int cost = healingItem.getCost();
@@ -170,7 +170,7 @@ public class ShopGUI {
 	 * Method for purchasing a healing item.
 	 * If the team has enough money, and doesn't already have a map for each city, adds the map to their inventory
 	 * and reduces their money by the cost of the item.
-	 * @param Map map
+	 * @param map Map 
 	 */
 	public void buyMap(Map map) {
 		int cost = map.getCost();
@@ -190,7 +190,7 @@ public class ShopGUI {
 	/**
 	 * Method for purchasing a power up.
 	 * If the team has enough money, adds the power up to their inventory, and reduces their money by the cost of the item.
-	 * @param PowerUp powerUp
+	 * @param powerUp PowerUp 
 	 */
 	private void buyPowerUp(PowerUp powerUp) {
 		int cost = powerUp.getCost();

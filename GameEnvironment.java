@@ -35,7 +35,7 @@ public class GameEnvironment {
 	private long lStartTime;
 
 	/**
-	 * @return ArrayList<Villain>  The list of Villains
+	 * @return ArrayList  The list of Villains
 	 */
 	public ArrayList<Villain> getVillains() {
 		return villains;
@@ -92,7 +92,7 @@ public class GameEnvironment {
 		return currentCity;
 	}
 	/**
-	 * @return ArrayList<CityGUI> gets the list of cities
+	 * @return ArrayList gets the list of cities
 	 */
 	public ArrayList<CityGUI> getCityList() {
 		return cities;
@@ -173,7 +173,7 @@ public class GameEnvironment {
 		cityBackgrounds.add("/Images/lava.jpg");
 	}
 	/**
-	 * @return ArrayList<String> gets the list of backgrounds
+	 * @return ArrayList  gets the list of backgrounds
 	 */
 	public ArrayList<String> getCitybackgrounds() {
 		return cityBackgrounds;
@@ -315,7 +315,7 @@ public class GameEnvironment {
 	
 	/**
 	 * Makes a list of healing items
-	 * @return List<HealingItem> healingItems
+	 * @return List healingItems
 	 */
 	public List<HealingItem> getHealingItemsList() {
 		List<HealingItem> healingItems = new ArrayList<HealingItem>();
@@ -329,7 +329,7 @@ public class GameEnvironment {
 	}
 	/**
 	 * Makes a list of power Ups
-	 * @return List<PowerUp> powerUps
+	 * @return List powerUps
 	 */
 	public List<PowerUp> getPowerUpsList() {
 		List<PowerUp> powerUps = new ArrayList<PowerUp>();
@@ -355,10 +355,11 @@ public class GameEnvironment {
 	 * @return boolean false if you do not have any heros left. true if you have at least one still alive
 	 */
 	public boolean herosLeft() {
-		if (team.getHeroes().size() == 0)
+		if (team.getHeroes().size() == 0) {
 			return false;
-		else
+		} else {
 			return true;
+		}
 	}
 
 

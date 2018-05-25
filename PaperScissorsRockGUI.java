@@ -68,9 +68,9 @@ public class PaperScissorsRockGUI {
 	}
 	/**
 	 * Calls initialize()
-	 * @param Hero heroPlayingInput
-	 * @param BattleWindowGUI battleWindowInputGui
-	 * @param GamEnvironment gameEnvironmentInput
+	 * @param heroPlayingInput Hero 
+	 * @param battleWindowInputGui BattleWindowGUI 
+	 * @param gameEnvironmentInput GamEnvironment 
 	 */
 	public PaperScissorsRockGUI(Hero heroPlayingInput, BattleWindowGUI battleWindowInputGui, GameEnvironment gameEnvironmentInput) {
 		gameEnvironment = gameEnvironmentInput;
@@ -90,9 +90,9 @@ public class PaperScissorsRockGUI {
 	}
 	/**
 	 * Returns the result of the round.
-	 * @param HandSign herosMove
-	 * @param HandSign villainsMove
-	 * @return
+	 * @param herosMove HandSign 
+	 * @param villainsMove HandSign 
+	 * @return int 0 = you lost the round, 1 means you won the round, 2 means a tie
 	 */
 	private int returnRoundResult(HandSign herosMove, HandSign villainsMove) {
 		int loss = 0;
@@ -118,7 +118,7 @@ public class PaperScissorsRockGUI {
 	/**
 	 * Returns a String stating the round result, based on the result given as an int.
 	 * @param int roundResult
-	 * @return
+	 * @return String
 	 */
 	private String returnRoundLabelText(int roundResult) {
 		String labelText;
@@ -133,7 +133,7 @@ public class PaperScissorsRockGUI {
 	}
 	/**
 	 * Returns a random integer between 0 and 2 inclusive.
-	 * @return int random.nextInt(3)
+	 * @return int
 	 */
 	private int getRandomNumber() {
 		return random.nextInt(3);
@@ -246,7 +246,7 @@ public class PaperScissorsRockGUI {
 	/**
 	 * Gives clue if the hero has the Paper Scissors Rock Clue power up.
 	 * The clue displays two moves, one is the villains move, and the other is random.
-	 * @param int randomNumber
+	 * @param randomNumber int 
 	 */
 	private void giveClue(int randomNumber) {
 		int secondRandomNumber = random.nextInt(3); 
@@ -264,7 +264,7 @@ public class PaperScissorsRockGUI {
 	 * Allows the player to go back to the city, unless the entire game is over.
 	 * 
 	 * If the game is not over, displays the next clue, and decrements the villains lives or the hero's lives.
-	 * @param int num. The players move as an int. 0 is paper, 1 is scissors, 2 is rock.
+	 * @param num int . The players move as an int. 0 is paper, 1 is scissors, 2 is rock.
 	 */
 	private void buttonClicked(int num) {
 		herosMove = HandSign.parseType(num);
@@ -330,7 +330,7 @@ public class PaperScissorsRockGUI {
 	 * Displays either "You Win!" or "You Lose!".
 	 * 
 	 * Displays the button to go back to the battle window.
-	 * @param String gameResult
+	 * @param gameResult String 
 	 */
 	private void endGameLabels(String gameResult) {
 		winOrLoseGameLabel.setText(gameResult);

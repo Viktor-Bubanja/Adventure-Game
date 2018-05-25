@@ -32,7 +32,7 @@ public class Villain {
 	}
 	/**
 	 * 
-	 * @return ArrayList<String> List of possible games Villain might play.
+	 * @return ArrayList List of possible games Villain might play.
 	 */
 	public ArrayList<String> getGames() {
 		return games;
@@ -59,10 +59,10 @@ public class Villain {
 	}
 	/** Constructor for the Villain class.
 	 *  The Super Villain has five lives, all other Villains have three.
-	 * @param String inputTaunt Taunt that the Villain says in the BattleScreen.
-	 * @param ArrayList<String> inputGames List of possible games the Villain might play.
-	 * @param String inputName Villains name
-	 * @param int inputDamage Damage that the Villain deals.
+	 * @param inputTaunt String  Taunt that the Villain says in the BattleScreen.
+	 * @param inputGames ArrayList List of possible games the Villain might play.
+	 * @param inputName String  Villains name
+	 * @param inputDamage int  Damage that the Villain deals.
 	 */
 	public Villain(String inputTaunt, ArrayList<String> inputGames, String inputName, int inputDamage) {
 		taunt = inputTaunt;

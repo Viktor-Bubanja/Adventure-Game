@@ -32,9 +32,9 @@ public class LairGUI {
 
 	/**
 	 * Calls initialize()
-	 * @param Team teamInput
-	 * @param GameEnvironment gameEnvironmentInput
-	 * @param CityGUI cityGuiInput
+	 * @param teamInput Team 
+	 * @param gameEnvironmentInput GameEnvironment 
+	 * @param cityGuiInput CityGUI 
 	 */
 	public LairGUI(Team teamInput, GameEnvironment gameEnvironmentInput, CityGUI cityGuiInput) {
 		team = teamInput;

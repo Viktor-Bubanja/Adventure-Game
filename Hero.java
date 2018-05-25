@@ -58,7 +58,7 @@ public class Hero {
 	}
 	/**
 	 * decreases your max health (when medic dies) and sets your current health to that maxHealth if you had higher health
-	 * @param increaseBy int
+	 * @param decreaseBy int  
 	 */
 	public void decreaseMaxHealth(int decreaseBy) {
 		maxHealth -= decreaseBy;
@@ -67,8 +67,8 @@ public class Hero {
 		}
 	}
 	/**
-	 * heals you up untill the maxHealth
-	 * @param healingInput double
+	 * heals you up until the maxHealth
+	 * @param healingInput double  
 	 */
 	public void heal(double healingInput) {
 		int toHeal = (int) (healingInput * maxHealth);
