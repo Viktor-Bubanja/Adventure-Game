@@ -30,7 +30,7 @@ public class PowerUpDenGUI {
 	private int heroIndex;
 	private CityGUI cityGui;
 	private Team team;
-	private JComboBox<String> powerUpSelectionBox;
+	private JComboBox powerUpSelectionBox;
 	private JLabel heroAlreadyHasPowerUpLabel;
 	/**
 	 * Makes the window visible when first initialized.
@@ -135,7 +135,7 @@ public class PowerUpDenGUI {
 		powerUpDenGUIFrame.getContentPane().add(noPowerUpsLabel);
 		noPowerUpsLabel.setVisible(false);
 		
-		powerUpSelectionBox = new JComboBox<String>(getListPowerUpNames());
+		powerUpSelectionBox = new JComboBox(getListPowerUpNames());
 		powerUpSelectionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroAlreadyHasPowerUpLabel.setVisible(false); 
@@ -145,35 +145,35 @@ public class PowerUpDenGUI {
 		powerUpSelectionBox.setBounds(475, 430, 250, 30);
 		powerUpDenGUIFrame.getContentPane().add(powerUpSelectionBox);
 		
-		JLabel lblChooseAPower = new JLabel("Choose a Power Up:");
-		lblChooseAPower.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblChooseAPower.setBounds(500, 388, 200, 25);
-		powerUpDenGUIFrame.getContentPane().add(lblChooseAPower);
+		JLabel choosePowerLabel = new JLabel("Choose a Power Up:");
+		choosePowerLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		choosePowerLabel.setBounds(500, 388, 200, 25);
+		powerUpDenGUIFrame.getContentPane().add(choosePowerLabel);
 		
-		JLabel lblChooseAHero = new JLabel("Choose a Hero to apply the Power Up to:");
-		lblChooseAHero.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblChooseAHero.setBounds(400, 245, 400, 25);
-		powerUpDenGUIFrame.getContentPane().add(lblChooseAHero);
+		JLabel chooseHeroLabel = new JLabel("Choose a Hero to apply the Power Up to:");
+		chooseHeroLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		chooseHeroLabel.setBounds(400, 245, 400, 25);
+		powerUpDenGUIFrame.getContentPane().add(chooseHeroLabel);
 		
-		JComboBox<String> heroSelectionBox = new JComboBox<String>(team.getHeroNames());
-		heroSelectionBox.addActionListener(new ActionListener() {
+		JComboBox heroSelection = new JComboBox(team.getHeroNames());
+		heroSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				heroAlreadyHasPowerUpLabel.setVisible(false); //When the player changes the selected hero, warning label is made invisible.
-				heroIndex = heroSelectionBox.getSelectedIndex();
+				heroIndex = heroSelection.getSelectedIndex();
 			}
 		});
-		heroSelectionBox.setBounds(475, 290, 250, 30);
-		powerUpDenGUIFrame.getContentPane().add(heroSelectionBox);
+		heroSelection.setBounds(475, 290, 250, 30);
+		powerUpDenGUIFrame.getContentPane().add(heroSelection);
 		
-		JButton btnBackToHome = new JButton("Back to Home Base!");
-		btnBackToHome.addActionListener(new ActionListener() {
+		JButton backHomeButton = new JButton("Back to Home Base!");
+		backHomeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cityGui.makeCityVisible();
 				powerUpDenGUIFrame.dispose();
 			}
 		});
-		btnBackToHome.setBounds(980, 680, 180, 60);
-		powerUpDenGUIFrame.getContentPane().add(btnBackToHome);
+		backHomeButton.setBounds(980, 680, 180, 60);
+		powerUpDenGUIFrame.getContentPane().add(backHomeButton);
 		
 		JButton applyPowerUpButton = new JButton("Apply");
 		applyPowerUpButton.addActionListener(new ActionListener() {
@@ -188,11 +188,11 @@ public class PowerUpDenGUI {
 		applyPowerUpButton.setBounds(540, 490, 120, 40);
 		powerUpDenGUIFrame.getContentPane().add(applyPowerUpButton);
 		
-		JLabel lblPowerupDen = new JLabel("PowerUp Den");
-		lblPowerupDen.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPowerupDen.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblPowerupDen.setBounds(400, 40, 400, 50);
-		powerUpDenGUIFrame.getContentPane().add(lblPowerupDen);
+		JLabel denTitleLabel = new JLabel("PowerUp Den");
+		denTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		denTitleLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		denTitleLabel.setBounds(400, 40, 400, 50);
+		powerUpDenGUIFrame.getContentPane().add(denTitleLabel);
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));

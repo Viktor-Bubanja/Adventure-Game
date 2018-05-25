@@ -36,7 +36,7 @@ public class BattleWindowGUI {
 	private Team team;
 	private String currentGame;
 	private JLabel gameLabel;
-	private JComboBox<String> heroSelection;
+	private JComboBox heroSelection;
 /**
  * Sets the battle window to visible
  */
@@ -127,7 +127,7 @@ public class BattleWindowGUI {
 		nameLabel.setBounds(300, 50, 600, 22);
 		battleWindowFrame.getContentPane().add(nameLabel);
 		
-		heroSelection = new JComboBox<String>(team.getHeroNames()); //Combobox to select your hero
+		heroSelection = new JComboBox(team.getHeroNames()); //Combobox to select your hero
 		heroSelection.setBounds(475, 430, 250, 30);
 		battleWindowFrame.getContentPane().add(heroSelection);
 	
@@ -190,7 +190,7 @@ public class BattleWindowGUI {
 	 */
 	public void removeDeadHeroFromComboBox(Hero hero) {
 		//heroSelection.removeItem(hero);
-		heroSelection = new JComboBox<String>(team.getHeroNames());
+		heroSelection = new JComboBox(team.getHeroNames());
 		heroSelection.setBounds(267, 108, 161, 29);
 		battleWindowFrame.getContentPane().add(heroSelection);
 	}

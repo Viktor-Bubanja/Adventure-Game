@@ -177,21 +177,21 @@ public class HospitalGUI {
 		HospitalFrame.getContentPane().add(timeLeftLabel);
 		timeLeftLabel.setVisible(false);
 		
-		JLabel lblChooseAHero = new JLabel("Choose a hero to heal");
-		lblChooseAHero.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblChooseAHero.setBounds(488, 245, 227, 32);
-		HospitalFrame.getContentPane().add(lblChooseAHero);
+		JLabel chooseHeroLabel = new JLabel("Choose a hero to heal");
+		chooseHeroLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		chooseHeroLabel.setBounds(488, 245, 227, 32);
+		HospitalFrame.getContentPane().add(chooseHeroLabel);
 		
-		JLabel lblHospital = new JLabel("Hospital");
-		lblHospital.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHospital.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblHospital.setBounds(500, 40, 200, 50);
-		HospitalFrame.getContentPane().add(lblHospital);
+		JLabel hospitalTitleLabel = new JLabel("Hospital");
+		hospitalTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		hospitalTitleLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		hospitalTitleLabel.setBounds(500, 40, 200, 50);
+		HospitalFrame.getContentPane().add(hospitalTitleLabel);
 
-		JLabel lblChooseAHealing = new JLabel("Choose a healing item to use:");
-		lblChooseAHealing.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblChooseAHealing.setBounds(461, 388, 290, 18);
-		HospitalFrame.getContentPane().add(lblChooseAHealing);
+		JLabel chooseItemLabel = new JLabel("Choose a healing item to use:");
+		chooseItemLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		chooseItemLabel.setBounds(461, 388, 290, 18);
+		HospitalFrame.getContentPane().add(chooseItemLabel);
 
 		JComboBox heroComboBox = new JComboBox(team.getHeroNames());
 		heroComboBox.addActionListener(new ActionListener() {
@@ -216,14 +216,14 @@ public class HospitalGUI {
 		healButton.setBounds(540, 490, 120, 40);
 		HospitalFrame.getContentPane().add(healButton);
 				
-		JButton btnClose = new JButton("Back to Home Base!");
-		btnClose.addActionListener(new ActionListener() {
+		JButton closeButton = new JButton("Back to Home Base!");
+		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finishedWindow();
 			}
 		});
-		btnClose.setBounds(980, 680, 180, 60);
-		HospitalFrame.getContentPane().add(btnClose);
+		closeButton.setBounds(980, 680, 180, 60);
+		HospitalFrame.getContentPane().add(closeButton);
 		
 		ActionListener countdown = new ActionListener() { //gets called every second by the timer.
 			public void actionPerformed(ActionEvent e) {

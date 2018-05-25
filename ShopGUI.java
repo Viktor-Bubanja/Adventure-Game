@@ -258,25 +258,25 @@ public class ShopGUI {
 		healingItemsLabel.setBounds(820, 360, 353, 20);
 		shopGUIFrame.getContentPane().add(healingItemsLabel);
 			
-		JLabel lblSmallPotion = new JLabel("Small Potion");
-		lblSmallPotion.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblSmallPotion.setBounds(48, 345, 122, 23);
-		shopGUIFrame.getContentPane().add(lblSmallPotion);
+		JLabel smallPotLabel = new JLabel("Small Potion");
+		smallPotLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		smallPotLabel.setBounds(48, 345, 122, 23);
+		shopGUIFrame.getContentPane().add(smallPotLabel);
 		
-		JLabel lblQuickPotion = new JLabel("Quick Potion");
-		lblQuickPotion.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblQuickPotion.setBounds(275, 345, 122, 23);
-		shopGUIFrame.getContentPane().add(lblQuickPotion);
+		JLabel quickPotLabel = new JLabel("Quick Potion");
+		quickPotLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		quickPotLabel.setBounds(275, 345, 122, 23);
+		shopGUIFrame.getContentPane().add(quickPotLabel);
 		
-		JLabel lblBigPotion = new JLabel("Big Potion");
-		lblBigPotion.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblBigPotion.setBounds(501, 345, 122, 23);
-		shopGUIFrame.getContentPane().add(lblBigPotion);
+		JLabel bigPotLabel = new JLabel("Big Potion");
+		bigPotLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		bigPotLabel.setBounds(501, 345, 122, 23);
+		shopGUIFrame.getContentPane().add(bigPotLabel);
 		
-		JLabel lblMap = new JLabel("Map");
-		lblMap.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblMap.setBounds(85, 560, 61, 15);
-		shopGUIFrame.getContentPane().add(lblMap);
+		JLabel mapLabel = new JLabel("Map");
+		mapLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		mapLabel.setBounds(85, 560, 61, 15);
+		shopGUIFrame.getContentPane().add(mapLabel);
 		
 		JLabel smallPotionCostLabel = new JLabel("$" + Integer.toString(smallPotion.getCost()));
 		smallPotionCostLabel.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -304,11 +304,11 @@ public class ShopGUI {
 		moneyLeftLabel.setBounds(700, 522, 172, 15);
 		shopGUIFrame.getContentPane().add(moneyLeftLabel);
 		
-		JLabel lblShop = new JLabel("Shop");
-		lblShop.setHorizontalAlignment(SwingConstants.CENTER);
-		lblShop.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblShop.setBounds(540, 20, 120, 73);
-		shopGUIFrame.getContentPane().add(lblShop);
+		JLabel shopTitleLabel = new JLabel("Shop");
+		shopTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		shopTitleLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		shopTitleLabel.setBounds(540, 20, 120, 73);
+		shopGUIFrame.getContentPane().add(shopTitleLabel);
 		notEnoughMoneyLabel = new JLabel("You don't have enough money!");
 		notEnoughMoneyLabel.setForeground(new Color(255, 0, 0));
 		notEnoughMoneyLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -359,15 +359,15 @@ public class ShopGUI {
 		buyMapButton.setBounds(50, 620, 120, 40);
 		shopGUIFrame.getContentPane().add(buyMapButton);
 		
-		JButton btnBackToHome = new JButton("Back to Home Base!");
-		btnBackToHome.addActionListener(new ActionListener() {
+		JButton backHomeButton = new JButton("Back to Home Base!");
+		backHomeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cityGui.makeCityVisible();
 				shopGUIFrame.dispose();
 			}
 		});
-		btnBackToHome.setBounds(980, 680, 180, 60);
-		shopGUIFrame.getContentPane().add(btnBackToHome);
+		backHomeButton.setBounds(980, 680, 180, 60);
+		shopGUIFrame.getContentPane().add(backHomeButton);
 		
 		JButton buyExtraRollButton = new JButton("Buy");
 		buyExtraRollButton.addActionListener(new ActionListener() {
@@ -398,40 +398,40 @@ public class ShopGUI {
 		buyExtraGuessButton.setBounds(275, 220, 120, 40);
 		shopGUIFrame.getContentPane().add(buyExtraGuessButton);
 		
-		JLabel lblNewLabel = new JLabel("Golden Die");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblNewLabel.setBounds(45, 145, 125, 23);
-		shopGUIFrame.getContentPane().add(lblNewLabel);
+		JLabel goldenDieTitleLabel = new JLabel("Golden Die");
+		goldenDieTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		goldenDieTitleLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		goldenDieTitleLabel.setBounds(45, 145, 125, 23);
+		shopGUIFrame.getContentPane().add(goldenDieTitleLabel);
 		
-		JLabel lblExtraGuess = new JLabel("Extra Guess");
-		lblExtraGuess.setHorizontalAlignment(SwingConstants.CENTER);
-		lblExtraGuess.setForeground(new Color(0, 0, 0));
-		lblExtraGuess.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblExtraGuess.setBounds(275, 145, 134, 23);
-		shopGUIFrame.getContentPane().add(lblExtraGuess);
+		JLabel extraGuessTitleLabel = new JLabel("Extra Guess");
+		extraGuessTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		extraGuessTitleLabel.setForeground(new Color(0, 0, 0));
+		extraGuessTitleLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		extraGuessTitleLabel.setBounds(275, 145, 134, 23);
+		shopGUIFrame.getContentPane().add(extraGuessTitleLabel);
 		
-		JLabel lblClueForPaper = new JLabel("Clue for Paper Scissors Rock");
-		lblClueForPaper.setHorizontalAlignment(SwingConstants.CENTER);
-		lblClueForPaper.setFont(new Font("Dialog", Font.BOLD, 17));
-		lblClueForPaper.setBounds(430, 145, 273, 23);
-		shopGUIFrame.getContentPane().add(lblClueForPaper);
+		JLabel paperClueLabel = new JLabel("Clue for Paper Scissors Rock");
+		paperClueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		paperClueLabel.setFont(new Font("Dialog", Font.BOLD, 17));
+		paperClueLabel.setBounds(430, 145, 273, 23);
+		shopGUIFrame.getContentPane().add(paperClueLabel);
 		
 		buyExtraRollButton.setBounds(50, 220, 120, 40);
 		shopGUIFrame.getContentPane().add(buyExtraRollButton);
 		
-		JLabel lblInventory = new JLabel("Inventory:");
-		lblInventory.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblInventory.setBounds(700, 320, 150, 15);
-		shopGUIFrame.getContentPane().add(lblInventory);
+		JLabel inventoryLabel = new JLabel("Inventory:");
+		inventoryLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+		inventoryLabel.setBounds(700, 320, 150, 15);
+		shopGUIFrame.getContentPane().add(inventoryLabel);
 		
-		JLabel lblHealingItems = new JLabel("Healing Items:");
-		lblHealingItems.setBounds(700, 360, 122, 20);
-		shopGUIFrame.getContentPane().add(lblHealingItems);
+		JLabel yourHealingItemsLabel = new JLabel("Healing Items:");
+		yourHealingItemsLabel.setBounds(700, 360, 122, 20);
+		shopGUIFrame.getContentPane().add(yourHealingItemsLabel);
 		
-		JLabel lblPowerUps = new JLabel("Power Ups:");
-		lblPowerUps.setBounds(700, 400, 108, 20);
-		shopGUIFrame.getContentPane().add(lblPowerUps);
+		JLabel yourPowerUpsLabel = new JLabel("Power Ups:");
+		yourPowerUpsLabel.setBounds(700, 400, 108, 20);
+		shopGUIFrame.getContentPane().add(yourPowerUpsLabel);
 		
 		powerUpsLabel = new JLabel("");
 		powerUpsLabel.setBounds(820, 400, 366, 20);
@@ -458,9 +458,9 @@ public class ShopGUI {
 		clueCostLabel.setBounds(535, 195, 70, 15);
 		shopGUIFrame.getContentPane().add(clueCostLabel);
 		
-		JLabel lblMaps = new JLabel("Maps:");
-		lblMaps.setBounds(700, 440, 70, 20);
-		shopGUIFrame.getContentPane().add(lblMaps);
+		JLabel mapsLabel = new JLabel("Maps:");
+		mapsLabel.setBounds(700, 440, 70, 20);
+		shopGUIFrame.getContentPane().add(mapsLabel);
 		
 		numberMapsLabel = new JLabel("");
 		numberMapsLabel.setBounds(820, 440, 70, 20);
@@ -485,37 +485,37 @@ public class ShopGUI {
 		speechLabel.setBounds(836, 55, 166, 30);
 		shopGUIFrame.getContentPane().add(speechLabel);
 		
-		JLabel lblRollsHigherNumbers = new JLabel("Rolls higher numbers");
-		lblRollsHigherNumbers.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRollsHigherNumbers.setBounds(34, 172, 150, 15);
-		shopGUIFrame.getContentPane().add(lblRollsHigherNumbers);
+		JLabel goldenDieDescLabel = new JLabel("Rolls higher numbers");
+		goldenDieDescLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		goldenDieDescLabel.setBounds(34, 172, 150, 15);
+		shopGUIFrame.getContentPane().add(goldenDieDescLabel);
 		
-		JLabel lblExtraGuessAt = new JLabel("Extra guess at Guess the Number");
-		lblExtraGuessAt.setBounds(210, 172, 250, 15);
-		shopGUIFrame.getContentPane().add(lblExtraGuessAt);
+		JLabel extraGuessLabel = new JLabel("Extra guess at Guess the Number");
+		extraGuessLabel.setBounds(210, 172, 250, 15);
+		shopGUIFrame.getContentPane().add(extraGuessLabel);
 		
-		JLabel hint = new JLabel("Hints at Villains move");
-		hint.setHorizontalAlignment(SwingConstants.CENTER);
-		hint.setBounds(475, 172, 175, 15);
-		shopGUIFrame.getContentPane().add(hint);
+		JLabel paperClueDescLabel = new JLabel("Hints at Villains move");
+		paperClueDescLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		paperClueDescLabel.setBounds(475, 172, 175, 15);
+		shopGUIFrame.getContentPane().add(paperClueDescLabel);
 		
-		JLabel lblHealsHealth = new JLabel("Heals 25% health");
-		lblHealsHealth.setBounds(48, 370, 150, 15);
-		shopGUIFrame.getContentPane().add(lblHealsHealth);
+		JLabel smallHealthLabel = new JLabel("Heals 25% health");
+		smallHealthLabel.setBounds(48, 370, 150, 15);
+		shopGUIFrame.getContentPane().add(smallHealthLabel);
 		
-		JLabel lblHealsHealth_2 = new JLabel("Heals 25% health quickly");
-		lblHealsHealth_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHealsHealth_2.setBounds(250, 370, 180, 15);
-		shopGUIFrame.getContentPane().add(lblHealsHealth_2);
+		JLabel quickHealthDescLabel = new JLabel("Heals 25% health quickly");
+		quickHealthDescLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		quickHealthDescLabel.setBounds(250, 370, 180, 15);
+		shopGUIFrame.getContentPane().add(quickHealthDescLabel);
 		
-		JLabel lblHealsHealth_1 = new JLabel("Heals 50% health");
-		lblHealsHealth_1.setBounds(490, 370, 150, 15);
-		shopGUIFrame.getContentPane().add(lblHealsHealth_1);
+		JLabel bigHealthDescLabel = new JLabel("Heals 50% health");
+		bigHealthDescLabel.setBounds(490, 370, 150, 15);
+		shopGUIFrame.getContentPane().add(bigHealthDescLabel);
 		
-		JLabel lblRevealsLayoutOf = new JLabel("Reveals layout of City");
-		lblRevealsLayoutOf.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRevealsLayoutOf.setBounds(28, 580, 170, 15);
-		shopGUIFrame.getContentPane().add(lblRevealsLayoutOf);
+		JLabel mapDescLabel = new JLabel("Reveals layout of City");
+		mapDescLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		mapDescLabel.setBounds(28, 580, 170, 15);
+		shopGUIFrame.getContentPane().add(mapDescLabel);
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));

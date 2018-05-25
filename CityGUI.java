@@ -324,14 +324,14 @@ public class CityGUI {
 			showMapButtonAndLabel();
 		}
 		
-		JButton closeLabel = new JButton("I Give Up"); // Closes the game mid game :(
-		closeLabel.addActionListener(new ActionListener() {
+		JButton closeButton = new JButton("I Give Up"); // Closes the game mid game :(
+		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cityScreenFrame.dispose();
 			}
 		});
-		closeLabel.setBounds(980, 680, 180, 60);
-		cityScreenFrame.getContentPane().add(closeLabel);
+		closeButton.setBounds(980, 680, 180, 60);
+		cityScreenFrame.getContentPane().add(closeButton);
 
 		backgroundPic = new JLabel(); // background pic that changes for every city
 		backgroundPic.setIcon(new ImageIcon(CityGUI.class.getResource(gameEnvironment.getBackground(gameEnvironment.getCurrentCityIndex()))));

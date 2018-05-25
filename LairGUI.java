@@ -63,15 +63,15 @@ public class LairGUI {
 		int currentCity = gameEnvironment.getCurrentCityIndex();
 		Villain villain = gameEnvironment.getVillains().get(currentCity); //gets the villain corresponding to the current city.
 		
-		JButton btnEnterTheLair = new JButton("Enter the lair!");
-		btnEnterTheLair.setBounds(510, 450, 180, 60);
-		btnEnterTheLair.addActionListener(new ActionListener() {
+		JButton enterBattleButton = new JButton("Fight!");
+		enterBattleButton.setBounds(510, 450, 180, 60);
+		enterBattleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gameEnvironment.openBattleWindow(team, cityGui);
 				lairFrame.dispose();
 			}
 		});
-		lairFrame.getContentPane().add(btnEnterTheLair);
+		lairFrame.getContentPane().add(enterBattleButton);
 		
 		JButton backToHomeBaseButton = new JButton("Back to Home base");
 		backToHomeBaseButton.setBounds(980, 680, 180, 60);
@@ -95,10 +95,10 @@ public class LairGUI {
 		VillainLabel.setBounds(475, 345, 250, 50);
 		lairFrame.getContentPane().add(VillainLabel);
 		
-		JLabel lblNewLabel = new JLabel("Villain's Lair");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblNewLabel.setBounds(450, 40, 300, 100);
-		lairFrame.getContentPane().add(lblNewLabel);
+		JLabel lairTitleLabel = new JLabel("Villain's Lair");
+		lairTitleLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+		lairTitleLabel.setBounds(450, 40, 300, 100);
+		lairFrame.getContentPane().add(lairTitleLabel);
 		
 		JLabel backgroundPic = new JLabel("");
 		backgroundPic.setIcon(new ImageIcon(ShopGUI.class.getResource("/Images/notsodarkScroll.jpg")));
