@@ -1,31 +1,25 @@
 # Adventure-Game
 
  ----Authors----
- 
 Ryan Sheridan and Viktor Bubanja
 
  ----Name of the Game----
- 
 Heroes and Villains
 
  ----Description----
- 
 Heroes and Villains is a text game written in Java that utilizes Swing for the GUI.
 The game is played by moving your team between cities. Each city contains a shop where you can buy potions and power ups, a hospital where you can heal heroes, and a power up den where you can apply power ups to heroes.
 In each city you need to defeat the villain to move to the next city. The villain is fought by playing either paper scissors rock, guess the number, or roll the dice. The final city contains the super villain, which needs to be defeated in order to win the game.
 
  ----Prerequisites----
- 
 Java Runtime Enviroment to run JAR files, such as Eclipse.
 
  ----How to play from Eclipse----
- 
 Once you have Eclipse installed, create a new empty java project.
 Import the /sourceCode/src/ folder into this new project by rightclicking your new projects /src/ folder and clicking import.
 Now make sure you are running the gameEnvironment and press RUN
 
  ----How to play from command line----
- 
 Open the terminal to our games folder.
 Run the command: 
 java -jar vbu19_rsh127_hereos_villians.jar
