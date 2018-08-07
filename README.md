@@ -11,7 +11,7 @@ Heroes and Villains
  ----Description----
  
 Heroes and Villains is a text game written in Java that utilizes Swing for the GUI.
-The game is playing by moving your team between cities. Each city contains a shop where you can buy potions and power ups, a hospital where you can heal heroes, and a power up den where you can apply power ups to heroes.
+The game is played by moving your team between cities. Each city contains a shop where you can buy potions and power ups, a hospital where you can heal heroes, and a power up den where you can apply power ups to heroes.
 In each city you need to defeat the villain to move to the next city. The villain is fought by playing either paper scissors rock, guess the number, or roll the dice. The final city contains the super villain, which needs to be defeated in order to win the game.
 
  ----Prerequisites----
